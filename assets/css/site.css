@@ -1,0 +1,95 @@
+/*
+ * Additions for the static site. flatsome.css and theme.css come from the
+ * WordPress theme; this file covers what Flatsome's JavaScript used to do.
+ */
+
+img:is([sizes=auto i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px; }
+
+/* Desktop dropdowns: also open on keyboard focus */
+li.has-dropdown:focus-within > .nav-dropdown {
+  left: -15px; max-height: inherit; opacity: 1; visibility: visible;
+}
+.nav-right li.has-dropdown:focus-within:last-child > .nav-dropdown { left: auto; right: -15px; }
+.nav-dropdown-has-arrow li.has-dropdown:hover:after,
+.nav-dropdown-has-arrow li.has-dropdown:hover:before,
+.nav-dropdown-has-arrow li.has-dropdown:focus-within:after,
+.nav-dropdown-has-arrow li.has-dropdown:focus-within:before { opacity: 1; }
+
+/* Mobile off-canvas menu */
+.mobile-sidebar {
+  background: #fff; bottom: 0; left: 0; max-width: 85vw; overflow-y: auto; position: fixed;
+  top: 0; transform: translateX(-100%); transition: transform .3s, visibility .3s;
+  visibility: hidden; width: 300px; z-index: 1001;
+}
+.mobile-sidebar .sidebar-menu { padding: 30px 0; }
+.mobile-sidebar .nav-vertical li > a { padding-left: 20px; }
+.mobile-sidebar .nav-sidebar > li { position: relative; }
+.mobile-sidebar .nav-sidebar > li > .toggle {
+  background: none; border: 0; min-height: 2.5em; position: absolute; right: 0; top: .25em;
+}
+.mobile-sidebar .nav-sidebar > li > .toggle i { display: inline-block; }
+.mobile-sidebar .nav-sidebar > li.is-open > .toggle i { transform: rotate(180deg); }
+.mobile-sidebar .nav-sidebar ul.children {
+  display: none; left: auto; opacity: 1; padding-bottom: 10px; position: static;
+  transform: none; visibility: visible; flex: 0 0 100%; width: 100%;
+}
+.mobile-sidebar .nav-sidebar > li { flex-wrap: wrap; }
+.mobile-sidebar .nav-sidebar ul.children > li > a { display: block; padding: 8px 20px 8px 35px; }
+.mobile-sidebar .nav-sidebar li.is-open > ul.children { display: block; }
+.mobile-sidebar .nav-sidebar ul.children a { padding-left: 35px; font-size: .9em; }
+.menu-overlay {
+  background: #f17c41; inset: 0; opacity: 0; position: fixed; transition: opacity .3s;
+  visibility: hidden; z-index: 1000;
+}
+.menu-open .mobile-sidebar { transform: none; visibility: visible; }
+.menu-open .menu-overlay { opacity: .9; visibility: visible; }
+.menu-open, .menu-open body { overflow: hidden; }
+.menu-close {
+  background: none; border: 0; color: #fff; font-size: 2em; line-height: 1; margin: 0;
+  min-height: 0; padding: 10px; position: fixed; right: 10px; top: 10px; z-index: 1002;
+  display: none;
+}
+.menu-open .menu-close { display: block; }
+
+/* Accordions (Flatsome accordion shortcode) */
+.accordion-title {
+  border-top: 1px solid #ddd; display: block; font-size: 90%; padding: .6em 2.3em;
+  position: relative; transition: border .3s;
+}
+.accordion-title.active {
+  background-color: rgba(0, 0, 0, .03); border-color: var(--fs-color-primary);
+  color: var(--fs-color-primary); font-weight: 700;
+}
+.dark .accordion-title.active { color: #fff; }
+.accordion .toggle {
+  background: none; border: 0; height: 1.5em; left: 0; margin: 0 0 0 .25em; min-height: 0;
+  padding: 0; position: absolute; top: .3em; width: 2.3em;
+}
+.accordion-title.active .toggle i { transform: rotate(180deg); }
+.accordion-inner { display: none; padding: 1em 2.3em; }
+.accordion-title.active + .accordion-inner { display: block; }
+.accordion-item:last-child .accordion-title:not(.active) { border-bottom: 1px solid #ddd; }
+
+/* Sliders: native horizontal scrolling with snap points, arrows added by site.js */
+.slider:not(.flickity-enabled) { scroll-behavior: smooth; scroll-snap-type: x mandatory; }
+.slider:not(.flickity-enabled) > * { scroll-snap-align: start; }
+.slider-wrapper { position: relative; }
+.slider-wrapper .flickity-prev-next-button { z-index: 2; }
+.slider-wrapper:hover .flickity-prev-next-button,
+.slider-wrapper .flickity-prev-next-button:focus-visible { opacity: .7; transform: translateX(0) !important; }
+.flickity-prev-next-button svg { fill: currentColor; }
+.slider-nav-light .flickity-prev-next-button { color: #fff; }
+
+/* Scroll animations: show everything when JS or IntersectionObserver is missing */
+html:not(.has-js) [data-animate] { opacity: 1 !important; transform: none !important; filter: none !important; }
+
+/* Static replacement for the HappyForms submit feedback */
+.static-form-note {
+  background: #f4f4f4; border-left: 4px solid var(--fs-color-secondary); color: #29394a;
+  margin-top: 1em; padding: .8em 1em;
+}
+.static-form-note.is-error { border-left-color: var(--fs-color-alert); }
+[data-honeypot] { display: none !important; }
+
+/* Easy Table of Contents toggle */
+#ez-toc-container.is-collapsed nav { display: none; }
