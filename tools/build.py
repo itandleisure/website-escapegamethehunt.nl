@@ -5,7 +5,9 @@ Usage:  python tools/build.py
 Edit partials/*.html, then run this script. Every index.html in the site gets
 the content between its <!-- partial:NAME --> and <!-- /partial:NAME -->
 markers replaced, and the menu item for the current page marked as active.
-Only the Python standard library is needed.
+It also adds the "city links" block to every blog post and category page, so
+each post links to its city page and news archive (and back). Only the Python
+standard library is needed.
 """
 import os
 import re
@@ -14,6 +16,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = 'https://escapegamethehunt.nl'
 SKIP_DIRS = {'.git', 'assets', 'partials', 'tools', 'node_modules'}
 MARKER = re.compile(r'(<!-- partial:([\w-]+) -->)(.*?)(<!-- /partial:\2 -->)', re.S)
+CITY_BLOCK = re.compile(r'<!-- citylinks -->.*?<!-- /citylinks -->\n', re.S)
+POST_CATS = re.compile(r'<article class="[^"]*\bpost\b[^"]*"')
 LI_LINK = re.compile(r'<li class="([^"]*)"([^>]*)><a ([^>]*?)href="([^"]*)"')
 
 
@@ -50,7 +54,65 @@ def mark_active(html, page_path):
     return ''.join(out)
 
 
-def build_page(fp, parts):
+def city_index():
+    """category slug -> (city name, city page or None), from category/*/index.html."""
+    cities = {}
+    cat_dir = os.path.join(ROOT, 'category')
+    loc_dir = os.path.join(ROOT, 'escape-game-the-hunt-locaties')
+    locs = os.listdir(loc_dir) if os.path.isdir(loc_dir) else []
+    for slug in sorted(os.listdir(cat_dir)) if os.path.isdir(cat_dir) else []:
+        fp = os.path.join(cat_dir, slug, 'index.html')
+        if not os.path.isfile(fp):
+            continue
+        with open(fp, encoding='utf-8') as fh:
+            m = re.search(r'<title>([^<]*?) - ', fh.read())
+        name = m.group(1).strip() if m else slug.title()
+        page = None
+        for cand in ('escape-game-the-hunt-' + slug, 'escape-game-the-hunt-' + slug + '-2'):
+            if cand in locs:
+                page = '/escape-game-the-hunt-locaties/%s/' % cand
+                break
+        cities[slug] = (name, page)
+    return cities
+
+
+def city_links(html, page_path, cities):
+    """Insert or refresh the city links block on blog posts and category pages."""
+    html = CITY_BLOCK.sub('', html)
+    items = []
+    if page_path.startswith('/category/'):
+        slug = page_path.split('/')[2]
+        name, page = cities.get(slug, (None, None))
+        if not page:
+            return html
+        items.append('<a href="%s">Speel Escape Game The Hunt in %s</a>' % (page, name))
+        items.append('<a href="/escape-game-the-hunt-locaties/">Bekijk alle locaties</a>')
+        anchor = '<div id="post-list">'
+    else:
+        m = POST_CATS.search(html)
+        if not m:
+            return html
+        for slug in re.findall(r'\bcategory-([\w-]+)', m.group(0)):
+            if slug not in cities:
+                continue
+            name, page = cities[slug]
+            if page:
+                items.append('<a href="%s">Escape Game The Hunt %s: info en boeken</a>' % (page, name))
+            else:
+                items.append('<a href="/escape-game-the-hunt-locaties/">Bekijk alle locaties</a>')
+            items.append('<a href="/category/%s/">Meer berichten over %s</a>' % (slug, name))
+        if not items:
+            return html
+        items.append('<a href="/escape-game-the-hunt-prijzen/">Prijzen</a>')
+        anchor = '<nav class="navigation-post"'
+    if anchor not in html:
+        return html
+    block = ('<!-- citylinks -->\n<nav aria-label="Gerelateerde pagina\'s" class="city-links">'
+             + ' '.join(items) + '</nav>\n<!-- /citylinks -->')
+    return html.replace(anchor, block + '\n' + anchor, 1)
+
+
+def build_page(fp, parts, cities):
     rel = os.path.relpath(os.path.dirname(fp), ROOT).replace(os.sep, '/')
     page_path = '/' if rel == '.' else '/' + rel + '/'
     with open(fp, encoding='utf-8') as fh:
@@ -70,7 +132,7 @@ def build_page(fp, parts):
                                 '<div class="header-bg-container fill">', 1)
         return '%s\n%s\n%s' % (m.group(1), body, m.group(4))
 
-    new = MARKER.sub(sub, html)
+    new = city_links(MARKER.sub(sub, html), page_path, cities)
     if new != html:
         with open(fp, 'w', encoding='utf-8', newline='\n') as fh:
             fh.write(new)
@@ -93,6 +155,7 @@ def write_sitemap(paths):
 
 def main():
     parts = load_partials()
+    cities = city_index()
     paths = []
     changed = 0
     for dirpath, dirnames, filenames in os.walk(ROOT):
@@ -100,7 +163,7 @@ def main():
         if 'index.html' in filenames:
             rel = os.path.relpath(dirpath, ROOT).replace(os.sep, '/')
             paths.append('/' if rel == '.' else '/' + rel + '/')
-            changed += build_page(os.path.join(dirpath, 'index.html'), parts)
+            changed += build_page(os.path.join(dirpath, 'index.html'), parts, cities)
     write_sitemap(paths)
     print('%d pages, %d updated, sitemap.xml written' % (len(paths), changed))
 

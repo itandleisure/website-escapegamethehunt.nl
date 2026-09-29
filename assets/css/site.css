@@ -93,3 +93,10 @@ html:not(.has-js) [data-animate] { opacity: 1 !important; transform: none !impor
 
 /* Easy Table of Contents toggle */
 #ez-toc-container.is-collapsed nav { display: none; }
+
+/* Footer navigation and related-page links (internal linking) */
+.footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: .25em 1.25em; padding: .5em 0 1em; }
+.footer-nav a { color: rgba(255, 255, 255, .8); }
+.footer-nav a:hover { color: #fff; text-decoration: underline; }
+.city-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .5em 1.5em; margin: 1.5em 0; padding: 1em; background: rgba(0, 0, 0, .03); border-top: 3px solid var(--fs-color-primary); }
+.city-links a { font-weight: 700; }

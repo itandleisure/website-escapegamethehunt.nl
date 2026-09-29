@@ -37,6 +37,10 @@ en ga naar http://localhost:8080.
 - **Tekst of afbeeldingen op een pagina**: pas `<pagina>/index.html` direct aan. Afbeeldingen komen in `assets/uploads/`.
 - **Menu, header of footer**: pas het bestand in `partials/` aan en draai daarna `python tools/build.py`.
   Dat zet de nieuwe versie in alle pagina's en markeert het actieve menu-item.
+- **Interne links**: `python tools/build.py` zet onderaan elke blogpost een blok met links naar de
+  stadspagina, het nieuwsoverzicht van die stad en de prijzen, en op elk nieuwsoverzicht een link
+  naar de stadspagina. Dat gebeurt op basis van de categorie in `<article class="... category-<stad>">`.
+  De footer (`partials/footer.html`) linkt naar alle vaste pagina's.
 - **Nieuwe pagina**: kopieer een bestaande `index.html` naar een nieuwe map, pas de inhoud, `<title>`,
   description en canonical aan en draai `python tools/build.py` (die werkt ook de sitemap bij).
 
