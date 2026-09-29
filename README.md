@@ -41,6 +41,9 @@ en ga naar http://localhost:8080.
   stadspagina, het nieuwsoverzicht van die stad en de prijzen, en op elk nieuwsoverzicht een link
   naar de stadspagina. Dat gebeurt op basis van de categorie in `<article class="... category-<stad>">`.
   De footer (`partials/footer.html`) linkt naar alle vaste pagina's.
+- **Pagina weghalen**: vervang de `index.html` door een doorverwijspagina (zie
+  `escape-game-the-hunt-open-inschrijving/open-inschrijving-22-november-in-enschede/`) en zet de
+  301-doorverwijzing in `_redirects` (Netlify/Cloudflare Pages) en `.htaccess` (Apache).
 - **Nieuwe pagina**: kopieer een bestaande `index.html` naar een nieuwe map, pas de inhoud, `<title>`,
   description en canonical aan en draai `python tools/build.py` (die werkt ook de sitemap bij).
 

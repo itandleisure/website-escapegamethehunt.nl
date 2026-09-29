@@ -1,0 +1,2 @@
+# Permanente doorverwijzingen voor Apache-hosting. Zie ook _redirects voor Netlify / Cloudflare Pages.
+Redirect 301 /escape-game-the-hunt-open-inschrijving/open-inschrijving-22-november-in-enschede /escape-game-the-hunt-locaties/escape-game-the-hunt-enschede/

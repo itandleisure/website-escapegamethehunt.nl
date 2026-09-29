@@ -162,6 +162,10 @@ def main():
         dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS and not d.startswith('.')]
         if 'index.html' in filenames:
             rel = os.path.relpath(dirpath, ROOT).replace(os.sep, '/')
+            fp = os.path.join(dirpath, 'index.html')
+            with open(fp, encoding='utf-8') as fh:
+                if 'http-equiv="refresh"' in fh.read():
+                    continue  # redirect stub (see _redirects / .htaccess): not in sitemap
             paths.append('/' if rel == '.' else '/' + rel + '/')
             changed += build_page(os.path.join(dirpath, 'index.html'), parts, cities)
     write_sitemap(paths)
