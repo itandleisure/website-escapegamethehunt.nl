@@ -144,7 +144,7 @@ def prices(p):
 def contact(p):
     inner = f'''<div class="cards">
 <a class="card" href="tel:{SITE['phone']}"><span class="label">Bellen</span><h3>{SITE['phone_display']}</h3><p>Voor vragen en snelle afspraken.</p></a>
-<a class="card" href="mailto:{SITE['email']}"><span class="label">Mailen</span><h3>{SITE['email']}</h3><p>We reageren binnen 1 werkdag.</p></a>
+<a class="card" href="mailto:{SITE['email']}"><span class="label">Mailen</span><h3>{SITE['email']}</h3><p>We reageren binnen 24 uur.</p></a>
 <div class="card"><span class="label">Adres</span><h3>Giethoorn</h3><p>{SITE['address']}<br>KvK {SITE['kvk']}</p></div>
 </div>'''
     return simple(p, extra_before=section('Contact', 'Neem contact met ons op', inner), body_html='',
@@ -232,7 +232,7 @@ def apply_block():
 
 def thanks():
     crumbs = [('Home', '/'), ('Bedankt', None)]
-    body = f'''{hero('Bedankt voor je aanvraag!', 'We hebben je aanvraag ontvangen en nemen binnen 1 werkdag contact met je op met een offerte op maat.', crumbs, cta=False)}
+    body = f'''{hero('Bedankt voor je aanvraag!', 'We hebben je aanvraag ontvangen en nemen binnen 24 uur contact met je op met een offerte op maat.', crumbs, cta=False)}
 <section class="section"><div class="wrap stack">
 <p>Heb je haast of wil je nog iets toevoegen? Bel ons op <a href="tel:{SITE['phone']}">{SITE['phone_display']}</a> of mail naar <a href="mailto:{SITE['email']}">{SITE['email']}</a>.</p>
 <p><a class="btn btn-line" href="/">Terug naar de homepage</a></p>
