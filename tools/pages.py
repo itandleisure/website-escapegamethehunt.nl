@@ -20,10 +20,11 @@ GENERAL_FAQ = [
 GALLERY = ['2026/09/the-hunt-hunter-en-groepen-1600.jpg', '2026/09/the-hunt-spelen-in-de-regen-800.jpg',
            '2026/09/the-hunt-nijmegen-centrum-800.jpg', '2026/09/the-hunt-nijmegen-waalkade-waalbrug-800.jpg',
            '2026/09/the-hunt-drachten-speluitleg-800.jpg', '2026/04/16-april-Escape-Game-The-Hunt-Groningen-768x576.jpeg',
-           '2026/04/Groep-utrecht-toppers-768x576.jpeg', '2026/04/Escape-Game-The-Hunt-Eindhoven-768x576.jpeg']
+           '2026/04/Groep-utrecht-toppers-768x576.jpeg', '2026/04/Escape-Game-The-Hunt-Eindhoven-768x576.jpeg',
+           '2026/09/the-hunt-extractiepunt-gehaald-800.jpg']
 GALLERY_ALT = ['Een Hunter houdt de groepen in de gaten', 'Een Hunter in de regen: het spel gaat gewoon door',
                'Speluitleg in het centrum van Nijmegen', 'Groep aan de Waalkade in Nijmegen', 'Speluitleg in Drachten',
-               'Teams in Groningen', 'Groep in Utrecht', 'The Hunt in Eindhoven']
+               'Teams in Groningen', 'Groep in Utrecht', 'The Hunt in Eindhoven', 'Een team juicht bij het extractiepunt']
 
 VIDEO = '''<div class="media-frame trailer" data-vimeo="1113340430">
 <img src="/assets/uploads/2026/09/the-hunt-team-puzzelt-800.jpg" alt="Een team puzzelt onder tijdsdruk" loading="lazy" width="800" height="602">

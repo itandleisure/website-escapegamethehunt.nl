@@ -42,7 +42,7 @@ def post_cards(posts):
         post_card(p['path'], short_title(p), p.get('keyword') or short_title(p)) for p in posts)
 
 
-def hero(title, lede, crumbs, label=None, cta=True):
+def hero(title, lede, crumbs, label=None, cta=True, img=None):
     trail = '<span aria-hidden="true">/</span>'.join(
         (f'<a href="{h}">{esc(t)}</a>' if h else f'<span>{esc(t)}</span>') for t, h in crumbs)
     lbl = f'<span class="coords"><span class="ping" aria-hidden="true"></span>{label}</span>' if label else ''
@@ -50,7 +50,7 @@ def hero(title, lede, crumbs, label=None, cta=True):
                f'<a class="btn btn-ghost" href="/#locaties">Kies je stad</a></div>') if cta else ''
     lede_html = f'<p class="lede">{esc(lede)}</p>' if lede else ''
     return f'''<section class="hero compact grid-bg">
-<div class="hero-media"><img src="/assets/uploads/2026/09/the-hunt-juichende-groep-1600.jpg" alt="" fetchpriority="high" width="1600" height="1201"></div>
+<div class="hero-media"><img src="{img or '/assets/uploads/2026/09/the-hunt-juichende-groep-1600.jpg'}" alt="" fetchpriority="high" width="1600" height="1201"></div>
 <div class="wrap">
 <nav class="crumbs" aria-label="Kruimelpad">{trail}</nav>
 {lbl}

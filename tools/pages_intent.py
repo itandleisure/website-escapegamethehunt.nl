@@ -7,6 +7,32 @@ from render import (ICON_ARROW, LOCS, P, SITE, booking, esc, faq_block, faq_sche
 PER_PERSON = [(8, '€49,38', '€59,74'), (12, '€32,92', '€39,83'), (17, '€23,24', '€28,11'), (25, '€22,50', '€27,23')]
 
 
+U = '/assets/uploads/'
+TEAM_PHOTOS = [('2026/09/de-2gemeenten-uit-jirsum-die-the-hunt-in-utrecht-hebben-gedaan-1067x800.jpeg', 'Twee gemeenten speelden The Hunt in Utrecht'),
+               ('2026/09/the-hunt-drachten-van-braak-accountants-800.jpg', 'Bedrijfsuitje van een accountantskantoor in Drachten'),
+               ('2026/09/the-hunt-uitleg-nijmegen-800.jpg', 'Speluitleg voor een bedrijf in Nijmegen'),
+               ('2026/04/Escape-Game-The-Hunt-teamuitje-Menzis-in-Groningen-768x1024.jpeg', 'Teamuitje in Groningen'),
+               ('2026/04/peter-print-groningen-toppers-768x576.jpeg', 'Bedrijfsteam in Groningen'),
+               ('2026/04/apotheek-groningen-768x1024.jpeg', 'Team van een apotheek in Groningen'),
+               ('2026/04/huisartsenpraktijk-de-schelfhoek-in-almelo-768x1024.jpeg', 'Team van een huisartsenpraktijk in Almelo'),
+               ('2026/09/Steiger-B-Escape-game-The-Hunt-Hilversum-768x1024.jpeg', 'Teamuitje in Hilversum'),
+               ('2026/04/Groningen-teams-768x576.jpeg', 'Teams in Groningen')]
+VRIJ_PHOTOS = [('2026/04/Escape-Game-The-Hunt-vrijgezellenfeest-groningen-1067x800.jpeg', 'Vrijgezellenfeest in Groningen'),
+               ('2026/04/Groep-Nijmegen-Vrijgezellenfeest-768x576.jpeg', 'Vrijgezellenfeest in Nijmegen'),
+               ('2026/09/the-hunt-groningen-team-april-800.jpg', 'Team met gametas in Groningen'),
+               ('2026/04/Tilburg-Marjolein-768x576.jpeg', 'Groep in Tilburg'),
+               ('2026/09/the-hunt-puzzelen-met-gameboekje-800.jpg', 'Puzzelen met het gameboekje'),
+               ('2026/09/the-hunt-tilburg-groep-800.jpg', 'Groep met paraplu’s in Tilburg'),
+               ('2026/09/the-hunt-groningen-groep-april-3-800.jpg', 'Teams in Groningen'),
+               ('2026/08/Groep-Sofie-Leuven-Belgie-768x1024.jpeg', 'Groep uit Leuven'),
+               ('2026/09/the-hunt-groningen-groep-april-1-800.jpg', 'Groep in Groningen')]
+
+
+def photo_block(label, title, photos):
+    imgs = ''.join(f'<img src="{U}{p}" alt="{esc(a)}" loading="lazy" width="768" height="576">' for p, a in photos)
+    return section(label, title, f'<div class="gallery">{imgs}</div><p style="margin-top:20px"><a class="btn btn-line" href="/escape-game-the-hunt-fotopagina/">Meer foto’s {ICON_ARROW}</a></p>', 'section paper')
+
+
 def per_person_table():
     rows = ''.join(f'<tr><td>{n} personen</td><td>{ex}</td><td>{inc}</td></tr>' for n, ex, inc in PER_PERSON)
     return (f'<div class="examples"><span class="label">Prijs per persoon</span><table><thead><tr><th>Groep</th><th>Ex. btw</th>'
@@ -87,7 +113,7 @@ VRIJ_FAQ = [
 def teamuitje():
     path = '/teamuitje-bedrijfsuitje/'
     crumbs = [('Home', '/'), ('Teamuitje & bedrijfsuitje', path)]
-    body = f'''{hero('Teamuitje & bedrijfsuitje: The Hunt', 'Een actief teamuitje midden in de stad. Samen zes puzzels oplossen, de route bepalen en 90 minuten uit handen blijven van de Hunters. Voor teams van 8 tot ±200 personen, in heel Nederland.', [('Home', '/'), ('Teamuitje & bedrijfsuitje', None)], 'Teamuitje · bedrijfsuitje · personeelsuitje')}
+    body = f'''{hero('Teamuitje & bedrijfsuitje: The Hunt', 'Een actief teamuitje midden in de stad. Samen zes puzzels oplossen, de route bepalen en 90 minuten uit handen blijven van de Hunters. Voor teams van 8 tot ±200 personen, in heel Nederland.', [('Home', '/'), ('Teamuitje & bedrijfsuitje', None)], 'Teamuitje · bedrijfsuitje · personeelsuitje', img='/assets/uploads/2026/09/the-hunt-drachten-speluitleg-1600.jpg')}
 
 <section class="section" aria-labelledby="waarom-titel">
 <div class="wrap split">
@@ -119,6 +145,8 @@ def teamuitje():
 </div>
 </section>
 
+{photo_block('Zij gingen jullie voor', 'Bedrijven en teams die The Hunt speelden', TEAM_PHOTOS)}
+
 {section('Programma en prijzen', 'Zo ziet jullie teamuitje eruit', f'<div class="pricing">{programme("team")}{per_person_table()}</div>')}
 
 {section('Prijzen', 'Eén vaste prijs tot 17 personen', pricing(), 'section paper')}
@@ -136,7 +164,7 @@ def teamuitje():
 def vrijgezellenfeest():
     path = '/vrijgezellenfeest/'
     crumbs = [('Home', '/'), ('Vrijgezellenfeest', path)]
-    body = f'''{hero('Vrijgezellenfeest: The Hunt', 'Een actief en origineel vrijgezellenfeest: ontsnap in teams aan de Hunters, los puzzels op en bereik het extractiepunt. Vanaf 8 personen, in heel Nederland.', [('Home', '/'), ('Vrijgezellenfeest', None)], 'Vrijgezellenfeest · vrouwen · mannen · gemengd')}
+    body = f'''{hero('Vrijgezellenfeest: The Hunt', 'Een actief en origineel vrijgezellenfeest: ontsnap in teams aan de Hunters, los puzzels op en bereik het extractiepunt. Vanaf 8 personen, in heel Nederland.', [('Home', '/'), ('Vrijgezellenfeest', None)], 'Vrijgezellenfeest · vrouwen · mannen · gemengd', img='/assets/uploads/2026/04/Escape-Game-The-Hunt-vrijgezellenfeest-groningen.jpeg')}
 
 <section class="section" aria-labelledby="waarom-titel">
 <div class="wrap split">
@@ -163,6 +191,8 @@ def vrijgezellenfeest():
 {VIDEO}
 </div>
 </section>
+
+{photo_block('Zij gingen jullie voor', 'Groepen die The Hunt speelden', VRIJ_PHOTOS)}
 
 {section('Programma en prijzen', 'Zo ziet jullie vrijgezellenfeest eruit', f'<div class="pricing">{programme("vrijgezellen")}{per_person_table()}</div>')}
 
