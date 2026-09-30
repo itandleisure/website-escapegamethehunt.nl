@@ -168,7 +168,8 @@ def photos(p):
 
 
 def about(p):
-    text = f'''<h2>Wie zijn wij?</h2>
+    text = f'''<img src="/assets/uploads/2026/09/the-hunt-spelleiders-1600.jpg" alt="Spelleiders van Escape Game The Hunt" width="1600" height="901">
+<h2>Wie zijn wij?</h2>
 <p>Escape Game The Hunt is onderdeel van {SITE['company']} uit Giethoorn. Sinds 2020 laten we groepen door steden in heel Nederland vluchten voor onze Hunters.</p>
 <p>The Hunt is geïnspireerd op tv-programma's als Hunted en Jachtseizoen. Wij maakten er een spel van dat je met je eigen groep speelt: zes escape-puzzels, een GameApp en Hunters die elke tien minuten jullie locatie doorkrijgen.</p>
 <p>We spelen in principe overal waar we een speelveld kunnen maken. Voor grote groepen combineren we The Hunt met onze andere spellen.</p>

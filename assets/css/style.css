@@ -327,3 +327,15 @@ fieldset.field{border:0;padding:0;margin:0}
 .steps span{color:var(--on-dark-muted);font-size:.95rem}
 .price-incl{margin-top:-4px;font-size:1.05rem;color:var(--signal);font-weight:700}
 .price-rows small{font-weight:400;color:var(--on-dark-muted)}
+.card.has-img{padding:0;overflow:hidden}
+.card.has-img img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.card.has-img h3,.card.has-img p,.card.has-img .more{padding-inline:20px}
+.card.has-img h3{padding-top:14px}
+.card.has-img > :last-child{padding-bottom:20px}
+.prose .city-photo{width:100%;aspect-ratio:4/3;object-fit:cover}
+
+/* hero met foto rechts: het onderwerp blijft zichtbaar naast de tekst */
+@media (min-width:861px){
+  .hero-media.right{left:auto;width:56%}
+  .hero:has(.hero-media.right)::after{background:linear-gradient(90deg,var(--night) 44%,rgba(20,30,41,.55) 60%,rgba(20,30,41,.05) 100%)}
+}

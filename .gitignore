@@ -6,5 +6,4 @@ Thumbs.db
 .mcp.json
 
 # Aangeleverde originele foto's (worden verkleind naar assets/uploads)
-nieuwe-fotos/*
-!nieuwe-fotos/LEESMIJ.txt
+fotos-nieuw/

@@ -17,15 +17,16 @@ GENERAL_FAQ = [
     ('Is er ook een winnaar?', '<p>Jazeker. Wanneer het spel voorbij is en elk team op het extractiepunt is aangekomen, gaan we over tot het bekronen van het winnende team.</p>'),
 ]
 
-GALLERY = ['2026/04/16-april-Escape-Game-The-Hunt-Groningen-1067x800.jpeg', '2026/04/Groep-utrecht-toppers-768x576.jpeg',
-           '2026/04/Escape-Game-The-Hunt-Eindhoven-768x576.jpeg', '2026/04/Groep-Nijmegen-Vrijgezellenfeest-768x576.jpeg',
-           '2026/04/Groningen-teams-768x576.jpeg', '2026/04/Escape-Game-The-Hunt-vrijgezellenfeest-groningen-768x576.jpeg',
-           '2026/04/Open-inschrijving-Groningen-768x576.jpeg', '2026/04/Provincie-Groningen-The-Hunt-spelen-Escaperoom-768x576.jpeg']
-GALLERY_ALT = ['Teams na afloop van The Hunt in Groningen', 'Groep in Utrecht', 'The Hunt in Eindhoven', 'Vrijgezellenfeest in Nijmegen',
-               'Teams in Groningen', 'Vrijgezellenfeest in Groningen', 'Open inschrijving in Groningen', 'The Hunt in de provincie Groningen']
+GALLERY = ['2026/09/the-hunt-hunter-en-groepen-1600.jpg', '2026/09/the-hunt-spelen-in-de-regen-800.jpg',
+           '2026/09/the-hunt-nijmegen-centrum-800.jpg', '2026/09/the-hunt-nijmegen-waalkade-waalbrug-800.jpg',
+           '2026/09/the-hunt-drachten-speluitleg-800.jpg', '2026/04/16-april-Escape-Game-The-Hunt-Groningen-768x576.jpeg',
+           '2026/04/Groep-utrecht-toppers-768x576.jpeg', '2026/04/Escape-Game-The-Hunt-Eindhoven-768x576.jpeg']
+GALLERY_ALT = ['Een Hunter houdt de groepen in de gaten', 'Een Hunter in de regen: het spel gaat gewoon door',
+               'Speluitleg in het centrum van Nijmegen', 'Groep aan de Waalkade in Nijmegen', 'Speluitleg in Drachten',
+               'Teams in Groningen', 'Groep in Utrecht', 'The Hunt in Eindhoven']
 
 VIDEO = '''<div class="media-frame trailer" data-vimeo="1113340430">
-<img src="/assets/uploads/2026/04/Hunter-actief-533x400.png" alt="Een Hunter met gametas in een steegje" loading="lazy" width="533" height="400">
+<img src="/assets/uploads/2026/09/the-hunt-puzzelen-met-kaart-800.jpg" alt="Deelnemers puzzelen met de kaart van het speelveld" loading="lazy" width="600" height="800">
 <button type="button" class="play" aria-label="Bekijk de trailer van The Hunt"><span class="play-icon" aria-hidden="true"></span>Bekijk de trailer</button>
 <p class="trailer-note">De video wordt pas geladen als je op afspelen klikt (Vimeo).</p>
 </div>'''
@@ -37,7 +38,7 @@ def home():
     gal = ''.join(f'<img src="/assets/uploads/{g}" alt="{a}" loading="lazy" width="768" height="576">' for g, a in zip(GALLERY, GALLERY_ALT))
     body = f'''
 <section class="hero grid-bg">
-<div class="hero-media"><img src="/assets/uploads/2025/06/escape-the-hunt-juichend-team-game-kleiner.jpg" alt="" fetchpriority="high" width="1292" height="969"></div>
+<div class="hero-media right"><img src="/assets/uploads/2026/09/the-hunt-hunter-rugtas-1600.jpg" alt="Een Hunter met rugtas kijkt naar de groepen" fetchpriority="high" width="1200" height="1600" style="object-position:center 55%"></div>
 <div class="wrap">
 <span class="coords"><span class="ping" aria-hidden="true"></span>Outdoor escape room · te spelen in heel Nederland</span>
 <h1>Ontsnap aan de <em>Hunters</em>. Midden in jullie stad.</h1>
@@ -76,10 +77,10 @@ def home():
 <div class="wrap">
 <div class="head"><span class="label">Voor wie</span><h2 id="wie-titel">Voor elke groep vanaf 8 personen</h2></div>
 <div class="cards four">
-<div class="card"><h3>Teamuitje en bedrijfsuitje</h3><p>Samenwerken onder druk, met een eindstand die nog weken besproken wordt. Ook voor personeelsuitjes en grote afdelingen.</p></div>
-<div class="card"><h3>Vrijgezellenfeest</h3><p>Actief, competitief en goed te combineren met een borrel of diner in de stad.</p></div>
-<div class="card"><h3>Vrienden en familie</h3><p>Puzzelaars en lopers hebben allebei een rol. Kinderen vanaf 8 jaar kunnen meedoen.</p></div>
-<a class="card" href="/op-maat-gemaakt/"><h3>Op maat gemaakt</h3><p>Wij verwerken vragen over jullie eigen bedrijf of groep in de opdrachten, voor €{P['custom']} extra.</p><span class="more">Hoe werkt dat →</span></a>
+<div class="card has-img"><img src="/assets/uploads/2026/09/the-hunt-uitleg-nijmegen-800.jpg" alt="Speluitleg voor een bedrijf in Nijmegen" loading="lazy" width="600" height="800"><h3>Teamuitje en bedrijfsuitje</h3><p>Samenwerken onder druk, met een eindstand die nog weken besproken wordt. Ook voor personeelsuitjes en grote afdelingen.</p></div>
+<div class="card has-img"><img src="/assets/uploads/2026/04/Groep-Nijmegen-Vrijgezellenfeest-768x576.jpeg" alt="Vrijgezellenfeest in Nijmegen" loading="lazy" width="768" height="576"><h3>Vrijgezellenfeest</h3><p>Actief, competitief en goed te combineren met een borrel of diner in de stad.</p></div>
+<div class="card has-img"><img src="/assets/uploads/2026/09/the-hunt-utrecht-groep-800.jpg" alt="Groep in Utrecht" loading="lazy" width="600" height="800"><h3>Vrienden en familie</h3><p>Puzzelaars en lopers hebben allebei een rol. Kinderen vanaf 8 jaar kunnen meedoen.</p></div>
+<a class="card has-img" href="/op-maat-gemaakt/"><img src="/assets/uploads/2026/05/groep-escape-game-the-hunt-op-maat-gemaakt-800.jpg" alt="Groep die een op maat gemaakte Hunt speelde" loading="lazy" width="800" height="600"><h3>Op maat gemaakt</h3><p>Wij verwerken vragen over jullie eigen bedrijf of groep in de opdrachten, voor €{P['custom']} extra.</p><span class="more">Hoe werkt dat →</span></a>
 </div>
 </div>
 </section>
@@ -149,7 +150,7 @@ def location(loc):
     hero_img = c['og_image'] or SITE['og_image']
     body = f'''
 <section class="hero compact grid-bg">
-<div class="hero-media"><img src="/assets/uploads/2025/06/escape-the-hunt-juichend-team-game-kleiner.jpg" alt="" fetchpriority="high" width="1292" height="969"></div>
+<div class="hero-media"><img src="/assets/uploads/2026/09/the-hunt-hunter-en-groepen-1600.jpg" alt="" fetchpriority="high" width="1600" height="1200"></div>
 <div class="wrap">
 <nav class="crumbs" aria-label="Kruimelpad"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/escape-game-the-hunt-locaties/">Locaties</a><span aria-hidden="true">/</span><span>{esc(city)}</span></nav>
 <span class="coords"><span class="ping" aria-hidden="true"></span>{coords(loc)} · {esc(loc['province'])}</span>
@@ -162,7 +163,7 @@ def location(loc):
 
 <section class="section">
 <div class="wrap article">
-<div class="prose">{f'<img src="{loc["image"]}" alt="Escape Game The Hunt in {esc(city)}" width="640" height="480">' if loc["image"] else ''}{c['body']}</div>
+<div class="prose">{f'<img class="city-photo" src="{loc["image"]}" alt="Escape Game The Hunt in {esc(city)}" width="800" height="600">' if loc["image"] else ''}{c['body']}</div>
 <aside class="aside" aria-label="Boeken in {esc(city)}">
 <div class="aside-card">
 <span class="label">The Hunt {esc(city)}</span>
