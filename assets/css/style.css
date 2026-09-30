@@ -315,3 +315,13 @@ fieldset.field{border:0;padding:0;margin:0}
 .pager .btn{padding:.6em 1em;min-width:44px;justify-content:center}
 .shots{display:flex;flex-wrap:wrap;gap:10px}
 .shots img{height:220px;width:auto;border-radius:8px;border:1px solid var(--line)}
+
+/* werkwijze bij het boekingsformulier */
+.steps-title{color:var(--white);font-size:1.1rem;margin-top:8px}
+.steps{list-style:none;margin:0;padding:0;counter-reset:stap;display:flex;flex-direction:column;gap:0}
+.steps li{counter-increment:stap;display:grid;grid-template-columns:32px 1fr;column-gap:14px;position:relative;padding-bottom:16px}
+.steps li::before{content:counter(stap);grid-row:span 2;width:32px;height:32px;border-radius:50%;border:2px solid var(--signal);color:var(--signal);
+  font:700 .9rem/28px var(--mono);text-align:center;background:var(--night);z-index:1}
+.steps li:not(:last-child)::after{content:"";position:absolute;left:15px;top:32px;bottom:0;width:2px;background:var(--line-dark)}
+.steps b{color:var(--white);line-height:32px}
+.steps span{color:var(--on-dark-muted);font-size:.95rem}

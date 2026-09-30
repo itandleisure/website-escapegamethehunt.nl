@@ -12,6 +12,13 @@ PROVINCES = ['Groningen', 'Friesland', 'Drenthe', 'Overijssel', 'Flevoland', 'Ge
 P = SITE['prices']
 esc = lambda s: html.escape(str(s), quote=True)
 
+
+def asset(path):
+    """Pad met korte hash, zodat browsers na een wijziging meteen de nieuwe CSS/JS laden."""
+    import hashlib
+    with open(os.path.join(ROOT, path.lstrip('/')), 'rb') as fh:
+        return '%s?v=%s' % (path, hashlib.md5(fh.read()).hexdigest()[:8])
+
 ICON_MENU = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>'
 ICON_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
 
@@ -61,7 +68,7 @@ def page(*, path, title, description, body, og_image=None, robots=None, schema=(
 <link rel="icon" href="/assets/uploads/2025/05/cropped-escapegamethehunt-512-192x192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="/assets/uploads/2025/05/cropped-escapegamethehunt-512-180x180.png">
 <link rel="preload" href="/assets/fonts/S6u9w4BMUTPHh6UVSwiPGQ.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="{asset('/assets/css/style.css')}">
 {head_extra}{jsonld(org)}
 {''.join(jsonld(s) for s in schema)}
 </head>
@@ -79,7 +86,7 @@ def page(*, path, title, description, body, og_image=None, robots=None, schema=(
 </main>
 {footer()}
 <a class="btn btn-signal mobile-cta" href="#boeken">Boek The Hunt {ICON_ARROW}</a>
-<script src="/assets/js/main.js" defer></script>
+<script src="{asset('/assets/js/main.js')}" defer></script>
 </body>
 </html>
 '''
@@ -238,6 +245,14 @@ def booking(city=None):
 <span class="label">Aanvraag · reactie binnen 1 werkdag</span>
 <h2 id="boeken-titel">{title}</h2>
 <p class="lede">Laat weten met hoeveel personen jullie komen en wanneer. Je krijgt een duidelijke offerte, zonder verplichtingen.</p>
+<h3 class="steps-title">Zo gaan we te werk</h3>
+<ol class="steps">
+<li><b>Aanvraag</b><span>Je vult het formulier in met stad, datum en aantal personen.</span></li>
+<li><b>Offerte</b><span>Is alles duidelijk, dan sturen we je een offerte. Hebben we nog vragen, dan nemen we eerst contact met je op.</span></li>
+<li><b>Akkoord</b><span>Tevreden met de offerte? Accordeer hem en wij gaan aan de slag.</span></li>
+<li><b>Spelleiders</b><span>We koppelen één of meer spelleiders aan jullie event.</span></li>
+<li><b>Laatste informatie</b><span>Twee weken van tevoren ontvangen jullie alle praktische informatie en de factuur.</span></li>
+</ol>
 <div class="contact-lines"><a href="tel:{SITE['phone']}">{SITE['phone_display']}</a><a href="mailto:{SITE['email']}">{SITE['email']}</a></div>
 </div>
 <form class="form" data-booking data-google="{esc(SITE['google_form_url'])}" action="{SITE['formsubmit']}" method="POST">
