@@ -79,7 +79,7 @@ def home():
 <div class="cards four">
 <div class="card has-img"><img src="/assets/uploads/2026/09/the-hunt-uitleg-nijmegen-800.jpg" alt="Speluitleg voor een bedrijf in Nijmegen" loading="lazy" width="600" height="800"><h3>Teamuitje en bedrijfsuitje</h3><p>Samenwerken onder druk, met een eindstand die nog weken besproken wordt. Ook voor personeelsuitjes en grote afdelingen.</p></div>
 <div class="card has-img"><img src="/assets/uploads/2026/04/Groep-Nijmegen-Vrijgezellenfeest-768x576.jpeg" alt="Vrijgezellenfeest in Nijmegen" loading="lazy" width="768" height="576"><h3>Vrijgezellenfeest</h3><p>Actief, competitief en goed te combineren met een borrel of diner in de stad.</p></div>
-<div class="card has-img"><img src="/assets/uploads/2026/09/the-hunt-utrecht-groep-800.jpg" alt="Groep in Utrecht" loading="lazy" width="600" height="800"><h3>Vrienden en familie</h3><p>Puzzelaars en lopers hebben allebei een rol. Kinderen vanaf 8 jaar kunnen meedoen.</p></div>
+<div class="card has-img"><img src="/assets/uploads/2026/04/Groningen-teams-768x576.jpeg" alt="Teams in Groningen" loading="lazy" width="768" height="576"><h3>Vrienden en familie</h3><p>Puzzelaars en lopers hebben allebei een rol. Kinderen vanaf 8 jaar kunnen meedoen.</p></div>
 <a class="card has-img" href="/op-maat-gemaakt/"><img src="/assets/uploads/2026/05/groep-escape-game-the-hunt-op-maat-gemaakt-800.jpg" alt="Groep die een op maat gemaakte Hunt speelde" loading="lazy" width="800" height="600"><h3>Op maat gemaakt</h3><p>Wij verwerken vragen over jullie eigen bedrijf of groep in de opdrachten, voor €{P['custom']} extra.</p><span class="more">Hoe werkt dat →</span></a>
 </div>
 </div>
