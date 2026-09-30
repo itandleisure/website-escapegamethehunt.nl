@@ -222,7 +222,7 @@ def nl_map(current=None):
                      f'<text class="{lbl}" x="{x + dx:.1f}" y="{y + dy:.1f}" text-anchor="{anchor}">{esc(l["name"])}</text></a>')
     return f'''<figure class="map" style="margin:0">
 <svg viewBox="0 0 300 336" role="img" aria-label="Kaart van Nederland met onze vaste speelsteden">{''.join(parts)}</svg>
-<figcaption class="map-caption"><span>Vaste speelsteden</span>{"" if current else "<span>Wijs een stip aan voor de stad</span>"}</figcaption>
+{"" if current else "<figcaption class=\"map-caption\"><span>Wijs een stip aan voor de stad</span></figcaption>"}
 </figure>'''
 
 
