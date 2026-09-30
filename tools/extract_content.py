@@ -6,10 +6,23 @@ import json
 from html import escape as html_escape
 import os
 import re
+import subprocess
 
 from bs4 import BeautifulSoup, NavigableString, Tag
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# De oude pagina's worden overschreven door het nieuwe ontwerp; lees ze daarom uit de laatste commit van de 1-op-1-herbouw.
+SOURCE_REF = 'claude/rebuild-site-f1vk4l'
+
+
+def read_old(rel):
+    return subprocess.run(['git', 'show', '%s:%s/index.html' % (SOURCE_REF, rel.replace(os.sep, '/'))], cwd=ROOT,
+                          capture_output=True, check=True).stdout.decode('utf-8')
+
+
+def old_dirs():
+    out = subprocess.run(['git', 'ls-tree', '-r', '--name-only', SOURCE_REF], cwd=ROOT, capture_output=True, check=True)
+    return sorted(os.path.dirname(f) for f in out.stdout.decode('utf-8').splitlines() if f.endswith('/index.html'))
 OUT = os.path.join(ROOT, 'src', 'content')
 
 KEEP_INLINE = {'strong', 'b', 'em', 'i', 'a', 'br'}
@@ -56,7 +69,7 @@ def blocks(main):
         yield el
 
 
-def sections(main):
+def sections(main, drop=None):
     """Blokken als schone HTML; algemene secties (zie GENERIC) vallen weg."""
     html, dropping = [], False
     for el in blocks(main):
@@ -64,7 +77,7 @@ def sections(main):
         if not t:
             continue
         if el.name in ('h2', 'h3', 'h4', 'h5'):
-            dropping = bool(GENERIC.match(t))
+            dropping = bool((drop or GENERIC).match(t))
             if not dropping:
                 lvl = 'h2' if el.name == 'h2' else 'h3'
                 head = re.sub(r'</?(strong|em)>', '', clean_inline(el)).strip()
@@ -120,11 +133,52 @@ def related_posts(soup):
 
 
 def location(slug, page):
-    fp = os.path.join(ROOT, 'escape-game-the-hunt-locaties', page, 'index.html')
-    soup = BeautifulSoup(open(fp, encoding='utf-8').read(), 'html.parser')
+    soup = BeautifulSoup(read_old('escape-game-the-hunt-locaties/' + page), 'html.parser')
     main = soup.find('main')
     data = meta(soup)
     data.update({'h1': text(main.find('h1')), 'body': sections(main), 'faq': faq(main), 'posts': related_posts(main)})
+    return data
+
+
+# Voor blogs en losse pagina's: alleen formulier-, nieuws- en herhaalblokken weg; inhoudelijke secties blijven.
+LIGHT = re.compile(r'^(kunnen jullie ontsnappen|durven jullie|boek |nieuws|contactformulier|meer inspiratie|inhoudsopgave)', re.I)
+SKIP_DIRS = {'assets', 'src', 'tools', 'partials', 'category', 'escape-game-the-hunt-locaties', 'escape-game-the-hunt-nieuws', '.git', '.claude'}
+
+
+def faq_groups(main):
+    """Accordeons gegroepeerd onder hun titel (FAQ-pagina)."""
+    groups = []
+    for acc in main.select('.accordion'):
+        t = acc.find_previous(class_='accordion_title')
+        items = []
+        for it in acc.select('.accordion-item'):
+            q, a = it.select_one('.accordion-title span'), it.select_one('.accordion-inner')
+            if q and a:
+                items.append([text(q), ''.join('<p>%s</p>' % clean_inline(p).strip() for p in a.find_all('p'))])
+        if items:
+            groups.append([text(t) if t else 'Vragen', items])
+    return groups
+
+
+def generic(rel):
+    raw = read_old(rel)
+    if 'http-equiv="refresh"' in raw:
+        return None
+    soup = BeautifulSoup(raw, 'html.parser')
+    main = soup.find('main')
+    data = meta(soup)
+    body_cls = ' '.join(soup.body.get('class', []))
+    art = main.find(class_=re.compile(r'\bpost-\d+'))
+    data.update({
+        'path': '/' + rel.replace(os.sep, '/') + '/',
+        'kind': 'post' if 'single-post' in body_cls else 'page',
+        'categories': re.findall(r'category-([\w-]+)', ' '.join(art.get('class', [])) if art else ''),
+        'h1': text(main.find('h1')) if main.find('h1') else '',
+        'body': sections(main, LIGHT),
+        'faq_groups': faq_groups(main),
+        'images': [{'src': i['src'], 'alt': i.get('alt', '')} for i in main.find_all('img')
+                   if i.get('src', '').startswith('/assets/uploads/') and not i.find_parent('form')],
+    })
     return data
 
 
@@ -137,6 +191,18 @@ def main():
         with open(os.path.join(OUT, 'locaties', loc['slug'] + '.json'), 'w', encoding='utf-8', newline='\n') as fh:
             json.dump(data, fh, ensure_ascii=False, indent=1)
         print(loc['slug'], len(data['body']), 'tekens,', len(data['faq']), 'vragen,', len(data['posts']), 'berichten')
+    os.makedirs(os.path.join(OUT, 'pages'), exist_ok=True)
+    n = 0
+    for rel in old_dirs():
+        if not rel or rel.split('/')[0] in SKIP_DIRS:
+            continue
+        data = generic(rel)
+        if data:
+            name = rel.replace('/', '__') + '.json'
+            with open(os.path.join(OUT, 'pages', name), 'w', encoding='utf-8', newline='\n') as fh:
+                json.dump(data, fh, ensure_ascii=False, indent=1)
+            n += 1
+    print(n, "overige pagina's")
 
 
 if __name__ == '__main__':

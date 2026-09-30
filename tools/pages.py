@@ -174,6 +174,15 @@ def location(loc):
 </div>
 </section>
 
+<section class="section tight paper" aria-labelledby="trailer-titel">
+<div class="wrap split">
+<div class="stack"><span class="label">Trailer</span><h2 id="trailer-titel">Zo ziet een Hunt eruit</h2>
+<p>Teams met een gametas, puzzels onder tijdsdruk en Hunters die steeds dichterbij komen. Bekijk in de trailer hoe het spel in de stad werkt.</p>
+<p><a class="btn btn-signal" href="#boeken">Boek in {esc(city)} {ICON_ARROW}</a></p></div>
+{VIDEO}
+</div>
+</section>
+
 <section class="section dark grid-bg" aria-labelledby="werkt-titel">
 <div class="wrap">
 <div class="head"><span class="label">De spelklok</span><h2 id="werkt-titel">Zo verloopt The Hunt in {esc(city)}</h2></div>

@@ -303,3 +303,7 @@ fieldset.field{border:0;padding:0;margin:0}
   .mobile-cta{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:40;justify-content:center;box-shadow:var(--shadow)}
   body{padding-bottom:76px}
 }
+
+/* paginering */
+.pager{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
+.pager .btn{padding:.6em 1em;min-width:44px;justify-content:center}
