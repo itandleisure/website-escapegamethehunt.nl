@@ -50,7 +50,7 @@ def hero(title, lede, crumbs, label=None, cta=True):
                f'<a class="btn btn-ghost" href="/#locaties">Kies je stad</a></div>') if cta else ''
     lede_html = f'<p class="lede">{esc(lede)}</p>' if lede else ''
     return f'''<section class="hero compact grid-bg">
-<div class="hero-media"><img src="/assets/uploads/2025/06/escape-the-hunt-juichend-team-game-kleiner.jpg" alt="" fetchpriority="high" width="1292" height="969"></div>
+<div class="hero-media"><img src="/assets/uploads/2026/09/the-hunt-juichende-groep-1600.jpg" alt="" fetchpriority="high" width="1600" height="1201"></div>
 <div class="wrap">
 <nav class="crumbs" aria-label="Kruimelpad">{trail}</nav>
 {lbl}

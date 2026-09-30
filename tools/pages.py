@@ -26,7 +26,7 @@ GALLERY_ALT = ['Een Hunter houdt de groepen in de gaten', 'Een Hunter in de rege
                'Teams in Groningen', 'Groep in Utrecht', 'The Hunt in Eindhoven']
 
 VIDEO = '''<div class="media-frame trailer" data-vimeo="1113340430">
-<img src="/assets/uploads/2026/09/the-hunt-puzzelen-met-kaart-800.jpg" alt="Deelnemers puzzelen met de kaart van het speelveld" loading="lazy" width="600" height="800">
+<img src="/assets/uploads/2026/09/the-hunt-team-puzzelt-800.jpg" alt="Een team puzzelt onder tijdsdruk" loading="lazy" width="800" height="602">
 <button type="button" class="play" aria-label="Bekijk de trailer van The Hunt"><span class="play-icon" aria-hidden="true"></span>Bekijk de trailer</button>
 <p class="trailer-note">De video wordt pas geladen als je op afspelen klikt (Vimeo).</p>
 </div>'''

@@ -53,7 +53,7 @@ def main():
         elif p['path'] == '/op-maat-gemaakt/':
             html = op_maat(p)
         elif p['path'].startswith('/werken-bij/'):
-            photo = '<img src="/assets/uploads/2026/09/the-hunt-drachten-speluitleg-1600.jpg" alt="Een spelleider geeft uitleg aan de groep" width="1600" height="1200">'
+            photo = '<img src="/assets/uploads/2026/09/the-hunt-spelleider-uitleg-1600.jpg" alt="Een spelleider geeft uitleg aan de groep" width="1600" height="1173">'
             html = pm.simple(p, form=False, body_html=photo + p['body'], extra_after=pm.apply_block())
         else:
             html = SPECIAL.get(p['path'], pm.simple)(p)

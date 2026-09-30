@@ -125,7 +125,12 @@ def clock(start_place=None, city=None):
         ('00:10', 'De jacht begint', 'De Hunters komen in actie. Elke 10 minuten krijgen zij jullie locatie door, en dan gaan ze op jacht.', ' class="hot"'),
         ('90:00', 'Extractiepunt', 'Elk goed antwoord levert een deel van de GPS-code op. Halen jullie het extractiepunt voordat de tijd op is, zonder gepakt te worden?', ''),
     ]
-    lis = ''.join(f'<li{h}><time>{t}</time><h3>{a}</h3><p>{b}</p></li>' for t, a, b, h in steps)
+    photos = [('the-hunt-spelleider-uitleg-800.jpg', 'De spelleider geeft uitleg aan de groep'),
+              ('the-hunt-puzzelen-met-gameboekje-800.jpg', 'Een team puzzelt met het gameboekje'),
+              ('the-hunt-hunter-rugtas-800.jpg', 'Een Hunter houdt de teams in de gaten'),
+              ('the-hunt-extractiepunt-gehaald-800.jpg', 'Een team juicht bij het extractiepunt')]
+    lis = ''.join(f'<li{h}><img src="/assets/uploads/2026/09/{photos[i][0]}" alt="{photos[i][1]}" loading="lazy" width="800" height="600">'
+                  f'<time>{t}</time><h3>{a}</h3><p>{b}</p></li>' for i, (t, a, b, h) in enumerate(steps))
     return f'<ol class="clock">{lis}</ol>'
 
 
