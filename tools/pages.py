@@ -56,8 +56,11 @@ def home():
 </div>
 </section>
 
-<section class="video-band" data-bg-vimeo="1092778550" aria-label="Video: een team lost een puzzel op">
-<img src="/assets/uploads/2026/09/the-hunt-team-puzzelt-1600.jpg" alt="" loading="lazy" width="1600" height="1204">
+<section class="video-band" aria-label="Video: een team lost een puzzel op">
+<video data-autoplay muted loop playsinline preload="none" poster="/assets/uploads/2026/09/the-hunt-team-puzzelt-1600.jpg" aria-hidden="true">
+<source src="/assets/uploads/2026/09/the-hunt-puzzel-oplossen-1080p.mp4" type="video/mp4" media="(min-width: 1100px)">
+<source src="/assets/uploads/2026/09/the-hunt-puzzel-oplossen-720p.mp4" type="video/mp4">
+</video>
 <div class="wrap video-band-text">
 <span class="label">90 minuten · 6 puzzels · 1 extractiepunt</span>
 <p>Puzzelen onder tijdsdruk, terwijl de Hunters steeds dichterbij komen.</p>

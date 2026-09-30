@@ -30,26 +30,27 @@
     });
   });
 
-  /* Videoband: Vimeo-loop (gedempt, zonder knoppen) laden zodra de band in beeld komt.
-     Bij "minder beweging" in de systeeminstellingen blijft de foto staan. */
-  var bands = document.querySelectorAll('[data-bg-vimeo]');
+  /* Videoband: korte loop (eigen mp4, gedempt) starten zodra hij in beeld komt en pauzeren daarbuiten.
+     Bij "minder beweging" in de systeeminstellingen blijft de poster (foto) staan. */
   var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (bands.length && 'IntersectionObserver' in window && !still) {
+  function play(v) { var p = v.play(); if (p && p.catch) { p.catch(function () {}); } }
+  var vids = document.querySelectorAll('video[data-autoplay]');
+  if (vids.length && 'IntersectionObserver' in window && !still) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (!en.isIntersecting) { return; }
-        var band = en.target;
-        io.unobserve(band);
-        band.style.setProperty('--band-h', band.offsetHeight + 'px');
-        var f = document.createElement('iframe');
-        f.src = 'https://player.vimeo.com/video/' + band.getAttribute('data-bg-vimeo') + '?background=1&autoplay=1&loop=1&muted=1&dnt=1';
-        f.title = 'Video: een team lost een puzzel op';
-        f.allow = 'autoplay; fullscreen';
-        f.setAttribute('tabindex', '-1');
-        band.insertBefore(f, band.firstChild);
+        var v = en.target;
+        if (en.isIntersecting) {
+          if (!v.dataset.loaded) {
+            v.dataset.loaded = '1';
+            v.autoplay = true;            // de browser start zelf zodra er genoeg geladen is
+            v.preload = 'auto';
+            v.addEventListener('canplay', function () { play(v); }, { once: true });
+            v.load();
+          } else { play(v); }
+        } else { v.pause(); }
       });
-    }, { rootMargin: '200px' });
-    bands.forEach(function (b) { io.observe(b); });
+    }, { rootMargin: '150px' });
+    vids.forEach(function (v) { io.observe(v); });
   }
 
   /* Boekingsformulier (zelfde opzet als coworkingcompeta.com en badassrentals.nl).
