@@ -12,7 +12,9 @@ GENERAL_FAQ = [
     ('Hoe lang duurt het spel?', '<p>Het spel duurt 90 minuten. Reken inclusief ontvangst, uitleg en afronding op ongeveer twee uur.</p>'),
     ('Gaat The Hunt door als het regent?', '<p>Ja. The Hunt is een actief uitje waarbij je de hele tijd in beweging blijft. Trek wel kleding aan die tegen een buitje kan.</p>'),
     ('Is The Hunt geschikt voor kinderen?', '<p>Ja. De puzzels variëren van eenvoudig tot moeilijk, dus kinderen vanaf 8 jaar kunnen goed meedoen. En als boefje opgejaagd worden door de Hunters vinden ze vaak extra spannend.</p>'),
-    ('Lijkt The Hunt op Hunted of Jachtseizoen?', '<p>Ja, daar is het spel op geïnspireerd. Jullie zijn op de vlucht, de Hunters krijgen regelmatig jullie locatie door en gaan actief op jacht.</p>'),
+    ('Lijkt The Hunt op Hunted of Jachtseizoen?', '<p>Ja, daar is het spel op geïnspireerd. Jullie zijn op de vlucht. Onze Hunters krijgen elke 10 minuten jullie locatie door en gaan op basis daarvan jagen op jullie.</p>'),
+    ('Werken jullie met live Hunters?', '<p>Ja, dat klopt. De spelleider(s) die de uitleg doet, wordt na 10 minuten de Hunter die op jullie gaat jagen. Wellicht is het slim om die persoon te vriend te houden ;-)</p>'),
+    ('Is er ook een winnaar?', '<p>Jazeker. Wanneer het spel voorbij is en elk team op het extractiepunt is aangekomen, gaan we over tot het bekronen van het winnende team.</p>'),
 ]
 
 GALLERY = ['2026/04/16-april-Escape-Game-The-Hunt-Groningen-1067x800.jpeg', '2026/04/Groep-utrecht-toppers-768x576.jpeg',
