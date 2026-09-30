@@ -75,12 +75,12 @@ p{margin:0}
 .brand span{font-size:1.05rem;line-height:1.1}
 .brand small{display:block;font:500 .68rem/1.2 var(--mono);letter-spacing:.1em;color:var(--signal);text-transform:uppercase}
 .nav{margin-left:auto;display:flex;align-items:center;gap:4px}
-.nav a{color:var(--on-dark);text-decoration:none;font-weight:700;font-size:.95rem;padding:.55em .75em;border-radius:6px}
+.nav a{color:var(--on-dark);text-decoration:none;font-weight:700;font-size:.95rem;padding:.55em .7em;border-radius:6px;white-space:nowrap}
 .nav a:hover,.nav a[aria-current="page"]{color:var(--signal)}
 .nav .btn{margin-left:10px;padding:.7em 1.15em}
 .nav-toggle{display:none;margin-left:auto;background:none;border:0;color:var(--white);padding:10px;cursor:pointer}
 .nav-toggle svg{width:28px;height:28px}
-@media (max-width:980px){
+@media (max-width:1140px){
   .nav-toggle{display:block}
   .nav{position:fixed;inset:72px 0 auto 0;flex-direction:column;align-items:stretch;background:var(--night);padding:12px var(--gutter) 24px;gap:0;
     border-bottom:1px solid var(--line-dark);transform:translateY(-8px);opacity:0;visibility:hidden;max-height:calc(100vh - 72px);overflow:auto}
@@ -365,3 +365,5 @@ fieldset.field{border:0;padding:0;margin:0}
 .video-band-text .label{color:var(--signal)}
 .video-band-text p{font-size:clamp(1.3rem,2.6vw,2rem);font-weight:700;max-width:24ch;line-height:1.2;text-wrap:balance}
 .video-band > .wrap{width:100%}
+.card-links{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.95rem}
+.card-links a{font-weight:700}

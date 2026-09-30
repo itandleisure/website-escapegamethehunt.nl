@@ -12,6 +12,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import pages  # noqa: E402
 import pages_more as pm  # noqa: E402
+import pages_intent  # noqa: E402
 from render import LOCS, ROOT, SITE  # noqa: E402
 
 NEWS_PER_PAGE = 9
@@ -45,6 +46,8 @@ def main():
         write(loc['url'], pages.location(loc), written)
     write(OVERVIEW['path'], pm.locations_overview(OVERVIEW), written)
     write('/bedankt/', pm.thanks(), written)
+    write('/teamuitje-bedrijfsuitje/', pages_intent.teamuitje(), written)
+    write('/vrijgezellenfeest/', pages_intent.vrijgezellenfeest(), written)
 
     all_p = pm.all_pages()
     for p in all_p:

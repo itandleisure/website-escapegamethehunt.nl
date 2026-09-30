@@ -92,8 +92,8 @@ def home():
 <div class="wrap">
 <div class="head"><span class="label">Voor wie</span><h2 id="wie-titel">Voor elke groep vanaf 8 personen</h2></div>
 <div class="cards four">
-<div class="card has-img"><img src="/assets/uploads/2026/09/the-hunt-uitleg-nijmegen-800.jpg" alt="Speluitleg voor een bedrijf in Nijmegen" loading="lazy" width="600" height="800"><h3>Teamuitje en bedrijfsuitje</h3><p>Samenwerken onder druk, met een eindstand die nog weken besproken wordt. Ook voor personeelsuitjes en grote afdelingen.</p></div>
-<div class="card has-img"><img src="/assets/uploads/2026/04/Groep-Nijmegen-Vrijgezellenfeest-768x576.jpeg" alt="Vrijgezellenfeest in Nijmegen" loading="lazy" width="768" height="576"><h3>Vrijgezellenfeest</h3><p>Actief, competitief en goed te combineren met een borrel of diner in de stad.</p></div>
+<a class="card has-img" href="/teamuitje-bedrijfsuitje/"><img src="/assets/uploads/2026/09/the-hunt-uitleg-nijmegen-800.jpg" alt="Speluitleg voor een bedrijf in Nijmegen" loading="lazy" width="600" height="800"><h3>Teamuitje en bedrijfsuitje</h3><p>Samenwerken onder druk, met een eindstand die nog weken besproken wordt. Ook voor personeelsuitjes en grote afdelingen.</p><span class="more">Meer over teamuitjes →</span></a>
+<a class="card has-img" href="/vrijgezellenfeest/"><img src="/assets/uploads/2026/04/Groep-Nijmegen-Vrijgezellenfeest-768x576.jpeg" alt="Vrijgezellenfeest in Nijmegen" loading="lazy" width="768" height="576"><h3>Vrijgezellenfeest</h3><p>Actief, competitief en goed te combineren met een borrel of diner in de stad.</p><span class="more">Meer over vrijgezellenfeesten →</span></a>
 <div class="card has-img"><img src="/assets/uploads/2026/04/Groningen-teams-768x576.jpeg" alt="Teams in Groningen" loading="lazy" width="768" height="576"><h3>Vrienden en familie</h3><p>Puzzelaars en lopers hebben allebei een rol. Kinderen vanaf 8 jaar kunnen meedoen.</p></div>
 <a class="card has-img" href="/op-maat-gemaakt/"><img src="/assets/uploads/2026/05/groep-escape-game-the-hunt-op-maat-gemaakt-800.jpg" alt="Groep die een op maat gemaakte Hunt speelde" loading="lazy" width="800" height="600"><h3>Op maat gemaakt</h3><p>Wij verwerken vragen over jullie eigen bedrijf of groep in de opdrachten, voor €{P['custom']} extra.</p><span class="more">Hoe werkt dat →</span></a>
 </div>
@@ -215,6 +215,8 @@ def location(loc):
 </div>
 </section>
 
+{intent_links(loc)}
+
 <section class="section paper" aria-labelledby="faq-titel">
 <div class="wrap">
 <div class="head"><span class="label">Veelgestelde vragen</span><h2 id="faq-titel">Vragen over The Hunt {esc(city)}</h2></div>
@@ -234,3 +236,28 @@ def location(loc):
 {booking(city)}'''
     return page(path=loc['url'], title=c['title'], description=c['description'], body=body, og_image=hero_img,
                 schema=[crumbs, faq_schema(c['faq'])], active='/escape-game-the-hunt-locaties/')
+
+
+def intent_links(loc):
+    """Blok 'Teamuitje of vrijgezellenfeest in [stad]?' met links naar stadsblogs of de landelijke pagina."""
+    from pages_more import all_pages
+    blogs = {}
+    for p in all_pages():
+        if p['kind'] == 'post' and p['city'] is loc:
+            kw = (p.get('keyword') or '').lower()
+            for key, words in (('team', ('teamuitje', 'bedrijfsuitje', 'bedrijfsfeest')), ('vrij', ('vrijgezellen',))):
+                if any(w in kw for w in words):
+                    blogs.setdefault(key, []).append((p['keyword'], p['path']))
+    city = esc(loc['name'])
+
+    def card(key, title, text, national, label):
+        links = ''.join(f'<a href="{u}">{esc(k)}</a>' for k, u in sorted(blogs.get(key, [])))
+        extra = f'<p class="card-links">{links}</p>' if links else ''
+        return (f'<div class="card"><h3>{title}</h3><p>{text}</p>{extra}'
+                f'<a class="more" href="{national}">{label} →</a></div>')
+    return f'''<section class="section tight" aria-labelledby="doel-titel"><div class="wrap">
+<div class="head"><span class="label">Voor jullie groep</span><h2 id="doel-titel">Teamuitje of vrijgezellenfeest in {city}?</h2></div>
+<div class="cards">
+{card('team', f'Teamuitje en bedrijfsuitje in {city}', 'Samenwerken onder tijdsdruk, met meerdere teams tegen elkaar. Van een klein team tot ongeveer 200 collega’s.', '/teamuitje-bedrijfsuitje/', 'Alles over teamuitjes')}
+{card('vrij', f'Vrijgezellenfeest in {city}', 'Actief en competitief, met op verzoek vragen over de bruid of bruidegom. Daarna eten of borrelen in de stad.', '/vrijgezellenfeest/', 'Alles over vrijgezellenfeesten')}
+</div></div></section>'''
