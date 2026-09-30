@@ -239,3 +239,28 @@ def thanks():
 </div></section>'''
     return page(path='/bedankt/', title='Bedankt voor je aanvraag - Escape Game The Hunt',
                 description='Bedankt voor je aanvraag voor Escape Game The Hunt.', body=body, robots='noindex, follow')
+
+
+def not_found():
+    """404-pagina. GitHub Pages leest _redirects/.htaccess niet; dit script stuurt bekende oude adressen door."""
+    script = r"""<script>
+(function () {
+  var p = location.pathname, rules = [
+    [/^\/wp-content\/uploads\/(.*)$/, '/assets/uploads/$1'],
+    [/^\/escape-game-the-hunt-locaties\/escape-game-the-hunt-locaties\/(.*)$/, '/escape-game-the-hunt-locaties/$1'],
+    [/^\/escape-game-locaties\/(.*)$/, '/escape-game-the-hunt-locaties/$1'],
+    [/^\/(feed|comments\/feed|wp-login\.php|wp-admin)(\/.*)?$/, '/'],
+    [/^\/category\/[^\/]+\/feed\/?$/, '/escape-game-the-hunt-nieuws/']
+  ];
+  for (var i = 0; i < rules.length; i++) {
+    if (rules[i][0].test(p)) { location.replace(p.replace(rules[i][0], rules[i][1])); return; }
+  }
+})();
+</script>"""
+    body = f'''{hero('Deze pagina bestaat niet (meer)', 'Misschien is de pagina verhuisd. Kies hieronder je stad of ga naar de homepage.', [('Home', '/'), ('Niet gevonden', None)], cta=False)}
+<section class="section"><div class="wrap">
+<div class="locations">{nl_map()}{province_list()}</div>
+<p style="margin-top:24px"><a class="btn btn-signal" href="/">Naar de homepage {ICON_ARROW}</a></p>
+</div></section>'''
+    return page(path='/404.html', title='Pagina niet gevonden - Escape Game The Hunt', description='Deze pagina bestaat niet (meer).',
+                body=body, robots='noindex, follow', head_extra=script + '\n')

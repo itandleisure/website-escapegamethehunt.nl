@@ -46,6 +46,8 @@ def main():
         write(loc['url'], pages.location(loc), written)
     write(OVERVIEW['path'], pm.locations_overview(OVERVIEW), written)
     write('/bedankt/', pm.thanks(), written)
+    with open(os.path.join(ROOT, '404.html'), 'w', encoding='utf-8', newline='\n') as fh:
+        fh.write(pm.not_found())  # GitHub Pages toont deze pagina bij elk onbekend adres
     write('/teamuitje-bedrijfsuitje/', pages_intent.teamuitje(), written)
     write('/vrijgezellenfeest/', pages_intent.vrijgezellenfeest(), written)
 
