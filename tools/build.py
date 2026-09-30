@@ -157,6 +157,7 @@ def main():
     parts = load_partials()
     cities = city_index()
     paths = []
+    noindex = set()
     changed = 0
     for dirpath, dirnames, filenames in os.walk(ROOT):
         dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS and not d.startswith('.')]
@@ -164,11 +165,14 @@ def main():
             rel = os.path.relpath(dirpath, ROOT).replace(os.sep, '/')
             fp = os.path.join(dirpath, 'index.html')
             with open(fp, encoding='utf-8') as fh:
-                if 'http-equiv="refresh"' in fh.read():
-                    continue  # redirect stub (see _redirects / .htaccess): not in sitemap
+                html = fh.read()
+            if 'http-equiv="refresh"' in html:
+                continue  # redirect stub (see _redirects / .htaccess): not in sitemap
             paths.append('/' if rel == '.' else '/' + rel + '/')
             changed += build_page(os.path.join(dirpath, 'index.html'), parts, cities)
-    write_sitemap(paths)
+            if re.search(r'content="noindex[^"]*" name="robots"', html):
+                noindex.add(paths[-1])  # still built, but kept out of the sitemap
+    write_sitemap([p for p in paths if p not in noindex])
     print('%d pages, %d updated, sitemap.xml written' % (len(paths), changed))
 
 
