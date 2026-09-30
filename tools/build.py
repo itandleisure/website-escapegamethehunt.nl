@@ -85,7 +85,7 @@ def city_links(html, page_path, cities):
         name, page = cities.get(slug, (None, None))
         if not page:
             return html
-        items.append('<a href="%s">Speel Escape Game The Hunt in %s</a>' % (page, name))
+        items.append('<a href="%s">Speel de outdoor escape room in %s</a>' % (page, name))
         items.append('<a href="/escape-game-the-hunt-locaties/">Bekijk alle locaties</a>')
         anchor = '<div id="post-list">'
     else:
@@ -97,7 +97,7 @@ def city_links(html, page_path, cities):
                 continue
             name, page = cities[slug]
             if page:
-                items.append('<a href="%s">Escape Game The Hunt %s: info en boeken</a>' % (page, name))
+                items.append('<a href="%s">Escape room %s: info en boeken</a>' % (page, name))
             else:
                 items.append('<a href="/escape-game-the-hunt-locaties/">Bekijk alle locaties</a>')
             items.append('<a href="/category/%s/">Meer berichten over %s</a>' % (slug, name))
