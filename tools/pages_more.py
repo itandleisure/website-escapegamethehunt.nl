@@ -72,7 +72,7 @@ def facts_card(title, label, buttons):
     return f'''<div class="aside-card">
 <span class="label">{label}</span>
 <h3>{title}</h3>
-<dl><dt>Speeltijd</dt><dd>90 minuten</dd><dt>Groep</dt><dd>vanaf {P['min_people']} personen</dd><dt>Prijs</dt><dd>€{P['base']} t/m {P['base_max_people']} pers.</dd></dl>
+<dl><dt>Speeltijd</dt><dd>90 minuten</dd><dt>Groep</dt><dd>vanaf {P['min_people']} personen</dd><dt>Prijs</dt><dd>€{P['base']} ex. btw (€{P['base_incl']} incl.) t/m {P['base_max_people']} pers.</dd></dl>
 {buttons}
 </div>'''
 
@@ -138,7 +138,7 @@ def simple(p, extra_before='', extra_after='', body_html=None, schema=(), lede=N
 def prices(p):
     rest = p['body'][p['body'].find('<h2>Maak'):] if '<h2>Maak' in p['body'] else ''
     return simple(p, extra_before=section('Prijzen', 'Eén vaste prijs tot 17 personen', pricing()), body_html=rest,
-                  lede=f'Tot en met {P["base_max_people"]} personen betaal je €{P["base"]}. Daarboven €{P["per_person"]} per persoon. Alle prijzen exclusief btw.')
+                  lede=f'Tot en met {P["base_max_people"]} personen betaal je €{P["base"]}. Daarboven €{P["per_person"]} per persoon. Exclusief btw (inclusief: €{P["base_incl"]} en €{P["per_person_incl"]} p.p.).')
 
 
 def contact(p):

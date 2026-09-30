@@ -130,21 +130,22 @@ def clock(start_place=None, city=None):
 
 
 def pricing(city=None):
-    rows = ''.join('<tr><td>%d personen</td><td>%s</td></tr>' % (n, p) for n, p in P['examples'])
+    rows = ''.join('<tr><td>%d personen</td><td>%s</td><td>%s</td></tr>' % (n, ex, inc) for n, ex, inc in P['examples'])
     return f'''<div class="pricing">
 <div class="price-card">
 <span class="label">Prijs{' in ' + esc(city) if city else ''}</span>
-<div class="amount tnum">€{P['base']}<small>t/m {P['base_max_people']} personen</small></div>
+<div class="amount tnum">€{P['base']}<small>ex. btw · t/m {P['base_max_people']} personen</small></div>
+<p class="price-incl">€{P['base_incl']} inclusief btw</p>
 <div class="price-rows">
-<div><span>Vanaf {P['base_max_people'] + 1} personen</span><b>€{P['per_person']} p.p.</b></div>
-<div><span>Opdrachten op maat voor jullie groep</span><b>+ €{P['custom']}</b></div>
+<div><span>Vanaf {P['base_max_people'] + 1} personen</span><b>€{P['per_person']} p.p. <small>(€{P['per_person_incl']} incl.)</small></b></div>
+<div><span>Opdrachten op maat voor jullie groep</span><b>+ €{P['custom']} <small>(€{P['custom_incl']} incl.)</small></b></div>
 <div><span>Groepsgrootte</span><b>{P['min_people']} tot ±{P['max_people']} personen</b></div>
 </div>
-<p class="price-note">Alle prijzen zijn exclusief 21% btw. Voor groepen boven de {P['max_people']} maken we een wisselprogramma met onze andere spellen.</p>
+<p class="price-note">Bedragen zonder toevoeging zijn exclusief 21% btw. Voor groepen boven de {P['max_people']} maken we een wisselprogramma met onze andere spellen.</p>
 </div>
 <div class="examples">
 <span class="label">Rekenvoorbeelden</span>
-<table><thead><tr><th>Groep</th><th>Totaal ex. btw</th></tr></thead><tbody>{rows}</tbody></table>
+<table><thead><tr><th>Groep</th><th>Ex. btw</th><th>Incl. btw</th></tr></thead><tbody>{rows}</tbody></table>
 <a class="btn btn-line" href="/escape-game-the-hunt-prijzen/">Alles over prijzen {ICON_ARROW}</a>
 </div>
 </div>'''

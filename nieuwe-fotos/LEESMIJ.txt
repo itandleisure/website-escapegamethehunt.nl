@@ -1,0 +1,9 @@
+Zet hier nieuwe foto's voor de website neer (gewoon de originelen, groot mag).
+
+Tip voor de bestandsnaam (hoeft niet, helpt wel):
+- de stad erin als de foto in een bepaalde stad is gemaakt, bijv. "groningen-hunter-rent.jpg"
+- "actie" voor foto's tijdens het spel (puzzelen, rennen, Hunter in beeld)
+- "groep" voor groepsfoto's
+
+Claude verkleint en comprimeert de foto's en zet ze op de juiste plek in de site.
+Deze map zelf gaat niet mee naar GitHub of de live site.

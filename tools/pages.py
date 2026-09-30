@@ -8,7 +8,7 @@ GENERAL_FAQ = [
     ('Met hoeveel personen kun je The Hunt spelen?',
      f'<p>Vanaf {P["min_people"]} personen. We verdelen de groep in teams van ongeveer zes. We hebben al groepen van meer dan 100 personen begeleid; tot ongeveer {P["max_people"]} deelnemers is mogelijk.</p>'),
     ('Wat kost The Hunt?',
-     f'<p>Tot en met {P["base_max_people"]} personen betaal je €{P["base"]}. Daarboven rekenen we €{P["per_person"]} per persoon. Opdrachten op maat kosten €{P["custom"]} extra. Alle prijzen zijn exclusief btw.</p>'),
+     f'<p>Tot en met {P["base_max_people"]} personen betaal je €{P["base"]}. Daarboven rekenen we €{P["per_person"]} per persoon. Opdrachten op maat kosten €{P["custom"]} extra. Alle prijzen zijn exclusief btw; inclusief btw is dat €{P["base_incl"]}, €{P["per_person_incl"]} per persoon en €{P["custom_incl"]}.</p>'),
     ('Hoe lang duurt het spel?', '<p>Het spel duurt 90 minuten. Reken inclusief ontvangst, uitleg en afronding op ongeveer twee uur.</p>'),
     ('Gaat The Hunt door als het regent?', '<p>Ja. The Hunt is een actief uitje waarbij je de hele tijd in beweging blijft. Trek wel kleding aan die tegen een buitje kan.</p>'),
     ('Is The Hunt geschikt voor kinderen?', '<p>Ja. De puzzels variëren van eenvoudig tot moeilijk, dus kinderen vanaf 8 jaar kunnen goed meedoen. En als boefje opgejaagd worden door de Hunters vinden ze vaak extra spannend.</p>'),
@@ -43,7 +43,7 @@ def home():
 <h1>Ontsnap aan de <em>Hunters</em>. Midden in jullie stad.</h1>
 <p class="lede">The Hunt is de escape game die je buiten speelt. Los in teams zes puzzels op, kraak de GPS-code van het extractiepunt en blijf 90 minuten uit handen van de Hunters. Geïnspireerd op Hunted en Jachtseizoen.</p>
 <div class="hero-cta"><a class="btn btn-signal" href="#boeken">Boek The Hunt {ICON_ARROW}</a><a class="btn btn-ghost" href="#locaties">Kies je stad</a></div>
-{facts([('90 min', 'speeltijd'), ('8+', 'personen'), ('€' + str(P['base']), 't/m 17 personen'), ('Heel NL', 'speelgebied')])}
+{facts([('90 min', 'speeltijd'), ('8+', 'personen'), ('€' + str(P['base']), 'ex. btw · t/m 17 pers.'), ('Heel NL', 'speelgebied')])}
 </div>
 </section>
 
@@ -156,7 +156,7 @@ def location(loc):
 <h1>{esc(c['h1'])}</h1>
 <p class="lede">{esc(c['description'])}</p>
 <div class="hero-cta"><a class="btn btn-signal" href="#boeken">Boek in {esc(city)} {ICON_ARROW}</a><a class="btn btn-ghost" href="#prijzen">Bekijk prijzen</a></div>
-{facts([('90 min', 'speeltijd'), ('8+', 'personen'), ('€' + str(P['base']), 't/m 17 personen'), (esc(start if len(start) < 22 else city + ' centrum'), 'startlocatie')])}
+{facts([('90 min', 'speeltijd'), ('8+', 'personen'), ('€' + str(P['base']), 'ex. btw · t/m 17 pers.'), (esc(start if len(start) < 22 else city + ' centrum'), 'startlocatie')])}
 </div>
 </section>
 
@@ -167,7 +167,7 @@ def location(loc):
 <div class="aside-card">
 <span class="label">The Hunt {esc(city)}</span>
 <h3>Jullie missie in {esc(city)}</h3>
-<dl><dt>Start</dt><dd>{esc(start)}</dd><dt>Speeltijd</dt><dd>90 minuten</dd><dt>Groep</dt><dd>vanaf {P['min_people']} personen</dd><dt>Prijs</dt><dd>€{P['base']} t/m {P['base_max_people']} pers.</dd></dl>
+<dl><dt>Start</dt><dd>{esc(start)}</dd><dt>Speeltijd</dt><dd>90 minuten</dd><dt>Groep</dt><dd>vanaf {P['min_people']} personen</dd><dt>Prijs</dt><dd>€{P['base']} ex. btw (€{P['base_incl']} incl.) t/m {P['base_max_people']} pers.</dd></dl>
 <a class="btn btn-signal" href="#boeken">Vraag een offerte aan</a>
 <a class="btn btn-ghost" href="tel:{SITE['phone']}">Bel {SITE['phone_display']}</a>
 </div>
