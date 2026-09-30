@@ -309,3 +309,5 @@ fieldset.field{border:0;padding:0;margin:0}
 /* paginering */
 .pager{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
 .pager .btn{padding:.6em 1em;min-width:44px;justify-content:center}
+.shots{display:flex;flex-wrap:wrap;gap:10px}
+.shots img{height:220px;width:auto;border-radius:8px;border:1px solid var(--line)}

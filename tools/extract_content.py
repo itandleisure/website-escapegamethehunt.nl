@@ -39,6 +39,8 @@ def clean_inline(node):
     for c in node.children:
         if isinstance(c, NavigableString):
             out.append(html_escape(str(c), quote=False))
+        elif isinstance(c, Tag) and c.name in ('style', 'script'):
+            continue
         elif isinstance(c, Tag):
             inner = clean_inline(c)
             name = {'b': 'strong', 'i': 'em'}.get(c.name, c.name)

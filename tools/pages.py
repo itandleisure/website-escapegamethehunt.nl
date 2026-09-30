@@ -162,7 +162,7 @@ def location(loc):
 
 <section class="section">
 <div class="wrap article">
-<div class="prose">{c['body']}</div>
+<div class="prose">{f'<img src="{loc["image"]}" alt="Escape Game The Hunt in {esc(city)}" width="640" height="480">' if loc["image"] else ''}{c['body']}</div>
 <aside class="aside" aria-label="Boeken in {esc(city)}">
 <div class="aside-card">
 <span class="label">The Hunt {esc(city)}</span>
