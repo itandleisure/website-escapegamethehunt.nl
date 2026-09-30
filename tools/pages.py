@@ -34,11 +34,11 @@ def home():
 <section class="hero grid-bg">
 <div class="hero-media"><img src="/assets/uploads/2025/06/escape-the-hunt-juichend-team-game-kleiner.jpg" alt="" fetchpriority="high" width="1292" height="969"></div>
 <div class="wrap">
-<span class="coords"><span class="ping" aria-hidden="true"></span>Outdoor escape room · 33 steden in Nederland</span>
+<span class="coords"><span class="ping" aria-hidden="true"></span>Outdoor escape room · te spelen in heel Nederland</span>
 <h1>Ontsnap aan de <em>Hunters</em>. Midden in jullie stad.</h1>
 <p class="lede">The Hunt is de escape game die je buiten speelt. Los in teams zes puzzels op, kraak de GPS-code van het extractiepunt en blijf 90 minuten uit handen van de Hunters. Geïnspireerd op Hunted en Jachtseizoen.</p>
 <div class="hero-cta"><a class="btn btn-signal" href="#boeken">Boek The Hunt {ICON_ARROW}</a><a class="btn btn-ghost" href="#locaties">Kies je stad</a></div>
-{facts([('90 min', 'speeltijd'), ('8+', 'personen'), ('€' + str(P['base']), 't/m 17 personen'), ('33', 'steden')])}
+{facts([('90 min', 'speeltijd'), ('8+', 'personen'), ('€' + str(P['base']), 't/m 17 personen'), ('Heel NL', 'speelgebied')])}
 </div>
 </section>
 
@@ -95,8 +95,8 @@ def home():
 
 <section class="section" id="locaties" aria-labelledby="loc-titel">
 <div class="wrap">
-<div class="head"><span class="label">Speelsteden</span><h2 id="loc-titel">Speel The Hunt in 33 steden</h2>
-<p class="lede">Kies je stad voor de startlocatie, de route door het centrum en een voorbeeldprogramma.</p></div>
+<div class="head"><span class="label">Speelsteden</span><h2 id="loc-titel">Te spelen in heel Nederland</h2>
+<p class="lede">Dit zijn onze vaste speelsteden, met startlocatie, route en voorbeeldprogramma. Staat jullie plaats er niet tussen? Neem contact met ons op, dan kijken we samen wat er mogelijk is.</p></div>
 <div class="locations">{nl_map()}{province_list()}</div>
 </div>
 </section>
@@ -118,8 +118,8 @@ def home():
 </section>
 
 {booking()}'''
-    return page(path='/', title='Escape Game The Hunt | Outdoor escape room in 33 steden',
-                description='The Hunt is de outdoor escape room geïnspireerd op Hunted en Jachtseizoen. Ontsnap in 90 minuten aan de Hunters, in 33 steden. Vanaf 8 personen.',
+    return page(path='/', title='Escape Game The Hunt | Outdoor escape room in heel Nederland',
+                description='The Hunt is de outdoor escape room geïnspireerd op Hunted en Jachtseizoen. Ontsnap in 90 minuten aan de Hunters, te spelen in heel Nederland. Vanaf 8 personen.',
                 body=body, schema=[faq_schema(GENERAL_FAQ),
                                    {'@context': 'https://schema.org', '@type': 'WebSite', 'name': SITE['name'], 'url': SITE['url']}],
                 head_extra='<meta name="google-site-verification" content="GNl7i1eW7qRSl_ednpGUEVZconmYRnp_xq_5k6pT__M">\n')
@@ -196,7 +196,7 @@ def location(loc):
 <div class="wrap">
 <div class="head"><span class="label">In de buurt</span><h2 id="buurt-titel">Ook te spelen in de buurt van {esc(city)}</h2></div>
 <div class="province"><ul>{near}</ul></div>
-<p style="margin-top:16px"><a href="/#locaties">Bekijk alle 33 steden</a></p>
+<p style="margin-top:16px"><a href="/#locaties">Bekijk alle speelsteden</a></p>
 </div>
 </section>
 

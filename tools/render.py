@@ -93,7 +93,7 @@ def footer():
 <div class="footer-grid">
 <div class="stack">
 <a class="brand" href="/"><img src="{SITE['logo']}" alt="" width="40" height="48"><span>Escape Game<br>The Hunt</span></a>
-<p>De outdoor escape room waarin jullie door de stad vluchten voor de Hunters. Te spelen in 33 steden, vanaf 8 personen.</p>
+<p>De outdoor escape room waarin jullie door de stad vluchten voor de Hunters. Te spelen in heel Nederland, vanaf 8 personen.</p>
 <div class="contact-lines"><a href="tel:{SITE['phone']}">{SITE['phone_display']}</a><a href="mailto:{SITE['email']}">{SITE['email']}</a></div>
 </div>
 <div><h2>Speel The Hunt in</h2><ul class="footer-cities">{cities}</ul></div>
@@ -188,8 +188,8 @@ def nl_map(current=None):
                      f'<circle class="dot" cx="{x:.1f}" cy="{y:.1f}" r="{5.5 if is_cur else 4}"/>'
                      f'<text class="{lbl}" x="{x + dx:.1f}" y="{y + dy:.1f}" text-anchor="{anchor}">{esc(l["name"])}</text></a>')
     return f'''<figure class="map" style="margin:0">
-<svg viewBox="0 0 300 336" role="img" aria-label="Kaart van Nederland met alle 33 speelsteden">{''.join(parts)}</svg>
-<figcaption class="map-caption"><span>33 speelsteden</span>{"" if current else "<span>Wijs een stip aan voor de stad</span>"}</figcaption>
+<svg viewBox="0 0 300 336" role="img" aria-label="Kaart van Nederland met onze vaste speelsteden">{''.join(parts)}</svg>
+<figcaption class="map-caption"><span>Vaste speelsteden</span>{"" if current else "<span>Wijs een stip aan voor de stad</span>"}</figcaption>
 </figure>'''
 
 
@@ -221,7 +221,7 @@ def booking(city=None):
 <div class="field"><label for="f-mail">E-mailadres</label><input id="f-mail" type="email" name="E-mail" autocomplete="email" required></div>
 <div class="field"><label for="f-tel">Telefoonnummer</label><input id="f-tel" type="tel" name="Telefoon" autocomplete="tel" required></div>
 <div class="field"><label for="f-bedrijf">Bedrijfsnaam <span class="opt">(optioneel)</span></label><input id="f-bedrijf" name="Bedrijf" autocomplete="organization"></div>
-<div class="field"><label for="f-stad">Stad</label><select id="f-stad" name="Stad" required><option value="">Kies een stad</option>{opts}</select></div>
+<div class="field"><label for="f-stad">Stad</label><select id="f-stad" name="Stad" required><option value="">Kies een stad</option>{opts}<option>Andere plaats (vermeld hieronder)</option></select></div>
 <div class="field"><label for="f-datum">Gewenste datum</label><input id="f-datum" type="date" name="Datum" required></div>
 <div class="field"><label for="f-tijd">Starttijd <span class="opt">(ongeveer)</span></label><input id="f-tijd" name="Starttijd" placeholder="bijv. 15:00"></div>
 <div class="field"><label for="f-aantal">Aantal personen</label><input id="f-aantal" type="number" name="Aantal personen" min="{P['min_people']}" inputmode="numeric" required></div>
