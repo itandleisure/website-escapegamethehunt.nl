@@ -17,6 +17,7 @@ tools/pages_more.py        blogs, prijzen, contact, FAQ, sfeerimpressie, nieuws,
 tools/extract_content.py   eenmalig gebruikt om de tekst uit de oude WordPress-pagina's te halen (vereist beautifulsoup4)
 assets/css/style.css       het hele ontwerp
 assets/js/main.js          mobiel menu, trailer (Vimeo pas na klik) en boekingsformulier
+tools/google-formulier/    Google Apps Script voor aanvragen (Google Sheet + e-mail)
 assets/uploads/            alle afbeeldingen en video's
 _redirects / .htaccess     301-doorverwijzingen (Netlify/Cloudflare Pages resp. Apache)
 ```
@@ -46,10 +47,24 @@ Ga daarna naar http://localhost:8080. Het bouwscript heeft alleen standaard-Pyth
 Pas de gegenereerde `index.html`-bestanden niet met de hand aan: de volgende build overschrijft ze.
 Doorverwijspagina's (met een meta refresh) laat het bouwscript met rust.
 
-## Formulier
+## Formulier (zelfde opzet als coworkingcompeta.com en badassrentals.nl)
 
-Het boekingsformulier stuurt naar `form_endpoint` in `src/data/site.json` (bijvoorbeeld Formspree of Basin).
-Zolang dat leeg is, opent het formulier het e-mailprogramma van de bezoeker met een ingevulde aanvraag.
+Het boekingsformulier werkt in twee stappen:
+
+1. **Google Sheet + e-mail.** Staat `google_form_url` in `src/data/site.json` ingevuld, dan stuurt
+   `assets/js/main.js` elke aanvraag naar het Google Apps Script `tools/google-formulier/Code.gs`. Dat zet de
+   aanvraag in het tabblad "Aanvragen", mailt info@escapegamethehunt.nl (antwoorden gaat direct naar de klant) en
+   ruimt aanvragen ouder dan 12 maanden automatisch op. Daarna gaat de bezoeker naar `/bedankt/`.
+2. **FormSubmit als reserve.** Is `google_form_url` leeg of lukt Google niet, dan gaat het formulier gewoon via
+   FormSubmit (`https://formsubmit.co/info@escapegamethehunt.nl`) naar hetzelfde adres. Bij de allereerste
+   inzending stuurt FormSubmit een activatiemail naar info@; die link moet één keer worden aangeklikt.
+
+Google Sheet instellen (eenmalig):
+
+1. Maak een Google Sheet, bijv. "The Hunt aanvragen". Extensies > Apps Script: plak `tools/google-formulier/Code.gs`.
+2. Kies bovenin de functie `installeer` en klik op Uitvoeren (toestemming geven).
+3. Implementeren > Nieuwe implementatie > Web-app, "Uitvoeren als: ik", "Toegang: iedereen".
+4. Zet de /exec-URL in `google_form_url` in `src/data/site.json`, draai `python tools/build.py`, commit en push.
 
 ## Privacy
 

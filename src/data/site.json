@@ -9,7 +9,6 @@
   "company": "Badass Group B.V.",
   "logo": "/assets/uploads/2025/06/escape-game-the-hunt-wit-logo.png",
   "og_image": "/assets/uploads/2025/06/escape-the-hunt-juichend-team-game-kleiner.jpg",
-  "form_endpoint": "",
   "prices": {
     "base": 395,
     "base_max_people": 17,
@@ -117,5 +116,7 @@
       "Perfecte activiteit",
       "We wisten niet goed wat we konden verwachten, maar dit overtrof alles. De combinatie van puzzelen, rennen en strategie maakt het enorm leuk. De hunters geven het spel echt een extra dimensie. Je voelt de druk, maar dat maakt het juist zo spannend. Perfecte activiteit voor groepen die van actie houden. Wij raden het iedereen aan!"
     ]
-  ]
+  ],
+  "google_form_url": "",
+  "formsubmit": "https://formsubmit.co/info@escapegamethehunt.nl"
 }

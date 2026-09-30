@@ -228,3 +228,14 @@ def apply_block():
 <p class="lede">Stuur een korte motivatie en je woonplaats. We nemen snel contact met je op.</p></div>
 <div class="stack contact-lines"><a href="mailto:{SITE['email']}?subject=Sollicitatie%20The%20Hunt">{SITE['email']}</a><a href="tel:{SITE['phone']}">{SITE['phone_display']}</a></div>
 </div></section>'''
+
+
+def thanks():
+    crumbs = [('Home', '/'), ('Bedankt', None)]
+    body = f'''{hero('Bedankt voor je aanvraag!', 'We hebben je aanvraag ontvangen en nemen binnen 1 werkdag contact met je op met een offerte op maat.', crumbs, cta=False)}
+<section class="section"><div class="wrap stack">
+<p>Heb je haast of wil je nog iets toevoegen? Bel ons op <a href="tel:{SITE['phone']}">{SITE['phone_display']}</a> of mail naar <a href="mailto:{SITE['email']}">{SITE['email']}</a>.</p>
+<p><a class="btn btn-line" href="/">Terug naar de homepage</a></p>
+</div></section>'''
+    return page(path='/bedankt/', title='Bedankt voor je aanvraag - Escape Game The Hunt',
+                description='Bedankt voor je aanvraag voor Escape Game The Hunt.', body=body, robots='noindex, follow')

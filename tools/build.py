@@ -44,6 +44,7 @@ def main():
     for loc in LOCS:
         write(loc['url'], pages.location(loc), written)
     write(OVERVIEW['path'], pm.locations_overview(OVERVIEW), written)
+    write('/bedankt/', pm.thanks(), written)
 
     all_p = pm.all_pages()
     for p in all_p:

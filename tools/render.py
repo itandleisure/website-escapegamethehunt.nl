@@ -240,19 +240,23 @@ def booking(city=None):
 <p class="lede">Laat weten met hoeveel personen jullie komen en wanneer. Je krijgt een duidelijke offerte, zonder verplichtingen.</p>
 <div class="contact-lines"><a href="tel:{SITE['phone']}">{SITE['phone_display']}</a><a href="mailto:{SITE['email']}">{SITE['email']}</a></div>
 </div>
-<form class="form" data-booking data-endpoint="{esc(SITE['form_endpoint'])}" data-email="{SITE['email']}" novalidate>
-<div class="field"><label for="f-naam">Naam</label><input id="f-naam" name="Naam" autocomplete="name" required></div>
-<fieldset class="field"><legend>Type aanvraag</legend><div class="choices"><label><input type="radio" name="Type aanvraag" value="Zakelijk" checked> Zakelijk</label><label><input type="radio" name="Type aanvraag" value="Particulier"> Particulier</label></div></fieldset>
-<div class="field"><label for="f-mail">E-mailadres</label><input id="f-mail" type="email" name="E-mail" autocomplete="email" required></div>
-<div class="field"><label for="f-tel">Telefoonnummer</label><input id="f-tel" type="tel" name="Telefoon" autocomplete="tel" required></div>
-<div class="field"><label for="f-bedrijf">Bedrijfsnaam <span class="opt">(optioneel)</span></label><input id="f-bedrijf" name="Bedrijf" autocomplete="organization"></div>
-<div class="field"><label for="f-stad">Stad</label><select id="f-stad" name="Stad" required><option value="">Kies een stad</option>{opts}<option>Andere plaats (vermeld hieronder)</option></select></div>
-<div class="field"><label for="f-datum">Gewenste datum</label><input id="f-datum" type="date" name="Datum" required></div>
-<div class="field"><label for="f-tijd">Starttijd <span class="opt">(ongeveer)</span></label><input id="f-tijd" name="Starttijd" placeholder="bijv. 15:00"></div>
-<div class="field"><label for="f-aantal">Aantal personen</label><input id="f-aantal" type="number" name="Aantal personen" min="{P['min_people']}" inputmode="numeric" required></div>
-<fieldset class="field"><legend>Soort Hunt</legend><div class="choices"><label><input type="radio" name="Soort Hunt" value="Regulier" checked> Regulier</label><label><input type="radio" name="Soort Hunt" value="Op maat (+€125)"> Op maat (+€{P['custom']})</label></div></fieldset>
-<div class="field full"><label for="f-info">Overige informatie <span class="opt">(optioneel)</span></label><textarea id="f-info" name="Overige informatie"></textarea></div>
-<div class="hp" aria-hidden="true"><label for="f-web">Website</label><input id="f-web" name="website" tabindex="-1" autocomplete="off"></div>
+<form class="form" data-booking data-google="{esc(SITE['google_form_url'])}" action="{SITE['formsubmit']}" method="POST">
+<input type="hidden" name="form" value="boeking">
+<input type="hidden" name="_subject" value="Aanvraag The Hunt via escapegamethehunt.nl">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_next" value="{SITE['url']}/bedankt/">
+<div class="field"><label for="f-naam">Naam</label><input id="f-naam" name="naam" autocomplete="name" required></div>
+<fieldset class="field"><legend>Type aanvraag</legend><div class="choices"><label><input type="radio" name="type" value="Zakelijk" checked> Zakelijk</label><label><input type="radio" name="type" value="Particulier"> Particulier</label></div></fieldset>
+<div class="field"><label for="f-mail">E-mailadres</label><input id="f-mail" type="email" name="email" autocomplete="email" required></div>
+<div class="field"><label for="f-tel">Telefoonnummer</label><input id="f-tel" type="tel" name="telefoon" autocomplete="tel" required></div>
+<div class="field"><label for="f-bedrijf">Bedrijfsnaam <span class="opt">(optioneel)</span></label><input id="f-bedrijf" name="bedrijf" autocomplete="organization"></div>
+<div class="field"><label for="f-stad">Stad</label><select id="f-stad" name="stad" required><option value="">Kies een stad</option>{opts}<option>Andere plaats (vermeld hieronder)</option></select></div>
+<div class="field"><label for="f-datum">Gewenste datum</label><input id="f-datum" type="date" name="datum" required></div>
+<div class="field"><label for="f-tijd">Starttijd <span class="opt">(ongeveer)</span></label><input id="f-tijd" name="starttijd" placeholder="bijv. 15:00"></div>
+<div class="field"><label for="f-aantal">Aantal personen</label><input id="f-aantal" type="number" name="personen" min="{P['min_people']}" inputmode="numeric" required></div>
+<fieldset class="field"><legend>Soort Hunt</legend><div class="choices"><label><input type="radio" name="soort" value="Regulier" checked> Regulier</label><label><input type="radio" name="soort" value="Op maat (+€125)"> Op maat (+€{P['custom']})</label></div></fieldset>
+<div class="field full"><label for="f-info">Overige informatie <span class="opt">(optioneel)</span></label><textarea id="f-info" name="bericht"></textarea></div>
+<div class="hp" aria-hidden="true"><label for="f-web">Laat dit veld leeg</label><input id="f-web" name="_honey" tabindex="-1" autocomplete="off"></div>
 <div class="full"><button class="btn btn-signal" type="submit">Vraag een offerte aan {ICON_ARROW}</button></div>
 </form>
 </div>
