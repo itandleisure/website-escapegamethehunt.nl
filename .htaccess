@@ -4,3 +4,5 @@ RedirectMatch 301 ^/escape-game-the-hunt-locaties/escape-game-the-hunt-locaties/
 RedirectMatch 301 ^/escape-game-locaties/(.*)$ /escape-game-the-hunt-locaties/$1
 Redirect 301 /escaperoom-amersfoort /escape-game-the-hunt-locaties/escape-game-the-hunt-amersfoort/
 Redirect 301 /escaperoom-rotterdam-een-unieke-outdoor-beleving-met-the-hunt /escape-game-the-hunt-locaties/escape-game-the-hunt-rotterdam-2/
+RedirectMatch 301 ^/escape-game-the-hunt-open-inschrijving/open-inschrijving-4-april-in-groningen/?$ /escape-game-the-hunt-locaties/escape-game-the-hunt-groningen/
+RedirectMatch 301 ^/escape-game-the-hunt-open-inschrijving/?$ /
