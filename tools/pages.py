@@ -69,7 +69,7 @@ def home():
 <li>Puzzels van eenvoudig tot moeilijk, dus ook leuk met kinderen vanaf 8 jaar.</li>
 <li>Het spel gaat gewoon door als het regent.</li>
 </ul>
-<figure class="phone"><img src="/assets/uploads/2026/09/the-hunt-gameapp-800.jpg" alt="De GameApp met het speelveld op een telefoon" loading="lazy" width="511" height="800"><figcaption>De GameApp</figcaption></figure>
+<figure class="phone"><img src="/assets/uploads/2026/09/the-hunt-gameapp-800.jpg" alt="De GameApp met het speelveld op een telefoon" loading="lazy" width="511" height="800"></figure>
 </div>
 </div>
 {VIDEO}
