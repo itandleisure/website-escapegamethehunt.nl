@@ -81,7 +81,7 @@ def post(p, pages_):
     date = (p['published'] or '')[:10]
     shown = '%s-%s-%s' % (date[8:10], date[5:7], date[:4]) if date else ''
     crumbs = [('Home', '/'), ('Nieuws', '/escape-game-the-hunt-nieuws/'), (short_title(p), p['path'])]
-    label = (f'{esc(city["name"])} · ' if city else '') + (f'<time datetime="{date}">{shown}</time>' if date else 'Nieuws')
+    label = f'The Hunt in {esc(city["name"])}' if city else 'Nieuws'
     if city:
         card = facts_card(f'Escape room {esc(city["name"])}', f'Speel in {esc(city["name"])}',
                           f'<a class="btn btn-signal" href="{city["url"]}">Alles over {esc(city["name"])}</a>'
