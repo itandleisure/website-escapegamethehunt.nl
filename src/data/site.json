@@ -1,0 +1,125 @@
+{
+  "name": "Escape Game The Hunt",
+  "url": "https://escapegamethehunt.nl",
+  "email": "info@escapegamethehunt.nl",
+  "phone": "+31850047719",
+  "phone_display": "085 004 7719",
+  "address": "Nering 10-1, 8355 DK Giethoorn",
+  "kvk": "82473897",
+  "company": "Badass Group B.V.",
+  "logo": "/assets/uploads/2025/06/escape-game-the-hunt-wit-logo.png",
+  "og_image": "/assets/uploads/2025/06/escape-the-hunt-juichend-team-game-kleiner.jpg",
+  "form_endpoint": "",
+  "prices": {
+    "base": 395,
+    "base_max_people": 17,
+    "per_person": "22,50",
+    "custom": 125,
+    "min_people": 8,
+    "max_people": 200,
+    "examples": [
+      [
+        13,
+        "€395"
+      ],
+      [
+        17,
+        "€395"
+      ],
+      [
+        21,
+        "€472,50"
+      ],
+      [
+        30,
+        "€675"
+      ],
+      [
+        56,
+        "€1.260"
+      ]
+    ]
+  },
+  "nav": [
+    [
+      "Locaties",
+      "/escape-game-the-hunt-locaties/"
+    ],
+    [
+      "Prijzen",
+      "/escape-game-the-hunt-prijzen/"
+    ],
+    [
+      "Op maat",
+      "/op-maat-gemaakt/"
+    ],
+    [
+      "Sfeerimpressie",
+      "/escape-game-the-hunt-fotopagina/"
+    ],
+    [
+      "Vragen",
+      "/veelgestelde-vragen/"
+    ],
+    [
+      "Nieuws",
+      "/escape-game-the-hunt-nieuws/"
+    ],
+    [
+      "Contact",
+      "/contact/"
+    ]
+  ],
+  "footer_links": [
+    [
+      "Over ons",
+      "/over-ons/"
+    ],
+    [
+      "Prijzen",
+      "/escape-game-the-hunt-prijzen/"
+    ],
+    [
+      "Op maat gemaakt",
+      "/op-maat-gemaakt/"
+    ],
+    [
+      "Open inschrijving",
+      "/escape-game-the-hunt-open-inschrijving/"
+    ],
+    [
+      "Veelgestelde vragen",
+      "/veelgestelde-vragen/"
+    ],
+    [
+      "Sfeerimpressie",
+      "/escape-game-the-hunt-fotopagina/"
+    ],
+    [
+      "Nieuws",
+      "/escape-game-the-hunt-nieuws/"
+    ],
+    [
+      "Werken bij",
+      "/werken-bij/"
+    ],
+    [
+      "Contact",
+      "/contact/"
+    ]
+  ],
+  "reviews": [
+    [
+      "Teamuitje in Nijmegen",
+      "Wij deden The Hunt met ons teamuitje en het was fantastisch! De puzzels zijn uitdagend en je wordt écht opgejaagd. Het gaf zoveel energie. Volgend jaar weer!"
+    ],
+    [
+      "In één woord WOW!",
+      "Wat een adrenaline! De spanning zat er vanaf minuut één goed in. Echt een unieke ervaring!"
+    ],
+    [
+      "Perfecte activiteit",
+      "We wisten niet goed wat we konden verwachten, maar dit overtrof alles. De combinatie van puzzelen, rennen en strategie maakt het enorm leuk. De hunters geven het spel echt een extra dimensie. Je voelt de druk, maar dat maakt het juist zo spannend. Perfecte activiteit voor groepen die van actie houden. Wij raden het iedereen aan!"
+    ]
+  ]
+}

@@ -1,0 +1,205 @@
+"""Paginatypes van de nieuwe site: homepage en locatiepagina's."""
+from render import (ICON_ARROW, LOCS, P, SITE, booking, clock, content, coords, esc, facts, faq_block, faq_schema,
+                    nearest, nl_map, page, pricing, province_list)
+
+GENERAL_FAQ = [
+    ('Wat is een outdoor escape room?',
+     '<p>Bij een outdoor escape room los je escape-puzzels op in de stad in plaats van in een afgesloten kamer. Bij The Hunt krijgt elk team een gametas met puzzels en een GameApp. Wie alle puzzels oplost, vindt het geheime extractiepunt, terwijl de Hunters jullie proberen te pakken.</p>'),
+    ('Met hoeveel personen kun je The Hunt spelen?',
+     f'<p>Vanaf {P["min_people"]} personen. We verdelen de groep in teams van ongeveer zes. We hebben al groepen van meer dan 100 personen begeleid; tot ongeveer {P["max_people"]} deelnemers is mogelijk.</p>'),
+    ('Wat kost The Hunt?',
+     f'<p>Tot en met {P["base_max_people"]} personen betaal je €{P["base"]}. Daarboven rekenen we €{P["per_person"]} per persoon. Opdrachten op maat kosten €{P["custom"]} extra. Alle prijzen zijn exclusief btw.</p>'),
+    ('Hoe lang duurt het spel?', '<p>Het spel duurt 90 minuten. Reken inclusief ontvangst, uitleg en afronding op ongeveer twee uur.</p>'),
+    ('Gaat The Hunt door als het regent?', '<p>Ja. The Hunt is een actief uitje waarbij je de hele tijd in beweging blijft. Trek wel kleding aan die tegen een buitje kan.</p>'),
+    ('Is The Hunt geschikt voor kinderen?', '<p>Ja. De puzzels variëren van eenvoudig tot moeilijk, dus kinderen vanaf 8 jaar kunnen goed meedoen. En als boefje opgejaagd worden door de Hunters vinden ze vaak extra spannend.</p>'),
+    ('Lijkt The Hunt op Hunted of Jachtseizoen?', '<p>Ja, daar is het spel op geïnspireerd. Jullie zijn op de vlucht, de Hunters krijgen regelmatig jullie locatie door en gaan actief op jacht.</p>'),
+]
+
+GALLERY = ['2026/04/16-april-Escape-Game-The-Hunt-Groningen-1067x800.jpeg', '2026/04/Groep-utrecht-toppers-768x576.jpeg',
+           '2026/04/Escape-Game-The-Hunt-Eindhoven-768x576.jpeg', '2026/04/Groep-Nijmegen-Vrijgezellenfeest-768x576.jpeg',
+           '2026/04/Groningen-teams-768x576.jpeg', '2026/04/Escape-Game-The-Hunt-vrijgezellenfeest-groningen-768x576.jpeg',
+           '2026/04/Open-inschrijving-Groningen-768x576.jpeg', '2026/04/Provincie-Groningen-The-Hunt-spelen-Escaperoom-768x576.jpeg']
+GALLERY_ALT = ['Teams na afloop van The Hunt in Groningen', 'Groep in Utrecht', 'The Hunt in Eindhoven', 'Vrijgezellenfeest in Nijmegen',
+               'Teams in Groningen', 'Vrijgezellenfeest in Groningen', 'Open inschrijving in Groningen', 'The Hunt in de provincie Groningen']
+
+VIDEO = '''<div class="media-frame"><video controls preload="none" playsinline poster="/assets/uploads/2025/06/escape-the-hunt-juichend-team-game-kleiner.jpg">
+<source src="/assets/uploads/2025/06/Escaperoom-The-Hunt-aan-het-puzzelen.mp4" type="video/mp4"></video></div>'''
+
+
+def home():
+    q = ''.join(f'<figure class="quote"><span class="stars" aria-label="5 sterren">★★★★★</span><blockquote><p>{esc(t)}</p></blockquote><figcaption>{esc(h)}</figcaption></figure>'
+                for h, t in SITE['reviews'])
+    gal = ''.join(f'<img src="/assets/uploads/{g}" alt="{a}" loading="lazy" width="768" height="576">' for g, a in zip(GALLERY, GALLERY_ALT))
+    body = f'''
+<section class="hero grid-bg">
+<div class="hero-media"><img src="/assets/uploads/2025/06/escape-the-hunt-juichend-team-game-kleiner.jpg" alt="" fetchpriority="high" width="1292" height="969"></div>
+<div class="wrap">
+<span class="coords"><span class="ping" aria-hidden="true"></span>Outdoor escape room · 33 steden in Nederland</span>
+<h1>Ontsnap aan de <em>Hunters</em>. Midden in jullie stad.</h1>
+<p class="lede">The Hunt is de escape game die je buiten speelt. Los in teams zes puzzels op, kraak de GPS-code van het extractiepunt en blijf 90 minuten uit handen van de Hunters. Geïnspireerd op Hunted en Jachtseizoen.</p>
+<div class="hero-cta"><a class="btn btn-signal" href="#boeken">Boek The Hunt {ICON_ARROW}</a><a class="btn btn-ghost" href="#locaties">Kies je stad</a></div>
+{facts([('90 min', 'speeltijd'), ('8+', 'personen'), ('€' + str(P['base']), 't/m 17 personen'), ('33', 'steden')])}
+</div>
+</section>
+
+<section class="section dark grid-bg" id="zo-werkt-het" aria-labelledby="werkt-titel">
+<div class="wrap">
+<div class="head"><span class="label">De spelklok</span><h2 id="werkt-titel">Zo verloopt een Hunt</h2>
+<p class="lede">Een kat-en-muisspel van 90 minuten. Jullie puzzelen en rennen, de Hunters kijken elke tien minuten waar jullie zijn.</p></div>
+{clock()}
+</div>
+</section>
+
+<section class="section" aria-labelledby="stad-titel">
+<div class="wrap split">
+<div class="stack">
+<span class="label">Geen kamer, wel een speelveld</span>
+<h2 id="stad-titel">De hele stad is jullie escape room</h2>
+<p>Jullie worden niet opgesloten. Jullie bewegen vrij door het centrum en kiezen zelf je route, terwijl de Hunters steeds dichterbij komen. Wie slim puzzelt maar vergeet om uit het zicht te blijven, wordt alsnog gepakt.</p>
+<ul class="checks">
+<li>Alles zit in de gametas en op je telefoon. Er liggen geen puzzels verstopt in de stad.</li>
+<li>In de GameApp zien jullie het speelveld, voeren jullie antwoorden in en kopen jullie hints.</li>
+<li>Puzzels van eenvoudig tot moeilijk, dus ook leuk met kinderen vanaf 8 jaar.</li>
+<li>Het spel gaat gewoon door als het regent.</li>
+</ul>
+</div>
+{VIDEO}
+</div>
+</section>
+
+<section class="section paper" aria-labelledby="wie-titel">
+<div class="wrap">
+<div class="head"><span class="label">Voor wie</span><h2 id="wie-titel">Voor elke groep vanaf 8 personen</h2></div>
+<div class="cards">
+<div class="card"><h3>Teamuitje en bedrijfsuitje</h3><p>Samenwerken onder druk, met een eindstand die nog weken besproken wordt. Ook voor personeelsuitjes en grote afdelingen.</p></div>
+<div class="card"><h3>Vrijgezellenfeest</h3><p>Actief, competitief en goed te combineren met een borrel of diner in de stad.</p></div>
+<div class="card"><h3>Vrienden en familie</h3><p>Puzzelaars en lopers hebben allebei een rol. Kinderen vanaf 8 jaar kunnen meedoen.</p></div>
+<a class="card" href="/op-maat-gemaakt/"><h3>Op maat gemaakt</h3><p>Wij verwerken vragen over jullie eigen bedrijf of groep in de opdrachten, voor €{P['custom']} extra.</p><span class="more">Hoe werkt dat →</span></a>
+</div>
+</div>
+</section>
+
+<section class="section" id="prijzen" aria-labelledby="prijs-titel">
+<div class="wrap">
+<div class="head"><span class="label">Prijzen</span><h2 id="prijs-titel">Eén vaste prijs tot 17 personen</h2></div>
+{pricing()}
+</div>
+</section>
+
+<section class="section navy" aria-labelledby="review-titel">
+<div class="wrap">
+<div class="head"><span class="label">Ervaringen</span><h2 id="review-titel">Wat groepen zeggen na hun Hunt</h2></div>
+<div class="quotes">{q}</div>
+</div>
+</section>
+
+<section class="section" id="locaties" aria-labelledby="loc-titel">
+<div class="wrap">
+<div class="head"><span class="label">Speelsteden</span><h2 id="loc-titel">Speel The Hunt in 33 steden</h2>
+<p class="lede">Kies je stad voor de startlocatie, de route door het centrum en een voorbeeldprogramma.</p></div>
+<div class="locations">{nl_map()}{province_list()}</div>
+</div>
+</section>
+
+<section class="section paper" aria-labelledby="foto-titel">
+<div class="wrap">
+<div class="head"><span class="label">Sfeerimpressie</span><h2 id="foto-titel">Groepen die jullie voorgingen</h2></div>
+<div class="gallery">{gal}</div>
+<p style="margin-top:20px"><a class="btn btn-line" href="/escape-game-the-hunt-fotopagina/">Meer foto's {ICON_ARROW}</a></p>
+</div>
+</section>
+
+<section class="section" aria-labelledby="faq-titel">
+<div class="wrap">
+<div class="head"><span class="label">Veelgestelde vragen</span><h2 id="faq-titel">Goed om te weten</h2></div>
+{faq_block(GENERAL_FAQ)}
+<p style="margin-top:20px"><a href="/veelgestelde-vragen/">Alle veelgestelde vragen</a></p>
+</div>
+</section>
+
+{booking()}'''
+    return page(path='/', title='Escape Game The Hunt | Outdoor escape room in 33 steden',
+                description='The Hunt is de outdoor escape room geïnspireerd op Hunted en Jachtseizoen. Ontsnap in 90 minuten aan de Hunters, in 33 steden. Vanaf 8 personen.',
+                body=body, schema=[faq_schema(GENERAL_FAQ),
+                                   {'@context': 'https://schema.org', '@type': 'WebSite', 'name': SITE['name'], 'url': SITE['url']}],
+                head_extra='<meta name="google-site-verification" content="GNl7i1eW7qRSl_ednpGUEVZconmYRnp_xq_5k6pT__M">\n')
+
+
+def location(loc):
+    c = content('locaties', loc['slug'])
+    city = loc['name']
+    start = loc['start'] or f'Centrum van {city}'
+    posts = ''
+    if c['posts']:
+        cards = ''.join(f'<a class="post" href="{p["url"]}">' + (f'<img src="{p["image"]}" alt="" loading="lazy" width="533" height="400">' if p['image'] else '')
+                        + f'<span>{esc(p["title"])}</span></a>' for p in c['posts'])
+        posts = f'''<section class="section paper" aria-labelledby="posts-titel"><div class="wrap">
+<div class="head"><span class="label">Uitjes in {esc(city)}</span><h2 id="posts-titel">Meer over The Hunt in {esc(city)}</h2></div>
+<div class="posts">{cards}</div></div></section>'''
+    near = ''.join(f'<li><a href="{l["url"]}">{esc(l["name"])}</a></li>' for l in nearest(loc))
+    crumbs = {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
+        {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': SITE['url'] + '/'},
+        {'@type': 'ListItem', 'position': 2, 'name': 'Locaties', 'item': SITE['url'] + '/escape-game-the-hunt-locaties/'},
+        {'@type': 'ListItem', 'position': 3, 'name': city, 'item': SITE['url'] + loc['url']}]}
+    hero_img = c['og_image'] or SITE['og_image']
+    body = f'''
+<section class="hero compact grid-bg">
+<div class="hero-media"><img src="/assets/uploads/2025/06/escape-the-hunt-juichend-team-game-kleiner.jpg" alt="" fetchpriority="high" width="1292" height="969"></div>
+<div class="wrap">
+<nav class="crumbs" aria-label="Kruimelpad"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/escape-game-the-hunt-locaties/">Locaties</a><span aria-hidden="true">/</span><span>{esc(city)}</span></nav>
+<span class="coords"><span class="ping" aria-hidden="true"></span>{coords(loc)} · {esc(loc['province'])}</span>
+<h1>{esc(c['h1'])}</h1>
+<p class="lede">{esc(c['description'])}</p>
+<div class="hero-cta"><a class="btn btn-signal" href="#boeken">Boek in {esc(city)} {ICON_ARROW}</a><a class="btn btn-ghost" href="#prijzen">Bekijk prijzen</a></div>
+{facts([('90 min', 'speeltijd'), ('8+', 'personen'), ('€' + str(P['base']), 't/m 17 personen'), (esc(start if len(start) < 22 else city + ' centrum'), 'startlocatie')])}
+</div>
+</section>
+
+<section class="section">
+<div class="wrap article">
+<div class="prose">{c['body']}</div>
+<aside class="aside" aria-label="Boeken in {esc(city)}">
+<div class="aside-card">
+<span class="label">The Hunt {esc(city)}</span>
+<h3>Jullie missie in {esc(city)}</h3>
+<dl><dt>Start</dt><dd>{esc(start)}</dd><dt>Speeltijd</dt><dd>90 minuten</dd><dt>Groep</dt><dd>vanaf {P['min_people']} personen</dd><dt>Prijs</dt><dd>€{P['base']} t/m {P['base_max_people']} pers.</dd></dl>
+<a class="btn btn-signal" href="#boeken">Vraag een offerte aan</a>
+<a class="btn btn-ghost" href="tel:{SITE['phone']}">Bel {SITE['phone_display']}</a>
+</div>
+{nl_map(loc['slug'])}
+</aside>
+</div>
+</section>
+
+<section class="section dark grid-bg" aria-labelledby="werkt-titel">
+<div class="wrap">
+<div class="head"><span class="label">De spelklok</span><h2 id="werkt-titel">Zo verloopt The Hunt in {esc(city)}</h2></div>
+{clock(loc['start'], city)}
+</div>
+</section>
+
+<section class="section" id="prijzen" aria-labelledby="prijs-titel">
+<div class="wrap">
+<div class="head"><span class="label">Prijzen</span><h2 id="prijs-titel">Wat kost een escape room in {esc(city)}?</h2></div>
+{pricing(city)}
+</div>
+</section>
+
+<section class="section paper" aria-labelledby="faq-titel">
+<div class="wrap">
+<div class="head"><span class="label">Veelgestelde vragen</span><h2 id="faq-titel">Vragen over The Hunt {esc(city)}</h2></div>
+{faq_block(c['faq'])}
+</div>
+</section>
+{posts}
+<section class="section tight" aria-labelledby="buurt-titel">
+<div class="wrap">
+<div class="head"><span class="label">In de buurt</span><h2 id="buurt-titel">Ook te spelen in de buurt van {esc(city)}</h2></div>
+<div class="province"><ul>{near}</ul></div>
+<p style="margin-top:16px"><a href="/#locaties">Bekijk alle 33 steden</a></p>
+</div>
+</section>
+
+{booking(city)}'''
+    return page(path=loc['url'], title=c['title'], description=c['description'], body=body, og_image=hero_img,
+                schema=[crumbs, faq_schema(c['faq'])], active='/escape-game-the-hunt-locaties/')
