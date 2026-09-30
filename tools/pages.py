@@ -204,6 +204,7 @@ def location(loc):
 <div class="wrap">
 <div class="head"><span class="label">Veelgestelde vragen</span><h2 id="faq-titel">Vragen over The Hunt {esc(city)}</h2></div>
 {faq_block(c['faq'])}
+<p style="margin-top:20px"><a href="/veelgestelde-vragen/">Alle veelgestelde vragen</a>: over live Hunters, de winnaar, maatwerk, groepen en eten en drinken.</p>
 </div>
 </section>
 {posts}
