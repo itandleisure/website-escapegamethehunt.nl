@@ -1,0 +1,9 @@
+# Permanente doorverwijzingen (Netlify / Cloudflare Pages). Zie ook .htaccess voor Apache-hosting.
+/escape-game-the-hunt-open-inschrijving/open-inschrijving-22-november-in-enschede/ /escape-game-the-hunt-locaties/escape-game-the-hunt-enschede/ 301
+/escape-game-the-hunt-open-inschrijving/open-inschrijving-22-november-in-enschede /escape-game-the-hunt-locaties/escape-game-the-hunt-enschede/ 301
+/escape-game-the-hunt-locaties/escape-game-the-hunt-locaties/* /escape-game-the-hunt-locaties/:splat 301
+/escape-game-locaties/* /escape-game-the-hunt-locaties/:splat 301
+/escaperoom-amersfoort/ /escape-game-the-hunt-locaties/escape-game-the-hunt-amersfoort/ 301
+/escaperoom-amersfoort /escape-game-the-hunt-locaties/escape-game-the-hunt-amersfoort/ 301
+/escaperoom-rotterdam-een-unieke-outdoor-beleving-met-the-hunt/ /escape-game-the-hunt-locaties/escape-game-the-hunt-rotterdam-2/ 301
+/escaperoom-rotterdam-een-unieke-outdoor-beleving-met-the-hunt /escape-game-the-hunt-locaties/escape-game-the-hunt-rotterdam-2/ 301
