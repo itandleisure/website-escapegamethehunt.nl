@@ -83,7 +83,8 @@ p{margin:0}
 @media (max-width:980px){
   .nav-toggle{display:block}
   .nav{position:fixed;inset:72px 0 auto 0;flex-direction:column;align-items:stretch;background:var(--night);padding:12px var(--gutter) 24px;gap:0;
-    border-bottom:1px solid var(--line-dark);transform:translateY(-8px);opacity:0;visibility:hidden;transition:.18s ease;max-height:calc(100vh - 72px);overflow:auto}
+    border-bottom:1px solid var(--line-dark);transform:translateY(-8px);opacity:0;visibility:hidden;max-height:calc(100vh - 72px);overflow:auto}
+  .nav.anim{transition:.18s ease}
   .nav.open{transform:none;opacity:1;visibility:visible}
   .nav a{padding:.85em 0;border-bottom:1px solid var(--line-dark);border-radius:0}
   .nav .btn{margin:16px 0 0;justify-content:center;border-radius:999px}
@@ -167,6 +168,9 @@ p{margin:0}
 
 /* doelgroepen */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.cards.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1060px){.cards.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.cards.four{grid-template-columns:1fr}}
 .card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}
 a.card:hover{border-color:var(--signal);transform:translateY(-2px);color:var(--ink)}
 .card h3{font-size:1.15rem}

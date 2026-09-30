@@ -25,7 +25,7 @@ GALLERY_ALT = ['Teams na afloop van The Hunt in Groningen', 'Groep in Utrecht', 
                'Teams in Groningen', 'Vrijgezellenfeest in Groningen', 'Open inschrijving in Groningen', 'The Hunt in de provincie Groningen']
 
 VIDEO = '''<div class="media-frame trailer" data-vimeo="1113340430">
-<img src="/assets/uploads/2025/06/escape-the-hunt-juichend-team-game-kleiner.jpg" alt="" loading="lazy" width="1292" height="969">
+<img src="/assets/uploads/2026/04/Hunter-actief-533x400.png" alt="Een Hunter met gametas in een steegje" loading="lazy" width="533" height="400">
 <button type="button" class="play" aria-label="Bekijk de trailer van The Hunt"><span class="play-icon" aria-hidden="true"></span>Bekijk de trailer</button>
 <p class="trailer-note">De video wordt pas geladen als je op afspelen klikt (Vimeo).</p>
 </div>'''
@@ -75,7 +75,7 @@ def home():
 <section class="section paper" aria-labelledby="wie-titel">
 <div class="wrap">
 <div class="head"><span class="label">Voor wie</span><h2 id="wie-titel">Voor elke groep vanaf 8 personen</h2></div>
-<div class="cards">
+<div class="cards four">
 <div class="card"><h3>Teamuitje en bedrijfsuitje</h3><p>Samenwerken onder druk, met een eindstand die nog weken besproken wordt. Ook voor personeelsuitjes en grote afdelingen.</p></div>
 <div class="card"><h3>Vrijgezellenfeest</h3><p>Actief, competitief en goed te combineren met een borrel of diner in de stad.</p></div>
 <div class="card"><h3>Vrienden en familie</h3><p>Puzzelaars en lopers hebben allebei een rol. Kinderen vanaf 8 jaar kunnen meedoen.</p></div>

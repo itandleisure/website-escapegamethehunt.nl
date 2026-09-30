@@ -7,6 +7,7 @@
   var nav = document.getElementById('nav');
   if (toggle && nav) {
     toggle.addEventListener('click', function () {
+      nav.classList.add('anim');  // animatie alleen bij openen/sluiten, niet bij het draaien of verkleinen van het scherm
       var open = nav.classList.toggle('open');
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
