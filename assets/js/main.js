@@ -15,6 +15,20 @@
     });
   }
 
+  /* Trailer: Vimeo laadt pas na een klik, zodat er zonder klik geen verbinding met Vimeo is. */
+  document.querySelectorAll('.trailer[data-vimeo]').forEach(function (box) {
+    box.querySelector('.play').addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://player.vimeo.com/video/' + box.getAttribute('data-vimeo') + '?dnt=1&autoplay=1';
+      f.title = 'Trailer Escape Game The Hunt';
+      f.allow = 'autoplay; fullscreen; picture-in-picture';
+      f.allowFullscreen = true;
+      box.innerHTML = '';
+      box.appendChild(f);
+      box.classList.add('playing');
+    });
+  });
+
   /* Boekingsformulier.
      Een statische site heeft geen server. Zet in src/data/site.json "form_endpoint" op een formulierdienst
      (bijv. Formspree of Basin) die een POST accepteert; zonder endpoint opent de mail-app met een ingevuld bericht. */

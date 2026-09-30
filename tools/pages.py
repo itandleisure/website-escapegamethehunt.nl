@@ -22,8 +22,11 @@ GALLERY = ['2026/04/16-april-Escape-Game-The-Hunt-Groningen-1067x800.jpeg', '202
 GALLERY_ALT = ['Teams na afloop van The Hunt in Groningen', 'Groep in Utrecht', 'The Hunt in Eindhoven', 'Vrijgezellenfeest in Nijmegen',
                'Teams in Groningen', 'Vrijgezellenfeest in Groningen', 'Open inschrijving in Groningen', 'The Hunt in de provincie Groningen']
 
-VIDEO = '''<div class="media-frame"><video controls preload="none" playsinline poster="/assets/uploads/2025/06/escape-the-hunt-juichend-team-game-kleiner.jpg">
-<source src="/assets/uploads/2025/06/Escaperoom-The-Hunt-aan-het-puzzelen.mp4" type="video/mp4"></video></div>'''
+VIDEO = '''<div class="media-frame trailer" data-vimeo="1113340430">
+<img src="/assets/uploads/2025/06/escape-the-hunt-juichend-team-game-kleiner.jpg" alt="" loading="lazy" width="1292" height="969">
+<button type="button" class="play" aria-label="Bekijk de trailer van The Hunt"><span class="play-icon" aria-hidden="true"></span>Bekijk de trailer</button>
+<p class="trailer-note">De video wordt pas geladen als je op afspelen klikt (Vimeo).</p>
+</div>'''
 
 
 def home():
