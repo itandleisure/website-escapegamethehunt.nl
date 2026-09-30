@@ -56,6 +56,15 @@ def home():
 </div>
 </section>
 
+<section class="video-band" data-bg-vimeo="1092778550" aria-label="Video: een team lost een puzzel op">
+<img src="/assets/uploads/2026/09/the-hunt-team-puzzelt-1600.jpg" alt="" loading="lazy" width="1600" height="1204">
+<div class="wrap video-band-text">
+<span class="label">90 minuten · 6 puzzels · 1 extractiepunt</span>
+<p>Puzzelen onder tijdsdruk, terwijl de Hunters steeds dichterbij komen.</p>
+<a class="btn btn-signal" href="#boeken">Boek The Hunt {ICON_ARROW}</a>
+</div>
+</section>
+
 <section class="section" aria-labelledby="stad-titel">
 <div class="wrap split">
 <div class="stack">

@@ -30,6 +30,28 @@
     });
   });
 
+  /* Videoband: Vimeo-loop (gedempt, zonder knoppen) laden zodra de band in beeld komt.
+     Bij "minder beweging" in de systeeminstellingen blijft de foto staan. */
+  var bands = document.querySelectorAll('[data-bg-vimeo]');
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (bands.length && 'IntersectionObserver' in window && !still) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) { return; }
+        var band = en.target;
+        io.unobserve(band);
+        band.style.setProperty('--band-h', band.offsetHeight + 'px');
+        var f = document.createElement('iframe');
+        f.src = 'https://player.vimeo.com/video/' + band.getAttribute('data-bg-vimeo') + '?background=1&autoplay=1&loop=1&muted=1&dnt=1';
+        f.title = 'Video: een team lost een puzzel op';
+        f.allow = 'autoplay; fullscreen';
+        f.setAttribute('tabindex', '-1');
+        band.insertBefore(f, band.firstChild);
+      });
+    }, { rootMargin: '200px' });
+    bands.forEach(function (b) { io.observe(b); });
+  }
+
   /* Boekingsformulier (zelfde opzet als coworkingcompeta.com en badassrentals.nl).
      - Staat er een Google Apps Script-URL in data-google (uit "google_form_url" in src/data/site.json), dan gaat
        de aanvraag naar die Google Sheet + e-mail en daarna naar de bedankpagina.
