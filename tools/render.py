@@ -282,3 +282,19 @@ def booking(city=None):
 def nearest(loc, n=5):
     d = lambda l: math.hypot((l['lat'] - loc['lat']), (l['lng'] - loc['lng']) * math.cos(math.radians(52)))
     return sorted((l for l in LOCS if l['slug'] != loc['slug']), key=d)[:n]
+
+
+def post_card(url, title, keyword):
+    """Berichtkaart zonder titelplaatje: alleen het zoekwoord groot, de volledige titel eronder."""
+    return (f'<a class="post" href="{url}"><span class="post-visual grid-bg"><span class="ping" aria-hidden="true"></span>'
+            f'<b>{esc(keyword)}</b></span><span class="post-title">{esc(title)}</span></a>')
+
+
+def keywords():
+    import glob
+    out = {}
+    for fp in glob.glob(os.path.join(ROOT, 'src', 'content', 'pages', '*.json')):
+        d = json.load(open(fp, encoding='utf-8'))
+        if d.get('keyword'):
+            out[d['path']] = d['keyword']
+    return out

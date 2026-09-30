@@ -1,5 +1,5 @@
 """Paginatypes van de nieuwe site: homepage en locatiepagina's."""
-from render import (ICON_ARROW, LOCS, P, SITE, booking, clock, content, coords, esc, facts, faq_block, faq_schema,
+from render import (ICON_ARROW, keywords, post_card, LOCS, P, SITE, booking, clock, content, coords, esc, facts, faq_block, faq_schema,
                     nearest, nl_map, page, pricing, province_list)
 
 GENERAL_FAQ = [
@@ -137,8 +137,8 @@ def location(loc):
     start = loc['start'] or f'Centrum van {city}'
     posts = ''
     if c['posts']:
-        cards = ''.join(f'<a class="post" href="{p["url"]}">' + (f'<img src="{p["image"]}" alt="" loading="lazy" width="533" height="400">' if p['image'] else '')
-                        + f'<span>{esc(p["title"])}</span></a>' for p in c['posts'])
+        kw = keywords()
+        cards = ''.join(post_card(p['url'], p['title'], kw.get(p['url'], p['title'])) for p in c['posts'] if p['url'] in kw)
         posts = f'''<section class="section paper" aria-labelledby="posts-titel"><div class="wrap">
 <div class="head"><span class="label">Uitjes in {esc(city)}</span><h2 id="posts-titel">Meer over The Hunt in {esc(city)}</h2></div>
 <div class="posts">{cards}</div></div></section>'''

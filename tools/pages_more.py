@@ -4,8 +4,8 @@ import json
 import os
 
 from pages import VIDEO  # noqa: F401  (hergebruikt op sommige pagina's)
-from render import (ICON_ARROW, LOCS, P, ROOT, SITE, booking, esc, faq_block, faq_schema, nl_map, page, pricing,
-                    province_list)
+from render import (ICON_ARROW, LOCS, P, ROOT, SITE, booking, esc, faq_block, faq_schema, nl_map, page, post_card,
+                    pricing, province_list)
 
 LOC_BY_SLUG = {l['slug']: l for l in LOCS}
 
@@ -39,8 +39,7 @@ def thumb(src):
 
 def post_cards(posts):
     return '<div class="posts">%s</div>' % ''.join(
-        f'<a class="post" href="{p["path"]}"><img src="{thumb(p["og_image"])}" alt="" loading="lazy" width="533" height="400">'
-        f'<span>{esc(short_title(p))}</span></a>' for p in posts)
+        post_card(p['path'], short_title(p), p.get('keyword') or short_title(p)) for p in posts)
 
 
 def hero(title, lede, crumbs, label=None, cta=True):
