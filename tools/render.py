@@ -5,6 +5,7 @@ import math
 import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUT = os.path.join(ROOT, 'docs')  # de gebouwde website; GitHub Pages publiceert deze map
 SITE = json.load(open(os.path.join(ROOT, 'src', 'data', 'site.json'), encoding='utf-8'))
 LOCS = json.load(open(os.path.join(ROOT, 'src', 'data', 'locations.json'), encoding='utf-8'))
 PROVINCES = ['Groningen', 'Friesland', 'Drenthe', 'Overijssel', 'Flevoland', 'Gelderland', 'Utrecht',
@@ -16,7 +17,7 @@ esc = lambda s: html.escape(str(s), quote=True)
 def asset(path):
     """Pad met korte hash, zodat browsers na een wijziging meteen de nieuwe CSS/JS laden."""
     import hashlib
-    with open(os.path.join(ROOT, path.lstrip('/')), 'rb') as fh:
+    with open(os.path.join(OUT, path.lstrip('/')), 'rb') as fh:
         return '%s?v=%s' % (path, hashlib.md5(fh.read()).hexdigest()[:8])
 
 ICON_MENU = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>'

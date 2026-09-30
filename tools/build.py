@@ -2,7 +2,8 @@
 
 Gebruik:  python tools/build.py
 
-Schrijft elke pagina als <pad>/index.html in de hoofdmap, plus sitemap.xml en robots.txt.
+Schrijft elke pagina als docs/<pad>/index.html, plus sitemap.xml, robots.txt en 404.html in docs/.
+GitHub Pages publiceert alleen de map docs/; src/ en tools/ blijven zo buiten de website.
 Alleen standaard-Python nodig. Doorverwijspagina's (meta refresh) worden niet aangeraakt.
 """
 import math
@@ -13,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import pages  # noqa: E402
 import pages_more as pm  # noqa: E402
 import pages_intent  # noqa: E402
-from render import LOCS, ROOT, SITE  # noqa: E402
+from render import LOCS, OUT, ROOT, SITE  # noqa: E402
 
 NEWS_PER_PAGE = 9
 OVERVIEW = {'path': '/escape-game-the-hunt-locaties/', 'title': 'Escape Game The Hunt Locaties - Escape Game The Hunt',
@@ -24,7 +25,7 @@ SPECIAL = {'/escape-game-the-hunt-prijzen/': pm.prices, '/contact/': pm.contact,
 
 
 def write(path, html, written):
-    fp = os.path.join(ROOT, path.strip('/'), 'index.html') if path != '/' else os.path.join(ROOT, 'index.html')
+    fp = os.path.join(OUT, path.strip('/'), 'index.html') if path != '/' else os.path.join(OUT, 'index.html')
     os.makedirs(os.path.dirname(fp), exist_ok=True)
     with open(fp, 'w', encoding='utf-8', newline='\n') as fh:
         fh.write(html)
@@ -46,7 +47,7 @@ def main():
         write(loc['url'], pages.location(loc), written)
     write(OVERVIEW['path'], pm.locations_overview(OVERVIEW), written)
     write('/bedankt/', pm.thanks(), written)
-    with open(os.path.join(ROOT, '404.html'), 'w', encoding='utf-8', newline='\n') as fh:
+    with open(os.path.join(OUT, '404.html'), 'w', encoding='utf-8', newline='\n') as fh:
         fh.write(pm.not_found())  # GitHub Pages toont deze pagina bij elk onbekend adres
     write('/teamuitje-bedrijfsuitje/', pages_intent.teamuitje(), written)
     write('/vrijgezellenfeest/', pages_intent.vrijgezellenfeest(), written)
@@ -70,17 +71,17 @@ def main():
         write('/escape-game-the-hunt-nieuws/' + (f'page/{n}/' if n > 1 else ''),
               pm.news(n, total, posts[(n - 1) * NEWS_PER_PAGE:n * NEWS_PER_PAGE]), written)
 
-    cats = sorted({c for p in posts for c in p['categories']} | set(os.listdir(os.path.join(ROOT, 'category'))))
+    cats = sorted({c for p in posts for c in p['categories']} | set(os.listdir(os.path.join(OUT, 'category'))))
     for slug in cats:
         name = pm.LOC_BY_SLUG[slug]['name'] if slug in pm.LOC_BY_SLUG else slug.replace('-', ' ').title()
         write(f'/category/{slug}/', pm.category(slug, name, [p for p in posts if slug in p['categories']]), written)
 
     urls = sorted(p for p, noindex in written if not noindex and '/page/' not in p)
-    with open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8', newline='\n') as fh:
+    with open(os.path.join(OUT, 'sitemap.xml'), 'w', encoding='utf-8', newline='\n') as fh:
         fh.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
         fh.write(''.join('  <url><loc>%s%s</loc></url>\n' % (SITE['url'], u) for u in urls))
         fh.write('</urlset>\n')
-    with open(os.path.join(ROOT, 'robots.txt'), 'w', encoding='utf-8', newline='\n') as fh:
+    with open(os.path.join(OUT, 'robots.txt'), 'w', encoding='utf-8', newline='\n') as fh:
         fh.write('User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % SITE['url'])
     print('%d pagina\'s gebouwd, %d in sitemap.xml, nieuws: %d pagina\'s' % (len(written), len(urls), total))
 

@@ -4,7 +4,7 @@ import json
 import os
 
 from pages import VIDEO  # noqa: F401  (hergebruikt op sommige pagina's)
-from render import (ICON_ARROW, LOCS, P, ROOT, SITE, booking, esc, faq_block, faq_schema, nl_map, page, post_card,
+from render import (ICON_ARROW, LOCS, OUT, P, ROOT, SITE, booking, esc, faq_block, faq_schema, nl_map, page, post_card,
                     pricing, province_list)
 
 LOC_BY_SLUG = {l['slug']: l for l in LOCS}
@@ -34,7 +34,7 @@ def thumb(src):
         return SITE['og_image']
     base, ext = os.path.splitext(src)
     small = base + '-533x400' + ext
-    return small if os.path.exists(os.path.join(ROOT, small.lstrip('/'))) else src
+    return small if os.path.exists(os.path.join(OUT, small.lstrip('/'))) else src
 
 
 def post_cards(posts):
