@@ -351,3 +351,8 @@ fieldset.field{border:0;padding:0;margin:0}
 .clock time{display:flex;align-items:center;gap:10px}
 .clock time::before{content:"";width:12px;height:12px;border-radius:50%;border:2px solid var(--signal);flex-shrink:0}
 .clock li.hot time::before{background:var(--signal)}
+.with-phone{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:24px;align-items:center}
+.with-phone .phone{margin:0;display:flex;flex-direction:column;gap:6px}
+.with-phone .phone img{border-radius:14px;aspect-ratio:511/800;object-fit:cover;box-shadow:var(--shadow)}
+.with-phone figcaption{font:600 .72rem/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:center}
+@media (max-width:520px){.with-phone{grid-template-columns:1fr 110px;gap:14px}}
