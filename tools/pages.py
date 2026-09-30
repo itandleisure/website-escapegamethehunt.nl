@@ -99,7 +99,7 @@ def home():
 <section class="section" id="locaties" aria-labelledby="loc-titel">
 <div class="wrap">
 <div class="head"><span class="label">Speelsteden</span><h2 id="loc-titel">Te spelen in heel Nederland</h2>
-<p class="lede">Dit zijn onze vaste speelsteden, met startlocatie, route en voorbeeldprogramma. Staat jullie plaats er niet tussen? Neem contact met ons op, dan kijken we samen wat er mogelijk is.</p></div>
+<p class="lede">We spelen in principe overal, zolang we er een speelveld kunnen maken. Hieronder staan onze vaste speelsteden met startlocatie, route en voorbeeldprogramma. Staat jullie plaats er niet tussen? Dan komen we naar jullie toe.</p></div>
 <div class="locations">{nl_map()}{province_list()}</div>
 </div>
 </section>

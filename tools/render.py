@@ -93,7 +93,7 @@ def footer():
 <div class="footer-grid">
 <div class="stack">
 <a class="brand" href="/"><img src="{SITE['logo']}" alt="" width="40" height="48"><span>Escape Game<br>The Hunt</span></a>
-<p>De outdoor escape room waarin jullie door de stad vluchten voor de Hunters. Te spelen in heel Nederland, vanaf 8 personen.</p>
+<p>De outdoor escape room waarin jullie door de stad vluchten voor de Hunters. Te spelen in heel Nederland: overal waar we een speelveld kunnen maken. Vanaf 8 personen.</p>
 <div class="contact-lines"><a href="tel:{SITE['phone']}">{SITE['phone_display']}</a><a href="mailto:{SITE['email']}">{SITE['email']}</a></div>
 </div>
 <div><h2>Speel The Hunt in</h2><ul class="footer-cities">{cities}</ul></div>
