@@ -167,8 +167,9 @@
   "lat": 51.9851,
   "lng": 5.8987,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-arnhem/",
-  "start": "Korenmarktkerk (achterkant), Korenmarkt",
-  "image": "/assets/uploads/2025/06/Escape-Game-The-Hunt-Arnhem-Locatie.png"
+  "start": "Korenmarkt",
+  "image": "/assets/uploads/2025/06/Escape-Game-The-Hunt-Arnhem-Locatie.png",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-arnhem"
  },
  {
   "slug": "nijmegen",
