@@ -109,8 +109,9 @@
   "lat": 52.787,
   "lng": 6.119,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-steenwijk/",
-  "start": "",
-  "image": ""
+  "start": "Grote Kerk",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-steenwijk"
  },
  {
   "slug": "deventer",
