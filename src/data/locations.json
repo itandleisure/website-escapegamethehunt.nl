@@ -78,8 +78,9 @@
   "lat": 52.6956,
   "lng": 6.1944,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-meppel/",
-  "start": "",
-  "image": ""
+  "start": "Meppeler Toren",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-meppel"
  },
  {
   "slug": "zwolle",
