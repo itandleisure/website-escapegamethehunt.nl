@@ -251,8 +251,9 @@
   "lat": 52.0786,
   "lng": 4.2887,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-den-haag/",
-  "start": "",
-  "image": ""
+  "start": "Nieuwe Kerk, Spui",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-den-haag"
  },
  {
   "slug": "zoetermeer",
