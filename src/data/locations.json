@@ -67,8 +67,9 @@
   "lat": 52.7792,
   "lng": 6.9069,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-emmen/",
-  "start": "",
-  "image": ""
+  "start": "Café De Drie Paardjes",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-emmen"
  },
  {
   "slug": "meppel",
