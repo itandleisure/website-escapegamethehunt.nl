@@ -163,8 +163,9 @@
   "lat": 52.3708,
   "lng": 5.222,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-almere/",
-  "start": "",
-  "image": ""
+  "start": "Stadhuisplein",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-almere"
  },
  {
   "slug": "arnhem",
