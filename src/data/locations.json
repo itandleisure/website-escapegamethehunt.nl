@@ -311,8 +311,9 @@
   "lat": 51.4416,
   "lng": 5.4697,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-eindhoven/",
-  "start": "",
-  "image": ""
+  "start": "Stadhuisplein",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-eindhoven"
  },
  {
   "slug": "tilburg",
