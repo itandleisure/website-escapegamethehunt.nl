@@ -147,7 +147,7 @@ def pricing(city=None):
 <div><span>Opdrachten op maat voor jullie groep</span><b>+ €{P['custom']} <small>(€{P['custom_incl']} incl.)</small></b></div>
 <div><span>Groepsgrootte</span><b>{P['min_people']} tot ±{P['max_people']} personen</b></div>
 </div>
-<p class="price-note">Bedragen zonder toevoeging zijn exclusief 21% btw. Voor groepen boven de {P['max_people']} maken we een wisselprogramma met onze andere spellen.</p>
+<p class="price-note">Bedragen zonder toevoeging zijn exclusief 21% btw. Willen jullie meerdere spellen spelen? Dan maken we een wisselprogramma met onze andere spellen.</p>
 </div>
 <div class="examples">
 <span class="label">Rekenvoorbeelden</span>

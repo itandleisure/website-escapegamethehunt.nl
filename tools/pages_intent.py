@@ -73,19 +73,19 @@ def programme(kind):
 <tr><td>16:45</td><td>Einde van het spel, bekendmaking van het winnende team</td></tr>
 <tr><td>17:00</td><td>{'Borrel of diner in de stad' if kind == 'team' else 'Samen eten, borrelen of verder feesten in de stad'}</td></tr>
 </tbody></table>
-<p class="price-note" style="color:var(--muted)">Tijden en horeca bepalen we samen met jullie. We werken in de speelsteden samen met horeca voor een ontvangst, borrel, buffet of diner.</p>
+<p class="price-note" style="color:var(--muted)">De starttijd bepalen we samen met jullie. Een borrel of diner reserveer je zelf in de buurt; wij stemmen de starttijd erop af.</p>
 </div>'''
 
 
 TEAM_FAQ = [
     ('Met hoeveel personen kunnen we The Hunt spelen?',
-     f'<p>Vanaf {P["min_people"]} personen. We verdelen de groep in teams van ongeveer zes. We hebben al groepen van meer dan 100 personen begeleid; tot ongeveer {P["max_people"]} deelnemers is mogelijk. Voor nog grotere groepen maken we een wisselprogramma met onze andere spellen.</p>'),
+     f'<p>Vanaf {P["min_people"]} personen. We verdelen de groep in teams van ongeveer zes. We hebben al groepen van meer dan 100 personen begeleid; tot ongeveer {P["max_people"]} deelnemers is mogelijk. Willen jullie meerdere spellen spelen? Dan maken we een wisselprogramma met onze andere spellen.</p>'),
     ('Wat kost een teamuitje met The Hunt per persoon?',
      f'<p>Tot en met {P["base_max_people"]} personen betaal je samen €{P["base"]} ex. btw (€{P["base_incl"]} incl. btw). Met 12 personen is dat €32,92 per persoon ex. btw. Vanaf 18 personen betaal je €{P["per_person"]} per persoon ex. btw (€{P["per_person_incl"]} incl.).</p>'),
     ('Moet iedereen sportief zijn?',
      '<p>Nee. Jullie bepalen zelf hoe je je door de stad beweegt. Naast bewegen zijn puzzelen, navigeren, communiceren en strategisch nadenken net zo belangrijk.</p>'),
     ('Kunnen we het teamuitje combineren met eten of een borrel?',
-     '<p>Ja. We werken in de speelsteden samen met horeca, dus een ontvangst, borrel, buffet of diner voor of na het spel is mogelijk.</p>'),
+     '<p>Ja. Een borrel of diner voor of na het spel reserveer je zelf bij een café of restaurant in de buurt; wij stemmen de starttijd erop af.</p>'),
     ('Kunnen jullie het spel op maat maken voor ons bedrijf?',
      f'<p>Ja. Jullie leveren vooraf vragen en antwoorden aan over jullie bedrijf, collega’s of kernwaarden. Die verwerken wij in de opdrachten. Dat kost €{P["custom"]} extra (€{P["custom_incl"]} incl. btw). Lees meer over <a href="/op-maat-gemaakt/">The Hunt op maat</a>.</p>'),
     ('In welke steden kunnen we spelen?',
@@ -102,7 +102,7 @@ VRIJ_FAQ = [
     ('Kunnen er vragen over de bruid of bruidegom in het spel?',
      f'<p>Ja. Bij een Hunt op maat verwerken we jullie eigen vragen over de vrijgezel in de opdrachten: verhalen, foto’s, eerste ontmoeting of bekende uitspraken. Dat kost €{P["custom"]} extra (€{P["custom_incl"]} incl. btw). Lees meer over <a href="/op-maat-gemaakt/">The Hunt op maat</a>.</p>'),
     ('Kunnen we na afloop eten of borrelen?',
-     '<p>Ja. The Hunt speel je in het centrum, dus eten, borrelen of verder feesten ligt op loopafstand. We denken graag mee over een arrangement.</p>'),
+     '<p>Ja. The Hunt speel je in het centrum, dus eten, borrelen of verder feesten ligt op loopafstand. We denken graag mee over de planning.</p>'),
     ('Is The Hunt geschikt voor een vrouwen-, mannen- of gemengde groep?',
      '<p>Ja. Puzzelaars en lopers hebben allebei een rol, dus iedereen doet mee. Er is aan het eind een winnend team, dus het wordt vanzelf competitief.</p>'),
     ('Gaat het door als het regent?',
@@ -139,7 +139,7 @@ def teamuitje():
 <div class="stack">
 <span class="label">Personeelsuitje en grote groepen</span>
 <h2 id="groot-titel">Van een klein team tot de hele organisatie</h2>
-<p>We verdelen de groep in teams van ongeveer zes personen die tegelijk spelen. Zo organiseren we The Hunt net zo makkelijk voor een afdeling van 12 als voor een personeelsuitje met 150 collega’s. We hebben al groepen van meer dan 100 personen begeleid; tot ongeveer 200 deelnemers is mogelijk. Voor nog grotere groepen maken we een wisselprogramma met onze andere spellen.</p>
+<p>We verdelen de groep in teams van ongeveer zes personen die tegelijk spelen. Zo organiseren we The Hunt net zo makkelijk voor een afdeling van 12 als voor een personeelsuitje met 150 collega’s. We hebben al groepen van meer dan 100 personen begeleid; tot ongeveer 200 deelnemers is mogelijk. Willen jullie meerdere spellen spelen? Dan maken we een wisselprogramma met onze andere spellen.</p>
 <p>Wil je het extra persoonlijk? Bij <a href="/op-maat-gemaakt/" style="color:var(--signal)">The Hunt op maat</a> verwerken we vragen over jullie bedrijf, collega’s of kernwaarden in de puzzels.</p>
 </div>
 </div>
