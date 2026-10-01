@@ -238,8 +238,9 @@
   "lat": 51.9225,
   "lng": 4.4792,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-rotterdam-2/",
-  "start": "",
-  "image": ""
+  "start": "De Doelen",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-rotterdam"
  },
  {
   "slug": "den-haag",
