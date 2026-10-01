@@ -102,8 +102,9 @@
   "lat": 52.555,
   "lng": 5.911,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-kampen/",
-  "start": "",
-  "image": ""
+  "start": "Oude Raadhuisplein",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-kampen"
  },
  {
   "slug": "steenwijk",
