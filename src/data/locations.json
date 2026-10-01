@@ -278,8 +278,9 @@
   "lat": 52.0575,
   "lng": 4.4931,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-zoetermeer/",
-  "start": "",
-  "image": ""
+  "start": "Promenadeplein",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-zoetermeer"
  },
  {
   "slug": "dordrecht",
