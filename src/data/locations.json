@@ -158,8 +158,9 @@
   "lat": 52.313,
   "lng": 6.929,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-oldenzaal/",
-  "start": "",
-  "image": ""
+  "start": "Ganzenmarkt",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-oldenzaal"
  },
  {
   "slug": "almere",
