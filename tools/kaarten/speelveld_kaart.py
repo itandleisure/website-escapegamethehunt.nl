@@ -2,14 +2,12 @@
 import json, math, sys
 from PIL import Image, ImageDraw, ImageFont
 
-SRC, OUT = sys.argv[1], sys.argv[2]
-FIELD = [(53.21963, 6.55682), (53.21905, 6.55739), (53.21764, 6.55917), (53.21554, 6.55908), (53.21403, 6.56336),
-         (53.21378, 6.56599), (53.21506, 6.57071), (53.21674, 6.573), (53.22136, 6.56998), (53.22264, 6.56629)]
-if len(sys.argv) > 3:
-    FIELD = [tuple(p) for p in json.load(open(sys.argv[3]))]
-START = ('Start: Forum Groningen', 53.21891, 6.57018)
-LABELS = ['Grote Markt', 'Vismarkt', 'Martinitoren', 'Prinsentuin', 'Herestraat', 'Folkingestraat', 'Oude Ebbingestraat',
-          'Oosterstraat', 'Akerkhof', 'Poelestraat', 'Zuiderdiep', 'Noorderhaven', 'Turfsingel', 'Schuitendiep', 'Brugstraat']
+# Gebruik: python speelveld_kaart.py osm.json uit.jpg stad.json
+# stad.json: {"field": [[lat, lon], ...], "start": ["Start: ...", lat, lon] of null, "labels": ["Straat", ...]}
+SRC, OUT, CFG = sys.argv[1], sys.argv[2], json.load(open(sys.argv[3], encoding='utf-8'))
+FIELD = [tuple(p) for p in CFG['field']]
+START = CFG.get('start')
+LABELS = CFG.get('labels', [])
 W, H, S = 1600, 1200, 2  # uitvoer, supersampling
 ORANGE = (242, 146, 34)
 
@@ -85,12 +83,13 @@ for n, g in seen.items():
     label(n, *px(g['lat'], g['lon']))
 
 # startpunt
-sx, sy = px(START[1], START[2]); r = 18 * S
-d.ellipse((sx - r, sy - r, sx + r, sy + r), fill=(41, 57, 74), outline=(255, 255, 255), width=5 * S)
-tw = d.textlength(START[0], font=bold)
-bx, by = sx + 26 * S, sy - 22 * S
-d.rounded_rectangle((bx, by, bx + tw + 28 * S, by + 44 * S), radius=10 * S, fill=(41, 57, 74))
-d.text((bx + 14 * S, by + 22 * S), START[0], font=bold, fill=(255, 255, 255), anchor='lm')
+if START:
+    sx, sy = px(START[1], START[2]); r = 18 * S
+    d.ellipse((sx - r, sy - r, sx + r, sy + r), fill=(41, 57, 74), outline=(255, 255, 255), width=5 * S)
+    tw = d.textlength(START[0], font=bold)
+    bx, by = sx + 26 * S, sy - 22 * S
+    d.rounded_rectangle((bx, by, bx + tw + 28 * S, by + 44 * S), radius=10 * S, fill=(41, 57, 74))
+    d.text((bx + 14 * S, by + 22 * S), START[0], font=bold, fill=(255, 255, 255), anchor='lm')
 
 small = ImageFont.truetype('C:/Windows/Fonts/arial.ttf', 15 * S)
 d.text((W * S - 12 * S, H * S - 10 * S), '© OpenStreetMap-bijdragers', font=small, fill=(110, 116, 126), anchor='rd',
