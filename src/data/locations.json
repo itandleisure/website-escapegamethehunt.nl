@@ -209,8 +209,9 @@
   "lat": 52.3728,
   "lng": 4.8936,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-amsterdam/",
-  "start": "",
-  "image": ""
+  "start": "Noordermarkt",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-amsterdam"
  },
  {
   "slug": "haarlem",
