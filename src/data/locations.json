@@ -38,8 +38,9 @@
   "lat": 53.107,
   "lng": 6.099,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-drachten/",
-  "start": "",
-  "image": "/assets/uploads/2026/09/the-hunt-drachten-speluitleg-800.jpg"
+  "start": "Thalenpark",
+  "image": "/assets/uploads/2026/09/the-hunt-drachten-speluitleg-800.jpg",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-drachten"
  },
  {
   "slug": "heerenveen",
@@ -131,8 +132,9 @@
   "lat": 52.357,
   "lng": 6.662,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-almelo/",
-  "start": "",
-  "image": ""
+  "start": "Stadhuis Almelo",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-almelo"
  },
  {
   "slug": "enschede",
