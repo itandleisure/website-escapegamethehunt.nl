@@ -27,8 +27,9 @@
   "lat": 53.2012,
   "lng": 5.7999,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-leeuwarden/",
-  "start": "",
-  "image": "/assets/uploads/2025/06/Escape-Game-The-Hunt-Leeuwarden-Locatie.png"
+  "start": "Wilhelminaplein",
+  "image": "/assets/uploads/2025/06/Escape-Game-The-Hunt-Leeuwarden-Locatie.png",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-leeuwarden"
  },
  {
   "slug": "drachten",
