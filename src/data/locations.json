@@ -188,8 +188,9 @@
   "lat": 52.0907,
   "lng": 5.1214,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-utrecht/",
-  "start": "",
-  "image": "/assets/uploads/2026/09/the-hunt-utrecht-basisschool-de-kameleon-800.jpg"
+  "start": "Vredenburg",
+  "image": "/assets/uploads/2026/09/the-hunt-utrecht-basisschool-de-kameleon-800.jpg",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-utrecht"
  },
  {
   "slug": "amersfoort",
