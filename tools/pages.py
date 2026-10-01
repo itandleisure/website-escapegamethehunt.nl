@@ -1,6 +1,6 @@
 """Paginatypes van de nieuwe site: homepage en locatiepagina's."""
 from render import (ICON_ARROW, with_field_map, keywords, post_card, LOCS, P, SITE, booking, clock, content, coords, esc, facts, faq_block, faq_schema,
-                    nearest, nl_map, page, pricing, province_list)
+                    nearest, nl_map, page, price_line, pricing, province_list)
 
 GENERAL_FAQ = [
     ('Wat is een outdoor escape room?',
@@ -8,7 +8,7 @@ GENERAL_FAQ = [
     ('Met hoeveel personen kun je The Hunt spelen?',
      f'<p>Vanaf {P["min_people"]} personen. We verdelen de groep in teams van ongeveer zes. We hebben al groepen van meer dan 100 personen begeleid; tot ongeveer {P["max_people"]} deelnemers is mogelijk.</p>'),
     ('Wat kost The Hunt?',
-     f'<p>Tot en met {P["base_max_people"]} personen betaal je €{P["base"]}. Daarboven rekenen we €{P["per_person"]} per persoon. Opdrachten op maat kosten €{P["custom"]} extra. Alle prijzen zijn exclusief btw; inclusief btw is dat €{P["base_incl"]}, €{P["per_person_incl"]} per persoon en €{P["custom_incl"]}.</p>'),
+     f'<p>Voor de hele groep betaal je €{P["base"]} ex. btw (€{P["base_incl"]} inclusief btw), tot en met {P["base_max_people"]} personen. Voor grotere groepen en opdrachten op maat staan alle bedragen op de <a href="/escape-game-the-hunt-prijzen/">prijzenpagina</a>.</p>'),
     ('Hoe lang duurt het spel?', '<p>Het spel duurt 90 minuten. Reken inclusief ontvangst, uitleg en afronding op ongeveer twee uur.</p>'),
     ('Gaat The Hunt door als het regent?', '<p>Ja. The Hunt is een actief uitje waarbij je de hele tijd in beweging blijft. Trek wel kleding aan die tegen een buitje kan.</p>'),
     ('Is The Hunt geschikt voor kinderen?', '<p>Ja. De puzzels variëren van eenvoudig tot moeilijk, dus kinderen vanaf 8 jaar kunnen goed meedoen. En als boefje opgejaagd worden door de Hunters vinden ze vaak extra spannend.</p>'),
@@ -103,8 +103,8 @@ def home():
 
 <section class="section" id="prijzen" aria-labelledby="prijs-titel">
 <div class="wrap">
-<div class="head"><span class="label">Prijzen</span><h2 id="prijs-titel">Eén vaste prijs tot 17 personen</h2></div>
-{pricing()}
+<div class="head"><span class="label">Prijzen</span><h2 id="prijs-titel">Eén vast bedrag voor de hele groep</h2></div>
+{price_line()}
 </div>
 </section>
 
@@ -212,7 +212,7 @@ def location(loc):
 <section class="section" id="prijzen" aria-labelledby="prijs-titel">
 <div class="wrap">
 <div class="head"><span class="label">Prijzen</span><h2 id="prijs-titel">Wat kost een escape room in {esc(city)}?</h2></div>
-{pricing(city)}
+{price_line()}
 </div>
 </section>
 

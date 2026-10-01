@@ -157,6 +157,21 @@ def pricing(city=None):
 </div>'''
 
 
+def price_line(audience='zakelijk'):
+    """Korte prijsregel met link; de volledige uitleg staat alleen op de prijzenpagina."""
+    if audience == 'particulier':
+        amount = f"€{P['base_incl']}<small>voor de hele groep · t/m {P['base_max_people']} personen</small>"
+        sub = 'Inclusief btw. Spelen jullie met meer personen of willen jullie opdrachten op maat? Bekijk alle bedragen.'
+    else:
+        amount = f"€{P['base']}<small>ex. btw voor de hele groep · t/m {P['base_max_people']} personen</small>"
+        sub = f"€{P['base_incl']} inclusief btw. Grotere groepen en opdrachten op maat staan op de prijzenpagina."
+    return f'''<div class="price-line">
+<div class="amount tnum">{amount}</div>
+<p>{sub}</p>
+<a class="btn btn-signal" href="/escape-game-the-hunt-prijzen/">Alle prijzen {ICON_ARROW}</a>
+</div>'''
+
+
 def faq_block(items):
     det = ''.join(f'<details><summary>{esc(q)}</summary><div class="answer">{a}</div></details>' for q, a in items)
     return f'<div class="faq">{det}</div>'

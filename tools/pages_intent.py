@@ -1,10 +1,9 @@
 """Landelijke pagina's per doelgroep: teamuitje & bedrijfsuitje, en vrijgezellenfeest. Linken naar alle steden."""
 from pages import VIDEO
 from pages_more import all_pages, crumb_schema, hero, section
-from render import (ICON_ARROW, LOCS, P, SITE, booking, esc, faq_block, faq_schema, nl_map, page, pricing,
+from render import (ICON_ARROW, LOCS, P, SITE, booking, esc, faq_block, faq_schema, nl_map, page, price_line, pricing,
                     province_list)
 
-PER_PERSON = [(8, '€49,38', '€59,74'), (12, '€32,92', '€39,83'), (17, '€23,24', '€28,11'), (25, '€22,50', '€27,23')]
 
 
 U = '/assets/uploads/'
@@ -33,13 +32,6 @@ def photo_block(label, title, photos):
     return section(label, title, f'<div class="gallery">{imgs}</div><p style="margin-top:20px"><a class="btn btn-line" href="/escape-game-the-hunt-fotopagina/">Meer foto’s {ICON_ARROW}</a></p>', 'section paper')
 
 
-def per_person_table():
-    rows = ''.join(f'<tr><td>{n} personen</td><td>{ex}</td><td>{inc}</td></tr>' for n, ex, inc in PER_PERSON)
-    return (f'<div class="examples"><span class="label">Prijs per persoon</span><table><thead><tr><th>Groep</th><th>Ex. btw</th>'
-            f'<th>Incl. btw</th></tr></thead><tbody>{rows}</tbody></table>'
-            f'<p class="price-note" style="color:var(--muted)">Tot en met {P["base_max_people"]} personen betaal je samen €{P["base"]} ex. btw; '
-            f'daarboven €{P["per_person"]} per persoon.</p></div>')
-
 
 def city_blogs(words):
     """Bestaande stadsblogs voor dit onderwerp, als links per stad."""
@@ -67,7 +59,7 @@ def programme(kind):
     return f'''<div class="examples">
 <span class="label">Voorbeeldprogramma</span>
 <table><tbody>
-<tr><td>14:30</td><td>Ontvangst met koffie en appelgebak{', of een drankje voor de vrijgezellen' if kind == 'vrijgezellen' else ''}</td></tr>
+<tr><td>14:30</td><td>Verzamelen bij de start</td></tr>
 <tr><td>15:00</td><td>Speluitleg door jullie spelleider</td></tr>
 <tr><td>15:15</td><td>Start The Hunt: 10 minuten voorsprong, daarna gaan de Hunters op jacht</td></tr>
 <tr><td>16:45</td><td>Einde van het spel, bekendmaking van het winnende team</td></tr>
@@ -80,14 +72,14 @@ def programme(kind):
 TEAM_FAQ = [
     ('Met hoeveel personen kunnen we The Hunt spelen?',
      f'<p>Vanaf {P["min_people"]} personen. We verdelen de groep in teams van ongeveer zes. We hebben al groepen van meer dan 100 personen begeleid; tot ongeveer {P["max_people"]} deelnemers is mogelijk. Willen jullie meerdere spellen spelen? Dan maken we een wisselprogramma met onze andere spellen.</p>'),
-    ('Wat kost een teamuitje met The Hunt per persoon?',
-     f'<p>Tot en met {P["base_max_people"]} personen betaal je samen €{P["base"]} ex. btw (€{P["base_incl"]} incl. btw). Met 12 personen is dat €32,92 per persoon ex. btw. Vanaf 18 personen betaal je €{P["per_person"]} per persoon ex. btw (€{P["per_person_incl"]} incl.).</p>'),
+    ('Wat kost een teamuitje met The Hunt?',
+     f'<p>Voor de hele groep betaal je €{P["base"]} ex. btw (€{P["base_incl"]} incl. btw), tot en met {P["base_max_people"]} personen. Voor grotere groepen en opdrachten op maat staan alle bedragen op de <a href="/escape-game-the-hunt-prijzen/">prijzenpagina</a>.</p>'),
     ('Moet iedereen sportief zijn?',
      '<p>Nee. Jullie bepalen zelf hoe je je door de stad beweegt. Naast bewegen zijn puzzelen, navigeren, communiceren en strategisch nadenken net zo belangrijk.</p>'),
     ('Kunnen we het teamuitje combineren met eten of een borrel?',
      '<p>Ja. Een borrel of diner voor of na het spel reserveer je zelf bij een café of restaurant in de buurt; wij stemmen de starttijd erop af.</p>'),
     ('Kunnen jullie het spel op maat maken voor ons bedrijf?',
-     f'<p>Ja. Jullie leveren vooraf vragen en antwoorden aan over jullie bedrijf, collega’s of kernwaarden. Die verwerken wij in de opdrachten. Dat kost €{P["custom"]} extra (€{P["custom_incl"]} incl. btw). Lees meer over <a href="/op-maat-gemaakt/">The Hunt op maat</a>.</p>'),
+     f'<p>Ja. Jullie leveren vooraf vragen en antwoorden aan over jullie bedrijf, collega’s of kernwaarden. Die verwerken wij in de opdrachten. Lees meer over <a href="/op-maat-gemaakt/">The Hunt op maat</a>.</p>'),
     ('In welke steden kunnen we spelen?',
      '<p>In principe overal waar we een speelveld kunnen maken. Op deze pagina staan onze vaste speelsteden; staat jullie plaats er niet tussen, dan komen we naar jullie toe.</p>'),
     ('Gaat het teamuitje door als het regent?',
@@ -97,10 +89,10 @@ TEAM_FAQ = [
 VRIJ_FAQ = [
     ('Met hoeveel personen kunnen we een vrijgezellenfeest met The Hunt vieren?',
      f'<p>Vanaf {P["min_people"]} personen. Tot en met {P["base_max_people"]} personen betaal je één vaste prijs. Grotere groepen spelen in meerdere teams van ongeveer zes tegen elkaar.</p>'),
-    ('Wat kost een vrijgezellenfeest met The Hunt per persoon?',
-     f'<p>Tot en met {P["base_max_people"]} personen betaal je samen €{P["base_incl"]} inclusief btw. Met 10 personen is dat €47,80 per persoon, met 17 personen €28,11 per persoon. Vanaf 18 personen is het €{P["per_person_incl"]} per persoon inclusief btw.</p>'),
+    ('Wat kost een vrijgezellenfeest met The Hunt?',
+     f'<p>Voor de hele groep betaal je €{P["base_incl"]}, tot en met {P["base_max_people"]} personen. Zijn jullie met meer, of willen jullie vragen over de bruid of bruidegom in het spel? Alle bedragen staan op de <a href="/escape-game-the-hunt-prijzen/">prijzenpagina</a>.</p>'),
     ('Kunnen er vragen over de bruid of bruidegom in het spel?',
-     f'<p>Ja. Bij een Hunt op maat verwerken we jullie eigen vragen over de vrijgezel in de opdrachten: verhalen, foto’s, eerste ontmoeting of bekende uitspraken. Dat kost €{P["custom"]} extra (€{P["custom_incl"]} incl. btw). Lees meer over <a href="/op-maat-gemaakt/">The Hunt op maat</a>.</p>'),
+     f'<p>Ja. Bij een Hunt op maat verwerken we jullie eigen vragen over de vrijgezel in de opdrachten: verhalen, foto’s, eerste ontmoeting of bekende uitspraken. Lees meer over <a href="/op-maat-gemaakt/">The Hunt op maat</a>.</p>'),
     ('Kunnen we na afloop eten of borrelen?',
      '<p>Ja. The Hunt speel je in het centrum, dus eten, borrelen of verder feesten ligt op loopafstand. We denken graag mee over de planning.</p>'),
     ('Is The Hunt geschikt voor een vrouwen-, mannen- of gemengde groep?',
@@ -147,9 +139,7 @@ def teamuitje():
 
 {photo_block('Zij gingen jullie voor', 'Bedrijven en teams die The Hunt speelden', TEAM_PHOTOS)}
 
-{section('Programma en prijzen', 'Zo ziet jullie teamuitje eruit', f'<div class="pricing">{programme("team")}{per_person_table()}</div>')}
-
-{section('Prijzen', 'Eén vaste prijs tot 17 personen', pricing(), 'section paper')}
+{section('Programma', 'Zo ziet jullie teamuitje eruit', f'<div class="pricing">{programme("team")}{price_line()}</div>')}
 
 {cities_block('Teamuitje in 33 steden', 'We spelen overal waar we een speelveld kunnen maken. Kies jullie stad voor de startlocatie en een voorbeeldprogramma.', ('teamuitje', 'bedrijfsuitje', 'bedrijfsfeest', 'groepsuitje', 'groepsactiviteit'))}
 
@@ -194,9 +184,7 @@ def vrijgezellenfeest():
 
 {photo_block('Zij gingen jullie voor', 'Groepen die The Hunt speelden', VRIJ_PHOTOS)}
 
-{section('Programma en prijzen', 'Zo ziet jullie vrijgezellenfeest eruit', f'<div class="pricing">{programme("vrijgezellen")}{per_person_table()}</div>')}
-
-{section('Prijzen', 'Eén vaste prijs tot 17 personen', pricing(), 'section paper')}
+{section('Programma', 'Zo ziet jullie vrijgezellenfeest eruit', f'<div class="pricing">{programme("vrijgezellen")}{price_line("particulier")}</div>')}
 
 {cities_block('Vrijgezellenfeest in 33 steden', 'We spelen overal waar we een speelveld kunnen maken. Kies de stad voor jullie vrijgezellenfeest.', ('vrijgezellen',))}
 
