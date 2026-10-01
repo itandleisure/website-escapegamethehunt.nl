@@ -209,11 +209,13 @@ def location(loc):
 </div>
 </section>
 
-<section class="section" id="prijzen" aria-labelledby="prijs-titel">
-<div class="wrap">
-<div class="head"><span class="label">Prijzen</span><h2 id="prijs-titel">Wat kost een escape room in {esc(city)}?</h2></div>
-{pricing(city)}
-</div>
+<section class="section tight" id="prijzen" aria-labelledby="prijs-titel">
+<div class="wrap"><div class="price-strip">
+<div><span class="label">Prijs in {esc(city)}</span>
+<h2 id="prijs-titel">Wat kost The Hunt in {esc(city)}?</h2>
+<p><strong>€{P['base']} ex. btw</strong> voor groepen tot en met {P['base_max_people']} personen (€{P['base_incl']} incl. btw). Daarboven €{P['per_person']} per persoon ex. btw.</p></div>
+<a class="btn btn-signal" href="/escape-game-the-hunt-prijzen/">Bekijk alle prijzen {ICON_ARROW}</a>
+</div></div>
 </section>
 
 {intent_links(loc)}
