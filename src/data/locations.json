@@ -203,8 +203,9 @@
   "lat": 52.1561,
   "lng": 5.3878,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-amersfoort/",
-  "start": "Eemplein",
-  "image": ""
+  "start": "Koppelpoort",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-amersfoort"
  },
  {
   "slug": "amsterdam",
