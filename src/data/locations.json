@@ -91,8 +91,9 @@
   "lat": 52.5125,
   "lng": 6.0944,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-zwolle/",
-  "start": "",
-  "image": "/assets/uploads/2025/06/Escape-Game-The-Hunt-Zwolle-Locatie.png"
+  "start": "Grote Kerkplein",
+  "image": "/assets/uploads/2025/06/Escape-Game-The-Hunt-Zwolle-Locatie.png",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-zwolle"
  },
  {
   "slug": "kampen",
