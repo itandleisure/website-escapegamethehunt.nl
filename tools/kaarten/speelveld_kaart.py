@@ -5,6 +5,8 @@ from PIL import Image, ImageDraw, ImageFont
 SRC, OUT = sys.argv[1], sys.argv[2]
 FIELD = [(53.21963, 6.55682), (53.21905, 6.55739), (53.21764, 6.55917), (53.21554, 6.55908), (53.21403, 6.56336),
          (53.21378, 6.56599), (53.21506, 6.57071), (53.21674, 6.573), (53.22136, 6.56998), (53.22264, 6.56629)]
+if len(sys.argv) > 3:
+    FIELD = [tuple(p) for p in json.load(open(sys.argv[3]))]
 START = ('Start: Forum Groningen', 53.21891, 6.57018)
 LABELS = ['Grote Markt', 'Vismarkt', 'Martinitoren', 'Prinsentuin', 'Herestraat', 'Folkingestraat', 'Oude Ebbingestraat',
           'Oosterstraat', 'Akerkhof', 'Poelestraat', 'Zuiderdiep', 'Noorderhaven', 'Turfsingel', 'Schuitendiep', 'Brugstraat']
