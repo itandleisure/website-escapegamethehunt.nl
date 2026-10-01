@@ -59,8 +59,9 @@
   "lat": 52.9928,
   "lng": 6.5642,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-assen/",
-  "start": "",
-  "image": ""
+  "start": "Stadhuis Assen",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-assen"
  },
  {
   "slug": "emmen",
@@ -124,8 +125,9 @@
   "lat": 52.2511,
   "lng": 6.16,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-deventer/",
-  "start": "",
-  "image": ""
+  "start": "Brink",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-deventer"
  },
  {
   "slug": "almelo",
