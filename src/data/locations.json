@@ -147,8 +147,9 @@
   "lat": 52.2215,
   "lng": 6.8937,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-enschede/",
-  "start": "",
-  "image": "/assets/uploads/2025/06/Escape-Game-The-Hunt-Enschede-Locatie.png"
+  "start": "Oude Markt",
+  "image": "/assets/uploads/2025/06/Escape-Game-The-Hunt-Enschede-Locatie.png",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-enschede"
  },
  {
   "slug": "oldenzaal",
@@ -189,8 +190,9 @@
   "lat": 51.8426,
   "lng": 5.8528,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-nijmegen/",
-  "start": "",
-  "image": "/assets/uploads/2026/09/the-hunt-nijmegen-waalkade-waalbrug-800.jpg"
+  "start": "Plein 1944",
+  "image": "/assets/uploads/2026/09/the-hunt-nijmegen-waalkade-waalbrug-800.jpg",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-nijmegen"
  },
  {
   "slug": "utrecht",
@@ -326,8 +328,9 @@
   "lat": 51.5555,
   "lng": 5.0913,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-tilburg/",
-  "start": "",
-  "image": "/assets/uploads/2026/09/the-hunt-tilburg-groep-800.jpg"
+  "start": "Stadhuisplein",
+  "image": "/assets/uploads/2026/09/the-hunt-tilburg-groep-800.jpg",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-tilburg"
  },
  {
   "slug": "maastricht",
@@ -336,8 +339,9 @@
   "lat": 50.8514,
   "lng": 5.691,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-maastricht/",
-  "start": "",
-  "image": ""
+  "start": "Graanmarkt",
+  "image": "",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-maastricht"
  },
  {
   "slug": "venlo",
