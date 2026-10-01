@@ -304,3 +304,19 @@ def keywords():
         if d.get('keyword'):
             out[d['path']] = d['keyword']
     return out
+
+
+def with_field_map(loc, body_html):
+    """Zet de speelveldkaart van de stad in de tekst: voor 'Het speelveld', anders voor de tweede kop."""
+    if not loc or not loc.get('field_map'):
+        return body_html
+    src = loc['field_map']
+    fig = (f'<figure class="field-map"><img src="{src}-800.jpg" srcset="{src}-800.jpg 800w, {src}.jpg 1600w" '
+           f'sizes="(max-width: 900px) 100vw, 760px" alt="Kaart van het speelveld van The Hunt in {esc(loc["name"])}" '
+           f'width="1600" height="1200" loading="lazy"><figcaption>Het speelveld van The Hunt in {esc(loc["name"])}'
+           f'{" met de startlocatie bij " + esc(loc["start"]) if loc.get("start") else ""}.</figcaption></figure>')
+    at = body_html.find('<h2>Het speelveld')
+    if at < 0:
+        first = body_html.find('<h2')
+        at = body_html.find('<h2', first + 3) if first >= 0 else -1
+    return body_html[:at] + fig + body_html[at:] if at >= 0 else body_html + fig

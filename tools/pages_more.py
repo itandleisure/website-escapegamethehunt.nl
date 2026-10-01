@@ -4,7 +4,7 @@ import json
 import os
 
 from pages import VIDEO  # noqa: F401  (hergebruikt op sommige pagina's)
-from render import (ICON_ARROW, LOCS, OUT, P, ROOT, SITE, booking, esc, faq_block, faq_schema, nl_map, page, post_card,
+from render import (ICON_ARROW, with_field_map, LOCS, OUT, P, ROOT, SITE, booking, esc, faq_block, faq_schema, nl_map, page, post_card,
                     pricing, province_list)
 
 LOC_BY_SLUG = {l['slug']: l for l in LOCS}
@@ -100,7 +100,7 @@ def post(p, pages_):
 <section class="section">
 <div class="wrap article">
 <article class="prose">
-{p['body']}
+{with_field_map(city, p['body'])}
 </article>
 <aside class="aside" aria-label="Boeken">{card}{nl_map(city['slug']) if city else ''}</aside>
 </div>

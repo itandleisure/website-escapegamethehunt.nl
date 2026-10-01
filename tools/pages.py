@@ -1,5 +1,5 @@
 """Paginatypes van de nieuwe site: homepage en locatiepagina's."""
-from render import (ICON_ARROW, keywords, post_card, LOCS, P, SITE, booking, clock, content, coords, esc, facts, faq_block, faq_schema,
+from render import (ICON_ARROW, with_field_map, keywords, post_card, LOCS, P, SITE, booking, clock, content, coords, esc, facts, faq_block, faq_schema,
                     nearest, nl_map, page, pricing, province_list)
 
 GENERAL_FAQ = [
@@ -179,7 +179,7 @@ def location(loc):
 
 <section class="section">
 <div class="wrap article">
-<div class="prose">{f'<img class="city-photo" src="{loc["image"]}" alt="Escape Game The Hunt in {esc(city)}" width="800" height="600">' if loc["image"] else ''}{c['body']}</div>
+<div class="prose">{f'<img class="city-photo" src="{loc["image"]}" alt="Escape Game The Hunt in {esc(city)}" width="800" height="600">' if loc["image"] else ''}{with_field_map(loc, c['body'])}</div>
 <aside class="aside" aria-label="Boeken in {esc(city)}">
 <div class="aside-card">
 <span class="label">The Hunt {esc(city)}</span>
