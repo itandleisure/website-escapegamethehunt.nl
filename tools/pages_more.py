@@ -178,14 +178,8 @@ def about(p):
 
 
 def locations_overview(p):
-    cards = ''.join(
-        f'<a class="card" href="{l["url"]}"><span class="label">{esc(l["province"])}</span><h3>Escape room {esc(l["name"])}</h3>'
-        f'<p>{"Start: " + esc(l["start"]) if l["start"] else "Start in het centrum van " + esc(l["name"])}</p>'
-        f'<span class="more">Bekijk {esc(l["name"])} →</span></a>'
-        for l in sorted(LOCS, key=lambda l: l['name']))
     inner = f'<div class="locations">{nl_map()}{province_list()}</div>'
-    return simple(p, extra_before=section('Speelsteden', 'Te spelen in heel Nederland', inner)
-                  + section('Alle steden', 'Kies jullie speelstad', f'<div class="cards">{cards}</div>', 'section paper'),
+    return simple(p, extra_before=section('Speelsteden', 'Te spelen in heel Nederland', inner),
                   body_html='', lede='We spelen overal waar we een speelveld kunnen maken. Dit zijn onze vaste speelsteden.',
                   active='/escape-game-the-hunt-locaties/')
 
