@@ -374,3 +374,6 @@ fieldset.field{border:0;padding:0;margin:0}
 .price-line p{margin:0;color:var(--on-dark-muted)}
 .price-line .btn{align-self:flex-start}
 .pricing .price-line{max-width:none;align-self:start}
+
+.price-strip{display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:28px;border:1px solid var(--line);border-radius:var(--radius);background:var(--white)}
+.price-strip h2{font-size:clamp(1.3rem,2.4vw,1.7rem);margin:6px 0 8px}.price-strip p{margin:0;max-width:60ch}
