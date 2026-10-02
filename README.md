@@ -1,64 +1,73 @@
-# escapegamethehunt.nl (statische site)
+# escapegamethehunt.nl
 
-Statische versie van [escapegamethehunt.nl](https://escapegamethehunt.nl), overgezet vanaf WordPress
-(Flatsome-thema) in september 2026. Gewone HTML/CSS met een klein stukje JavaScript, zonder database,
-PHP of plugins.
+Statische site voor Escape Game The Hunt, gehost op GitHub Pages (map `docs/`, domein in `docs/CNAME`). Eigen HTML, CSS en een klein stukje JavaScript, zonder WordPress,
+database, plugins of externe scripts. Alle pagina's worden gegenereerd door één bouwscript.
 
 ## Structuur
 
 ```
-index.html                   homepage
-<pagina>/index.html          elke pagina/blogpost staat op dezelfde URL als op WordPress
-category/<stad>/             nieuwsoverzicht per stad
-escape-game-the-hunt-nieuws/page/N/   nieuwsarchief, pagina 2 t/m 6
-assets/css/flatsome.css      originele Flatsome-stylesheet (ongewijzigd)
-assets/css/theme.css         kleuren, lettertypes en instellingen uit de WordPress-customizer
-assets/css/site.css          aanvullingen voor de statische site (menu, sliders, accordions)
-assets/css/*.css             stylesheets van formulieren, inhoudsopgave, kaart en countdown
-assets/js/site.js            menu, sticky header, sliders, accordions, countdown, formulieren
-assets/uploads/              alle afbeeldingen en video (zelfde mappen als wp-content/uploads)
-partials/                    gedeelde header, footer en mobiel menu
-tools/build.py               zet de partials in alle pagina's + maakt sitemap.xml/robots.txt
-tools/import_wordpress.py    eenmalig gebruikt importscript (ter referentie)
+src/data/site.json         contactgegevens, prijzen, menu, reviews, formulier-endpoint
+src/data/locations.json    de 33 speelsteden: naam, provincie, coördinaten, URL, startlocatie
+src/content/locaties/      per stad: titel, meta, tekst, FAQ en gerelateerde berichten
+src/content/pages/         blogs en losse pagina's: titel, meta, datum, categorie, tekst
+tools/build.py             bouwt alle pagina's + sitemap.xml + robots.txt
+tools/render.py            basislayout, kop, voet, kaart, prijzen, formulier, FAQ
+tools/pages.py             homepage en locatiepagina's
+tools/pages_more.py        blogs, prijzen, contact, FAQ, sfeerimpressie, nieuws, categorieën, overige pagina's
+tools/extract_content.py   eenmalig gebruikt om de tekst uit de oude WordPress-pagina's te halen (vereist beautifulsoup4)
+docs/assets/css/style.css  het hele ontwerp
+docs/assets/js/main.js     mobiel menu, trailer (Vimeo pas na klik) en boekingsformulier
+tools/google-formulier/    Google Apps Script voor aanvragen (Google Sheet + e-mail)
+docs/assets/uploads/       alle afbeeldingen en video's
+docs/_redirects, .htaccess 301-doorverwijzingen voor andere hosting (GitHub Pages leest ze niet;
+                           daar zorgen doorverwijspagina's en docs/404.html voor)
+docs/                      de gebouwde website: dit is wat GitHub Pages publiceert
 ```
 
-## Lokaal bekijken
-
-De links beginnen met `/`, dus open de site via een webserver in plaats van dubbelklikken:
+## Bouwen en bekijken
 
 ```bash
-python -m http.server 8080
+python tools/build.py
+python -m http.server 8080 --directory docs
 ```
 
-en ga naar http://localhost:8080.
+Ga daarna naar http://localhost:8080. Het bouwscript heeft alleen standaard-Python nodig.
 
 ## Aanpassen
 
-- **Tekst of afbeeldingen op een pagina**: pas `<pagina>/index.html` direct aan. Afbeeldingen komen in `assets/uploads/`.
-- **Menu, header of footer**: pas het bestand in `partials/` aan en draai daarna `python tools/build.py`.
-  Dat zet de nieuwe versie in alle pagina's en markeert het actieve menu-item.
-- **Interne links**: `python tools/build.py` zet onderaan elke blogpost een blok met links naar de
-  stadspagina, het nieuwsoverzicht van die stad en de prijzen, en op elk nieuwsoverzicht een link
-  naar de stadspagina. Dat gebeurt op basis van de categorie in `<article class="... category-<stad>">`.
-  De footer (`partials/footer.html`) linkt naar alle vaste pagina's.
-- **Pagina weghalen**: vervang de `index.html` door een doorverwijspagina (zie
-  `escape-game-the-hunt-open-inschrijving/open-inschrijving-22-november-in-enschede/`) en zet de
-  301-doorverwijzing in `_redirects` (Netlify/Cloudflare Pages) en `.htaccess` (Apache).
-- **Nieuwe pagina**: kopieer een bestaande `index.html` naar een nieuwe map, pas de inhoud, `<title>`,
-  description en canonical aan en draai `python tools/build.py` (die werkt ook de sitemap bij).
+- **Prijzen, telefoon, e-mail, menu, reviews**: `src/data/site.json`, daarna `python tools/build.py`.
+- **Tekst van een stad**: het veld `body` of `faq` in `src/content/locaties/<stad>.json`.
+- **Startlocatie van een stad**: `start` in `src/data/locations.json`. Die verschijnt in de hero, de boekkaart en de spelklok.
+- **Nieuwe stad**: voeg een regel toe aan `src/data/locations.json` en maak `src/content/locaties/<slug>.json`
+  (kopieer een bestaande). De stad komt dan automatisch op de kaart, in de provincielijst, de footer en het formulier.
+- **Blog of pagina**: `src/content/pages/<pad>.json`. Een blog heeft een categorie (de stad); die bepaalt de
+  links naar de locatiepagina en de gerelateerde berichten.
+- **Ontwerp**: `docs/assets/css/style.css`. De kleuren en letters staan bovenaan als variabelen.
+- **Pagina weghalen**: haal het JSON-bestand weg, verwijder de map met `index.html` en zet een 301 in
+  `_redirects` en `.htaccess`.
 
-## Formulieren (boekingsaanvraag, contact, vacatures)
+Pas de gegenereerde `index.html`-bestanden niet met de hand aan: de volgende build overschrijft ze.
+Doorverwijspagina's (met een meta refresh) laat het bouwscript met rust.
 
-Op WordPress werden de formulieren (HappyForms) door de server verstuurd. Een statische site heeft geen
-server, dus in `assets/js/site.js` staan bovenaan twee instellingen:
+## Formulier (zelfde opzet als coworkingcompeta.com en badassrentals.nl)
 
-- `FORM_ENDPOINT`: leeg laten, of het adres van een formulierdienst (bijv. Formspree, Basin of Netlify Forms).
-  Die krijgt de ingevulde velden als POST en mailt ze door.
-- `FORM_EMAIL`: zolang er geen endpoint is, opent het formulier het e-mailprogramma van de bezoeker met een
-  ingevulde e-mail aan dit adres.
+Het boekingsformulier werkt in twee stappen:
 
-## Wat er niet meer in zit
+1. **Google Sheet + e-mail.** Staat `google_form_url` in `src/data/site.json` ingevuld, dan stuurt
+   `docs/assets/js/main.js` elke aanvraag naar het Google Apps Script `tools/google-formulier/Code.gs`. Dat zet de
+   aanvraag in het tabblad "Aanvragen", mailt info@escapegamethehunt.nl (antwoorden gaat direct naar de klant) en
+   ruimt aanvragen ouder dan 12 maanden automatisch op. Daarna gaat de bezoeker naar `/bedankt/`.
+2. **FormSubmit als reserve.** Is `google_form_url` leeg of lukt Google niet, dan gaat het formulier gewoon via
+   FormSubmit (`https://formsubmit.co/info@escapegamethehunt.nl`) naar hetzelfde adres. Bij de allereerste
+   inzending stuurt FormSubmit een activatiemail naar info@; die link moet één keer worden aangeklikt.
 
-Google Analytics/Tag Manager/Ads, WordPress-scripts (jQuery, emoji, wp-json, REST API) en de reCAPTCHA
-van het formulier. Voeg tracking alleen weer toe als dat bewust gewenst is (let dan op cookiemelding/AVG).
-De kaart op /escape-game-the-hunt-locaties/ laadt nog amCharts vanaf cdn.amcharts.com.
+Google Sheet instellen (eenmalig):
+
+1. Maak een Google Sheet, bijv. "The Hunt aanvragen". Extensies > Apps Script: plak `tools/google-formulier/Code.gs`.
+2. Kies bovenin de functie `installeer` en klik op Uitvoeren (toestemming geven).
+3. Implementeren > Nieuwe implementatie > Web-app, "Uitvoeren als: ik", "Toegang: iedereen".
+4. Zet de /exec-URL in `google_form_url` in `src/data/site.json`, draai `python tools/build.py`, commit en push.
+
+## Privacy
+
+Geen analytics, geen trackers, geen Google Fonts. De trailer laadt Vimeo pas na een klik op afspelen.
