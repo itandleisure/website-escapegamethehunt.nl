@@ -1,4 +1,80 @@
 [
- {"pagina": "/escape-game-the-hunt-locaties/escape-game-the-hunt-groningen/", "soort": "Titel en omschrijving", "datum": "2026-10-02", "wat": "Nieuwe titel en omschrijving (commit 4c6844b)"},
- {"pagina": "/escape-game-the-hunt-locaties/escape-game-the-hunt-groningen/", "soort": "Bijna top 3", "datum": "2026-10-02", "wat": "'escape room in Groningen' in de intro en als linktekst vanuit twee Groningen-blogs"}
+ {
+  "pagina": "/escape-game-the-hunt-locaties/escape-game-the-hunt-groningen/",
+  "soort": "Titel en omschrijving",
+  "datum": "2026-10-02",
+  "wat": "Nieuwe titel en omschrijving (commit 4c6844b)"
+ },
+ {
+  "pagina": "/escape-game-the-hunt-locaties/escape-game-the-hunt-groningen/",
+  "soort": "Bijna top 3",
+  "datum": "2026-10-02",
+  "wat": "'escape room in Groningen' in de intro en als linktekst vanuit twee Groningen-blogs"
+ },
+ {
+  "pagina": "/escape-game-the-hunt-locaties/escape-game-the-hunt-arnhem/",
+  "soort": "Bijna top 3",
+  "datum": "2026-10-02",
+  "wat": "\"escape room in Arnhem\" in de eerste alinea en als linktekst vanuit 4 stadsartikel(en)"
+ },
+ {
+  "pagina": "/escape-game-the-hunt-locaties/escape-game-the-hunt-leeuwarden/",
+  "soort": "Bijna top 3",
+  "datum": "2026-10-02",
+  "wat": "\"escape room in Leeuwarden\" in de eerste alinea en als linktekst vanuit 2 stadsartikel(en)"
+ },
+ {
+  "pagina": "/escape-game-the-hunt-locaties/escape-game-the-hunt-tilburg/",
+  "soort": "Bijna top 3",
+  "datum": "2026-10-02",
+  "wat": "\"escape room in Tilburg\" in de eerste alinea en als linktekst vanuit 7 stadsartikel(en)"
+ },
+ {
+  "pagina": "/escape-game-the-hunt-locaties/escape-game-the-hunt-meppel/",
+  "soort": "Bijna top 3",
+  "datum": "2026-10-02",
+  "wat": "\"escape room in Meppel\" in de eerste alinea (nog geen stadsartikelen om vanuit te linken)"
+ },
+ {
+  "pagina": "/escape-game-the-hunt-locaties/escape-game-the-hunt-venlo/",
+  "soort": "Bijna top 3",
+  "datum": "2026-10-02",
+  "wat": "\"escape room in Venlo\" in de eerste alinea (nog geen stadsartikelen om vanuit te linken)"
+ },
+ {
+  "pagina": "/escape-game-the-hunt-locaties/escape-game-the-hunt-oldenzaal/",
+  "soort": "Bijna top 3",
+  "datum": "2026-10-02",
+  "wat": "\"escape room in Oldenzaal\" in de eerste alinea (nog geen stadsartikelen om vanuit te linken)"
+ },
+ {
+  "pagina": "/escape-game-the-hunt-locaties/escape-game-the-hunt-alkmaar/",
+  "soort": "Bijna top 3",
+  "datum": "2026-10-02",
+  "wat": "\"escape game in Alkmaar\" in de eerste alinea en als linktekst vanuit 3 stadsartikel(en)"
+ },
+ {
+  "pagina": "/escape-game-the-hunt-locaties/escape-game-the-hunt-den-haag/",
+  "soort": "Bijna top 3",
+  "datum": "2026-10-02",
+  "wat": "\"escape room in Den Haag centrum\" in de eerste alinea en als linktekst vanuit 3 stadsartikel(en)"
+ },
+ {
+  "pagina": "/vrijgezellenfeest-alkmaar-speel-the-hunt/",
+  "soort": "Bijna top 3",
+  "datum": "2026-10-02",
+  "wat": "H1 \"Vrijgezellenfeest in Alkmaar\" en \"Alkmaar vrijgezellenfeest\" in de omschrijving"
+ },
+ {
+  "pagina": "/vrijgezellenfeest-alkmaar-speel-the-hunt/",
+  "soort": "Titel en omschrijving",
+  "datum": "2026-10-02",
+  "wat": "Nieuwe titel en omschrijving"
+ },
+ {
+  "pagina": "/escape-game-the-hunt-locaties/escape-game-the-hunt-utrecht/",
+  "soort": "Te laag voor de vraag",
+  "datum": "2026-10-02",
+  "wat": "Twee nieuwe secties met unieke Utrecht-inhoud (werven, bruggen, praktische info) en \"escape room in Utrecht\" in de intro en als linktekst vanuit de Utrecht-artikelen"
+ }
 ]
