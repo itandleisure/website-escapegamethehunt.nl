@@ -82,7 +82,7 @@ def main():
         fh.write(''.join('  <url><loc>%s%s</loc></url>\n' % (SITE['url'], u) for u in urls))
         fh.write('</urlset>\n')
     with open(os.path.join(OUT, 'robots.txt'), 'w', encoding='utf-8', newline='\n') as fh:
-        fh.write('User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % SITE['url'])
+        fh.write('User-agent: *\nAllow: /\nDisallow: /statistiek/\n\nSitemap: %s/sitemap.xml\n' % SITE['url'])
     print('%d pagina\'s gebouwd, %d in sitemap.xml, nieuws: %d pagina\'s' % (len(written), len(urls), total))
 
 
