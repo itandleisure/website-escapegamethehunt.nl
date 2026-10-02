@@ -94,5 +94,11 @@
   "soort": "Bijna top 3",
   "datum": "2026-10-02",
   "wat": "Niet nodig: de titel van de homepage is al \"Escape Game The Hunt | Outdoor escape room in heel Nederland\""
+ },
+ {
+  "pagina": "(alle locatiepagina's)",
+  "soort": "Hunted + stad",
+  "datum": "2026-10-02",
+  "wat": "Op elke locatiepagina een eigen zin met \"Hunted in [stad]\" na de intro"
  }
 ]
