@@ -148,6 +148,44 @@ def cls(p):
     return '' if p is None else 'top' if p <= 3 else 'ok' if p <= 10 else 'low'
 
 
+GROEPEN = ['the hunt + stad', 'hunted + stad', 'the hunt + ander woord', 'escape game the hunt', 'alleen "the hunt"', 'escape hunt (ander bedrijf)']
+
+
+def merk_groep(q, steden):
+    q = q.lower().strip()
+    if 'hunt' not in q:
+        return None
+    if 'escape hunt' in q or 'escapehunt' in q:
+        return 'escape hunt (ander bedrijf)'
+    if 'escape game the hunt' in q:
+        return 'escape game the hunt'
+    stad = next((s for s in steden if s.lower() in q), None)
+    if 'hunted' in q:
+        return 'hunted + stad' if stad else None
+    if 'the hunt' in q or q.startswith('hunt '):
+        if q in ('the hunt', 'thehunt'):
+            return 'alleen "the hunt"'
+        return 'the hunt + stad' if stad else 'the hunt + ander woord'
+    return None
+
+
+def merk(g):
+    """{groep: {maand: [klikken, vertoningen, pos*vert]}} en per stad de laatste 3 maanden."""
+    steden = [l['name'] for l in json.load(open(os.path.join(ROOT, 'src', 'data', 'locations.json'), encoding='utf-8'))]
+    per = defaultdict(lambda: defaultdict(lambda: [0, 0, 0.0]))
+    stad = defaultdict(lambda: defaultdict(lambda: [0, 0, 0.0]))
+    for r in g['q_maand']:
+        q, m = r['keys'][0], r['keys'][1][:7]
+        k = merk_groep(q, steden)
+        if not k:
+            continue
+        x = per[k][m]; x[0] += r['clicks']; x[1] += r['impressions']; x[2] += r['position'] * r['impressions']
+        for s in steden:
+            if s.lower() in q.lower() and k in ('the hunt + stad', 'hunted + stad'):
+                y = stad[(s, k)][m]; y[0] += r['clicks']; y[1] += r['impressions']; y[2] += r['position'] * r['impressions']
+    return per, stad, steden
+
+
 # ---------------- dashboard ----------------
 def dashboard(g, R):
     today = dt.date.today().strftime('%d-%m-%Y')
@@ -216,6 +254,25 @@ def dashboard(g, R):
         top = sorted(g['p_nu'], key=lambda r: -r['clicks'])[:20]
         parts.append('<section><h2>Beste pagina\'s</h2><table><tr><th>Pagina</th><th>Klikken</th><th>Vertoningen</th><th>Positie</th></tr>'
                      + ''.join(f'<tr><td>{E(r["keys"][0].replace(SITE[:-1], "") or "/")}</td><td>{r["clicks"]} {arrow(r["clicks"], pv.get(r["keys"][0], {}).get("clicks"))}</td><td>{r["impressions"]}</td><td>{r["position"]:.1f}</td></tr>' for r in top) + '</table></section>')
+        per, stadm, steden = merk(g)
+        months = sorted({m for k in per for m in per[k]})[-7:-1] + sorted({m for k in per for m in per[k]})[-1:]
+        months = sorted(set(months))
+        head = ''.join(f'<th>{m[5:]}-{m[2:4]}</th>' for m in months)
+        rowsb = ''.join('<tr><th>' + E(k) + '</th>' + ''.join(
+            (lambda x: f'<td>{x[0]}<div class="hist">{x[1]} vert.{f" · pos {x[2]/x[1]:.1f}" if x[1] else ""}</div></td>')(per[k].get(m, [0, 0, 0])) for m in months) + '</tr>' for k in GROEPEN)
+        stadrows = []
+        for s_ in steden:
+            cells = []
+            for k in ('the hunt + stad', 'hunted + stad'):
+                c = i = pw = 0
+                for m in months[-3:]:
+                    x = stadm[(s_, k)].get(m, [0, 0, 0]); c += x[0]; i += x[1]; pw += x[2]
+                cells.append(f'<td class="{cls(round(pw / i) if i else None)}">{f"{pw/i:.1f}" if i else "–"}<div class="hist">{c} klikken · {i} vert.</div></td>')
+            stadrows.append(f'<tr><th>{E(s_)}</th>{"".join(cells)}</tr>')
+        parts.append('<section><h2>Zoeken op de naam: "The Hunt" en "Hunted"</h2><p class="muted">Klikken per maand (met vertoningen en gemiddelde positie eronder). "the hunt + stad" = mensen die jullie al kennen; "hunted + stad" = mensen die het tv-programma als spel zoeken; "escape hunt" is een ander bedrijf. De laatste maand is nog niet compleet.</p>'
+                     f'<div class="scroll"><table class="rank"><tr><th>Zoekwijze</th>{head}</tr>{rowsb}</table></div>'
+                     '<h2 style="margin-top:16px">Per stad, laatste 3 maanden</h2><p class="muted">Gemiddelde positie, met klikken en vertoningen.</p>'
+                     f'<div class="scroll"><table class="rank"><tr><th>Stad</th><th>"the hunt [stad]"</th><th>"hunted [stad]"</th></tr>{"".join(stadrows)}</table></div></section>')
         # historie per stad uit Search Console (maandelijks, escaperoom/escape room + stad)
         cities = [l['name'] for l in json.load(open(os.path.join(ROOT, 'src', 'data', 'locations.json'), encoding='utf-8'))]
         mon = defaultdict(lambda: defaultdict(lambda: [0, 0.0]))
@@ -321,6 +378,12 @@ def email_html(g, R):
         kans = sorted([r for r in g['q_nu'] if 4 <= r['position'] <= 15 and r['impressions'] >= 20], key=lambda r: -r['impressions'])[:5]
         import tips as T
         tl = T.make(g, R)[:5]
+        per, _, _ = merk(g)
+        ms = sorted({m for k in per for m in per[k]})
+        if len(ms) >= 3:
+            prev, last = ms[-3], ms[-2]
+            rowsm = ''.join(f'<tr><td style="{td}">{E(k)}</td><td style="{td}">{per[k].get(last, [0])[0]} klikken</td><td style="{td};color:#5a6878">vorige maand {per[k].get(prev, [0])[0]}</td></tr>' for k in GROEPEN[:4])
+            p.append(f'<h2 style="font-size:16px">Zoeken op de naam ({last[5:]}-{last[:4]})</h2><table style="border-collapse:collapse;width:100%">{rowsm}</table>')
         p.append('<h2 style="font-size:16px">Top 5 tips om hoger te komen</h2><table style="border-collapse:collapse;width:100%">' + ''.join(
             f'<tr><td style="{td};vertical-align:top;width:30%"><b>{E(t["pagina"])}</b><br><span style="color:#5a6878;font-size:12px">{E(t["soort"])} · +{t["potentie"]} klikken</span>'
             f'{("<br><span style=" + chr(34) + "color:#2e7d32;font-weight:bold;font-size:12px" + chr(34) + ">✓ doorgevoerd " + dt.date.fromisoformat(t["gedaan"]["datum"]).strftime("%d-%m") + "</span>") if t.get("gedaan") else ""}</td><td style="{td}">{E(t["tip"])}</td></tr>' for t in tl) + '</table>')
