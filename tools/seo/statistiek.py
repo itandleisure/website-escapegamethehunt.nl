@@ -6,7 +6,7 @@ Gebruik:
   python tools/seo/statistiek.py --build                         (alleen pagina opnieuw maken)
 
 Instellingen staan in tools/seo/statistiek.local.json (niet in git):
-  {"wachtwoord": "...", "gsc_key": "pad/naar/service-account.json",
+  {"wachtwoord": "...", "gsc_key": "" (leeg = omgevingsvariabele GSC_SLEUTEL),
    "mail_url": "https://script.google.com/macros/s/.../exec", "mail_token": "...",
    "ontvangers": "a@b.nl,c@d.nl", "onderwerp": "Statistieken Escape Game The Hunt website"}
 
@@ -44,6 +44,7 @@ def cfg():
 
 # ---------------- Search Console ----------------
 def gsc_fetch(c):
+    c['gsc_key'] = c.get('gsc_key') or os.environ.get('GSC_SLEUTEL', '')
     if not c.get('gsc_key') or not os.path.exists(c['gsc_key']):
         print('Search Console: geen sleutelbestand ingesteld, overgeslagen'); return None
     from google.oauth2 import service_account
@@ -54,8 +55,15 @@ def gsc_fetch(c):
     end = dt.date.today() - dt.timedelta(days=3)
 
     def q(start, stop, dims, limit=25000):
-        r = s.post(url, json={'startDate': str(start), 'endDate': str(stop), 'dimensions': dims, 'rowLimit': limit})
-        r.raise_for_status(); return r.json().get('rows', [])
+        rows, start_row = [], 0
+        while True:
+            r = s.post(url, json={'startDate': str(start), 'endDate': str(stop), 'dimensions': dims,
+                                  'rowLimit': min(limit, 25000), 'startRow': start_row})
+            r.raise_for_status(); got = r.json().get('rows', [])
+            rows += got
+            if len(got) < 25000 or limit <= 25000 and dims != ['query', 'date']:
+                return rows
+            start_row += 25000
     cur0, prev0 = end - dt.timedelta(days=27), end - dt.timedelta(days=55)
     out = {'datum': str(dt.date.today()), 'tot': str(end),
            'dagen': q(end - dt.timedelta(days=480), end, ['date']),
