@@ -15,6 +15,12 @@ from collections import defaultdict
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 SITE = 'https://escapegamethehunt.nl'
+# zoekwoorden waar geen tip voor komt: merknamen van anderen en losse algemene woorden
+SKIP = re.compile(r'escape hunt|escapehunt|escape the city|clocked ?up|koepel|gevangenis|zwolderspel|sherlocked|prison', re.I)
+
+
+def bruikbaar(q):
+    return len(q.split()) >= 2 and not SKIP.search(q)
 CTR = {1: .28, 2: .15, 3: .11, 4: .08, 5: .065, 6: .05, 7: .04, 8: .035, 9: .03, 10: .025}
 
 
@@ -69,7 +75,7 @@ def make(g, R=None):
     # 2. zoekwoorden op 4-15
     for q, rows in qp.items():
         best = max(rows, key=lambda r: r['impressions'])
-        if 4 <= best['position'] <= 15 and best['impressions'] >= 40:
+        if 4 <= best['position'] <= 15 and best['impressions'] >= 40 and bruikbaar(q):
             extra = round(best['impressions'] * (exp_ctr(3) - best['clicks'] / best['impressions']))
             u = short(best['keys'][1])
             tips.append(dict(pagina=u, soort='Bijna top 3', potentie=max(extra, 1),
@@ -78,7 +84,7 @@ def make(g, R=None):
     # 3. kannibalisatie
     for q, rows in qp.items():
         rows = [r for r in rows if r['impressions'] >= 20 and live(short(r['keys'][1]))]
-        if len(rows) >= 2 and sum(r['impressions'] for r in rows) >= 80:
+        if len(rows) >= 2 and sum(r['impressions'] for r in rows) >= 80 and bruikbaar(q):
             rows.sort(key=lambda r: r['position'])
             main, other = short(rows[0]['keys'][1]), ', '.join(short(r['keys'][1]) for r in rows[1:3])
             tips.append(dict(pagina=main, soort='Concurrentie met eigen pagina', potentie=round(sum(r['impressions'] for r in rows) * 0.02),
