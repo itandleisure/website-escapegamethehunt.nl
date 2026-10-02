@@ -76,5 +76,17 @@
   "soort": "Te laag voor de vraag",
   "datum": "2026-10-02",
   "wat": "Twee nieuwe secties met unieke Utrecht-inhoud (werven, bruggen, praktische info) en \"escape room in Utrecht\" in de intro en als linktekst vanuit de Utrecht-artikelen"
+ },
+ {
+  "pagina": "/escape-game-the-hunt-locaties/escape-game-the-hunt-arnhem/",
+  "soort": "Concurrentie met eigen pagina",
+  "datum": "2026-10-02",
+  "wat": "Vergelijkingsartikel richt zich nu op \"Koepelgevangenis en alternatieven\"; locatiepagina is de hoofdpagina voor \"escape room arnhem\" en linkt naar het artikel"
+ },
+ {
+  "pagina": "/clocked-up-escape-room-arnhem-en-meer-ontdek-de-beste-escape-belevingen-in-de-stad/",
+  "soort": "Titel en omschrijving",
+  "datum": "2026-10-02",
+  "wat": "Nieuwe titel, omschrijving en H1 (was \"Bedrijfsfeest Arnhem\")"
  }
 ]
