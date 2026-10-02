@@ -17,6 +17,7 @@ import argparse, base64, csv, datetime as dt, glob, html, json, os, secrets, sub
 from collections import defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
 ROOT = os.path.dirname(os.path.dirname(HERE))
 CFG_F = os.path.join(HERE, 'statistiek.local.json')
 DATA = os.path.join(HERE, 'data')
@@ -69,6 +70,7 @@ def gsc_fetch(c):
            'dagen': q(end - dt.timedelta(days=480), end, ['date']),
            'q_nu': q(cur0, end, ['query'], 5000), 'q_voor': q(prev0, cur0 - dt.timedelta(days=1), ['query'], 5000),
            'p_nu': q(cur0, end, ['page'], 1000), 'p_voor': q(prev0, cur0 - dt.timedelta(days=1), ['page'], 1000),
+           'qp_nu': q(cur0, end, ['query', 'page'], 25000),
            'q_maand': q(end - dt.timedelta(days=480), end, ['query', 'date'], 25000)}
     os.makedirs(DATA, exist_ok=True)
     json.dump(out, open(os.path.join(DATA, f'gsc-{out["datum"]}.json'), 'w', encoding='utf-8'))
@@ -195,6 +197,10 @@ def dashboard(g, R):
     if g:
         qn, qv = agg(g['q_nu']), agg(g['q_voor'])
         kans = sorted([r for r in g['q_nu'] if 4 <= r['position'] <= 15 and r['impressions'] >= 20], key=lambda r: -r['impressions'])[:25]
+        import tips as T
+        tl = T.make(g, R)
+        parts.append('<section><h2>Tips per pagina om hoger te komen</h2><p class="muted">Automatisch berekend uit Search Console en de positiemetingen. Gesorteerd op potentie: het geschatte aantal extra klikken per 28 dagen.</p><table><tr><th>Pagina</th><th>Soort</th><th>Tip</th><th>Potentie</th></tr>'
+                     + ''.join(f'<tr><td><a href="{SITE[:-1]}{E(t["pagina"])}" target="_blank">{E(t["pagina"])}</a></td><td>{E(t["soort"])}</td><td>{E(t["tip"])}</td><td>+{t["potentie"]}</td></tr>' for t in tl[:30]) + '</table></section>')
         parts.append('<section><h2>Kansen: positie 4 tot 15 met veel vertoningen</h2><p class="muted">Hier levert een paar plekken stijgen het meeste extra klikken op.</p><table><tr><th>Zoekwoord</th><th>Positie</th><th>Vertoningen</th><th>Klikken</th></tr>'
                      + ''.join(f'<tr><td>{E(r["keys"][0])}</td><td>{r["position"]:.1f}</td><td>{r["impressions"]}</td><td>{r["clicks"]}</td></tr>' for r in kans) + '</table></section>')
         ch = []
@@ -311,6 +317,10 @@ def email_html(g, R):
         p.append(f'<h2 style="font-size:16px">Posities per stad</h2><table style="border-collapse:collapse;width:100%"><tr><th style="{td}">Stad</th>{head}</tr>{body}</table>')
     if g:
         kans = sorted([r for r in g['q_nu'] if 4 <= r['position'] <= 15 and r['impressions'] >= 20], key=lambda r: -r['impressions'])[:5]
+        import tips as T
+        tl = T.make(g, R)[:5]
+        p.append('<h2 style="font-size:16px">Top 5 tips om hoger te komen</h2><table style="border-collapse:collapse;width:100%">' + ''.join(
+            f'<tr><td style="{td};vertical-align:top;width:30%"><b>{E(t["pagina"])}</b><br><span style="color:#5a6878;font-size:12px">{E(t["soort"])} · +{t["potentie"]} klikken</span></td><td style="{td}">{E(t["tip"])}</td></tr>' for t in tl) + '</table>')
         p.append('<h2 style="font-size:16px">Top 5 kansen</h2><table style="border-collapse:collapse;width:100%">' + ''.join(
             f'<tr><td style="{td}">{E(r["keys"][0])}</td><td style="{td}">positie {r["position"]:.1f}</td><td style="{td}">{r["impressions"]} vert.</td></tr>' for r in kans) + '</table>')
     p.append(f'<p style="margin-top:20px"><a href="{SITE}statistiek/" style="background:#f29222;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none;font-weight:bold">Bekijk het volledige dashboard</a></p>'
