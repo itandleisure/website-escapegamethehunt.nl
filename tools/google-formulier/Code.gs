@@ -23,7 +23,8 @@ var FORMULIEREN = {
     tabblad: 'Aanvragen', bewaarMaanden: 12, onderwerp: 'Aanvraag The Hunt',
     velden: [['naam', 'Naam'], ['type', 'Zakelijk / particulier'], ['bedrijf', 'Bedrijf'], ['email', 'E-mail'],
       ['telefoon', 'Telefoon'], ['stad', 'Stad'], ['datum', 'Gewenste datum'], ['starttijd', 'Starttijd'],
-      ['personen', 'Aantal personen'], ['soort', 'Soort Hunt'], ['bericht', 'Overige informatie']]
+      ['personen', 'Aantal personen'], ['soort', 'Soort Hunt'], ['bericht', 'Overige informatie'],
+      ['gevonden', 'Hoe gevonden']]
   }
 };
 
@@ -125,6 +126,12 @@ function blad(cfg) {
     sheet.getRange(1, 1, 1, kolommen.length).setFontWeight('bold');
     sheet.setFrozenRows(1);
     sheet.getRange('A:A').setNumberFormat('dd-mm-yyyy hh:mm');
+  }
+  // Nieuwe velden toegevoegd? Dan ontbrekende kolomkoppen aanvullen.
+  var koppen = ['Datum', 'Pagina'].concat(cfg.velden.map(function (v) { return v[1]; }));
+  var huidig = sheet.getLastColumn();
+  if (huidig < koppen.length) {
+    sheet.getRange(1, huidig + 1, 1, koppen.length - huidig).setValues([koppen.slice(huidig)]).setFontWeight('bold');
   }
   return sheet;
 }

@@ -292,6 +292,7 @@ def booking(city=None):
 <div class="field"><label for="f-tijd">Starttijd <span class="opt">(ongeveer)</span></label><input id="f-tijd" name="starttijd" placeholder="bijv. 15:00"></div>
 <div class="field"><label for="f-aantal">Aantal personen</label><input id="f-aantal" type="number" name="personen" min="{P['min_people']}" inputmode="numeric" required></div>
 <fieldset class="field"><legend>Soort Hunt</legend><div class="choices"><label><input type="radio" name="soort" value="Regulier" checked> Regulier</label><label><input type="radio" name="soort" value="Op maat (+€125)"> Op maat (+€{P['custom']})</label></div></fieldset>
+<div class="field"><label for="f-bron">Hoe heb je ons gevonden? <span class="opt">(optioneel)</span></label><select id="f-bron" name="gevonden"><option value="">Kies een antwoord</option><option>Google</option><option>Via via / aanbeveling</option><option>Eerder gespeeld</option><option>Social media</option><option>Uitjessite of platform</option><option>Via Badass Games</option><option>Anders</option></select></div>
 <div class="field full"><label for="f-info">Overige informatie <span class="opt">(optioneel)</span></label><textarea id="f-info" name="bericht"></textarea></div>
 <div class="hp" aria-hidden="true"><label for="f-web">Laat dit veld leeg</label><input id="f-web" name="_honey" tabindex="-1" autocomplete="off"></div>
 <div class="full"><button class="btn btn-signal" type="submit">Vraag een offerte aan {ICON_ARROW}</button></div>
