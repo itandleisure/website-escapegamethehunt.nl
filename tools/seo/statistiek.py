@@ -199,8 +199,9 @@ def dashboard(g, R):
         kans = sorted([r for r in g['q_nu'] if 4 <= r['position'] <= 15 and r['impressions'] >= 20], key=lambda r: -r['impressions'])[:25]
         import tips as T
         tl = T.make(g, R)
-        parts.append('<section><h2>Tips per pagina om hoger te komen</h2><p class="muted">Automatisch berekend uit Search Console en de positiemetingen. Gesorteerd op potentie: het geschatte aantal extra klikken per 28 dagen.</p><table><tr><th>Pagina</th><th>Soort</th><th>Tip</th><th>Potentie</th></tr>'
-                     + ''.join(f'<tr><td><a href="{SITE[:-1]}{E(t["pagina"])}" target="_blank">{E(t["pagina"])}</a></td><td>{E(t["soort"])}</td><td>{E(t["tip"])}</td><td>+{t["potentie"]}</td></tr>' for t in tl[:30]) + '</table></section>')
+        parts.append('<section><h2>Tips per pagina om hoger te komen</h2><p class="muted">Automatisch berekend uit Search Console en de positiemetingen. Gesorteerd op potentie: het geschatte aantal extra klikken per 28 dagen.</p><table><tr><th>Pagina</th><th>Soort</th><th>Tip</th><th>Potentie</th><th>Doorgevoerd</th></tr>'
+                     + ''.join(f'<tr{" class=done" if t.get("gedaan") else ""}><td><a href="{SITE[:-1]}{E(t["pagina"])}" target="_blank">{E(t["pagina"])}</a></td><td>{E(t["soort"])}</td><td>{E(t["tip"])}</td><td>+{t["potentie"]}</td>'
+                               f'<td>{("<span class=check>✓</span> " + dt.date.fromisoformat(t["gedaan"]["datum"]).strftime("%d-%m") + "<br><small>" + E(t["gedaan"]["wat"]) + "</small>") if t.get("gedaan") else ""}</td></tr>' for t in tl[:30]) + '</table></section>')
         parts.append('<section><h2>Kansen: positie 4 tot 15 met veel vertoningen</h2><p class="muted">Hier levert een paar plekken stijgen het meeste extra klikken op.</p><table><tr><th>Zoekwoord</th><th>Positie</th><th>Vertoningen</th><th>Klikken</th></tr>'
                      + ''.join(f'<tr><td>{E(r["keys"][0])}</td><td>{r["position"]:.1f}</td><td>{r["impressions"]}</td><td>{r["clicks"]}</td></tr>' for r in kans) + '</table></section>')
         ch = []
@@ -247,6 +248,7 @@ td.top{background:#d9f2dc}td.ok{background:#fff3c4}td.low{background:#fde3cf}.hi
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}@media(max-width:760px){.two{grid-template-columns:1fr}}
 .chart{width:100%;height:auto}.chart .grid{stroke:#eef1f4}.chart .ax{font-size:11px;fill:#5a6878}.legend{display:flex;gap:16px;font-size:.85rem;margin-bottom:8px}.leg i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
 table.small{width:auto;margin-top:8px;font-size:.9rem}
+tr.done td{color:#5a6878}.check{color:#2e7d32;font-weight:700;font-size:1.1rem}
 #lock{max-width:380px;margin:12vh auto;background:#fff;border:1px solid #dbe2e9;border-radius:10px;padding:24px;text-align:center}#lock input{width:100%;padding:10px;font-size:1rem;margin:12px 0;border:1px solid #dbe2e9;border-radius:6px}#lock button{background:#f29222;border:0;color:#fff;padding:10px 18px;border-radius:6px;font-weight:700;cursor:pointer}'''
 
 
@@ -320,7 +322,8 @@ def email_html(g, R):
         import tips as T
         tl = T.make(g, R)[:5]
         p.append('<h2 style="font-size:16px">Top 5 tips om hoger te komen</h2><table style="border-collapse:collapse;width:100%">' + ''.join(
-            f'<tr><td style="{td};vertical-align:top;width:30%"><b>{E(t["pagina"])}</b><br><span style="color:#5a6878;font-size:12px">{E(t["soort"])} · +{t["potentie"]} klikken</span></td><td style="{td}">{E(t["tip"])}</td></tr>' for t in tl) + '</table>')
+            f'<tr><td style="{td};vertical-align:top;width:30%"><b>{E(t["pagina"])}</b><br><span style="color:#5a6878;font-size:12px">{E(t["soort"])} · +{t["potentie"]} klikken</span>'
+            f'{("<br><span style=" + chr(34) + "color:#2e7d32;font-weight:bold;font-size:12px" + chr(34) + ">✓ doorgevoerd " + dt.date.fromisoformat(t["gedaan"]["datum"]).strftime("%d-%m") + "</span>") if t.get("gedaan") else ""}</td><td style="{td}">{E(t["tip"])}</td></tr>' for t in tl) + '</table>')
         p.append('<h2 style="font-size:16px">Top 5 kansen</h2><table style="border-collapse:collapse;width:100%">' + ''.join(
             f'<tr><td style="{td}">{E(r["keys"][0])}</td><td style="{td}">positie {r["position"]:.1f}</td><td style="{td}">{r["impressions"]} vert.</td></tr>' for r in kans) + '</table>')
     p.append(f'<p style="margin-top:20px"><a href="{SITE}statistiek/" style="background:#f29222;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none;font-weight:bold">Bekijk het volledige dashboard</a></p>'

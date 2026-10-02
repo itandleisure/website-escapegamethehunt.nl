@@ -115,4 +115,9 @@ def make(g, R=None):
             continue
         if k not in seen:
             seen.add(k); out.append(t)
+    done_f = os.path.join(HERE, 'tips_gedaan.json')
+    done = {(d['pagina'], d['soort']): d for d in json.load(open(done_f, encoding='utf-8'))} if os.path.exists(done_f) else {}
+    for t in out:
+        d = done.get((t['pagina'], t['soort']))
+        t['gedaan'] = d
     return out
