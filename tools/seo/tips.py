@@ -7,7 +7,8 @@ Regels (elke tip krijgt een 'potentie' = geschat aantal extra klikken per 28 dag
 3. Twee of meer eigen pagina's op hetzelfde zoekwoord -> kannibalisatie: één pagina kiezen.
 4. Veel vertoningen maar positie 20+ -> inhoud uitbreiden en backlinks.
 5. Flinke daling in vertoningen t.o.v. de vorige periode -> controleren.
-6. Stad zonder enkele positie in de top 30 (DataForSEO) -> lokale backlinks en vermeldingen.
+6. Stad zonder enkele positie in de top 30 (DataForSEO) -> lokale backlinks en vermeldingen
+   (geen Google Bedrijfsprofiel: dat is per stad niet mogelijk).
 """
 import json, os, re
 from collections import defaultdict
@@ -111,8 +112,8 @@ def make(g, R=None):
         for stad in sorted({s for s, _ in last}):
             if not any(v for (s, _), v in last.items() if s == stad):
                 tips.append(dict(pagina=locs.get(stad, stad), soort='Niet zichtbaar in ' + stad, potentie=3,
-                                 tip=f'{stad} staat op geen enkel zoekwoord in de top 30. Zorg voor lokale vermeldingen: een Google Bedrijfsprofiel voor deze stad, '
-                                     f'een vermelding op uitjessites in de regio en een link vanaf een lokale partner (horeca, VVV).'))
+                                 tip=f'{stad} staat op geen enkel zoekwoord in de top 30. Zorg voor lokale vermeldingen: een vermelding op uitjessites en '
+                                     f'regionale nieuwssites, en een link vanaf een lokale partner (horeca, VVV, ondernemersvereniging).'))
     # één tip per pagina+soort, hoogste potentie eerst
     seen, out = set(), []
     for t in sorted(tips, key=lambda t: -t['potentie']):
