@@ -87,6 +87,7 @@ def gsc_latest():
 # ---------------- Google Analytics 4 ----------------
 GA_PROPERTY = '493051204'
 GA_SPAM = ['trafficheap.cc', 'blog2026.online']
+AI_BRON = 'chatgpt|openai|perplexity|copilot|gemini|claude'
 
 
 def ga_fetch(c):
@@ -122,7 +123,9 @@ def ga_fetch(c):
                'bronnen': q(cur, ['sessionSource'], ['sessions'], limit=15),
                'paginas': q(cur, ['pagePath'], ['screenPageViews', 'activeUsers'], limit=25),
                'apparaten': q(cur, ['deviceCategory'], ['activeUsers']),
-               'leads_pagina': q(cur, ['pagePath'], ['eventCount'], lead, limit=50)}
+               'leads_pagina': q(cur, ['pagePath'], ['eventCount'], lead, limit=50),
+               'ai': q(cur, ['sessionSource'], ['sessions', 'activeUsers'],
+                       {'filter': {'fieldName': 'sessionSource', 'stringFilter': {'matchType': 'PARTIAL_REGEXP', 'value': AI_BRON}}})}
         os.makedirs(DATA, exist_ok=True)
         json.dump(out, open(os.path.join(DATA, f'ga-{out["datum"]}.json'), 'w', encoding='utf-8'))
         print('Analytics bijgewerkt t/m', end)
@@ -177,8 +180,45 @@ def ga_section(a):
     dev = srt(a['apparaten']); tdv = sum(r['m'][0] for r in dev) or 1
     if dev:
         out.append('<p class="muted" style="margin-top:12px">Apparaten: ' + ' · '.join(f'{E(r["keys"][0])} {r["m"][0] / tdv * 100:.0f}%' for r in dev) + '</p>')
+    ai = srt(a.get('ai', []))
+    out.append('<p class="muted" style="margin-top:6px">Bezoekers via AI-zoekmachines (ChatGPT, Perplexity, Copilot, Gemini, Claude): '
+               + (' · '.join(f'{E(r["keys"][0])} {r["m"][0]:.0f} sessies' for r in ai) if ai else 'nog geen') + '</p>')
     out.append('</section>')
     return ''.join(out)
+
+
+# ---------------- AI-zichtbaarheid ----------------
+def ai_metingen():
+    return [json.load(open(f, encoding='utf-8')) for f in sorted(glob.glob(os.path.join(MET, 'ai-*.json')))]
+
+
+def ai_score(m, p):
+    a = [v['antwoorden'][p] for v in m['vragen'] if 'fout' not in v['antwoorden'].get(p, {'fout': 1})]
+    return sum(x['genoemd'] for x in a), sum(x['geciteerd'] for x in a), len(a)
+
+
+def ai_section(M):
+    if not M:
+        return ''
+    m = M[-1]; P = list(m['platforms'])
+    lab = lambda d: dt.date.fromisoformat(d).strftime('%d-%m-%Y')
+    k = ''.join(f'<div><b>{g}/{n}</b><span>{p} noemt ons</span><small class="muted">{c}× met link</small></div>' for p in P for g, c, n in [ai_score(m, p)])
+    hist = ''
+    if len(M) > 1:
+        hist = ('<table class="small"><tr><th>Meting</th>' + ''.join(f'<th>{p}</th>' for p in P) + '</tr>'
+                + ''.join(f'<tr><td>{lab(x["datum"])}</td>' + ''.join(f'<td>{ai_score(x, p)[0]}/{ai_score(x, p)[2]}</td>' for p in P) + '</tr>' for x in reversed(M)) + '</table>')
+    ico = lambda a: ('<span class="check">✓</span>' + ('🔗' if a.get('geciteerd') else '')) if a.get('genoemd') else '–'
+    rows = ''.join(f'<tr><td>{E(v["stad"] or "Heel NL")}</td><td title="{E(v["vraag"])}">{E(v["soort"])}</td>'
+                   + ''.join(f'<td title="{E(v["antwoorden"][p].get("fragment", "")[:300])}">{ico(v["antwoorden"][p])}</td>' for p in P) + '</tr>' for v in m['vragen'])
+    from collections import Counter
+    bron = Counter(b for v in m['vragen'] for a in v['antwoorden'].values() for b in set(a.get('bronnen', [])))
+    top = ''.join(f'<tr><td>{E(b)}</td><td>{n}</td></tr>' for b, n in bron.most_common(15))
+    return (f'<section><h2>AI-zichtbaarheid <small>meting {lab(m["datum"])}</small></h2>'
+            f'<p class="muted">We stellen {len(m["vragen"])} vragen (per stad: teamuitje, vrijgezellenfeest, outdoor escape; plus 4 algemene) aan ChatGPT, Perplexity en Gemini, met zoeken op het web vanuit Nederland. '
+            'Telt: wordt Escape Game The Hunt in het antwoord genoemd, en staat er een link naar onze site bij (🔗). Beweeg over een vinkje voor de tekst.</p>'
+            f'<div class="kpis">{k}</div>{hist}'
+            f'<div class="two"><div><h2 style="margin-top:16px">Per vraag</h2><table><tr><th>Stad</th><th>Vraag</th>{"".join(f"<th>{p}</th>" for p in P)}</tr>{rows}</table></div>'
+            f'<div><h2 style="margin-top:16px">Meest gebruikte bronnen</h2><p class="muted">Sites waar de AI zijn antwoord op baseert. Hier vermeld worden helpt.</p><table><tr><th>Site</th><th>Keer</th></tr>{top}</table></div></div></section>')
 
 
 # ---------------- posities ----------------
@@ -307,6 +347,7 @@ def dashboard(g, R, a=None):
     else:
         parts.append('<section><h2>Search Console</h2><p class="muted">Search Console is nog niet gekoppeld aan dit dashboard. Zodra de sleutel is ingesteld, verschijnen hier klikken, vertoningen, posities en kansen.</p></section>')
     parts.append(ga_section(a))
+    parts.append(ai_section(ai_metingen()))
     # posities overzicht in de tijd
     dates = sorted(R)
     if dates:
@@ -498,6 +539,11 @@ def email_html(g, R, a=None):
             f'{("<br><span style=" + chr(34) + "color:#2e7d32;font-weight:bold;font-size:12px" + chr(34) + ">✓ doorgevoerd " + dt.date.fromisoformat(t["gedaan"]["datum"]).strftime("%d-%m") + "</span>") if t.get("gedaan") else ""}</td><td style="{td}">{E(t["tip"])}</td></tr>' for t in tl) + '</table>')
         p.append('<h2 style="font-size:16px">Top 5 kansen</h2><table style="border-collapse:collapse;width:100%">' + ''.join(
             f'<tr><td style="{td}">{E(r["keys"][0])}</td><td style="{td}">positie {r["position"]:.1f}</td><td style="{td}">{r["impressions"]} vert.</td></tr>' for r in kans) + '</table>')
+    M = ai_metingen()
+    if M:
+        m = M[-1]
+        p.append('<h2 style="font-size:16px">AI-zichtbaarheid (meting ' + dt.date.fromisoformat(m['datum']).strftime('%d-%m') + ')</h2><p style="font-size:14px">'
+                 + ' · '.join(f'{pl}: genoemd in {ai_score(m, pl)[0]} van {ai_score(m, pl)[2]} antwoorden' for pl in m['platforms']) + '</p>')
     p.append(f'<p style="margin-top:20px"><a href="{SITE}statistiek/" style="background:#f29222;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none;font-weight:bold">Bekijk het volledige dashboard</a></p>'
              '<p style="color:#5a6878;font-size:12px">Het dashboard is beveiligd met een wachtwoord. Search Console loopt 2 à 3 dagen achter; posities worden wekelijks gemeten.</p></div>')
     return ''.join(p)
