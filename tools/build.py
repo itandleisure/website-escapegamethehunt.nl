@@ -21,7 +21,8 @@ OVERVIEW = {'path': '/escape-game-the-hunt-locaties/', 'title': 'Escape Game The
             'description': 'Ontdek alle locaties waar je Escape Game The Hunt kunt spelen. Van stad tot stad: hier vind je jouw volgende escape avontuur op straatniveau!',
             'h1': 'Alle locaties van The Hunt', 'og_image': '', 'robots': '', 'body': ''}
 SPECIAL = {'/escape-game-the-hunt-prijzen/': pm.prices, '/contact/': pm.contact, '/veelgestelde-vragen/': pm.faq_page,
-           '/escape-game-the-hunt-fotopagina/': pm.photos, '/over-ons/': pm.about}
+           '/escape-game-the-hunt-fotopagina/': pm.photos, '/over-ons/': pm.about,
+           '/privacyverklaring/': lambda p: pm.simple(p, form=False)}
 
 
 def write(path, html, written):

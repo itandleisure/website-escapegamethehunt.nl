@@ -47,7 +47,7 @@ gtag('js',new Date());gtag('config','{GA_ID}');
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>'''
 COOKIE_BAR = '''<div class="cookiebar" id="cookiebar" role="dialog" aria-live="polite" aria-label="Cookies" hidden>
-<p>We gebruiken analytische cookies van Google om te zien hoe bezoekers de site gebruiken. Geen advertenties, geen tracking voor anderen.</p>
+<p>We gebruiken analytische cookies van Google om te zien hoe bezoekers de site gebruiken. Geen advertenties, geen tracking voor anderen. <a href="/privacyverklaring/">Privacyverklaring</a></p>
 <div class="cookiebar-btns"><button type="button" class="btn btn-line" data-cookie="nee">Weigeren</button><button type="button" class="btn btn-signal" data-cookie="ja">Accepteren</button></div>
 </div>'''
 
@@ -125,7 +125,7 @@ def footer():
 <div><h2>Speel The Hunt in</h2><ul class="footer-cities">{cities}</ul></div>
 <div><h2>Meer</h2><ul class="footer-links">{links}</ul></div>
 </div>
-<div class="footer-bottom"><span>© 2020–2026 {SITE['name']} is onderdeel van {SITE['company']} · KvK {SITE['kvk']}</span><span>{SITE['address']} · <button type="button" class="linkbtn" data-cookie-open>Cookie-instellingen</button></span></div>
+<div class="footer-bottom"><span>© 2020–2026 {SITE['name']} is onderdeel van {SITE['company']} · KvK {SITE['kvk']}</span><span>{SITE['address']} · <a href="/privacyverklaring/">Privacyverklaring</a> · <button type="button" class="linkbtn" data-cookie-open>Cookie-instellingen</button></span></div>
 </div>
 </footer>'''
 
@@ -313,7 +313,7 @@ def booking(city=None):
 <div class="field"><label for="f-bron">Hoe heb je ons gevonden? <span class="opt">(optioneel)</span></label><select id="f-bron" name="gevonden"><option value="">Kies een antwoord</option><option>Google</option><option>Via via / aanbeveling</option><option>Eerder gespeeld</option><option>Social media</option><option>Uitjessite of platform</option><option>Via Badass Games</option><option>Anders</option></select></div>
 <div class="field full"><label for="f-info">Overige informatie <span class="opt">(optioneel)</span></label><textarea id="f-info" name="bericht"></textarea></div>
 <div class="hp" aria-hidden="true"><label for="f-web">Laat dit veld leeg</label><input id="f-web" name="_honey" tabindex="-1" autocomplete="off"></div>
-<div class="full"><button class="btn btn-signal" type="submit">Vraag een offerte aan {ICON_ARROW}</button></div>
+<div class="full"><button class="btn btn-signal" type="submit">Vraag een offerte aan {ICON_ARROW}</button><p class="form-note">We gebruiken je gegevens alleen voor je aanvraag. Lees de <a href="/privacyverklaring/">privacyverklaring</a>.</p></div>
 </form>
 </div>
 </section>'''
