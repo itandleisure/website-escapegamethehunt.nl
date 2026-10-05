@@ -11,7 +11,8 @@ Instellingen staan in tools/seo/statistiek.local.json (niet in git):
    "ontvangers": "a@b.nl,c@d.nl", "onderwerp": "Statistieken Escape Game The Hunt website"}
 
 Pagina: docs/statistiek/index.html, versleuteld met AES-GCM (sleutel uit het wachtwoord via PBKDF2).
-Historie: tools/seo/metingen/posities-*.csv (posities) en tools/seo/data/gsc-*.json (Search Console).
+Historie: tools/seo/metingen/posities-*.csv (posities), tools/seo/data/gsc-*.json (Search Console)
+en tools/seo/data/ga-*.json (Google Analytics 4, property 493051204, zelfde serviceaccount; wordt samen met --gsc opgehaald).
 """
 import argparse, base64, csv, datetime as dt, glob, html, json, os, secrets, subprocess, sys, urllib.request
 from collections import defaultdict
@@ -81,6 +82,103 @@ def gsc_fetch(c):
 def gsc_latest():
     f = sorted(glob.glob(os.path.join(DATA, 'gsc-*.json')))
     return json.load(open(f[-1], encoding='utf-8')) if f else None
+
+
+# ---------------- Google Analytics 4 ----------------
+GA_PROPERTY = '493051204'
+GA_SPAM = ['trafficheap.cc', 'blog2026.online']
+
+
+def ga_fetch(c):
+    """Bezoekers, bronnen, pagina's en aanvragen (event generate_lead) uit GA4. Fouten zijn niet fataal."""
+    key = c.get('gsc_key') or os.environ.get('GSC_SLEUTEL', '')
+    if not key or not os.path.exists(key):
+        return None
+    try:
+        from google.oauth2 import service_account
+        from google.auth.transport.requests import AuthorizedSession
+        cred = service_account.Credentials.from_service_account_file(key, scopes=['https://www.googleapis.com/auth/analytics.readonly'])
+        s = AuthorizedSession(cred)
+        url = f'https://analyticsdata.googleapis.com/v1beta/properties/{c.get("ga_property") or GA_PROPERTY}:runReport'
+        end = dt.date.today() - dt.timedelta(days=1)
+        cur, prev = (str(end - dt.timedelta(days=27)), str(end)), (str(end - dt.timedelta(days=55)), str(end - dt.timedelta(days=28)))
+        # spamverkeer (nepbezoekers van verwijzingssites) overal uitsluiten
+        nospam = {'notExpression': {'filter': {'fieldName': 'sessionSource', 'inListFilter': {'values': GA_SPAM}}}}
+        lead = {'andGroup': {'expressions': [nospam, {'filter': {'fieldName': 'eventName', 'stringFilter': {'value': 'generate_lead'}}}]}}
+
+        def q(rng, dims, mets, flt=None, limit=250):
+            body = {'dateRanges': [{'startDate': rng[0], 'endDate': rng[1]}], 'dimensions': [{'name': d} for d in dims],
+                    'metrics': [{'name': m} for m in mets], 'limit': limit}
+            body['dimensionFilter'] = flt or nospam
+            r = s.post(url, json=body); r.raise_for_status()
+            return [{'keys': [v['value'] for v in row.get('dimensionValues', [])], 'm': [float(v['value']) for v in row['metricValues']]}
+                    for row in r.json().get('rows', [])]
+        M = ['activeUsers', 'sessions', 'screenPageViews', 'engagementRate']
+        out = {'datum': str(dt.date.today()), 'tot': str(end),
+               'nu': q(cur, [], M), 'voor': q(prev, [], M),
+               'leads_nu': q(cur, [], ['eventCount'], lead), 'leads_voor': q(prev, [], ['eventCount'], lead),
+               'dagen': q((str(end - dt.timedelta(days=480)), str(end)), ['date'], ['activeUsers', 'sessions'], limit=1000),
+               'kanalen': q(cur, ['sessionDefaultChannelGroup'], ['sessions', 'activeUsers']),
+               'bronnen': q(cur, ['sessionSource'], ['sessions'], limit=15),
+               'paginas': q(cur, ['pagePath'], ['screenPageViews', 'activeUsers'], limit=25),
+               'apparaten': q(cur, ['deviceCategory'], ['activeUsers']),
+               'leads_pagina': q(cur, ['pagePath'], ['eventCount'], lead, limit=50)}
+        os.makedirs(DATA, exist_ok=True)
+        json.dump(out, open(os.path.join(DATA, f'ga-{out["datum"]}.json'), 'w', encoding='utf-8'))
+        print('Analytics bijgewerkt t/m', end)
+        return out
+    except Exception as e:
+        print('Analytics overgeslagen:', str(e)[:200])
+        return None
+
+
+def ga_latest():
+    f = sorted(glob.glob(os.path.join(DATA, 'ga-*.json')))
+    return json.load(open(f[-1], encoding='utf-8')) if f else None
+
+
+def ga_tot(rows, i=0):
+    return rows[0]['m'][i] if rows else 0
+
+
+def ga_section(a):
+    """Dashboarddeel voor Google Analytics."""
+    if not a:
+        return ('<section><h2>Bezoekers (Google Analytics)</h2><p class="muted">Google Analytics staat sinds 5 oktober 2026 op de site. '
+                'Zodra er gegevens zijn, verschijnen hier bezoekers, bronnen en aanvragen.</p></section>')
+    n, v = a['nu'], a['voor']
+    L1, L0 = ga_tot(a['leads_nu']), ga_tot(a['leads_voor'])
+    k = lambda val, lab, arr: f'<div><b>{val}</b><span>{lab}</span>{arr}</div>'
+    out = ['<section><h2>Bezoekers, laatste 28 dagen <small>Google Analytics, t.o.v. de 28 dagen daarvoor</small></h2>'
+           '<p class="muted">Tot 30 september 2026 komen de cijfers van de oude site, die veel te laag mat. De nieuwe meetcode draait sinds 5 oktober 2026: vergelijk vanaf dan. Spamverkeer (o.a. trafficheap.cc) is eruit gefilterd. Bezoekers die cookies weigeren, telt Google via een schatting mee. Aanvragen = verstuurde boekingsformulieren.</p><div class="kpis">'
+           + k(f'{ga_tot(n):.0f}', 'bezoekers', arrow(ga_tot(n), ga_tot(v) or None))
+           + k(f'{ga_tot(n, 1):.0f}', 'sessies', arrow(ga_tot(n, 1), ga_tot(v, 1) or None))
+           + k(f'{ga_tot(n, 2):.0f}', 'paginaweergaven', arrow(ga_tot(n, 2), ga_tot(v, 2) or None))
+           + k(f'{L1:.0f}', 'aanvragen', arrow(L1, L0 or None))
+           + k(f'{(L1 / ga_tot(n, 1) * 100 if ga_tot(n, 1) else 0):.1f}%', 'aanvragen per sessie', '') + '</div>']
+    wk = defaultdict(lambda: [0, 0])
+    for r in a['dagen']:
+        d = dt.datetime.strptime(r['keys'][0], '%Y%m%d').date(); w = d - dt.timedelta(days=d.weekday())
+        wk[w][0] += r['m'][0]; wk[w][1] += r['m'][1]
+    ks = sorted(wk)
+    if len(ks) >= 2:
+        out.append('<h2 style="margin-top:16px">Bezoekers per week</h2>' + svg_line([('Bezoekers', '#f29222', [(w.strftime('%d-%m-%y'), wk[w][0]) for w in ks])]))
+    tab = lambda title, head, rows: f'<div><h2 style="margin-top:16px">{title}</h2><table><tr>{"".join(f"<th>{h}</th>" for h in head)}</tr>{rows}</table></div>'
+    tr = lambda cells: '<tr>' + ''.join(f'<td>{c}</td>' for c in cells) + '</tr>'
+    srt = lambda rows: sorted(rows, key=lambda r: -r['m'][0])
+    out.append('<div class="two">'
+               + tab('Waar komen bezoekers vandaan?', ['Kanaal', 'Sessies', 'Bezoekers'], ''.join(tr([E(r['keys'][0]), f'{r["m"][0]:.0f}', f'{r["m"][1]:.0f}']) for r in srt(a['kanalen'])))
+               + tab('Bronnen', ['Bron', 'Sessies'], ''.join(tr([E(r['keys'][0]), f'{r["m"][0]:.0f}']) for r in srt(a['bronnen'])[:10]))
+               + '</div><div class="two">'
+               + tab('Meest bekeken pagina\'s', ['Pagina', 'Weergaven', 'Bezoekers'], ''.join(tr([E(r['keys'][0]), f'{r["m"][0]:.0f}', f'{r["m"][1]:.0f}']) for r in srt(a['paginas'])[:15]))
+               + tab('Aanvragen per pagina', ['Pagina', 'Aanvragen'], ''.join(tr([E(r['keys'][0]), f'{r["m"][0]:.0f}']) for r in srt(a['leads_pagina']))
+                     or '<tr><td colspan="2" class="muted">Nog geen aanvragen gemeten.</td></tr>')
+               + '</div>')
+    dev = srt(a['apparaten']); tdv = sum(r['m'][0] for r in dev) or 1
+    if dev:
+        out.append('<p class="muted" style="margin-top:12px">Apparaten: ' + ' · '.join(f'{E(r["keys"][0])} {r["m"][0] / tdv * 100:.0f}%' for r in dev) + '</p>')
+    out.append('</section>')
+    return ''.join(out)
 
 
 # ---------------- posities ----------------
@@ -187,7 +285,7 @@ def merk(g):
 
 
 # ---------------- dashboard ----------------
-def dashboard(g, R):
+def dashboard(g, R, a=None):
     today = dt.date.today().strftime('%d-%m-%Y')
     parts = [f'<header><h1>Statistieken escapegamethehunt.nl</h1><p class="muted">Bijgewerkt op {today}. Search Console loopt 2 à 3 dagen achter; posities worden wekelijks gemeten (mobiel, vanaf het centrum van elke stad, top 30).</p></header>']
     # KPI
@@ -208,6 +306,7 @@ def dashboard(g, R):
                      + svg_line([('Vertoningen', '#29394a', [(k.strftime('%d-%m-%y'), wk[k][1]) for k in ks])]) + '</section>')
     else:
         parts.append('<section><h2>Search Console</h2><p class="muted">Search Console is nog niet gekoppeld aan dit dashboard. Zodra de sleutel is ingesteld, verschijnen hier klikken, vertoningen, posities en kansen.</p></section>')
+    parts.append(ga_section(a))
     # posities overzicht in de tijd
     dates = sorted(R)
     if dates:
@@ -339,7 +438,7 @@ try{{const s=localStorage.getItem("stat_pw");if(s)open_(s).catch(()=>localStorag
 
 
 # ---------------- e-mail ----------------
-def email_html(g, R):
+def email_html(g, R, a=None):
     st = 'font-family:Arial,Helvetica,sans-serif;color:#1c2834'
     td = 'padding:6px 8px;border-bottom:1px solid #eef1f4;font-size:14px'
     col = {'top': '#d9f2dc', 'ok': '#fff3c4', 'low': '#fde3cf', '': '#ffffff'}
@@ -351,6 +450,16 @@ def email_html(g, R):
         cell = lambda v, l, a: f'<td style="background:#f3f5f7;padding:12px;border-radius:8px;width:25%"><div style="font-size:22px;font-weight:bold">{v}</div><div style="color:#5a6878;font-size:12px">{l}</div><div style="font-size:12px">{plain(a)}</div></td>'
         p.append('<h2 style="font-size:16px">Laatste 28 dagen (Search Console)</h2><table cellspacing="6" style="width:100%"><tr>'
                  + cell(f'{c1}', 'klikken', arrow(c1, c0)) + cell(f'{i1}', 'vertoningen', arrow(i1, i0)) + cell(f'{p1:.1f}', 'gem. positie', arrow(p1, p0, True)) + cell(f'{r1:.1f}%', 'CTR', arrow(r1, r0)) + '</tr></table>')
+    if a and a['nu']:
+        L1, L0 = ga_tot(a['leads_nu']), ga_tot(a['leads_voor'])
+        cell2 = lambda v, l, ar: f'<td style="background:#f3f5f7;padding:12px;border-radius:8px;width:33%"><div style="font-size:22px;font-weight:bold">{v}</div><div style="color:#5a6878;font-size:12px">{l}</div><div style="font-size:12px">{plain(ar)}</div></td>'
+        p.append('<h2 style="font-size:16px">Bezoekers, laatste 28 dagen (Google Analytics)</h2><table cellspacing="6" style="width:100%"><tr>'
+                 + cell2(f'{ga_tot(a["nu"]):.0f}', 'bezoekers', arrow(ga_tot(a['nu']), ga_tot(a['voor']) or None))
+                 + cell2(f'{ga_tot(a["nu"], 1):.0f}', 'sessies', arrow(ga_tot(a['nu'], 1), ga_tot(a['voor'], 1) or None))
+                 + cell2(f'{L1:.0f}', 'aanvragen', arrow(L1, L0 or None)) + '</tr></table>')
+        kan = sorted(a['kanalen'], key=lambda r: -r['m'][0])[:5]
+        if kan:
+            p.append('<p style="font-size:13px;color:#5a6878">Bronnen: ' + ' · '.join(f'{E(r["keys"][0])} {r["m"][0]:.0f}' for r in kan) + ' sessies</p>')
     dates = sorted(R)
     if dates:
         last = dates[-1]; prev = dates[-2] if len(dates) > 1 else None
@@ -417,20 +526,21 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     for a in ('posities', 'gsc', 'mail', 'push', 'build'):
         ap.add_argument('--' + a, action='store_true')
-    a = ap.parse_args()
+    a_ = ap.parse_args()
     c = cfg()
-    if a.posities:
+    if a_.posities:
         sys.path.insert(0, HERE)
         import posities_meten
         posities_meten.main()
-    g = gsc_fetch(c) if a.gsc else None
+    g = gsc_fetch(c) if a_.gsc else None
     g = g or gsc_latest()
+    a = (ga_fetch(c) if a_.gsc else None) or ga_latest()
     R = rankings()
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, 'w', encoding='utf-8', newline='\n') as fh:
-        fh.write(page(dashboard(g, R), c['wachtwoord']))
+        fh.write(page(dashboard(g, R, a), c['wachtwoord']))
     print('Dashboard:', OUT)
-    if a.mail:
-        send(c, email_html(g, R))
-    if a.push:
+    if a_.mail:
+        send(c, email_html(g, R, a))
+    if a_.push:
         push()
