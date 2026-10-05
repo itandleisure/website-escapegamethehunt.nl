@@ -15,7 +15,7 @@ TEAM_PHOTOS = [('2026/09/de-2gemeenten-uit-jirsum-die-the-hunt-in-utrecht-hebben
                ('2026/04/apotheek-groningen-768x1024.jpeg', 'Team van een apotheek in Groningen'),
                ('2026/04/huisartsenpraktijk-de-schelfhoek-in-almelo-768x1024.jpeg', 'Team van een huisartsenpraktijk in Almelo'),
                ('2026/09/Steiger-B-Escape-game-The-Hunt-Hilversum-768x1024.jpeg', 'Teamuitje in Hilversum'),
-               ('2026/04/Groningen-teams-768x576.jpeg', 'Teams in Groningen')]
+               ('2026/10/the-hunt-den-haag-groep-chinatown-800.jpg', 'Groep na The Hunt in Den Haag')]
 VRIJ_PHOTOS = [('2026/04/Escape-Game-The-Hunt-vrijgezellenfeest-groningen-1067x800.jpeg', 'Vrijgezellenfeest in Groningen'),
                ('2026/04/Groep-Nijmegen-Vrijgezellenfeest-768x576.jpeg', 'Vrijgezellenfeest in Nijmegen'),
                ('2026/09/the-hunt-groningen-team-april-800.jpg', 'Team met gametas in Groningen'),
