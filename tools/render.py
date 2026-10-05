@@ -36,6 +36,22 @@ def jsonld(data):
     return '<script type="application/ld+json">%s</script>' % json.dumps(data, ensure_ascii=False).replace('</', '<\\/')
 
 
+GA_ID = 'G-X9PCZEFQ8E'
+# Google Analytics 4 met Consent Mode v2: standaard staat alles op 'denied' (geen cookies, alleen anonieme tellingen);
+# pas na 'Accepteren' in de cookiemelding gebruikt Google cookies. De keuze bewaart main.js in localStorage.
+GA_HEAD = f'''<script>
+window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}
+var c=null;try{{c=localStorage.getItem('cookiekeuze');}}catch(e){{}}
+gtag('consent','default',{{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:c==='ja'?'granted':'denied',wait_for_update:500}});
+gtag('js',new Date());gtag('config','{GA_ID}');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>'''
+COOKIE_BAR = '''<div class="cookiebar" id="cookiebar" role="dialog" aria-live="polite" aria-label="Cookies" hidden>
+<p>We gebruiken analytische cookies van Google om te zien hoe bezoekers de site gebruiken. Geen advertenties, geen tracking voor anderen.</p>
+<div class="cookiebar-btns"><button type="button" class="btn btn-line" data-cookie="nee">Weigeren</button><button type="button" class="btn btn-signal" data-cookie="ja">Accepteren</button></div>
+</div>'''
+
+
 # ---------- basis ----------
 
 def page(*, path, title, description, body, og_image=None, robots=None, schema=(), head_extra='', active=None):
@@ -70,6 +86,7 @@ def page(*, path, title, description, body, og_image=None, robots=None, schema=(
 <link rel="apple-touch-icon" href="/assets/uploads/2025/05/cropped-escapegamethehunt-512-180x180.png">
 <link rel="preload" href="/assets/fonts/S6u9w4BMUTPHh6UVSwiPGQ.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{asset('/assets/css/style.css')}">
+{GA_HEAD}
 {head_extra}{jsonld(org)}
 {''.join(jsonld(s) for s in schema)}
 </head>
@@ -87,6 +104,7 @@ def page(*, path, title, description, body, og_image=None, robots=None, schema=(
 </main>
 {footer()}
 <a class="btn btn-signal mobile-cta" href="#boeken">Boek The Hunt {ICON_ARROW}</a>
+{COOKIE_BAR}
 <script src="{asset('/assets/js/main.js')}" defer></script>
 </body>
 </html>
@@ -107,7 +125,7 @@ def footer():
 <div><h2>Speel The Hunt in</h2><ul class="footer-cities">{cities}</ul></div>
 <div><h2>Meer</h2><ul class="footer-links">{links}</ul></div>
 </div>
-<div class="footer-bottom"><span>© 2020–2026 {SITE['name']} is onderdeel van {SITE['company']} · KvK {SITE['kvk']}</span><span>{SITE['address']}</span></div>
+<div class="footer-bottom"><span>© 2020–2026 {SITE['name']} is onderdeel van {SITE['company']} · KvK {SITE['kvk']}</span><span>{SITE['address']} · <button type="button" class="linkbtn" data-cookie-open>Cookie-instellingen</button></span></div>
 </div>
 </footer>'''
 

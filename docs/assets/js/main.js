@@ -63,6 +63,10 @@
     var google = form.getAttribute('data-google');
     form.addEventListener('submit', function (e) {
       if (!form.checkValidity()) { e.preventDefault(); form.reportValidity(); return; }
+      if (window.gtag) {
+        var stad = form.querySelector('[name="stad"]');
+        gtag('event', 'generate_lead', { stad: stad ? stad.value : '', pagina: location.pathname });
+      }
       if (!google || !window.fetch || !window.URLSearchParams) { return; }
       e.preventDefault();
       var btn = form.querySelector('[type=submit]');
@@ -79,4 +83,23 @@
         .catch(function () { form.submit(); });
     });
   });
+
+  /* Cookiemelding voor Google Analytics (Consent Mode, zie GA_HEAD in tools/render.py). */
+  var bar = document.getElementById('cookiebar');
+  if (bar) {
+    var keuze = null;
+    try { keuze = localStorage.getItem('cookiekeuze'); } catch (e) {}
+    if (!keuze) { bar.hidden = false; }
+    bar.querySelectorAll('[data-cookie]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var ja = b.getAttribute('data-cookie') === 'ja';
+        try { localStorage.setItem('cookiekeuze', ja ? 'ja' : 'nee'); } catch (e) {}
+        if (window.gtag) { gtag('consent', 'update', { analytics_storage: ja ? 'granted' : 'denied' }); }
+        bar.hidden = true;
+      });
+    });
+    document.querySelectorAll('[data-cookie-open]').forEach(function (b) {
+      b.addEventListener('click', function () { bar.hidden = false; });
+    });
+  }
 })();
