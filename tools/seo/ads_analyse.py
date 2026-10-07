@@ -86,10 +86,12 @@ def main():
     intro = ['Adverteren of niet? Kosten per zoekwoord naast onze positie in Google (gemeten 7-10-2026, mobiel, vanuit het centrum van de stad).',
              'Positie = organische plek nu (leeg = niet in de top 30). Search Console = gemiddelde positie, vertoningen en klikken van de laatste 28 dagen.',
              'Advies: top 3 organisch = niet adverteren (je krijgt de klik al gratis). Positie 4-10 = testen. Niet zichtbaar + genoeg volume = adverteren zinvol.',
+             'Bod bovenaan laag/hoog = de bandbreedte die Google Ads geeft voor een plek bovenaan de pagina (Zoekwoordplanner, gemiddelde van 12 maanden, heel NL). Geen live prijzen: de echte klikprijs hangt af van de veiling en de kwaliteitsscore.',
              '"Er adverteren al anderen" = er stonden betaalde advertenties boven de zoekresultaten: daar is concurrentie, dus de klikprijs kan hoger uitvallen.']
     for i, t in enumerate(intro, 1):
         ws.cell(i, 1, t).font = Font(bold=i == 1, italic=i > 1)
-    H = ['Stad', 'Zoekwoord', 'Zoekvolume/maand', 'Klikprijs (€)', 'Geschatte kosten/maand (€)', 'Onze positie nu', 'Onze pagina',
+    BOD = json.load(open(os.path.join(HERE, 'ads', 'zoekwoorden-ads.json'), encoding='utf-8'))
+    H = ['Stad', 'Zoekwoord', 'Zoekvolume/maand', 'Klikprijs gem. (€)', 'Bod bovenaan laag (€)', 'Bod bovenaan hoog (€)', 'Geschatte kosten/maand (€)', 'Kosten/maand laag-hoog (€)', 'Onze positie nu', 'Onze pagina',
          'Search Console gem. positie', 'SC vertoningen (28 d)', 'SC klikken (28 d)', 'Er adverteren al anderen', 'Advies']
     top = len(intro) + 2
     for c, h in enumerate(H, 1):
@@ -101,13 +103,15 @@ def main():
         g = G.get(r[1], {})
         gp = g.get('position')
         adv, k = advies(p, r[2], r[3], r[1], gp)
-        vals = [r[0], r[1], r[2], r[3], r[6], p or '–', url, round(gp, 1) if gp else '', g.get('impressions', ''), g.get('clicks', ''), 'ja' if ads else 'nee', adv]
+        b = BOD.get(r[1], {}); lo, hi = b.get('low'), b.get('high')
+        band = f'{r[5] * lo:.0f} - {r[5] * hi:.0f}' if lo and hi else ''
+        vals = [r[0], r[1], r[2], r[3], lo or '', hi or '', r[6], band, p or '–', url, round(gp, 1) if gp else '', g.get('impressions', ''), g.get('clicks', ''), 'ja' if ads else 'nee', adv]
         for c, v in enumerate(vals, 1):
-            x = ws.cell(i, c, v); x.fill = PatternFill('solid', fgColor=kleur[k]); x.alignment = Alignment(vertical='top', wrap_text=c in (7, 12))
+            x = ws.cell(i, c, v); x.fill = PatternFill('solid', fgColor=kleur[k]); x.alignment = Alignment(vertical='top', wrap_text=c in (10, 15))
         s = samen.setdefault(k, [0, 0.0, 0]); s[0] += 1; s[1] += r[6] or 0; s[2] += r[2]
-    for col, w in zip('ABCDEFGHIJKL', (13, 30, 12, 10, 13, 10, 38, 12, 12, 10, 12, 52)):
+    for col, w in zip('ABCDEFGHIJKLMNO', (13, 30, 12, 10, 10, 10, 13, 14, 10, 38, 12, 12, 10, 12, 52)):
         ws.column_dimensions[col].width = w
-    ws.freeze_panes = ws.cell(top + 1, 3); ws.auto_filter.ref = f'A{top}:L{top + len(rows)}'
+    ws.freeze_panes = ws.cell(top + 1, 3); ws.auto_filter.ref = f'A{top}:O{top + len(rows)}'
     try:
         wb.save(F); out = F
     except PermissionError:  # bestand staat open in Excel
