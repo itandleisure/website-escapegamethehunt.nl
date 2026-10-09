@@ -275,7 +275,7 @@ def svg_line(series, w=760, h=180, labels=None, invert=False):
         g.append(f'<path d="{d}" fill="none" stroke="{col}" stroke-width="2.2"/>')
     pts = series[0][2]
     step = max(1, len(pts) // 8)
-    for j in range(0, len(pts), step):
+    for j in range((len(pts) - 1) % step, len(pts), step):  # vanaf het eind tellen: laatste punt heeft altijd een label
         g.append(f'<text x="{X(j):.1f}" y="{h-6}" class="ax" text-anchor="middle">{E(str(pts[j][0]))}</text>')
     g.append('</svg>')
     leg = ''.join(f'<span class="leg"><i style="background:{col}"></i>{E(n)}</span>' for n, col, _ in series)
