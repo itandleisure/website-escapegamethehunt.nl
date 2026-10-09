@@ -4,7 +4,7 @@ import json
 import os
 
 from pages import VIDEO  # noqa: F401  (hergebruikt op sommige pagina's)
-from render import (ICON_ARROW, with_field_map, LOCS, OUT, P, ROOT, SITE, booking, esc, faq_block, faq_schema, nl_map, page, post_card,
+from render import (ADS_CONVERSIE_HEAD, ICON_ARROW, with_field_map, LOCS, OUT, P, ROOT, SITE, booking, esc, faq_block, faq_schema, nl_map, page, post_card,
                     pricing, province_list)
 
 LOC_BY_SLUG = {l['slug']: l for l in LOCS}
@@ -232,7 +232,8 @@ def thanks():
 <p><a class="btn btn-line" href="/">Terug naar de homepage</a></p>
 </div></section>'''
     return page(path='/bedankt/', title='Bedankt voor je aanvraag - Escape Game The Hunt',
-                description='Bedankt voor je aanvraag voor Escape Game The Hunt.', body=body, robots='noindex, follow')
+                description='Bedankt voor je aanvraag voor Escape Game The Hunt.', body=body, robots='noindex, follow',
+                head_extra=ADS_CONVERSIE_HEAD)
 
 
 def not_found():

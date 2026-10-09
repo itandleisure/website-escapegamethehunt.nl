@@ -84,17 +84,17 @@
     });
   });
 
-  /* Cookiemelding voor Google Analytics (Consent Mode, zie GA_HEAD in tools/render.py). */
+  /* Cookiemelding voor Google Analytics en Google Ads-conversiemeting (Consent Mode, zie GA_HEAD in tools/render.py). */
   var bar = document.getElementById('cookiebar');
   if (bar) {
     var keuze = null;
-    try { keuze = localStorage.getItem('cookiekeuze'); } catch (e) {}
+    try { keuze = localStorage.getItem('cookiekeuze-v2'); } catch (e) {}
     if (!keuze) { bar.hidden = false; }
     bar.querySelectorAll('[data-cookie]').forEach(function (b) {
       b.addEventListener('click', function () {
         var ja = b.getAttribute('data-cookie') === 'ja';
-        try { localStorage.setItem('cookiekeuze', ja ? 'ja' : 'nee'); } catch (e) {}
-        if (window.gtag) { gtag('consent', 'update', { analytics_storage: ja ? 'granted' : 'denied' }); }
+        try { localStorage.setItem('cookiekeuze-v2', ja ? 'ja' : 'nee'); } catch (e) {}
+        if (window.gtag) { var g = ja ? 'granted' : 'denied'; gtag('consent', 'update', { analytics_storage: g, ad_storage: g, ad_user_data: g }); }
         bar.hidden = true;
       });
     });
