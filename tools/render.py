@@ -46,7 +46,7 @@ VIDEO_SCHEMA = {'@context': 'https://schema.org', '@type': 'VideoObject', 'name'
 
 GA_ID = 'G-X9PCZEFQ8E'
 ADS_ID = 'AW-17938866567'      # Google Ads: conversiemeting voor de campagnes
-ADS_CONVERSIE = ''             # label van conversieactie "Submit lead form" (send_to = ADS_ID/label); leeg = geen conversie
+ADS_CONVERSIE = 'XoTbCNCFxvQbEIfD9elC'  # label van conversieactie "Submit lead form" (send_to = ADS_ID/label); leeg = geen conversie
 # Google Analytics 4 + Google Ads met Consent Mode v2: standaard staat alles op 'denied' (geen cookies, alleen anonieme
 # tellingen); pas na 'Accepteren' in de cookiemelding gebruikt Google cookies. ad_personalization blijft altijd 'denied':
 # we meten alleen of advertenties tot aanvragen leiden, geen remarketing. De keuze bewaart main.js in localStorage.
@@ -58,7 +58,7 @@ gtag('consent','default',{{ad_storage:g,ad_user_data:g,ad_personalization:'denie
 gtag('js',new Date());gtag('config','{GA_ID}');gtag('config','{ADS_ID}');
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>'''
-ADS_CONVERSIE_HEAD = (f"<script>gtag('event','conversion',{{send_to:'{ADS_ID}/{ADS_CONVERSIE}'}});</script>\n"
+ADS_CONVERSIE_HEAD = (f"<script>gtag('event','conversion',{{send_to:'{ADS_ID}/{ADS_CONVERSIE}',value:400,currency:'EUR'}});</script>\n"
                       if ADS_CONVERSIE else '')
 COOKIE_BAR = '''<div class="cookiebar" id="cookiebar" role="dialog" aria-live="polite" aria-label="Cookies" hidden>
 <p>We gebruiken cookies van Google om te zien hoe bezoekers de site gebruiken en of onze Google-advertenties tot aanvragen leiden. Geen gepersonaliseerde advertenties, geen verkoop van gegevens. <a href="/privacyverklaring/">Privacyverklaring</a></p>
