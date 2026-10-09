@@ -1,10 +1,11 @@
 """Google Ads-campagnes voor Escape Game The Hunt, als importbestand voor Google Ads Editor.
 
 Gebruik:  python tools/seo/ads_merkcampagne.py
-Maakt twee campagnes, elk met één advertentiegroep per stad, USP: live Hunters.
+Maakt vier campagnes in één bestand, USP: live Hunters. Alleen exact en woordgroep, nooit brede zoekwoorden.
   - "The Hunt - Merk":   the hunt <stad>, escape game the hunt <stad>, ...
   - "The Hunt - Hunted": hunted <stad>, hunted spel, zelf hunted spelen (mensen die Hunted zelf willen spelen).
     "Hunted" is een tv-merk: het staat alleen in de zoekwoorden, niet in de advertentieteksten.
+  - "The Hunt - Vrijgezellenfeest" en "The Hunt - Teamuitje": alleen kansrijke steden (zie VRIJGEZELLEN en TEAM).
 Schrijft tools/seo/ads/merkcampagne/merkcampagne-google-ads-editor.csv (Google Ads Editor: Account > Importeren >
 Uit bestand) en een leesbaar overzicht merkcampagne-overzicht.xlsx. Alles staat op Gepauzeerd, eerst nakijken.
 """
@@ -56,6 +57,62 @@ def algemeen(koppen, h1):
             }[x[0]], '') for x in k]
 
 
+NEG_UITJE = ['vacature', 'werken bij', 'escape hunt', 'gratis', 'kinderfeestje', 'kinderen']
+
+# Vrijgezellenfeest en teamuitje: alleen steden waar weinig/geen concurrenten adverteren en de klikprijs meevalt
+# (zie tools/seo/ads/google-ads-kosten-per-stad.xlsx, 7-10-2026). (stad, landingspagina, max. bod)
+VRIJGEZELLEN = [('Utrecht', 'vrijgezellenfeest-utrecht', '1.75'),
+                ('Rotterdam', 'vrijgezellenfeest-rotterdam-perfect-groepen', '1.50'),
+                ('Amsterdam', 'vrijgezellenfeest-amsterdam', '1.40'),
+                ('Groningen', 'vrijgezellenfeest-groningen-het-meest-actieve-avontuur-voor-de-bruidegom', '0.80'),
+                ('Amersfoort', 'vrijgezellenfeest-amersfoort-wie-van-jullie-weet-te-ontsnappen-aan-de-hunters', '1.50'),
+                ('Zwolle', 'vrijgezellenfeest-zwolle', '1.75'),
+                ('Nijmegen', 'vrijgezellenfeest-nijmegen-beleef-een-onvergetelijk-avontuur-met-escape-game-the-hunt', '1.75'),
+                ('Maastricht', 'vrijgezellenfeest-maastricht', '0.85')]
+# (stad, soorten, landingspagina, max. bod)
+TEAM = [('Groningen', ['bedrijfsuitje'], 'bedrijfsuitje-groningen-combineer-stad', '1.25'),
+        ('Zwolle', ['teamuitje'], 'teamuitje-bedrijfsuitje-zwolle', '1.25'),
+        ('Tilburg', ['teamuitje'], 'teamuitje-tilburg-organiseren-beleef-90-minuten-actie-met-the-hunt', '1.25'),
+        ('Enschede', ['bedrijfsuitje'], 'teamuitje-bedrijfsuitje-enschede', '1.25'),
+        ('Leeuwarden', ['teamuitje', 'bedrijfsuitje'], 'teamuitje-bedrijfsuitje-leeuwarden', '0.80')]
+
+
+def groepen_vrijgezellen():
+    g = []
+    for stad, slug, cpc in VRIJGEZELLEN:
+        s = stad.lower()
+        H = [(f'Vrijgezellenfeest {stad}', '1'), ('Ontsnap aan Live Hunters', ''), ('Echte Hunters Jagen op Jullie', ''),
+             ('Actief Vrijgezellenuitje', ''), ('90 Minuten Pure Spanning', ''), ('Escape Game The Hunt', ''),
+             (f'Outdoor Escape in {stad}', ''), ('Live Hunters op Jullie Hielen', ''), ('Wie Ontsnapt aan de Hunters?', ''),
+             ('Vanaf 8 Personen', ''), ('Puzzelen, Rennen, Ontsnappen', ''), ('Vrijblijvend Aanvragen', ''),
+             ('De Stad Is Jullie Speelveld', ''), ('Origineel Vrijgezellenfeest', ''), ('Voor Bruid én Bruidegom', '')]
+        D = [f'Vrijgezellenfeest in {stad}: ontsnap 90 minuten aan echte live Hunters in de stad.',
+             'Geen kamer maar de hele stad als speelveld. Live Hunters zitten jullie op de hielen.',
+             'Puzzelen, rennen en samenwerken. Een actief uitje voor groepen vanaf 8 personen.',
+             'Dé escape game met live Hunters. Vraag vrijblijvend een datum aan voor jullie feest.']
+        g.append((f'Vrijgezellenfeest {stad}', f'{SITE}/{slug}/', 'Vrijgezellen', s[:15],
+                  [f'vrijgezellenfeest {s}', f'vrijgezellenuitje {s}', f'vrijgezellendag {s}'], stad, H, D, cpc))
+    return g
+
+
+def groepen_team():
+    g = []
+    for stad, soorten, slug, cpc in TEAM:
+        s = stad.lower(); hoofd = soorten[0].capitalize(); ander = 'Bedrijfsuitje' if hoofd == 'Teamuitje' else 'Teamuitje'
+        H = [(f'{hoofd} {stad}', '1'), ('Ontsnap aan Live Hunters', ''), ('Echte Hunters Jagen op Jullie', ''),
+             ('Teamuitje met Live Hunters', ''), (f'{ander} {stad}', ''), ('Teambuilding in de Buitenlucht', ''),
+             ('90 Minuten Pure Spanning', ''), ('Escape Game The Hunt', ''), ("Van 8 tot 200 Collega's", ''),
+             ('Puzzelen, Rennen, Samenwerken', ''), (f'Outdoor Escape in {stad}', ''), ('Live Hunters op Jullie Hielen', ''),
+             ('Vrijblijvend Offerte Aanvragen', ''), ('De Stad Is Jullie Speelveld', ''), ('Ook Op Maat Mogelijk', '')]
+        D = [f"{hoofd} in {stad}: ontsnap 90 minuten met je collega's aan echte live Hunters.",
+             'Geen kamer maar de hele stad als speelveld. Live Hunters zitten jullie op de hielen.',
+             'Puzzelen, rennen en strategie: teambuilding die energie geeft. Van 8 tot 200 personen.',
+             'Dé escape game met live Hunters. Vraag vrijblijvend een datum en offerte aan.']
+        g.append((f'{" + ".join(x.capitalize() for x in soorten)} {stad}', f'{SITE}/{slug}/', hoofd, s[:15],
+                  [f'{x} {s}' for x in soorten], stad, H, D, cpc))
+    return g
+
+
 CAMPAGNES = [
     {'naam': 'The Hunt - Merk', 'budget': '5.00', 'cpc': '0.60', 'neg': NEG_BASIS, 'koppen': kop_merk,
      'algemeen': ('The Hunt - Algemeen', ['escape game the hunt', 'the hunt escape game', 'escapegamethehunt',
@@ -66,6 +123,10 @@ CAMPAGNES = [
                   'hunted uitje', 'hunted teamuitje', 'hunted bedrijfsuitje', 'hunted vrijgezellenfeest'],
                   'Speel Het Zelf: The Hunt'),
      'stad_kw': lambda s: [f'hunted {s}', f'hunted spel {s}', f'hunted spelen {s}']},
+    {'naam': 'The Hunt - Vrijgezellenfeest', 'budget': '5.00', 'cpc': '1.50', 'neg': NEG_UITJE,
+     'groepen': lambda: groepen_vrijgezellen()},
+    {'naam': 'The Hunt - Teamuitje', 'budget': '4.00', 'cpc': '1.25', 'neg': NEG_UITJE,
+     'groepen': lambda: groepen_team()},
 ]
 
 COLS = ['Campaign', 'Campaign Type', 'Campaign Status', 'Budget', 'Budget type', 'Bid Strategy Type', 'Networks',
@@ -76,11 +137,16 @@ COLS = ['Campaign', 'Campaign Type', 'Campaign Status', 'Budget', 'Budget type',
 
 
 def groepen(c):
+    """(naam, url, path1, path2, zoekwoorden, stad, koppen, beschrijvingen, max. bod)"""
+    if 'groepen' in c:
+        return c['groepen']()
+    bod = lambda stad: CPC_STAD.get(c['naam'], {}).get(stad, c['cpc'])
     naam, kws, h1 = c['algemeen']
-    g = [(naam, SITE + '/', 'The-Hunt', '', kws, None, algemeen(c['koppen'], h1), beschr('jouw stad'))]
+    g = [(naam, SITE + '/', 'The-Hunt', '', kws, None, algemeen(c['koppen'], h1), beschr('jouw stad'), c['cpc'])]
     for l in LOCS:
         g.append((f"{'The Hunt' if c['naam'].endswith('Merk') else 'Hunted'} {l['name']}", SITE + l['url'], 'The-Hunt',
-                  l['slug'][:15], c['stad_kw'](l['name'].lower()), l['name'], c['koppen'](l['name']), beschr(l['name'])))
+                  l['slug'][:15], c['stad_kw'](l['name'].lower()), l['name'], c['koppen'](l['name']), beschr(l['name']),
+                  bod(l['name'])))
     return g
 
 
@@ -93,8 +159,7 @@ def main():
                      'Budget type': 'Daily', 'Bid Strategy Type': 'Manual CPC', 'Networks': 'Google search',
                      'Languages': 'nl', 'Location': 'Netherlands'})
         rows += [{'Campaign': C, 'Keyword': n, 'Criterion Type': 'Campaign negative phrase'} for n in c['neg']]
-        for naam, url, p1, p2, kws, stad, H, D in groepen(c):
-            cpc = CPC_STAD.get(C, {}).get(stad, c['cpc'])
+        for naam, url, p1, p2, kws, stad, H, D, cpc in groepen(c):
             rows.append({'Campaign': C, 'Ad Group': naam, 'Ad Group Status': 'Enabled', 'Max CPC': cpc})
             rows += [{'Campaign': C, 'Ad Group': naam, 'Keyword': k, 'Criterion Type': mt, 'Status': 'Enabled'}
                      for k in kws for mt in ('Exact', 'Phrase')]
@@ -110,6 +175,9 @@ def main():
                 ad[f'Description {i}'] = d
             rows.append(ad)
             overzicht.append([C, naam, cpc, url, ', '.join(kws)] + [h for h, _ in H] + D)
+    brede = [r for r in rows if r.get('Keyword') and r['Criterion Type'] not in ('Exact', 'Phrase', 'Campaign negative phrase')]
+    if brede:
+        fouten.append(f'{len(brede)} zoekwoorden zonder exact/woordgroep (brede zoekwoorden zijn niet gewenst)')
     if fouten:
         raise SystemExit('\n'.join(fouten))
 
