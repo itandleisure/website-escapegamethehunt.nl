@@ -47,9 +47,11 @@ VIDEO_SCHEMA = {'@context': 'https://schema.org', '@type': 'VideoObject', 'name'
 GA_ID = 'G-X9PCZEFQ8E'
 ADS_ID = 'AW-17938866567'      # Google Ads: conversiemeting voor de campagnes
 ADS_CONVERSIE = 'XoTbCNCFxvQbEIfD9elC'  # label van conversieactie "Submit lead form" (send_to = ADS_ID/label); leeg = geen conversie
+CLARITY_ID = 'yvr1gtifcx'      # Microsoft Clarity: heatmaps en sessie-opnames
 # Google Analytics 4 + Google Ads met Consent Mode v2: standaard staat alles op 'denied' (geen cookies, alleen anonieme
 # tellingen); pas na 'Accepteren' in de cookiemelding gebruikt Google cookies. ad_personalization blijft altijd 'denied':
 # we meten alleen of advertenties tot aanvragen leiden, geen remarketing. De keuze bewaart main.js in localStorage.
+# Microsoft Clarity (heatmaps, opnames) krijgt dezelfde keuze: zonder toestemming werkt het zonder cookies.
 GA_HEAD = f'''<script>
 window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}
 var c=null;try{{c=localStorage.getItem('cookiekeuze-v2');}}catch(e){{}}
@@ -57,11 +59,17 @@ var g=c==='ja'?'granted':'denied';
 gtag('consent','default',{{ad_storage:g,ad_user_data:g,ad_personalization:'denied',analytics_storage:g,wait_for_update:500}});
 gtag('js',new Date());gtag('config','{GA_ID}');gtag('config','{ADS_ID}');
 </script>
-<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>'''
+<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
+<script>
+(function(c,l,a,r,i,t,y){{c[a]=c[a]||function(){{(c[a].q=c[a].q||[]).push(arguments)}};
+t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);}})(window,document,"clarity","script","{CLARITY_ID}");
+clarity('consentv2',{{ad_Storage:'denied',analytics_Storage:g}});
+</script>'''
 ADS_CONVERSIE_HEAD = (f"<script>gtag('event','conversion',{{send_to:'{ADS_ID}/{ADS_CONVERSIE}',value:400,currency:'EUR'}});</script>\n"
                       if ADS_CONVERSIE else '')
 COOKIE_BAR = '''<div class="cookiebar" id="cookiebar" role="dialog" aria-live="polite" aria-label="Cookies" hidden>
-<p>We gebruiken cookies van Google om te zien hoe bezoekers de site gebruiken en of onze Google-advertenties tot aanvragen leiden. Geen gepersonaliseerde advertenties, geen verkoop van gegevens. <a href="/privacyverklaring/">Privacyverklaring</a></p>
+<p>We gebruiken cookies van Google en Microsoft Clarity om te zien hoe bezoekers de site gebruiken en of onze Google-advertenties tot aanvragen leiden. Geen gepersonaliseerde advertenties, geen verkoop van gegevens. <a href="/privacyverklaring/">Privacyverklaring</a></p>
 <div class="cookiebar-btns"><button type="button" class="btn btn-line" data-cookie="nee">Weigeren</button><button type="button" class="btn btn-signal" data-cookie="ja">Accepteren</button></div>
 </div>'''
 
