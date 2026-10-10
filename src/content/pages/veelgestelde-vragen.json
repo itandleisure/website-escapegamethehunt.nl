@@ -1,7 +1,7 @@
 {
  "title": "Veelgestelde vragen - Escape Game The Hunt",
- "description": "Wij maken gebruik van de gameapp genaamd LOQUIZ. Deze kan je in de appstore van zowel de Android als Iphone telefoon terugvinden.",
- "og_image": "/assets/uploads/2022/08/loquiz-1.png",
+ "description": "Antwoorden op de meestgestelde vragen over Escape Game The Hunt: de startlocatie, de spelleiders, groepsgrootte, prijzen en het spel zelf.",
+ "og_image": "",
  "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
  "published": "2022-08-15T12:25:45+02:00",
  "modified": "2025-06-23T11:00:49+02:00",
@@ -11,19 +11,6 @@
  "h1": "Veelgestelde vragen",
  "body": "<h2>Veelgestelde vragen<br></h2>\n<h3>Vragen rondom de gameapp</h3>\n<h3>Gameapp vragen</h3>\n<h3>Algemene Vragen</h3>\n<h3>Algemene vragen</h3>\n<h3>Prijzen, groepen en het spel</h3>\n<h3>Prijzen, groepen en het spel</h3>",
  "faq_groups": [
-  [
-   "Gameapp vragen",
-   [
-    [
-     "Welke Gameapp wordt gebruikt?",
-     "<p>Wij maken gebruik van de gameapp genaamd LOQUIZ. Deze kan je in de appstore van zowel de Android als Iphone telefoon terugvinden.</p><div class=\"shots\"><img src=\"/assets/uploads/2022/08/loquiz-gameapp-280x280.jpg\" alt=\"Schermafbeelding van de Loquiz-app\" loading=\"lazy\"></div>"
-    ],
-    [
-     "Zijn er nog bepaalde zaken die ik aan of uit moet zetten binnen de gameapp?",
-     "<p>Wanneer je de gameapp opstart en je inloggegevens invult krijg je de volgende schermen te zien. Dit voorbeeld is gemaakt voor de Iphone telefoon maar voor Android is dit ongeveer hetzelfde.</p><p><strong>klik om het vinkje te zetten. Hierna openen de schermen hieronder.</strong></p><p>Kies: <strong>Geef toegang tot alle foto’s</strong></p><p>Kies: <strong>OK</strong></p><p>Kies: <strong>OK</strong></p><p><strong>Verzin een leuke teamnaam en vul het aantal leden in en klik op Oke</strong></p><p><strong>HET SPEL GAAT NU BEGINNEN</strong></p><div class=\"shots\"><img src=\"/assets/uploads/2022/08/loquiz-1-309x400.png\" alt=\"Schermafbeelding van de Loquiz-app\" loading=\"lazy\"><img src=\"/assets/uploads/2022/08/loquiz-2-267x400.png\" alt=\"Schermafbeelding van de Loquiz-app\" loading=\"lazy\"><img src=\"/assets/uploads/2022/08/loquiz-3-283x400.png\" alt=\"Schermafbeelding van de Loquiz-app\" loading=\"lazy\"><img src=\"/assets/uploads/2022/08/loquiz-4-286x400.png\" alt=\"Schermafbeelding van de Loquiz-app\" loading=\"lazy\"><img src=\"/assets/uploads/2022/08/loquiz-5-259x400.png\" alt=\"Schermafbeelding van de Loquiz-app\" loading=\"lazy\"></div>"
-    ]
-   ]
-  ],
   [
    "Algemene vragen",
    [
@@ -103,30 +90,5 @@
    ]
   ]
  ],
- "images": [
-  {
-   "src": "/assets/uploads/2022/08/loquiz-gameapp-280x280.jpg",
-   "alt": "loquiz gameapp"
-  },
-  {
-   "src": "/assets/uploads/2022/08/loquiz-1-309x400.png",
-   "alt": "loquiz 1"
-  },
-  {
-   "src": "/assets/uploads/2022/08/loquiz-2-267x400.png",
-   "alt": "loquiz 2"
-  },
-  {
-   "src": "/assets/uploads/2022/08/loquiz-3-283x400.png",
-   "alt": "loquiz 3"
-  },
-  {
-   "src": "/assets/uploads/2022/08/loquiz-4-286x400.png",
-   "alt": ""
-  },
-  {
-   "src": "/assets/uploads/2022/08/loquiz-5-259x400.png",
-   "alt": "loquiz 5"
-  }
- ]
+ "images": []
 }

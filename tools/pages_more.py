@@ -156,7 +156,7 @@ def faq_page(p):
         allq += items
         blocks.append(section('Veelgestelde vragen', esc(title), faq_block(items), 'section tight'))
     return simple(p, extra_before=''.join(blocks), body_html='', schema=[faq_schema(allq)],
-                  lede='Antwoorden over de GameApp, het spel, groepen en prijzen.')
+                  lede='Antwoorden over het spel, groepen en prijzen.')
 
 
 def photos(p):
