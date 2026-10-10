@@ -1,7 +1,7 @@
 """Statistiekpagina en wekelijkse e-mail voor escapegamethehunt.nl.
 
 Gebruik:
-  python tools/seo/statistiek.py --gsc --push                    (dagelijks: Search Console bijwerken)
+  python tools/seo/statistiek.py --gsc --push                    (dagelijks: Search Console, Analytics en Google Ads bijwerken)
   python tools/seo/statistiek.py --posities --gsc --mail --push  (wekelijks: ook posities meten en mailen)
   python tools/seo/statistiek.py --build                         (alleen pagina opnieuw maken)
 
@@ -187,6 +187,127 @@ def ga_section(a):
     return ''.join(out)
 
 
+# ---------------- Google Ads (via de koppeling Google Ads - Analytics) ----------------
+ADS_M = ['advertiserAdCost', 'advertiserAdClicks', 'advertiserAdImpressions']
+
+
+def ads_fetch(c):
+    """Kosten, klikken en vertoningen van Google Ads per dag, campagne, advertentiegroep en zoekwoord, uit GA4.
+    Werkt alleen als Google Ads aan Analytics is gekoppeld. Elk deel mag apart mislukken."""
+    key = c.get('gsc_key') or os.environ.get('GSC_SLEUTEL', '')
+    if not key or not os.path.exists(key):
+        return None
+    try:
+        from google.oauth2 import service_account
+        from google.auth.transport.requests import AuthorizedSession
+        cred = service_account.Credentials.from_service_account_file(key, scopes=['https://www.googleapis.com/auth/analytics.readonly'])
+        s = AuthorizedSession(cred)
+    except Exception as e:
+        print('Google Ads overgeslagen:', str(e)[:200]); return None
+    url = f'https://analyticsdata.googleapis.com/v1beta/properties/{c.get("ga_property") or GA_PROPERTY}:runReport'
+    end = dt.date.today()
+    rng = (str(end - dt.timedelta(days=27)), str(end))
+    ads_only = {'notExpression': {'filter': {'fieldName': 'sessionGoogleAdsCampaignName', 'inListFilter': {'values': ['(not set)', '']}}}}
+    lead = {'andGroup': {'expressions': [ads_only, {'filter': {'fieldName': 'eventName', 'stringFilter': {'value': 'generate_lead'}}}]}}
+    fouten = []
+
+    def q(dims, mets, flt=None, limit=500):
+        body = {'dateRanges': [{'startDate': rng[0], 'endDate': rng[1]}], 'dimensions': [{'name': d} for d in dims],
+                'metrics': [{'name': m} for m in mets], 'limit': limit}
+        if flt:
+            body['dimensionFilter'] = flt
+        try:
+            r = s.post(url, json=body); r.raise_for_status()
+        except Exception as e:
+            fouten.append(f'{"/".join(dims)}: {str(e)[:120]}'); return []
+        return [{'keys': [v['value'] for v in row.get('dimensionValues', [])], 'm': [float(v['value']) for v in row['metricValues']]}
+                for row in r.json().get('rows', [])]
+    out = {'datum': str(dt.date.today()), 'van': rng[0], 'tot': rng[1],
+           'dagen': q(['date'], ADS_M, limit=100),
+           'campagnes': q(['sessionGoogleAdsCampaignName'], ADS_M),
+           'groepen': q(['sessionGoogleAdsCampaignName', 'sessionGoogleAdsAdGroupName'], ADS_M),
+           'zoekwoorden': q(['sessionGoogleAdsKeyword'], ADS_M, limit=100),
+           'leads_dag': q(['date'], ['eventCount'], lead, limit=100),
+           'leads_campagne': q(['sessionGoogleAdsCampaignName'], ['eventCount'], lead),
+           'leads_groep': q(['sessionGoogleAdsCampaignName', 'sessionGoogleAdsAdGroupName'], ['eventCount'], lead)}
+    out['fouten'] = fouten
+    os.makedirs(DATA, exist_ok=True)
+    json.dump(out, open(os.path.join(DATA, f'ads-{out["datum"]}.json'), 'w', encoding='utf-8'))
+    print('Google Ads bijgewerkt t/m', end, f'({len(fouten)} fouten)' if fouten else '')
+    return out
+
+
+def ads_latest():
+    f = sorted(glob.glob(os.path.join(DATA, 'ads-*.json')))
+    return json.load(open(f[-1], encoding='utf-8')) if f else None
+
+
+def eur(v):
+    return ('€ ' + f'{v:,.2f}').replace(',', 'X').replace('.', ',').replace('X', '.')
+
+
+def ads_score(clicks, impr, leads):
+    """Groen = goed, geel = gemiddeld, oranje = matig. Aanvragen tellen het zwaarst, daarna de CTR."""
+    if leads:
+        return 'top'
+    if impr < 20:
+        return ''
+    ctr = clicks / impr * 100
+    return 'top' if ctr >= 10 else 'ok' if ctr >= 4 else 'low'
+
+
+def ads_section(ad):
+    """Dashboarddeel voor Google Ads: uitgaven per dag en welke campagnes, steden en zoekwoorden het goed doen."""
+    if not ad or not ad.get('dagen'):
+        msg = ('Er zijn nog geen Google Ads-cijfers. Ze komen via Google Analytics binnen zodra Google Ads daaraan gekoppeld is '
+               '(Analytics, Beheer, Productkoppelingen, Google Ads-koppelingen).')
+        if ad and ad.get('fouten'):
+            msg += ' Laatste foutmelding: ' + E(ad['fouten'][0])
+        return f'<section><h2>Google Ads</h2><p class="muted">{msg}</p></section>'
+    days = sorted(ad['dagen'], key=lambda r: r['keys'][0])
+    ld = {r['keys'][0]: r['m'][0] for r in ad.get('leads_dag', [])}
+    lc = {r['keys'][0]: r['m'][0] for r in ad.get('leads_campagne', [])}
+    lg = {tuple(r['keys']): r['m'][0] for r in ad.get('leads_groep', [])}
+    cost = sum(r['m'][0] for r in days); clicks = sum(r['m'][1] for r in days); impr = sum(r['m'][2] for r in days)
+    leads = sum(ld.values())
+    k = lambda val, lab: f'<div><b>{val}</b><span>{lab}</span></div>'
+    van = dt.date.fromisoformat(ad['van']).strftime('%d-%m'); tot_ = dt.date.fromisoformat(ad['tot']).strftime('%d-%m')
+    out = [f'<section><h2>Google Ads <small>{van} t/m {tot_}, vandaag is nog niet compleet</small></h2>'
+           '<p class="muted">Uit Google Analytics, dat de kosten uit Google Ads overneemt. Aanvragen = boekingsformulieren van bezoekers die via een advertentie kwamen. '
+           'Kleuren: groen = levert aanvragen op of CTR van 10% of meer, geel = CTR 4 tot 10%, oranje = CTR onder 4%. Pas na een paar weken zeggen de cijfers echt iets.</p><div class="kpis">'
+           + k(eur(cost), 'uitgegeven') + k(f'{clicks:.0f}', 'klikken') + k(f'{impr:.0f}', 'vertoningen')
+           + k(f'{(clicks / impr * 100 if impr else 0):.1f}%', 'CTR') + k(eur(cost / clicks) if clicks else '–', 'gem. klikprijs')
+           + k(f'{leads:.0f}', 'aanvragen') + k(eur(cost / leads) if leads else '–', 'kosten per aanvraag') + '</div>']
+    lab = lambda d: dt.datetime.strptime(d, '%Y%m%d').strftime('%d-%m')
+    if len(days) >= 2:
+        out.append('<h2 style="margin-top:16px">Uitgaven en klikken per dag</h2>'
+                   + svg_line([('Uitgegeven (€)', '#f29222', [(lab(r['keys'][0]), r['m'][0]) for r in days])])
+                   + svg_line([('Klikken', '#29394a', [(lab(r['keys'][0]), r['m'][1]) for r in days])]))
+    tr = lambda cells, c='': f'<tr{f" class={c}" if c else ""}>' + ''.join(f'<td>{x}</td>' for x in cells) + '</tr>'
+    row = lambda m, l: [eur(m[0]), f'{m[1]:.0f}', f'{m[2]:.0f}', f'{(m[1] / m[2] * 100 if m[2] else 0):.1f}%', eur(m[0] / m[1]) if m[1] else '–', f'{l:.0f}']
+    H = '<th>Uitgegeven</th><th>Klikken</th><th>Vert.</th><th>CTR</th><th>Klikprijs</th><th>Aanvr.</th>'
+    out.append('<h2 style="margin-top:16px">Per dag</h2><div class="scroll"><table class="ads"><tr><th>Dag</th>' + H + '</tr>'
+               + ''.join(tr([(lambda d: ['ma', 'di', 'wo', 'do', 'vr', 'za', 'zo'][d.weekday()] + d.strftime(' %d-%m'))(dt.datetime.strptime(r['keys'][0], '%Y%m%d'))] + row(r['m'], ld.get(r['keys'][0], 0)))
+                         for r in reversed(days[-14:])) + '</table></div>')
+    camp = sorted(ad.get('campagnes', []), key=lambda r: -r['m'][0])
+    out.append('<h2 style="margin-top:16px">Per campagne</h2><div class="scroll"><table class="ads"><tr><th>Campagne</th>' + H + '</tr>'
+               + ''.join(f'<tr><th>{E(r["keys"][0])}</th>' + ''.join(f'<td class="{ads_score(r["m"][1], r["m"][2], lc.get(r["keys"][0], 0))}">{x}</td>' if i == 3 else f'<td>{x}</td>'
+                                                                      for i, x in enumerate(row(r['m'], lc.get(r['keys'][0], 0)))) + '</tr>' for r in camp) + '</table></div>')
+    grp = sorted(ad.get('groepen', []), key=lambda r: -r['m'][2])[:30]
+    if grp:
+        out.append('<h2 style="margin-top:16px">Per advertentiegroep (stad)</h2><p class="muted">De 30 groepen met de meeste vertoningen.</p><div class="scroll"><table class="ads"><tr><th>Campagne</th><th>Groep</th>' + H + '</tr>'
+                   + ''.join(f'<tr><td>{E(r["keys"][0])}</td><th>{E(r["keys"][1])}</th>' + ''.join(
+                       f'<td class="{ads_score(r["m"][1], r["m"][2], lg.get(tuple(r["keys"]), 0))}">{x}</td>' if i == 3 else f'<td>{x}</td>'
+                       for i, x in enumerate(row(r['m'], lg.get(tuple(r['keys']), 0)))) + '</tr>' for r in grp) + '</table></div>')
+    kw = sorted([r for r in ad.get('zoekwoorden', []) if r['keys'][0] not in ('(not set)', '')], key=lambda r: -r['m'][1])[:20]
+    if kw:
+        out.append('<h2 style="margin-top:16px">Zoekwoorden met de meeste klikken</h2><div class="scroll"><table class="ads"><tr><th>Zoekwoord</th>' + H.replace('<th>Aanvr.</th>', '') + '</tr>'
+                   + ''.join(f'<tr><th>{E(r["keys"][0])}</th>' + ''.join(f'<td class="{ads_score(r["m"][1], r["m"][2], 0)}">{x}</td>' if i == 3 else f'<td>{x}</td>'
+                                                                       for i, x in enumerate(row(r['m'], 0)[:5])) + '</tr>' for r in kw) + '</table></div>')
+    out.append('</section>')
+    return ''.join(out)
+
+
 # ---------------- AI-zichtbaarheid ----------------
 def ai_metingen():
     return [json.load(open(f, encoding='utf-8')) for f in sorted(glob.glob(os.path.join(MET, 'ai-*.json')))]
@@ -325,7 +446,7 @@ def merk(g):
 
 
 # ---------------- dashboard ----------------
-def dashboard(g, R, a=None):
+def dashboard(g, R, a=None, ad=None):
     today = dt.date.today().strftime('%d-%m-%Y')
     parts = [f'<header><h1>Statistieken escapegamethehunt.nl</h1><p class="muted">Bijgewerkt op {today}. Search Console loopt 2 à 3 dagen achter; posities worden wekelijks gemeten (mobiel, vanaf het centrum van elke stad, top 30).</p></header>']
     # KPI
@@ -347,6 +468,7 @@ def dashboard(g, R, a=None):
     else:
         parts.append('<section><h2>Search Console</h2><p class="muted">Search Console is nog niet gekoppeld aan dit dashboard. Zodra de sleutel is ingesteld, verschijnen hier klikken, vertoningen, posities en kansen.</p></section>')
     parts.append(ga_section(a))
+    parts.append(ads_section(ad))
     parts.append(ai_section(ai_metingen()))
     # posities overzicht in de tijd
     dates = sorted(R)
@@ -445,6 +567,7 @@ td.top{background:#d9f2dc}td.ok{background:#fff3c4}td.low{background:#fde3cf}.hi
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}@media(max-width:760px){.two{grid-template-columns:1fr}}
 .chart{width:100%;height:auto}.chart .grid{stroke:#eef1f4}.chart .ax{font-size:11px;fill:#5a6878}.legend{display:flex;gap:16px;font-size:.85rem;margin-bottom:8px}.leg i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
 table.small{width:auto;margin-top:8px;font-size:.9rem}
+table.ads td{white-space:nowrap}table.ads th{white-space:nowrap}
 tr.done td{color:#5a6878}.check{color:#2e7d32;font-weight:700;font-size:1.1rem}
 #lock{max-width:380px;margin:12vh auto;background:#fff;border:1px solid #dbe2e9;border-radius:10px;padding:24px;text-align:center}#lock input{width:100%;padding:10px;font-size:1rem;margin:12px 0;border:1px solid #dbe2e9;border-radius:6px}#lock button{background:#f29222;border:0;color:#fff;padding:10px 18px;border-radius:6px;font-weight:700;cursor:pointer}'''
 
@@ -563,8 +686,9 @@ def push():
     if not g('diff', '--cached', '--quiet').returncode:
         print('Geen wijzigingen om te pushen'); return
     g('commit', '-m', f'Statistieken bijgewerkt {dt.date.today()}')
-    g('pull', '--rebase', 'origin', 'claude/redesign')
-    r = g('push', 'origin', 'claude/redesign')
+    # GitHub Pages publiceert sinds 10 oktober 2026 vanaf main
+    g('pull', '--rebase', '--autostash', 'origin', 'main')
+    r = g('push', 'origin', 'HEAD:main')
     print('Push:', 'ok' if r.returncode == 0 else r.stderr[-300:])
 
 
@@ -581,10 +705,11 @@ if __name__ == '__main__':
     g = gsc_fetch(c) if a_.gsc else None
     g = g or gsc_latest()
     a = (ga_fetch(c) if a_.gsc else None) or ga_latest()
+    ad = (ads_fetch(c) if a_.gsc else None) or ads_latest()
     R = rankings()
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, 'w', encoding='utf-8', newline='\n') as fh:
-        fh.write(page(dashboard(g, R, a), c['wachtwoord']))
+        fh.write(page(dashboard(g, R, a, ad), c['wachtwoord']))
     print('Dashboard:', OUT)
     if a_.mail:
         send(c, email_html(g, R, a))
