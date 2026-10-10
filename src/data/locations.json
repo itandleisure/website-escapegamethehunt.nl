@@ -255,6 +255,17 @@
   "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-alkmaar"
  },
  {
+  "slug": "hilversum",
+  "name": "Hilversum",
+  "province": "Noord-Holland",
+  "lat": 52.2236,
+  "lng": 5.1765,
+  "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-hilversum/",
+  "start": "",
+  "image": "",
+  "hero": "/assets/uploads/2026/10/the-hunt-hilversum-groep-1600.jpg"
+ },
+ {
   "slug": "rotterdam",
   "name": "Rotterdam",
   "province": "Zuid-Holland",

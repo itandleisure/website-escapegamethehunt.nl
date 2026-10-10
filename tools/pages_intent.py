@@ -141,7 +141,7 @@ def teamuitje():
 
 {section('Programma', 'Zo ziet jullie teamuitje eruit', f'<div class="pricing">{programme("team")}{price_line()}</div>')}
 
-{cities_block('Teamuitje in 33 steden', 'We spelen overal waar we een speelveld kunnen maken. Kies jullie stad voor de startlocatie en een voorbeeldprogramma.', ('teamuitje', 'bedrijfsuitje', 'bedrijfsfeest', 'groepsuitje', 'groepsactiviteit'))}
+{cities_block(f'Teamuitje in {len(LOCS)} steden', 'We spelen overal waar we een speelveld kunnen maken. Kies jullie stad voor de startlocatie en een voorbeeldprogramma.', ('teamuitje', 'bedrijfsuitje', 'bedrijfsfeest', 'groepsuitje', 'groepsactiviteit'))}
 
 {section('Veelgestelde vragen', 'Vragen over een teamuitje met The Hunt', faq_block(TEAM_FAQ), 'section paper')}
 
@@ -186,7 +186,7 @@ def vrijgezellenfeest():
 
 {section('Programma', 'Zo ziet jullie vrijgezellenfeest eruit', f'<div class="pricing">{programme("vrijgezellen")}{price_line("particulier")}</div>')}
 
-{cities_block('Vrijgezellenfeest in 33 steden', 'We spelen overal waar we een speelveld kunnen maken. Kies de stad voor jullie vrijgezellenfeest.', ('vrijgezellen',))}
+{cities_block(f'Vrijgezellenfeest in {len(LOCS)} steden', 'We spelen overal waar we een speelveld kunnen maken. Kies de stad voor jullie vrijgezellenfeest.', ('vrijgezellen',))}
 
 {section('Veelgestelde vragen', 'Vragen over een vrijgezellenfeest met The Hunt', faq_block(VRIJ_FAQ), 'section paper')}
 
