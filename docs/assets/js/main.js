@@ -95,6 +95,7 @@
         var ja = b.getAttribute('data-cookie') === 'ja';
         try { localStorage.setItem('cookiekeuze-v2', ja ? 'ja' : 'nee'); } catch (e) {}
         if (window.gtag) { var g = ja ? 'granted' : 'denied'; gtag('consent', 'update', { analytics_storage: g, ad_storage: g, ad_user_data: g }); }
+        if (window.clarity) { clarity('consentv2', { ad_Storage: 'denied', analytics_Storage: ja ? 'granted' : 'denied' }); }
         bar.hidden = true;
       });
     });
