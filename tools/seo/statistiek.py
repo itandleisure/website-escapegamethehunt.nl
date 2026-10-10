@@ -133,6 +133,9 @@ def ga_fetch(c):
                'leads_pagina': q(cur, ['pagePath'], ['eventCount'], lead, limit=50),
                'contact_nu': q(cur, ['eventName'], ['eventCount'], contact), 'contact_voor': q(prev, ['eventName'], ['eventCount'], contact),
                'contact_pagina': q(cur, ['eventName', 'pagePath'], ['eventCount'], contact, limit=100),
+               'landing': q(cur, ['landingPage'], ['sessions', 'bounceRate'], limit=40),
+               'landing_leads': q(cur, ['landingPage'], ['eventCount'], lead, limit=50),
+               'landing_contact': q(cur, ['landingPage'], ['eventCount'], contact, limit=50),
                'ai': q(cur, ['sessionSource'], ['sessions', 'activeUsers'],
                        {'filter': {'fieldName': 'sessionSource', 'stringFilter': {'matchType': 'PARTIAL_REGEXP', 'value': AI_BRON}}})}
         os.makedirs(DATA, exist_ok=True)
@@ -198,6 +201,21 @@ def ga_section(a):
                + tab('Contact per pagina', ['Pagina', 'Aanvragen', 'Bellen', 'Mailen'], ''.join(tr([E(p), f'{v[0]:.0f}', f'{v[1]:.0f}', f'{v[2]:.0f}']) for p, v in contact_paginas(a))
                      or '<tr><td colspan="4" class="muted">Nog geen aanvragen of klikken gemeten.</td></tr>')
                + '</div>')
+    if a.get('landing'):
+        ll = {r['keys'][0]: r['m'][0] for r in a.get('landing_leads', [])}
+        lc = {r['keys'][0]: r['m'][0] for r in a.get('landing_contact', [])}
+        rows = ''
+        for r in srt(a['landing'])[:15]:
+            p_, ses, bounce = r['keys'][0], r['m'][0], r['m'][1] * 100
+            act = ll.get(p_, 0) + lc.get(p_, 0)
+            cls_ = ' class="low"' if bounce >= 70 and ses >= 10 else ''
+            rows += (f'<tr{cls_}><td>{E(p_)}</td><td>{ses:.0f}</td><td>{bounce:.0f}%</td><td>{ll.get(p_, 0):.0f}</td>'
+                     f'<td>{lc.get(p_, 0):.0f}</td><td>{(act / ses * 100 if ses else 0):.1f}%</td></tr>')
+        out.append('<h2 style="margin-top:16px">Waar komen bezoekers binnen en haken ze af?</h2>'
+                   '<p class="muted">Per binnenkomstpagina: sessies, het deel dat zonder interactie weer weggaat (afhaken), en hoeveel '
+                   'aanvragen en klikken op bellen/mailen er daarna volgden. Oranje = 70% of meer haakt af.</p>'
+                   '<div class="scroll"><table class="ads"><tr><th>Binnenkomst</th><th>Sessies</th><th>Afhaken</th><th>Aanvragen</th>'
+                   '<th>Bellen/mailen</th><th>Contact per sessie</th></tr>' + rows + '</table></div>')
     dev = srt(a['apparaten']); tdv = sum(r['m'][0] for r in dev) or 1
     if dev:
         out.append('<p class="muted" style="margin-top:12px">Apparaten: ' + ' · '.join(f'{E(r["keys"][0])} {r["m"][0] / tdv * 100:.0f}%' for r in dev) + '</p>')
@@ -205,6 +223,125 @@ def ga_section(a):
     out.append('<p class="muted" style="margin-top:6px">Bezoekers via AI-zoekmachines (ChatGPT, Perplexity, Copilot, Gemini, Claude): '
                + (' · '.join(f'{E(r["keys"][0])} {r["m"][0]:.0f} sessies' for r in ai) if ai else 'nog geen') + '</p>')
     out.append('</section>')
+    return ''.join(out)
+
+
+# ---------------- Microsoft Clarity (heatmaps en opnames) ----------------
+CLARITY_TOKEN = os.path.join(HERE, 'clarity.token')   # alleen de API-token (Clarity, Settings, Data Export); niet in git
+
+
+def clarity_fetch():
+    """Clarity-cijfers per pagina over de laatste 24 uur. De API geeft maximaal 3 dagen terug en staat 10 verzoeken
+    per dag toe; daarom één verzoek per dag en de historie zelf opbouwen in tools/seo/data/clarity-*.json."""
+    if not os.path.exists(CLARITY_TOKEN):
+        return None
+    f = os.path.join(DATA, f'clarity-{dt.date.today()}.json')
+    if os.path.exists(f):
+        return True
+    try:
+        tok = open(CLARITY_TOKEN, encoding='utf-8-sig').read().strip()
+        req = urllib.request.Request('https://www.clarity.ms/export-data/api/v1/project-live-insights?numOfDays=1&dimension1=URL',
+                                     headers={'Authorization': 'Bearer ' + tok, 'Content-Type': 'application/json'})
+        data = json.load(urllib.request.urlopen(req, timeout=60))
+        os.makedirs(DATA, exist_ok=True)
+        json.dump(data, open(f, 'w', encoding='utf-8'))
+        print('Clarity bijgewerkt')
+        return True
+    except Exception as e:
+        print('Clarity overgeslagen:', str(e)[:200])
+        return None
+
+
+def num(v):
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return None
+
+
+def clarity_pad(u):
+    u = str(u or '').split('?')[0].split('#')[0]
+    if '://' in u:
+        u = '/' + u.split('://', 1)[1].split('/', 1)[-1] if '/' in u.split('://', 1)[1] else '/'
+    return u or '/'
+
+
+def clarity_dag(raw):
+    """{pad: {'sessies', 'scroll', 'actief', 'dood', 'boos', 'terug'}} uit één export. Velden buiten Traffic zijn niet
+    gedocumenteerd; daarom zoeken we per metric het eerste bekende veld."""
+    pg = defaultdict(dict)
+    veld = {'Traffic': [('sessies', ['totalSessionCount'])],
+            'Scroll Depth': [('scroll', ['averageScrollDepth', 'scrollDepth'])],
+            'Engagement Time': [('actief', ['activeTime', 'averageActiveTime']), ('totaal', ['totalTime'])],
+            'Dead Click Count': [('dood', ['sessionsWithMetricPercentage'])],
+            'Rage Click Count': [('boos', ['sessionsWithMetricPercentage'])],
+            'Quickback Click': [('terug', ['sessionsWithMetricPercentage'])]}
+    for m in raw or []:
+        for info in m.get('information') or []:
+            u = info.get('URL') or info.get('Url') or info.get('url')
+            if u is None:
+                continue
+            p = clarity_pad(u)
+            for key, opts in veld.get(m.get('metricName'), []):
+                for o in opts:
+                    if num(info.get(o)) is not None:
+                        pg[p][key] = pg[p].get(key, 0) + num(info[o]) if key == 'sessies' else num(info[o]); break
+    return pg
+
+
+def clarity_hist():
+    out = {}
+    for f in sorted(glob.glob(os.path.join(DATA, 'clarity-*.json'))):
+        try:
+            out[os.path.basename(f)[8:18]] = clarity_dag(json.load(open(f, encoding='utf-8')))
+        except Exception:
+            pass
+    return out
+
+
+def clarity_section(H):
+    if not H:
+        return ('<section><h2>Gedrag op de pagina (Microsoft Clarity)</h2><p class="muted">Nog geen Clarity-cijfers. Zet de API-token '
+                '(Clarity, Settings, Data Export) in tools/seo/clarity.token; daarna komen hier elke dag scrolldiepte, '
+                'boze en dode klikken per pagina bij.</p></section>')
+    dagen = sorted(H)[-28:]
+    M = ['scroll', 'actief', 'boos', 'dood']
+
+    def agg(pages):
+        """Sessies plus per metric het naar sessies gewogen gemiddelde (alleen over pagina's die die metric hebben)."""
+        s_, w = 0, {m: [0, 0] for m in M}
+        for v in pages:
+            n = v.get('sessies', 0); s_ += n
+            for m in M:
+                if m in v:
+                    w[m][0] += v[m] * n; w[m][1] += n
+        return s_, {m: (w[m][0] / w[m][1] if w[m][1] else 0) for m in M}
+    per = defaultdict(list)
+    for d in dagen:
+        for p, v in H[d].items():
+            per[p].append(v)
+    S0, G0 = agg(v for d in dagen for v in H[d].values())
+    k = lambda val, lab: f'<div><b>{val}</b><span>{lab}</span></div>'
+    out = [f'<section><h2>Gedrag op de pagina <small>Microsoft Clarity, {len(dagen)} dag(en) t/m {dagen[-1][8:10]}-{dagen[-1][5:7]}</small></h2>'
+           '<p class="muted">Scrolldiepte = hoe ver bezoekers gemiddeld naar beneden scrollen. Boze klikken = snel herhaald klikken uit '
+           'frustratie; dode klikken = klikken op iets wat niets doet. Oranje = boze of dode klikken bij 5% of meer van de sessies. '
+           'Bekijk de opnames en heatmaps van zo\'n pagina in Clarity om te zien wat er misgaat.</p><div class="kpis">'
+           + k(f'{S0:.0f}', 'sessies') + k(f'{G0["scroll"]:.0f}%', 'gem. scrolldiepte')
+           + k(f'{G0["boos"]:.1f}%', 'sessies met boze klikken') + k(f'{G0["dood"]:.1f}%', 'sessies met dode klikken') + '</div>']
+    if len(dagen) >= 2:
+        dg = {d: agg(H[d].values())[1] for d in dagen}
+        lab = lambda d: d[8:10] + '-' + d[5:7]
+        out.append('<h2 style="margin-top:16px">Trend per dag</h2>' + svg_line([('Scrolldiepte (%)', '#f29222', [(lab(d), dg[d]['scroll']) for d in dagen])])
+                   + svg_line([('Sessies met boze klikken (%)', '#c62828', [(lab(d), dg[d]['boos']) for d in dagen]),
+                               ('Sessies met dode klikken (%)', '#29394a', [(lab(d), dg[d]['dood']) for d in dagen])]))
+    tot = {p: agg(v) for p, v in per.items()}
+    rows = ''
+    for p, (n, g_) in sorted(tot.items(), key=lambda x: -x[1][0])[:20]:
+        slecht = g_['boos'] >= 5 or g_['dood'] >= 5
+        rows += (f'<tr{" class=low" if slecht and n >= 10 else ""}><td>{E(p)}</td><td>{n:.0f}</td><td>{g_["scroll"]:.0f}%</td>'
+                 f'<td>{g_["actief"]:.0f}</td><td>{g_["boos"]:.1f}%</td><td>{g_["dood"]:.1f}%</td></tr>')
+    out.append('<h2 style="margin-top:16px">Per pagina</h2><div class="scroll"><table class="ads"><tr><th>Pagina</th><th>Sessies</th>'
+               '<th>Scrolldiepte</th><th>Actieve tijd (s)</th><th>Boze klikken</th><th>Dode klikken</th></tr>' + rows + '</table></div></section>')
     return ''.join(out)
 
 
@@ -500,6 +637,7 @@ def dashboard(g, R, a=None, ad=None):
         parts.append('<section><h2>Search Console</h2><p class="muted">Search Console is nog niet gekoppeld aan dit dashboard. Zodra de sleutel is ingesteld, verschijnen hier klikken, vertoningen, posities en kansen.</p></section>')
     parts.append(ga_section(a))
     parts.append(ads_section(ad))
+    parts.append(clarity_section(clarity_hist()))
     parts.append(ai_section(ai_metingen()))
     # posities overzicht in de tijd
     dates = sorted(R)
@@ -739,6 +877,8 @@ if __name__ == '__main__':
     g = g or gsc_latest()
     a = (ga_fetch(c) if a_.gsc else None) or ga_latest()
     ad = (ads_fetch(c) if a_.gsc else None) or ads_latest()
+    if a_.gsc:
+        clarity_fetch()
     R = rankings()
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, 'w', encoding='utf-8', newline='\n') as fh:
