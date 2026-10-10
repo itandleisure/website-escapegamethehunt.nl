@@ -88,6 +88,12 @@ def gsc_latest():
 GA_PROPERTY = '493051204'
 GA_SPAM = ['trafficheap.cc', 'blog2026.online']
 AI_BRON = 'chatgpt|openai|perplexity|copilot|gemini|claude'
+CONTACT = ['klik_bellen', 'klik_mailen']  # events uit main.js: klik op telefoonnummer of e-mailadres (gemeten sinds 11-10-2026)
+
+
+def ev(rows, name):
+    """Aantal van één event uit rijen met eventName als eerste dimensie."""
+    return sum(r['m'][0] for r in rows or [] if r['keys'][0] == name)
 
 
 def ga_fetch(c):
@@ -106,6 +112,7 @@ def ga_fetch(c):
         # spamverkeer (nepbezoekers van verwijzingssites) overal uitsluiten
         nospam = {'notExpression': {'filter': {'fieldName': 'sessionSource', 'inListFilter': {'values': GA_SPAM}}}}
         lead = {'andGroup': {'expressions': [nospam, {'filter': {'fieldName': 'eventName', 'stringFilter': {'value': 'generate_lead'}}}]}}
+        contact = {'andGroup': {'expressions': [nospam, {'filter': {'fieldName': 'eventName', 'inListFilter': {'values': CONTACT}}}]}}
 
         def q(rng, dims, mets, flt=None, limit=250):
             body = {'dateRanges': [{'startDate': rng[0], 'endDate': rng[1]}], 'dimensions': [{'name': d} for d in dims],
@@ -124,6 +131,8 @@ def ga_fetch(c):
                'paginas': q(cur, ['pagePath'], ['screenPageViews', 'activeUsers'], limit=25),
                'apparaten': q(cur, ['deviceCategory'], ['activeUsers']),
                'leads_pagina': q(cur, ['pagePath'], ['eventCount'], lead, limit=50),
+               'contact_nu': q(cur, ['eventName'], ['eventCount'], contact), 'contact_voor': q(prev, ['eventName'], ['eventCount'], contact),
+               'contact_pagina': q(cur, ['eventName', 'pagePath'], ['eventCount'], contact, limit=100),
                'ai': q(cur, ['sessionSource'], ['sessions', 'activeUsers'],
                        {'filter': {'fieldName': 'sessionSource', 'stringFilter': {'matchType': 'PARTIAL_REGEXP', 'value': AI_BRON}}})}
         os.makedirs(DATA, exist_ok=True)
@@ -144,6 +153,16 @@ def ga_tot(rows, i=0):
     return rows[0]['m'][i] if rows else 0
 
 
+def contact_paginas(a):
+    """Per pagina: [aanvragen, klik bellen, klik mailen], meeste eerst."""
+    pg = defaultdict(lambda: [0, 0, 0])
+    for r in a.get('leads_pagina', []):
+        pg[r['keys'][0]][0] += r['m'][0]
+    for r in a.get('contact_pagina', []):
+        pg[r['keys'][1]][1 + CONTACT.index(r['keys'][0])] += r['m'][0]
+    return sorted(pg.items(), key=lambda x: -sum(x[1]))[:20]
+
+
 def ga_section(a):
     """Dashboarddeel voor Google Analytics."""
     if not a:
@@ -153,12 +172,14 @@ def ga_section(a):
     L1, L0 = ga_tot(a['leads_nu']), ga_tot(a['leads_voor'])
     k = lambda val, lab, arr: f'<div><b>{val}</b><span>{lab}</span>{arr}</div>'
     out = ['<section><h2>Bezoekers, laatste 28 dagen <small>Google Analytics, t.o.v. de 28 dagen daarvoor</small></h2>'
-           '<p class="muted">Tot 30 september 2026 komen de cijfers van de oude site, die veel te laag mat. De nieuwe meetcode draait sinds 5 oktober 2026: vergelijk vanaf dan. Spamverkeer (o.a. trafficheap.cc) is eruit gefilterd. Bezoekers die cookies weigeren, telt Google via een schatting mee. Aanvragen = verstuurde boekingsformulieren.</p><div class="kpis">'
+           '<p class="muted">Tot 30 september 2026 komen de cijfers van de oude site, die veel te laag mat. De nieuwe meetcode draait sinds 5 oktober 2026: vergelijk vanaf dan. Spamverkeer (o.a. trafficheap.cc) is eruit gefilterd. Bezoekers die cookies weigeren, telt Google via een schatting mee. Aanvragen = verstuurde boekingsformulieren (elk formulier is een mail naar jullie). Bellen en mailen = klikken op het telefoonnummer of e-mailadres, gemeten sinds 11 oktober 2026.</p><div class="kpis">'
            + k(f'{ga_tot(n):.0f}', 'bezoekers', arrow(ga_tot(n), ga_tot(v) or None))
            + k(f'{ga_tot(n, 1):.0f}', 'sessies', arrow(ga_tot(n, 1), ga_tot(v, 1) or None))
            + k(f'{ga_tot(n, 2):.0f}', 'paginaweergaven', arrow(ga_tot(n, 2), ga_tot(v, 2) or None))
            + k(f'{L1:.0f}', 'aanvragen', arrow(L1, L0 or None))
-           + k(f'{(L1 / ga_tot(n, 1) * 100 if ga_tot(n, 1) else 0):.1f}%', 'aanvragen per sessie', '') + '</div>']
+           + k(f'{(L1 / ga_tot(n, 1) * 100 if ga_tot(n, 1) else 0):.1f}%', 'aanvragen per sessie', '')
+           + ''.join(k(f'{ev(a.get("contact_nu"), e):.0f}', lab, arrow(ev(a.get('contact_nu'), e), ev(a.get('contact_voor'), e) or None))
+                     for e, lab in (('klik_bellen', 'klik op bellen'), ('klik_mailen', 'klik op mailen'))) + '</div>']
     wk = defaultdict(lambda: [0, 0])
     for r in a['dagen']:
         d = dt.datetime.strptime(r['keys'][0], '%Y%m%d').date(); w = d - dt.timedelta(days=d.weekday())
@@ -174,8 +195,8 @@ def ga_section(a):
                + tab('Bronnen', ['Bron', 'Sessies'], ''.join(tr([E(r['keys'][0]), f'{r["m"][0]:.0f}']) for r in srt(a['bronnen'])[:10]))
                + '</div><div class="two">'
                + tab('Meest bekeken pagina\'s', ['Pagina', 'Weergaven', 'Bezoekers'], ''.join(tr([E(r['keys'][0]), f'{r["m"][0]:.0f}', f'{r["m"][1]:.0f}']) for r in srt(a['paginas'])[:15]))
-               + tab('Aanvragen per pagina', ['Pagina', 'Aanvragen'], ''.join(tr([E(r['keys'][0]), f'{r["m"][0]:.0f}']) for r in srt(a['leads_pagina']))
-                     or '<tr><td colspan="2" class="muted">Nog geen aanvragen gemeten.</td></tr>')
+               + tab('Contact per pagina', ['Pagina', 'Aanvragen', 'Bellen', 'Mailen'], ''.join(tr([E(p), f'{v[0]:.0f}', f'{v[1]:.0f}', f'{v[2]:.0f}']) for p, v in contact_paginas(a))
+                     or '<tr><td colspan="4" class="muted">Nog geen aanvragen of klikken gemeten.</td></tr>')
                + '</div>')
     dev = srt(a['apparaten']); tdv = sum(r['m'][0] for r in dev) or 1
     if dev:
@@ -209,6 +230,7 @@ def ads_fetch(c):
     rng = (str(end - dt.timedelta(days=27)), str(end))
     ads_only = {'notExpression': {'filter': {'fieldName': 'sessionGoogleAdsCampaignName', 'inListFilter': {'values': ['(not set)', '']}}}}
     lead = {'andGroup': {'expressions': [ads_only, {'filter': {'fieldName': 'eventName', 'stringFilter': {'value': 'generate_lead'}}}]}}
+    contact = {'andGroup': {'expressions': [ads_only, {'filter': {'fieldName': 'eventName', 'inListFilter': {'values': CONTACT}}}]}}
     fouten = []
 
     def q(dims, mets, flt=None, limit=500):
@@ -236,7 +258,8 @@ def ads_fetch(c):
            'zoekwoorden': q(['sessionGoogleAdsKeyword'], ADS_M, limit=100),
            'leads_dag': q(['date'], ['eventCount'], lead, limit=100),
            'leads_campagne': q(['sessionGoogleAdsCampaignName'], ['eventCount'], lead),
-           'leads_groep': q(['sessionGoogleAdsCampaignName', 'sessionGoogleAdsAdGroupName'], ['eventCount'], lead)}
+           'leads_groep': q(['sessionGoogleAdsCampaignName', 'sessionGoogleAdsAdGroupName'], ['eventCount'], lead),
+           'contact': q(['eventName'], ['eventCount'], contact)}
     out['fouten'] = fouten
     os.makedirs(DATA, exist_ok=True)
     json.dump(out, open(os.path.join(DATA, f'ads-{out["datum"]}.json'), 'w', encoding='utf-8'))
@@ -280,11 +303,12 @@ def ads_section(ad):
     k = lambda val, lab: f'<div><b>{val}</b><span>{lab}</span></div>'
     van = dt.date.fromisoformat(ad['van']).strftime('%d-%m'); tot_ = dt.date.fromisoformat(ad['tot']).strftime('%d-%m')
     out = [f'<section><h2>Google Ads <small>{van} t/m {tot_}, vandaag is nog niet compleet</small></h2>'
-           '<p class="muted">Uit Google Analytics, dat de kosten uit Google Ads overneemt. Aanvragen = boekingsformulieren van bezoekers die via een advertentie kwamen. '
+           '<p class="muted">Uit Google Analytics, dat de kosten uit Google Ads overneemt. Aanvragen = boekingsformulieren van bezoekers die via een advertentie kwamen; bellen en mailen = hun klikken op het telefoonnummer of e-mailadres. '
            'Kleuren: groen = levert aanvragen op of CTR van 10% of meer, geel = CTR 4 tot 10%, oranje = CTR onder 4%. Pas na een paar weken zeggen de cijfers echt iets.</p><div class="kpis">'
            + k(eur(cost), 'uitgegeven') + k(f'{clicks:.0f}', 'klikken') + k(f'{impr:.0f}', 'vertoningen')
            + k(f'{(clicks / impr * 100 if impr else 0):.1f}%', 'CTR') + k(eur(cost / clicks) if clicks else '–', 'gem. klikprijs')
-           + k(f'{leads:.0f}', 'aanvragen') + k(eur(cost / leads) if leads else '–', 'kosten per aanvraag') + '</div>']
+           + k(f'{leads:.0f}', 'aanvragen') + k(eur(cost / leads) if leads else '–', 'kosten per aanvraag')
+           + k(f'{ev(ad.get("contact"), "klik_bellen"):.0f}', 'klik op bellen') + k(f'{ev(ad.get("contact"), "klik_mailen"):.0f}', 'klik op mailen') + '</div>']
     lab = lambda d: dt.datetime.strptime(d, '%Y%m%d').strftime('%d-%m')
     if len(days) >= 2:
         out.append('<h2 style="margin-top:16px">Uitgaven en klikken per dag</h2>'
@@ -628,6 +652,8 @@ def email_html(g, R, a=None):
                  + cell2(f'{ga_tot(a["nu"]):.0f}', 'bezoekers', arrow(ga_tot(a['nu']), ga_tot(a['voor']) or None))
                  + cell2(f'{ga_tot(a["nu"], 1):.0f}', 'sessies', arrow(ga_tot(a['nu'], 1), ga_tot(a['voor'], 1) or None))
                  + cell2(f'{L1:.0f}', 'aanvragen', arrow(L1, L0 or None)) + '</tr></table>')
+        if a.get('contact_nu') is not None:
+            p.append(f'<p style="font-size:13px;color:#5a6878">Klik op bellen: {ev(a["contact_nu"], "klik_bellen"):.0f} · klik op mailen: {ev(a["contact_nu"], "klik_mailen"):.0f}</p>')
         kan = sorted(a['kanalen'], key=lambda r: -r['m'][0])[:5]
         if kan:
             p.append('<p style="font-size:13px;color:#5a6878">Bronnen: ' + ' · '.join(f'{E(r["keys"][0])} {r["m"][0]:.0f}' for r in kan) + ' sessies</p>')
