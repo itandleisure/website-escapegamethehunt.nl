@@ -236,8 +236,8 @@ def clarity_fetch():
     if not os.path.exists(CLARITY_TOKEN):
         return None
     f = os.path.join(DATA, f'clarity-{dt.date.today()}.json')
-    if os.path.exists(f):
-        return True
+    if os.path.exists(f) and clarity_dag(json.load(open(f, encoding='utf-8'))):
+        return True   # vandaag al opgehaald; een lege export (nog geen bezoeken verwerkt) proberen we opnieuw
     try:
         tok = open(CLARITY_TOKEN, encoding='utf-8-sig').read().strip()
         req = urllib.request.Request('https://www.clarity.ms/export-data/api/v1/project-live-insights?numOfDays=1&dimension1=URL',
@@ -270,19 +270,20 @@ def clarity_dag(raw):
     """{pad: {'sessies', 'scroll', 'actief', 'dood', 'boos', 'terug'}} uit één export. Velden buiten Traffic zijn niet
     gedocumenteerd; daarom zoeken we per metric het eerste bekende veld."""
     pg = defaultdict(dict)
+    # metricName komt zonder spaties terug (ScrollDepth, RageClickCount, ...), de documentatie schrijft ze met spaties
     veld = {'Traffic': [('sessies', ['totalSessionCount'])],
-            'Scroll Depth': [('scroll', ['averageScrollDepth', 'scrollDepth'])],
-            'Engagement Time': [('actief', ['activeTime', 'averageActiveTime']), ('totaal', ['totalTime'])],
-            'Dead Click Count': [('dood', ['sessionsWithMetricPercentage'])],
-            'Rage Click Count': [('boos', ['sessionsWithMetricPercentage'])],
-            'Quickback Click': [('terug', ['sessionsWithMetricPercentage'])]}
+            'ScrollDepth': [('scroll', ['averageScrollDepth', 'scrollDepth'])],
+            'EngagementTime': [('actief', ['activeTime', 'averageActiveTime']), ('totaal', ['totalTime'])],
+            'DeadClickCount': [('dood', ['sessionsWithMetricPercentage'])],
+            'RageClickCount': [('boos', ['sessionsWithMetricPercentage'])],
+            'QuickbackClick': [('terug', ['sessionsWithMetricPercentage'])]}
     for m in raw or []:
         for info in m.get('information') or []:
             u = info.get('URL') or info.get('Url') or info.get('url')
             if u is None:
                 continue
             p = clarity_pad(u)
-            for key, opts in veld.get(m.get('metricName'), []):
+            for key, opts in veld.get(str(m.get('metricName')).replace(' ', ''), []):
                 for o in opts:
                     if num(info.get(o)) is not None:
                         pg[p][key] = pg[p].get(key, 0) + num(info[o]) if key == 'sessies' else num(info[o]); break
@@ -293,7 +294,9 @@ def clarity_hist():
     out = {}
     for f in sorted(glob.glob(os.path.join(DATA, 'clarity-*.json'))):
         try:
-            out[os.path.basename(f)[8:18]] = clarity_dag(json.load(open(f, encoding='utf-8')))
+            d = clarity_dag(json.load(open(f, encoding='utf-8')))
+            if d:
+                out[os.path.basename(f)[8:18]] = d
         except Exception:
             pass
     return out
