@@ -168,13 +168,17 @@ def photos(p):
 
 def about(p):
     text = f'''<img src="/assets/uploads/2026/09/the-hunt-spelleiders-1600.jpg" alt="Spelleiders van Escape Game The Hunt" width="1600" height="901">
-<h2>Wie zijn wij?</h2>
+<h2>Wie zitten er achter The Hunt?</h2>
 <p>Escape Game The Hunt is onderdeel van {SITE['company']} uit Giethoorn. Sinds 2020 laten we groepen door steden in heel Nederland vluchten voor onze Hunters.</p>
-<p>The Hunt is geïnspireerd op tv-programma's als Hunted en Jachtseizoen. Wij maakten er een spel van dat je met je eigen groep speelt: zes escape-puzzels, een GameApp en Hunters die elke tien minuten jullie locatie doorkrijgen.</p>
+<p>The Hunt is geïnspireerd op tv-programma's als Hunted en Jachtseizoen. Wij maakten er een eigen spel van: de zes escape-puzzels, de GameApp, de gametassen en het speelveld in elke stad zijn door ons bedacht en worden door ons onderhouden. The Hunt speel je dus alleen bij ons.</p>
+<h2>Ontwikkeld in Giethoorn, gespeeld in jullie stad</h2>
+<p>Vanuit Giethoorn ontwikkelen we het spel en zorgen we dat het in elke stad op dezelfde manier wordt gespeeld. De begeleiding op de dag zelf doen spelleiders uit jullie stad of regio. Zo kent de Hunter die achter jullie aan zit de stad op zijn duimpje.</p>
+<h2>Iedere spelleider door ons opgeleid</h2>
+<p>Of jullie nu in Den Haag, Groningen of Maastricht spelen: elke spelleider is door ons getraind, werkt met ons spelmateriaal en volgt hetzelfde draaiboek. In een aantal steden doen we dat samen met een vaste lokale partner, die The Hunt in zijn of haar eigen stad runt. Hetzelfde spel en dezelfde kwaliteit, met iemand die de stad echt kent.</p>
 <p>We spelen in principe overal waar we een speelveld kunnen maken. Voor grote groepen combineren we The Hunt met onze andere spellen.</p>
 <h2>Samenwerken met ons?</h2>
 <p>We zoeken <a href="/werken-bij/">spelleiders en locatie-eigenaren</a> die The Hunt in hun eigen regio willen spelen.</p>'''
-    return simple(p, body_html=text, lede='Het team achter Escape Game The Hunt.')
+    return simple(p, body_html=text, lede='Ons eigen spel, begeleid door spelleiders uit jullie stad.')
 
 
 def locations_overview(p):

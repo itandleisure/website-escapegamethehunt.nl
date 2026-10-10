@@ -77,6 +77,7 @@ def home():
 <p>Jullie worden niet opgesloten. Jullie bewegen vrij door het centrum en kiezen zelf je route, terwijl de Hunters steeds dichterbij komen. Wie slim puzzelt maar vergeet om uit het zicht te blijven, wordt alsnog gepakt.</p>
 <div class="with-phone">
 <ul class="checks">
+<li>Ons eigen spel, begeleid door spelleiders uit jullie stad of regio die door ons zijn opgeleid.</li>
 <li>Alles zit in de gametas en op je telefoon. Er liggen geen puzzels verstopt in de stad.</li>
 <li>In de GameApp zien jullie het speelveld, voeren jullie antwoorden in en kopen jullie hints.</li>
 <li>Puzzels van eenvoudig tot moeilijk, dus ook leuk met kinderen vanaf 8 jaar.</li>
@@ -164,6 +165,10 @@ def location(loc):
         {'@type': 'ListItem', 'position': 2, 'name': 'Locaties', 'item': SITE['url'] + '/escape-game-the-hunt-locaties/'},
         {'@type': 'ListItem', 'position': 3, 'name': city, 'item': SITE['url'] + loc['url']}]}
     hero_img = c['og_image'] or SITE['og_image']
+    faq = c['faq'] + [(f'Jullie zitten in Giethoorn. Wie begeleidt het spel in {city}?',
+                        f'<p>Een spelleider uit {esc(city)} of de regio. Vanuit Giethoorn ontwikkelen we het spel, maar op de dag zelf worden jullie '
+                        'begeleid door spelleiders die de stad kennen. Iedere spelleider is door ons opgeleid en werkt met ons eigen spelmateriaal '
+                        'en onze GameApp, zodat The Hunt overal even goed is.</p>')]
     body = f'''
 <section class="hero compact grid-bg">
 <div class="hero-media"><img src="/assets/uploads/2026/09/the-hunt-hunter-en-groepen-1600.jpg" alt="" fetchpriority="high" width="1600" height="1200"></div>
@@ -221,7 +226,7 @@ def location(loc):
 <section class="section paper" aria-labelledby="faq-titel">
 <div class="wrap">
 <div class="head"><span class="label">Veelgestelde vragen</span><h2 id="faq-titel">Vragen over The Hunt {esc(city)}</h2></div>
-{faq_block(c['faq'])}
+{faq_block(faq)}
 <p style="margin-top:20px"><a href="/veelgestelde-vragen/">Alle veelgestelde vragen</a>: over live Hunters, de winnaar, maatwerk, groepen en eten en drinken.</p>
 </div>
 </section>
@@ -236,7 +241,7 @@ def location(loc):
 
 {booking(city)}'''
     return page(path=loc['url'], title=c['title'], description=c['description'], body=body, og_image=hero_img,
-                schema=[crumbs, faq_schema(c['faq'])], active='/escape-game-the-hunt-locaties/')
+                schema=[crumbs, faq_schema(faq)], active='/escape-game-the-hunt-locaties/')
 
 
 def intent_links(loc):
