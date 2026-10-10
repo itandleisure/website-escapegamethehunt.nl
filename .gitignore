@@ -1,0 +1,14 @@
+.claude/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+.mcp.json
+
+# Aangeleverde originele foto's (worden verkleind naar assets/uploads)
+fotos-nieuw/
+
+# contactlijsten horeca (niet publiek)
+tools/seo/horeca/
+tools/seo/statistiek.local.json
+tools/seo/data/
