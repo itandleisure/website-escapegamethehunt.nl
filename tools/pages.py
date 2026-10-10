@@ -171,7 +171,7 @@ def location(loc):
                         'en onze GameApp, zodat The Hunt overal even goed is.</p>')]
     body = f'''
 <section class="hero compact grid-bg">
-<div class="hero-media"><img src="/assets/uploads/2026/09/the-hunt-hunter-en-groepen-1600.jpg" alt="" fetchpriority="high" width="1600" height="1200"></div>
+<div class="hero-media">{f'<img src="{loc["hero"]}" alt="Een groep speelt The Hunt in {esc(city)}"' if loc.get("hero") else '<img src="/assets/uploads/2026/09/the-hunt-hunter-en-groepen-1600.jpg" alt=""'} fetchpriority="high" width="1600" height="1200"></div>
 <div class="wrap">
 <nav class="crumbs" aria-label="Kruimelpad"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/escape-game-the-hunt-locaties/">Locaties</a><span aria-hidden="true">/</span><span>{esc(city)}</span></nav>
 <span class="coords"><span class="ping" aria-hidden="true"></span>{coords(loc)} · {esc(loc['province'])}</span>
