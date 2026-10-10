@@ -84,6 +84,14 @@
     });
   });
 
+  /* Klik op een telefoonnummer of e-mailadres meten als event in Google Analytics (klik_bellen / klik_mailen). */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href^="mailto:"]');
+    if (a && window.gtag) {
+      gtag('event', a.getAttribute('href').indexOf('tel:') === 0 ? 'klik_bellen' : 'klik_mailen', { pagina: location.pathname });
+    }
+  });
+
   /* Cookiemelding voor Google Analytics en Google Ads-conversiemeting (Consent Mode, zie GA_HEAD in tools/render.py). */
   var bar = document.getElementById('cookiebar');
   if (bar) {
