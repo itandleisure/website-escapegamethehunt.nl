@@ -30,7 +30,8 @@
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-leeuwarden/",
   "start": "Wilhelminaplein",
   "image": "/assets/uploads/2025/06/Escape-Game-The-Hunt-Leeuwarden-Locatie.png",
-  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-leeuwarden"
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-leeuwarden",
+  "hero": "/assets/uploads/2026/10/the-hunt-leeuwarden-groep-1600.jpg"
  },
  {
   "slug": "drachten",
@@ -41,7 +42,8 @@
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-drachten/",
   "start": "Thalenpark",
   "image": "/assets/uploads/2026/09/the-hunt-drachten-speluitleg-800.jpg",
-  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-drachten"
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-drachten",
+  "hero": "/assets/uploads/2026/09/the-hunt-drachten-van-braak-accountants-1600.jpg"
  },
  {
   "slug": "heerenveen",
@@ -271,7 +273,7 @@
   "lng": 4.2887,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-den-haag/",
   "start": "Nieuwe Kerk, Spui",
-  "image": "",
+  "image": "/assets/uploads/2026/10/the-hunt-den-haag-groep-chinatown-poort-800.jpg",
   "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-den-haag",
   "hero": "/assets/uploads/2026/10/the-hunt-den-haag-groep-chinatown-1600.jpg"
  },
@@ -336,7 +338,8 @@
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-tilburg/",
   "start": "Stadhuisplein",
   "image": "/assets/uploads/2026/09/the-hunt-tilburg-groep-800.jpg",
-  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-tilburg"
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-tilburg",
+  "hero": "/assets/uploads/2026/10/the-hunt-tilburg-groep-2-1600.jpg"
  },
  {
   "slug": "maastricht",
