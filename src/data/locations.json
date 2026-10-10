@@ -261,9 +261,10 @@
   "lat": 52.2236,
   "lng": 5.1765,
   "url": "/escape-game-the-hunt-locaties/escape-game-the-hunt-hilversum/",
-  "start": "",
+  "start": "Marktplein",
   "image": "",
-  "hero": "/assets/uploads/2026/10/the-hunt-hilversum-groep-1600.jpg"
+  "hero": "/assets/uploads/2026/10/the-hunt-hilversum-groep-1600.jpg",
+  "field_map": "/assets/uploads/2026/10/the-hunt-speelveld-hilversum"
  },
  {
   "slug": "rotterdam",
