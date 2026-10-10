@@ -222,8 +222,15 @@ def ads_fetch(c):
             fouten.append(f'{"/".join(dims)}: {str(e)[:120]}'); return []
         return [{'keys': [v['value'] for v in row.get('dimensionValues', [])], 'm': [float(v['value']) for v in row['metricValues']]}
                 for row in r.json().get('rows', [])]
+    def per_dag(rows):
+        # GA4 accepteert advertentiekosten niet met alleen 'date'; daarom per campagne ophalen en optellen
+        som = defaultdict(lambda: [0.0] * len(ADS_M))
+        for r in rows:
+            for i, v in enumerate(r['m']):
+                som[r['keys'][0]][i] += v
+        return [{'keys': [d], 'm': m} for d, m in sorted(som.items())]
     out = {'datum': str(dt.date.today()), 'van': rng[0], 'tot': rng[1],
-           'dagen': q(['date'], ADS_M, limit=100),
+           'dagen': per_dag(q(['date', 'sessionGoogleAdsCampaignName'], ADS_M, limit=1000)),
            'campagnes': q(['sessionGoogleAdsCampaignName'], ADS_M),
            'groepen': q(['sessionGoogleAdsCampaignName', 'sessionGoogleAdsAdGroupName'], ADS_M),
            'zoekwoorden': q(['sessionGoogleAdsKeyword'], ADS_M, limit=100),
