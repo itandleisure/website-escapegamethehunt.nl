@@ -38,7 +38,8 @@ def items():
     steden = ', '.join(f'<a href="{l["url"]}">{l["name"]}</a>' for l in LOCS)
     out += [
         {'q': 'In welke steden kun je The Hunt spelen? Waar locaties', 'a': f'<p>The Hunt speel je in {len(LOCS)} steden: {steden}. '
-         'Staat jullie stad er niet bij? Vraag het ons, op maat kan vaak meer.</p>'},
+         'Staat jullie stad er niet bij? Dan organiseren we The Hunt daar ook graag. Samen kijken we wat wel en niet kan, '
+         'en daar zitten geen extra kosten aan.</p>'},
         {'q': 'Wat kost het per persoon? Prijs grote groep tarief', 'a': f'<p>Tot en met {P["base_max_people"]} personen betaal je €{P["base"]} ex. btw '
          f'(€{P["base_incl"]} incl. btw) voor de hele groep. Daarboven is het €{P["per_person"]} ex. btw (€{P["per_person_incl"]} incl. btw) per persoon. '
          'Alle bedragen staan op de <a href="/escape-game-the-hunt-prijzen/">prijzenpagina</a>.</p>'},

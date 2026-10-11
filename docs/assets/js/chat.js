@@ -69,8 +69,8 @@
     // "Kan het in Breda?": een stad waar we (nog) niet spelen
     var m = !stad && !antwoord && norm(q).trim().match(/\bin ([a-z-]{3,}(?: [a-z-]{3,})?)$/);
     if (m && !CANON[m[1]] && STOP.indexOf(' ' + m[1] + ' ') < 0) {
-      return { q: 'Onbekende stad: ' + m[1], a: '<p>In ' + esc(m[1].replace(/\b\w/g, function (c) { return c.toUpperCase(); })) + ' hebben we (nog) geen vast speelveld. ' +
-        'We spelen in ' + data.steden.length + ' steden, zie <a href="/escape-game-the-hunt-locaties/">alle locaties</a>. Op maat kan vaak meer: laat hieronder je gegevens achter.</p>', terug: true };
+      return { q: 'Onbekende stad: ' + m[1], a: '<p>In ' + esc(m[1].replace(/\b\w/g, function (c) { return c.toUpperCase(); })) + ' hebben we nog geen vaste locatie, maar we organiseren The Hunt daar graag. ' +
+        'Samen kijken we wat wel en niet kan, en daar zitten geen extra kosten aan.</p>', terug: true };
     }
     // "Kan het in Zwolle?" zonder ander onderwerp: bevestigen met link naar de stad
     if (stad && (!antwoord || (best && !best.stad && Object.keys(w).every(function (x) { return x === 'steden'; })))) {
