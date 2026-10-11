@@ -4,6 +4,8 @@
    - Elke aanvraag via het boekingsformulier van escapegamethehunt.nl komt als nieuwe regel
      in het tabblad "Aanvragen".
    - Er gaat meteen een e-mail naar ONTVANGER (antwoorden gaat rechtstreeks naar de invuller).
+   - De chat op de website stuurt elke vraag naar het tabblad "Chatvragen" (elke ochtend een overzicht per mail)
+     en een terugbelverzoek naar "Chatcontact" (meteen een mail).
    - Regels ouder dan de bewaartermijn per tabblad worden elke nacht automatisch verwijderd (privacy).
 
    Eenmalig: kies bovenin de functie "installeer" en klik op Uitvoeren (geeft toestemming
@@ -24,7 +26,20 @@ var FORMULIEREN = {
     velden: [['naam', 'Naam'], ['type', 'Zakelijk / particulier'], ['bedrijf', 'Bedrijf'], ['email', 'E-mail'],
       ['telefoon', 'Telefoon'], ['stad', 'Stad'], ['datum', 'Gewenste datum'], ['starttijd', 'Starttijd'],
       ['personen', 'Aantal personen'], ['soort', 'Soort Hunt'], ['bericht', 'Overige informatie'],
-      ['gevonden', 'Hoe gevonden']]
+      ['gevonden', 'Hoe gevonden']],
+    verplicht: ['naam', 'email', 'telefoon', 'stad', 'datum', 'personen']
+  },
+  // Elke vraag die in de chat op de website wordt gesteld (anoniem). Geen mail per vraag, wel elke ochtend een overzicht.
+  chatvraag: {
+    tabblad: 'Chatvragen', bewaarMaanden: 12, geenMail: true,
+    velden: [['vraag', 'Vraag'], ['antwoord', 'Gegeven antwoord']],
+    verplicht: ['vraag']
+  },
+  // Bezoeker laat in de chat naam en telefoon/e-mail achter: meteen een mail
+  chatcontact: {
+    tabblad: 'Chatcontact', bewaarMaanden: 12, onderwerp: 'Terugbelverzoek via de chat',
+    velden: [['naam', 'Naam'], ['contact', 'Telefoon of e-mail'], ['vraag', 'Vraag']],
+    verplicht: ['naam', 'contact']
   }
 };
 
@@ -50,13 +65,9 @@ function doPost(e) {
   g.pagina = schoon(p.page || p.pagina, 300);
 
   // Controles
-  var fouten = [];
-  if (!g.naam) fouten.push('naam');
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(g.email)) fouten.push('email');
-  if (!g.telefoon) fouten.push('telefoon');
-  if (!g.stad) fouten.push('stad');
-  if (!g.datum) fouten.push('datum');
-  if (!g.personen) fouten.push('personen');
+  var fouten = cfg.verplicht.filter(function (k) {
+    return k === 'email' ? !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(g.email) : !g[k];
+  });
   if (fouten.length) return antwoord({ ok: false, fout: 'velden', velden: fouten });
 
   // 1. Opslaan in de spreadsheet (slot voorkomt dat twee inzendingen tegelijk botsen)
@@ -71,8 +82,9 @@ function doPost(e) {
   }
 
   // 2. E-mail sturen. Lukt dat niet, dan staat de inzending in ieder geval al in de spreadsheet.
+  if (cfg.geenMail) return antwoord({ ok: true });
   try {
-    var extra = ': ' + (g.stad || '') + ', ' + g.personen + ' pers. (' + (g.bedrijf || g.naam) + ')';
+    var extra = type === 'boeking' ? ': ' + (g.stad || '') + ', ' + g.personen + ' pers. (' + (g.bedrijf || g.naam) + ')' : ': ' + g.naam;
     stuurMail(cfg, g, cfg.onderwerp + extra);
   } catch (fout) {
     console.error('Mail versturen mislukt: ' + fout);
@@ -86,16 +98,50 @@ function doGet() {
   return ContentService.createTextOutput('Formulier-ontvanger Escape Game The Hunt is actief.');
 }
 
-// Eenmalig uitvoeren: maakt de tabbladen aan en zet de nachtelijke opruimtaak aan
+// Eenmalig uitvoeren: maakt de tabbladen aan en zet de nachtelijke opruimtaak en het ochtendoverzicht van de chat aan.
+// Opnieuw uitvoeren kan geen kwaad: bestaande taken worden niet dubbel aangemaakt.
 function installeer() {
   Object.keys(FORMULIEREN).forEach(function (k) { blad(FORMULIEREN[k]); });
-  var bestaat = ScriptApp.getProjectTriggers().some(function (t) {
-    return t.getHandlerFunction() === 'opruimen';
-  });
-  if (!bestaat) {
+  var taken = ScriptApp.getProjectTriggers().map(function (t) { return t.getHandlerFunction(); });
+  if (taken.indexOf('opruimen') < 0) {
     ScriptApp.newTrigger('opruimen').timeBased().everyDays(1).atHour(3).create();
   }
+  if (taken.indexOf('chatoverzicht') < 0) {
+    ScriptApp.newTrigger('chatoverzicht').timeBased().everyDays(1).atHour(8).create();
+  }
   opruimen();
+}
+
+// Elke ochtend: mail met alle chatvragen van gisteren. Geen vragen gesteld, dan geen mail.
+function chatoverzicht() {
+  var cfg = FORMULIEREN.chatvraag;
+  var sheet = blad(cfg);
+  var laatste = sheet.getLastRow();
+  if (laatste < 2) return;
+  var tot = new Date(); tot.setHours(0, 0, 0, 0);
+  var van = new Date(tot); van.setDate(van.getDate() - 1);
+  var rijen = sheet.getRange(2, 1, laatste - 1, 4).getValues().filter(function (r) {
+    return r[0] instanceof Date && r[0] >= van && r[0] < tot;
+  });
+  if (!rijen.length) return;
+  var zonder = rijen.filter(function (r) { return r[3] === 'geen antwoord'; }).length;
+  var tz = Session.getScriptTimeZone();
+  var html = '<p style="font-family:Arial,sans-serif;font-size:14px">' + rijen.length + ' vragen in de chat, waarvan ' + zonder +
+    ' zonder antwoord. Vragen zonder antwoord zijn ideeën voor de veelgestelde vragen.</p>' +
+    '<table cellpadding="6" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">' +
+    '<tr style="background:#F1EDE5"><th align="left">Tijd</th><th align="left">Vraag</th><th align="left">Antwoord</th><th align="left">Pagina</th></tr>' +
+    rijen.map(function (r) {
+      var geen = r[3] === 'geen antwoord';
+      return '<tr><td valign="top">' + Utilities.formatDate(r[0], tz, 'HH:mm') + '</td><td valign="top">' + html_(String(r[2]).replace(/^'/, '')) +
+        '</td><td valign="top"' + (geen ? ' style="color:#C0392B"' : '') + '>' + html_(r[3]) + '</td><td valign="top">' + html_(r[1]) + '</td></tr>';
+    }).join('') + '</table>' +
+    '<p style="font-family:Arial,sans-serif;font-size:12px;color:#777">Alle vragen staan in de Google Sheet, tabblad "' + cfg.tabblad + '".</p>';
+  MailApp.sendEmail({
+    to: ONTVANGER,
+    name: AFZENDER_NAAM,
+    subject: 'Chatvragen van ' + Utilities.formatDate(van, tz, 'd-M-yyyy') + ': ' + rijen.length + ' (' + zonder + ' zonder antwoord)',
+    htmlBody: html
+  });
 }
 
 // Verwijdert per tabblad de regels die ouder zijn dan de bewaartermijn
@@ -147,7 +193,7 @@ function stuurMail(cfg, g, onderwerp) {
     html_(SpreadsheetApp.getActiveSpreadsheet().getName()) + '", tabblad "' + cfg.tabblad + '".</p>';
   MailApp.sendEmail({
     to: ONTVANGER,
-    replyTo: g.email,
+    replyTo: /@/.test(g.email || g.contact || '') ? (g.email || g.contact) : ONTVANGER,
     name: AFZENDER_NAAM,
     subject: onderwerp,
     htmlBody: html
