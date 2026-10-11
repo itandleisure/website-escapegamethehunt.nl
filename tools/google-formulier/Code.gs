@@ -5,7 +5,7 @@
      in het tabblad "Aanvragen".
    - Er gaat meteen een e-mail naar ONTVANGER (antwoorden gaat rechtstreeks naar de invuller).
    - De chat op de website stuurt elke vraag naar het tabblad "Chatvragen" (elke ochtend een overzicht per mail)
-     en een terugbelverzoek naar "Chatcontact" (meteen een mail).
+     (meteen een mail per vraag, en elke ochtend een overzicht) en een terugbelverzoek naar "Chatcontact" (meteen een mail).
    - Regels ouder dan de bewaartermijn per tabblad worden elke nacht automatisch verwijderd (privacy).
 
    Eenmalig: kies bovenin de functie "installeer" en klik op Uitvoeren (geeft toestemming
@@ -29,9 +29,9 @@ var FORMULIEREN = {
       ['gevonden', 'Hoe gevonden']],
     verplicht: ['naam', 'email', 'telefoon', 'stad', 'datum', 'personen']
   },
-  // Elke vraag die in de chat op de website wordt gesteld (anoniem). Geen mail per vraag, wel elke ochtend een overzicht.
+  // Elke vraag die in de chat op de website wordt gesteld (anoniem): meteen een mail, en elke ochtend een overzicht.
   chatvraag: {
-    tabblad: 'Chatvragen', bewaarMaanden: 12, geenMail: true,
+    tabblad: 'Chatvragen', bewaarMaanden: 12, onderwerp: 'Chatvraag',
     velden: [['vraag', 'Vraag'], ['antwoord', 'Gegeven antwoord']],
     verplicht: ['vraag']
   },
@@ -84,7 +84,9 @@ function doPost(e) {
   // 2. E-mail sturen. Lukt dat niet, dan staat de inzending in ieder geval al in de spreadsheet.
   if (cfg.geenMail) return antwoord({ ok: true });
   try {
-    var extra = type === 'boeking' ? ': ' + (g.stad || '') + ', ' + g.personen + ' pers. (' + (g.bedrijf || g.naam) + ')' : ': ' + g.naam;
+    var extra = type === 'boeking' ? ': ' + (g.stad || '') + ', ' + g.personen + ' pers. (' + (g.bedrijf || g.naam) + ')'
+      : type === 'chatvraag' ? (g.antwoord === 'geen antwoord' ? ' zonder antwoord: ' : ': ') + g.vraag.slice(0, 80)
+      : ': ' + g.naam;
     stuurMail(cfg, g, cfg.onderwerp + extra);
   } catch (fout) {
     console.error('Mail versturen mislukt: ' + fout);
