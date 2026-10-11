@@ -128,6 +128,7 @@ def page(*, path, title, description, body, og_image=None, robots=None, schema=(
 <a class="btn btn-signal mobile-cta" href="#boeken">Boek The Hunt {ICON_ARROW}</a>
 {COOKIE_BAR}
 <script src="{asset('/assets/js/main.js')}" defer></script>
+<script src="{asset('/assets/js/chat.js')}" data-chat="{asset('/assets/chat.json')}" defer></script>
 </body>
 </html>
 '''

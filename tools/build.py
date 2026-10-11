@@ -14,6 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import pages  # noqa: E402
 import pages_more as pm  # noqa: E402
 import pages_intent  # noqa: E402
+import chat  # noqa: E402
 from render import LOCS, OUT, ROOT, SITE  # noqa: E402
 
 NEWS_PER_PAGE = 9
@@ -43,6 +44,7 @@ def op_maat(p):
 
 def main():
     written = []
+    chat.build()  # eerst: de pagina's verwijzen met een hash naar assets/chat.json
     write('/', pages.home(), written)
     for loc in LOCS:
         write(loc['url'], pages.location(loc), written)
