@@ -54,6 +54,7 @@ def main():
         fh.write(pm.not_found())  # GitHub Pages toont deze pagina bij elk onbekend adres
     write('/teamuitje-bedrijfsuitje/', pages_intent.teamuitje(), written)
     write('/vrijgezellenfeest/', pages_intent.vrijgezellenfeest(), written)
+    write('/actief-teamuitje/', pages_intent.actief_teamuitje(), written)
 
     all_p = pm.all_pages()
     for p in all_p:
