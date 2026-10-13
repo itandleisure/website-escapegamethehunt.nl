@@ -164,7 +164,7 @@ def clock(start_place=None, city=None):
     steps = [
         ('-00:15', 'Ontvangst', f'Jullie spelleider wacht {where}, legt het spel uit en verdeelt de groep in teams van ongeveer zes personen.', ''),
         ('00:00', 'Start', 'Elk team krijgt een gametas met zes escape-puzzels en toegang tot de GameApp. Jullie hebben 10 minuten voorsprong.', ''),
-        ('00:10', 'De jacht begint', 'De Hunters komen in actie. Elke 10 minuten krijgen zij jullie locatie door, en dan gaan ze op jacht.', ' class="hot"'),
+        ('00:10', 'De jacht begint', 'De live Hunters komen in actie. Elke 10 minuten krijgen zij jullie locatie door, en dan gaan ze op jacht.', ' class="hot"'),
         ('90:00', 'Extractiepunt', 'Elk goed antwoord levert een deel van de GPS-code op. Halen jullie het extractiepunt voordat de tijd op is, zonder gepakt te worden?', ''),
     ]
     photos = [('the-hunt-spelleider-uitleg-800.jpg', 'De spelleider geeft uitleg aan de groep'),
