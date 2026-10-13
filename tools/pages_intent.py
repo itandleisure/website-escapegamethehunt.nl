@@ -114,6 +114,7 @@ def teamuitje():
 <h2 id="waarom-titel">Samenwerken ontstaat vanzelf</h2>
 <p>Bij The Hunt is er geen trainer die vertelt dat jullie beter moeten communiceren. Zodra de klok loopt, ontdekken jullie dat zelf. Elk team krijgt een gametas met zes escape-puzzels en de GameApp, en moet binnen 90 minuten het geheime extractiepunt bereiken. Ondertussen krijgen de Hunters elke 10 minuten jullie locatie door.</p>
 <p>Binnen elk team komen vanzelf rollen naar voren. De puzzelaar ziet verbanden die anderen missen. De navigator kiest de route. Iemand bewaakt de tijd, een ander houdt de Hunters in de gaten. Zo heeft iedereen een rol, ook collega’s die niet van rennen houden.</p>
+<p>Zoeken jullie vooral iets waarbij je in beweging bent? Lees meer over The Hunt als <a href="/actief-teamuitje/">actief teamuitje</a>.</p>
 <ul class="checks">
 <li>Actief en buiten, in het centrum van de stad</li>
 <li>Meerdere teams tegen elkaar, met een winnaar aan het eind</li>
@@ -194,3 +195,76 @@ def vrijgezellenfeest():
     return page(path=path, title='Vrijgezellenfeest | Outdoor escape game The Hunt',
                 description='Origineel en actief vrijgezellenfeest: ontsnap in teams aan de Hunters, met vragen over de bruid of bruidegom. Vanaf 8 personen, in heel Nederland.',
                 body=body, schema=[crumb_schema(crumbs), faq_schema(VRIJ_FAQ)], active=path)
+
+
+ACTIEF_FAQ = [
+    ('Wat maakt The Hunt een actief teamuitje?',
+     '<p>Jullie zijn 90 minuten buiten in beweging: lopen, soms rennen, verstoppen en steeds weer een nieuwe route kiezen. Ondertussen lossen jullie zes escape-puzzels op. Zo zijn hoofd en benen allebei aan het werk.</p>'),
+    ('Moet iedereen sportief zijn?',
+     '<p>Nee. Rennen mag, maar hoeft niet. Jullie bepalen zelf het tempo. Wie niet van rennen houdt, puzzelt, navigeert of houdt de Hunters in de gaten. Iedereen heeft een rol.</p>'),
+    ('Hoe lang duurt het?',
+     '<p>Het spel duurt 90 minuten. Met de uitleg vooraf en de afsluiting erna ben je ongeveer 2 uur bezig.</p>'),
+    ('Met hoeveel personen kunnen we spelen?',
+     f'<p>Vanaf {P["min_people"]} personen. We verdelen de groep in teams van ongeveer zes die tegen elkaar spelen. Tot ongeveer {P["max_people"]} deelnemers is mogelijk.</p>'),
+    ('Wat kost een actief teamuitje met The Hunt?',
+     f'<p>Voor de hele groep betaal je €{P["base"]} ex. btw (€{P["base_incl"]} incl. btw), tot en met {P["base_max_people"]} personen. Alle bedragen staan op de <a href="/escape-game-the-hunt-prijzen/">prijzenpagina</a>.</p>'),
+    ('Gaat het door als het regent?',
+     '<p>Ja. Jullie blijven de hele tijd in beweging, dus met een regenjas is het prima te doen. Bij extreem weer overleggen we samen.</p>'),
+    ('Kan het ook in onze eigen stad?',
+     '<p>We spelen in vaste speelsteden door heel Nederland. Staat jullie stad er niet bij? Dan organiseren we The Hunt daar ook graag. Samen kijken we wat wel en niet kan, en daar zitten geen extra kosten aan.</p>'),
+]
+
+
+def actief_teamuitje():
+    path = '/actief-teamuitje/'
+    crumbs = [('Home', '/'), ('Actief teamuitje', path)]
+    body = f'''{hero('Actief teamuitje: The Hunt', 'Een actief teamuitje in de stad: 90 minuten buiten, in teams puzzels oplossen en uit handen blijven van echte Hunters. Voor teams van 8 tot ±200 personen, in heel Nederland.', [('Home', '/'), ('Actief teamuitje', None)], 'Actief · buiten · competitief', img='/assets/uploads/2026/09/the-hunt-hunter-en-groepen-1600.jpg')}
+
+<section class="section" aria-labelledby="actief-titel">
+<div class="wrap split">
+<div class="stack">
+<span class="label">Waarom actief</span>
+<h2 id="actief-titel">Een actief teamuitje waarbij iedereen meedoet</h2>
+<p>Bij veel actieve teamuitjes wint de sportiefste collega. Bij The Hunt niet. Jullie zijn 90 minuten buiten in beweging, maar winnen doe je met slim samenwerken. Elk team krijgt een gametas met zes escape-puzzels en de GameApp, en moet het geheime extractiepunt bereiken voordat de Hunters jullie te pakken krijgen.</p>
+<p>De Hunters krijgen elke 10 minuten jullie locatie door. Dus: snel weg, een andere straat in, ergens ongezien puzzelen en weer verder. Zo is het hele team de hele tijd bezig, met het hoofd én met de benen.</p>
+<ul class="checks">
+<li>90 minuten buiten in beweging, midden in de stad</li>
+<li>Echte Hunters die jacht op jullie maken</li>
+<li>Puzzelen, navigeren en samenwerken onder tijdsdruk</li>
+<li>Ook leuk voor collega’s die niet van sport houden</li>
+</ul>
+</div>
+<div class="media-frame"><img src="/assets/uploads/2026/09/the-hunt-hunter-en-groepen-800.jpg" alt="Een Hunter houdt de teams in de gaten" loading="lazy" width="800" height="600"></div>
+</div>
+</section>
+
+<section class="section dark grid-bg" aria-labelledby="anders-titel">
+<div class="wrap split">
+<div class="media-frame"><img src="/assets/uploads/2026/09/the-hunt-team-puzzelt-800.jpg" alt="Een team puzzelt samen tijdens The Hunt" loading="lazy" width="800" height="602"></div>
+<div class="stack">
+<span class="label">Anders dan anders</span>
+<h2 id="anders-titel">Geen bootcamp, geen escape room binnen</h2>
+<p>Een bootcamp of survival is vooral sport. Een escape room is vooral puzzelen, in een kamer. The Hunt zit daar precies tussenin: een escape game buiten, door de straten van de stad, waarbij jullie ook nog opgejaagd worden. Net als in het tv-programma Hunted, maar dan met puzzels.</p>
+<p>Omdat meerdere teams tegelijk spelen, is er aan het eind altijd een winnaar. Dat zorgt voor spanning tijdens het spel en voor verhalen bij de borrel erna.</p>
+</div>
+</div>
+</section>
+
+{section('Programma', 'Zo ziet jullie actieve teamuitje eruit', f'<div class="pricing">{programme("team")}{price_line()}</div>')}
+
+{cities_block(f'Actief teamuitje in {len(LOCS)} steden', 'Kies jullie stad voor de startlocatie en het speelveld. Staat jullie stad er niet bij? Dan komen we naar jullie toe.', ('actief', 'teamuitje'))}
+
+<section class="section tight paper" aria-labelledby="trailer-titel">
+<div class="wrap split">
+<div class="stack"><span class="label">Trailer</span><h2 id="trailer-titel">Zo ziet een Hunt eruit</h2>
+<p>Bekijk in de trailer hoe actief het spel is: puzzelen, rennen en uit het zicht blijven van de Hunters. Meer over teamuitjes en grote groepen lees je op de pagina <a href="/teamuitje-bedrijfsuitje/">teamuitje en bedrijfsuitje</a>.</p></div>
+{VIDEO}
+</div>
+</section>
+
+{section('Veelgestelde vragen', 'Vragen over een actief teamuitje', faq_block(ACTIEF_FAQ), 'section paper')}
+
+{booking()}'''
+    return page(path=path, title='Actief teamuitje | Buiten de stad in met The Hunt',
+                description=f'Actief teamuitje: 90 minuten buiten, puzzels oplossen en ontsnappen aan echte Hunters. Voor 8 tot ±200 personen, in {len(LOCS)} steden. Vanaf €{P["base"]} ex. btw.',
+                body=body, schema=[crumb_schema(crumbs), faq_schema(ACTIEF_FAQ)], active=path)
