@@ -177,6 +177,7 @@ def location(loc):
 <span class="coords"><span class="ping" aria-hidden="true"></span>{coords(loc)} · {esc(loc['province'])}</span>
 <h1>{esc(c['h1'])}</h1>
 <p class="lede">{esc(c['description'])}</p>
+<p class="hero-usp"><span class="ping" aria-hidden="true"></span>Jullie krijgen 10 minuten voorsprong, daarna gaan de live Hunters op jacht</p>
 <div class="hero-cta"><a class="btn btn-signal" href="#boeken">Boek in {esc(city)} {ICON_ARROW}</a><a class="btn btn-ghost" href="#prijzen">Bekijk prijzen</a></div>
 {facts([('90 min', 'speeltijd'), ('8+', 'personen'), ('€' + str(P['base']), 'ex. btw · t/m 17 pers.'), (esc(start if len(start) < 22 else city + ' centrum'), 'startlocatie')])}
 </div>
@@ -189,7 +190,7 @@ def location(loc):
 <div class="aside-card">
 <span class="label">The Hunt {esc(city)}</span>
 <h3>Jullie missie in {esc(city)}</h3>
-<dl><dt>Start</dt><dd>{esc(start)}</dd><dt>Speeltijd</dt><dd>90 minuten</dd><dt>Groep</dt><dd>vanaf {P['min_people']} personen</dd><dt>Prijs</dt><dd>€{P['base']} ex. btw (€{P['base_incl']} incl.) t/m {P['base_max_people']} pers.</dd></dl>
+<dl><dt>Start</dt><dd>{esc(start)}</dd><dt>Speeltijd</dt><dd>90 minuten</dd><dt>Hunters</dt><dd>Live, na 10 minuten voorsprong</dd><dt>Groep</dt><dd>vanaf {P['min_people']} personen</dd><dt>Prijs</dt><dd>€{P['base']} ex. btw (€{P['base_incl']} incl.) t/m {P['base_max_people']} pers.</dd></dl>
 <a class="btn btn-signal" href="#boeken">Vraag een offerte aan</a>
 <a class="btn btn-ghost" href="tel:{SITE['phone']}">Bel {SITE['phone_display']}</a>
 </div>
@@ -201,7 +202,7 @@ def location(loc):
 <section class="section tight paper" aria-labelledby="trailer-titel">
 <div class="wrap split">
 <div class="stack"><span class="label">Trailer</span><h2 id="trailer-titel">Zo ziet een Hunt eruit</h2>
-<p>Teams met een gametas, puzzels onder tijdsdruk en Hunters die steeds dichterbij komen. Bekijk in de trailer hoe het spel in de stad werkt.</p>
+<p>Teams met een gametas, puzzels onder tijdsdruk en live Hunters die na 10 minuten voorsprong steeds dichterbij komen. Bekijk in de trailer hoe het spel in de stad werkt.</p>
 <p><a class="btn btn-signal" href="#boeken">Boek in {esc(city)} {ICON_ARROW}</a></p></div>
 {VIDEO}
 </div>
