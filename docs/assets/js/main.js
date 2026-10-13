@@ -16,17 +16,23 @@
     });
   }
 
-  /* Trailer: Vimeo laadt pas na een klik, zodat er zonder klik geen verbinding met Vimeo is. */
-  document.querySelectorAll('.trailer[data-vimeo]').forEach(function (box) {
+  /* Trailer: eigen mp4, pas geladen na een klik. play() direct in de klik, zodat hij ook op iPhone meteen met geluid start. */
+  document.querySelectorAll('.trailer[data-video]').forEach(function (box) {
     box.querySelector('.play').addEventListener('click', function () {
-      var f = document.createElement('iframe');
-      f.src = 'https://player.vimeo.com/video/' + box.getAttribute('data-vimeo') + '?dnt=1&autoplay=1';
-      f.title = 'Trailer Escape Game The Hunt';
-      f.allow = 'autoplay; fullscreen; picture-in-picture';
-      f.allowFullscreen = true;
+      var img = box.querySelector('img');
+      var v = document.createElement('video');
+      v.src = box.getAttribute('data-video');
+      v.controls = true;
+      v.playsInline = true;
+      v.preload = 'auto';
+      if (img) v.poster = img.currentSrc || img.src;
+      v.setAttribute('title', 'Trailer Escape Game The Hunt');
       box.innerHTML = '';
-      box.appendChild(f);
+      box.appendChild(v);
       box.classList.add('playing');
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});  // lukt automatisch starten niet, dan staat de play-knop van de speler klaar
+      if (window.gtag) gtag('event', 'trailer_play', { pagina: location.pathname });
     });
   });
 

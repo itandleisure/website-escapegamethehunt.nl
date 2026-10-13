@@ -418,3 +418,4 @@ fieldset.field{border:0;padding:0;margin:0}
 
 /* stadspagina: live Hunters en voorsprong onder de intro */
 .hero-usp{display:flex;width:fit-content;max-width:100%;align-items:center;gap:10px;margin:4px 0 0;font-weight:700;color:var(--white);background:rgba(20,30,41,.55);border:1px solid var(--line-dark);border-radius:999px;padding:8px 16px;font-size:.95rem}
+.trailer video{object-fit:contain;background:#000}
