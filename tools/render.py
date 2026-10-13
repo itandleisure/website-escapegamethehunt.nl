@@ -36,13 +36,13 @@ def jsonld(data):
     return '<script type="application/ld+json">%s</script>' % json.dumps(data, ensure_ascii=False).replace('</', '<\\/')
 
 
-# Gestructureerde gegevens voor de trailer (Vimeo 1113340430), alleen op pagina's waar de trailer staat.
+# Gestructureerde gegevens voor de trailer (eigen mp4), alleen op pagina's waar de trailer staat.
 # uploadDate met tijdzone: Google meldt anders "Er ontbreekt een tijdzone in uploadDate".
 VIDEO_SCHEMA = {'@context': 'https://schema.org', '@type': 'VideoObject', 'name': 'Escape Game The Hunt - Promo',
                 'description': 'Trailer van Escape Game The Hunt: teams lossen in de binnenstad puzzels op en ontsnappen aan de Hunters.',
-                'thumbnailUrl': 'https://i.vimeocdn.com/video/2051834318-7a62b31dd1439b5a57ba899f6752b2b1629cad86723c7db274d50cbc5ab6ee37-d_1280x720',
+                'thumbnailUrl': 'https://escapegamethehunt.nl/assets/uploads/2026/09/the-hunt-team-puzzelt-1600.jpg',
                 'uploadDate': '2025-08-26T14:48:16+00:00', 'duration': 'PT1M9S',
-                'embedUrl': 'https://player.vimeo.com/video/1113340430', 'publisher': {'@id': 'https://escapegamethehunt.nl/#organization'}}
+                'contentUrl': 'https://escapegamethehunt.nl/assets/video/the-hunt-trailer-720p.mp4', 'publisher': {'@id': 'https://escapegamethehunt.nl/#organization'}}
 
 GA_ID = 'G-X9PCZEFQ8E'
 ADS_ID = 'AW-17938866567'      # Google Ads: conversiemeting voor de campagnes
@@ -110,7 +110,7 @@ def page(*, path, title, description, body, og_image=None, robots=None, schema=(
 <link rel="stylesheet" href="{asset('/assets/css/style.css')}">
 {GA_HEAD}
 {head_extra}{jsonld(org)}
-{''.join(jsonld(s) for s in schema)}{jsonld(VIDEO_SCHEMA) if 'data-vimeo="1113340430"' in body else ''}
+{''.join(jsonld(s) for s in schema)}{jsonld(VIDEO_SCHEMA) if 'data-video="/assets/video/the-hunt-trailer-720p.mp4"' in body else ''}
 </head>
 <body>
 <a class="skip" href="#inhoud">Naar de inhoud</a>
