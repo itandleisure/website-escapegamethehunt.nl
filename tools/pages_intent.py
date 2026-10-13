@@ -218,7 +218,7 @@ ACTIEF_FAQ = [
 def actief_teamuitje():
     path = '/actief-teamuitje/'
     crumbs = [('Home', '/'), ('Actief teamuitje', path)]
-    body = f'''{hero('Actief teamuitje: The Hunt', 'Een actief teamuitje in de stad: 90 minuten buiten, in teams puzzels oplossen en uit handen blijven van echte Hunters. Voor teams van 8 tot ±200 personen, in heel Nederland.', [('Home', '/'), ('Actief teamuitje', None)], 'Actief · buiten · competitief', img='/assets/uploads/2026/09/the-hunt-hunter-en-groepen-1600.jpg')}
+    body = f'''{hero('Actief teamuitje: The Hunt', 'Een actief teamuitje in de stad: 90 minuten buiten, in teams puzzels oplossen en uit handen blijven van live Hunters. Jullie krijgen 10 minuten voorsprong, daarna begint de jacht. Voor teams van 8 tot ±200 personen.', [('Home', '/'), ('Actief teamuitje', None)], 'Actief · buiten · competitief', img='/assets/uploads/2026/09/the-hunt-hunter-en-groepen-1600.jpg')}
 
 <section class="section" aria-labelledby="actief-titel">
 <div class="wrap split">
@@ -226,10 +226,10 @@ def actief_teamuitje():
 <span class="label">Waarom actief</span>
 <h2 id="actief-titel">Een actief teamuitje waarbij iedereen meedoet</h2>
 <p>Bij veel actieve teamuitjes wint de sportiefste collega. Bij The Hunt niet. Jullie zijn 90 minuten buiten in beweging, maar winnen doe je met slim samenwerken. Elk team krijgt een gametas met zes escape-puzzels en de GameApp, en moet het geheime extractiepunt bereiken voordat de Hunters jullie te pakken krijgen.</p>
-<p>De Hunters krijgen elke 10 minuten jullie locatie door. Dus: snel weg, een andere straat in, ergens ongezien puzzelen en weer verder. Zo is het hele team de hele tijd bezig, met het hoofd én met de benen.</p>
+<p>Jullie krijgen 10 minuten voorsprong. Daarna gaan de live Hunters op jacht: echte mensen, geen figuren in een app. Ze krijgen elke 10 minuten jullie locatie door. Dus: snel weg, een andere straat in, ergens ongezien puzzelen en weer verder. Zo is het hele team de hele tijd bezig, met het hoofd én met de benen.</p>
 <ul class="checks">
 <li>90 minuten buiten in beweging, midden in de stad</li>
-<li>Echte Hunters die jacht op jullie maken</li>
+<li>Live Hunters die jacht op jullie maken, na 10 minuten voorsprong</li>
 <li>Puzzelen, navigeren en samenwerken onder tijdsdruk</li>
 <li>Ook leuk voor collega’s die niet van sport houden</li>
 </ul>
@@ -266,5 +266,5 @@ def actief_teamuitje():
 
 {booking()}'''
     return page(path=path, title='Actief teamuitje | Buiten de stad in met The Hunt',
-                description=f'Actief teamuitje: 90 minuten buiten, puzzels oplossen en ontsnappen aan echte Hunters. Voor 8 tot ±200 personen, in {len(LOCS)} steden. Vanaf €{P["base"]} ex. btw.',
+                description=f'Actief teamuitje: 90 minuten buiten, puzzels oplossen en ontsnappen aan live Hunters, met 10 minuten voorsprong. Voor 8 tot ±200 personen, in {len(LOCS)} steden. Vanaf €{P["base"]} ex. btw.',
                 body=body, schema=[crumb_schema(crumbs), faq_schema(ACTIEF_FAQ)], active=path)
