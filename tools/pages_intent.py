@@ -148,7 +148,7 @@ def teamuitje():
 
 {booking()}'''
     return page(path=path, title='Teamuitje & bedrijfsuitje | Outdoor escape game The Hunt',
-                description='Actief teamuitje of bedrijfsuitje in de stad: los samen puzzels op en ontsnap aan de Hunters. Voor 8 tot ±200 personen, in heel Nederland. Vanaf €395.',
+                description='Actief teamuitje of bedrijfsuitje in de stad: los samen puzzels op en ontsnap aan de Hunters. Voor 8 tot ±200 personen, in heel Nederland. Vanaf €' + str(P['base']) + ' ex. btw.',
                 body=body, schema=[crumb_schema(crumbs), faq_schema(TEAM_FAQ)], active=path)
 
 
