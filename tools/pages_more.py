@@ -71,7 +71,7 @@ def facts_card(title, label, buttons):
     return f'''<div class="aside-card">
 <span class="label">{label}</span>
 <h3>{title}</h3>
-<dl><dt>Speeltijd</dt><dd>90 minuten</dd><dt>Groep</dt><dd>vanaf {P['min_people']} personen</dd><dt>Prijs</dt><dd>€{P['base']} ex. btw (€{P['base_incl']} incl.) t/m {P['base_max_people']} pers.</dd></dl>
+<dl><dt>Speeltijd</dt><dd>90 minuten</dd><dt>Groep</dt><dd>{P['min_people']} tot {P['max_people']}+ personen</dd><dt>Prijs</dt><dd>€{P['base']} ex. btw (€{P['base_incl']} incl.) t/m {P['base_max_people']} pers.</dd></dl>
 {buttons}
 </div>'''
 

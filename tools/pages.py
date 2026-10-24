@@ -45,7 +45,7 @@ def home():
 <h1>Ontsnap aan de <em>Hunters</em>. Midden in jullie stad.</h1>
 <p class="lede">The Hunt is de escape game die je buiten speelt. Los in teams zes puzzels op, kraak de GPS-code van het extractiepunt en blijf 90 minuten uit handen van de Hunters. Geïnspireerd op Hunted en Jachtseizoen.</p>
 <div class="hero-cta"><a class="btn btn-signal" href="#boeken">Boek The Hunt {ICON_ARROW}</a><a class="btn btn-ghost" href="#locaties">Kies je stad</a></div>
-{facts([('90 min', 'speeltijd'), ('8+', 'personen'), ('€' + str(P['base']), f'ex. btw · t/m {P["base_max_people"]} pers.'), ('Heel NL', 'speelgebied')])}
+{facts([('90 min', 'speeltijd'), (f'{P["min_people"]} – {P["max_people"]}+', 'personen'), ('€' + str(P['base']), f'ex. btw · t/m {P["base_max_people"]} pers.'), ('Heel NL', 'speelgebied')])}
 </div>
 </section>
 
@@ -179,7 +179,7 @@ def location(loc):
 <p class="lede">{esc(c['description'])}</p>
 <p class="hero-usp"><span class="ping" aria-hidden="true"></span>Jullie krijgen 10 minuten voorsprong, daarna gaan de live Hunters op jacht</p>
 <div class="hero-cta"><a class="btn btn-signal" href="#boeken">Boek in {esc(city)} {ICON_ARROW}</a><a class="btn btn-ghost" href="#prijzen">Bekijk prijzen</a></div>
-{facts([('90 min', 'speeltijd'), ('8+', 'personen'), ('€' + str(P['base']), f'ex. btw · t/m {P["base_max_people"]} pers.'), (esc(start if len(start) < 22 else city + ' centrum'), 'startlocatie')])}
+{facts([('90 min', 'speeltijd'), (f'{P["min_people"]} – {P["max_people"]}+', 'personen'), ('€' + str(P['base']), f'ex. btw · t/m {P["base_max_people"]} pers.'), (esc(start if len(start) < 22 else city + ' centrum'), 'startlocatie')])}
 </div>
 </section>
 
@@ -190,7 +190,7 @@ def location(loc):
 <div class="aside-card">
 <span class="label">The Hunt {esc(city)}</span>
 <h3>Jullie missie in {esc(city)}</h3>
-<dl><dt>Start</dt><dd>{esc(start)}</dd><dt>Speeltijd</dt><dd>90 minuten</dd><dt>Hunters</dt><dd>Live, na 10 minuten voorsprong</dd><dt>Groep</dt><dd>vanaf {P['min_people']} personen</dd><dt>Prijs</dt><dd>€{P['base']} ex. btw (€{P['base_incl']} incl.) t/m {P['base_max_people']} pers.</dd></dl>
+<dl><dt>Start</dt><dd>{esc(start)}</dd><dt>Speeltijd</dt><dd>90 minuten</dd><dt>Hunters</dt><dd>Live, na 10 minuten voorsprong</dd><dt>Groep</dt><dd>{P['min_people']} tot {P['max_people']}+ personen</dd><dt>Prijs</dt><dd>€{P['base']} ex. btw (€{P['base_incl']} incl.) t/m {P['base_max_people']} pers.</dd></dl>
 <a class="btn btn-signal" href="#boeken">Vraag een offerte aan</a>
 <a class="btn btn-ghost" href="tel:{SITE['phone']}">Bel {SITE['phone_display']}</a>
 </div>
