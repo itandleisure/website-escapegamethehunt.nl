@@ -29,6 +29,21 @@ KW = ['escaperoom', 'escape room', 'bedrijfsuitje', 'teamuitje', 'vrijgezellenfe
 E = html.escape
 
 
+def sleutel_uit_omgeving():
+    """In een cloudomgeving staat de serviceaccount-sleutel als base64 in GSC_SLEUTEL_B64 in plaats van als bestand.
+    Schrijf hem dan naar een tijdelijk bestand en zet GSC_SLEUTEL daarop, zodat de rest van het script niet verandert."""
+    b64 = os.environ.get('GSC_SLEUTEL_B64', '').strip()
+    if b64 and not os.environ.get('GSC_SLEUTEL'):
+        import tempfile
+        fd, pad = tempfile.mkstemp(suffix='.json')
+        with os.fdopen(fd, 'wb') as fh:
+            fh.write(base64.b64decode(b64))
+        os.environ['GSC_SLEUTEL'] = pad
+
+
+sleutel_uit_omgeving()
+
+
 def cfg():
     c = json.load(open(CFG_F, encoding='utf-8')) if os.path.exists(CFG_F) else {}
     changed = False
@@ -233,13 +248,13 @@ CLARITY_TOKEN = os.path.join(HERE, 'clarity.token')   # alleen de API-token (Cla
 def clarity_fetch():
     """Clarity-cijfers per pagina over de laatste 24 uur. De API geeft maximaal 3 dagen terug en staat 10 verzoeken
     per dag toe; daarom één verzoek per dag en de historie zelf opbouwen in tools/seo/data/clarity-*.json."""
-    if not os.path.exists(CLARITY_TOKEN):
+    if not os.path.exists(CLARITY_TOKEN) and not os.environ.get('CLARITY_TOKEN'):
         return None
     f = os.path.join(DATA, f'clarity-{dt.date.today()}.json')
     if os.path.exists(f) and clarity_dag(json.load(open(f, encoding='utf-8'))):
         return True   # vandaag al opgehaald; een lege export (nog geen bezoeken verwerkt) proberen we opnieuw
     try:
-        tok = open(CLARITY_TOKEN, encoding='utf-8-sig').read().strip()
+        tok = os.environ.get('CLARITY_TOKEN', '').strip() or open(CLARITY_TOKEN, encoding='utf-8-sig').read().strip()
         req = urllib.request.Request('https://www.clarity.ms/export-data/api/v1/project-live-insights?numOfDays=1&dimension1=URL',
                                      headers={'Authorization': 'Bearer ' + tok, 'Content-Type': 'application/json'})
         data = json.load(urllib.request.urlopen(req, timeout=60))
