@@ -10,40 +10,40 @@
   "logo": "/assets/uploads/2025/06/escape-game-the-hunt-wit-logo.png",
   "og_image": "/assets/uploads/2026/09/the-hunt-juichende-groep-1600.jpg",
   "prices": {
-    "base": 395,
-    "base_max_people": 17,
+    "base": 495,
+    "base_max_people": 20,
     "per_person": "22,50",
     "custom": 125,
     "min_people": 8,
     "max_people": 200,
     "examples": [
       [
-        13,
-        "€395",
-        "€477,95"
+        15,
+        "€495",
+        "€598,95"
       ],
       [
-        17,
-        "€395",
-        "€477,95"
+        20,
+        "€495",
+        "€598,95"
       ],
       [
-        21,
-        "€472,50",
-        "€571,73"
+        25,
+        "€607,50",
+        "€735,08"
       ],
       [
-        30,
-        "€675",
-        "€816,75"
+        40,
+        "€945",
+        "€1.143,45"
       ],
       [
-        56,
-        "€1.260",
-        "€1.524,60"
+        60,
+        "€1.395",
+        "€1.687,95"
       ]
     ],
-    "base_incl": "477,95",
+    "base_incl": "598,95",
     "per_person_incl": "27,23",
     "custom_incl": "151,25"
   },

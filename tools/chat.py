@@ -41,7 +41,7 @@ def items():
          'Staat jullie stad er niet bij? Dan organiseren we The Hunt daar ook graag. Samen kijken we wat wel en niet kan, '
          'en daar zitten geen extra kosten aan.</p>'},
         {'q': 'Wat kost het per persoon? Prijs grote groep tarief', 'a': f'<p>Tot en met {P["base_max_people"]} personen betaal je €{P["base"]} ex. btw '
-         f'(€{P["base_incl"]} incl. btw) voor de hele groep. Daarboven is het €{P["per_person"]} ex. btw (€{P["per_person_incl"]} incl. btw) per persoon. '
+         f'(€{P["base_incl"]} incl. btw) voor de hele groep. Daarboven betaal je €{P["per_person"]} ex. btw (€{P["per_person_incl"]} incl. btw) per extra persoon. '
          'Alle bedragen staan op de <a href="/escape-game-the-hunt-prijzen/">prijzenpagina</a>.</p>'},
         {'q': 'Hoe kan ik boeken of reserveren? Is er plek beschikbaar op een datum?', 'a': '<p>Vul het <a href="#boeken">aanvraagformulier</a> in met de stad, '
          'datum en het aantal personen. We laten je snel weten of het kan, meestal dezelfde werkdag. Liever bellen? '

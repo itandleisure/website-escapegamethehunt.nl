@@ -184,7 +184,7 @@ def pricing(city=None):
 <div class="amount tnum">€{P['base']}<small>ex. btw · t/m {P['base_max_people']} personen</small></div>
 <p class="price-incl">€{P['base_incl']} inclusief btw</p>
 <div class="price-rows">
-<div><span>Vanaf {P['base_max_people'] + 1} personen</span><b>€{P['per_person']} p.p. <small>(€{P['per_person_incl']} incl.)</small></b></div>
+<div><span>Per extra persoon boven de {P['base_max_people']}</span><b>€{P['per_person']} <small>(€{P['per_person_incl']} incl.)</small></b></div>
 <div><span>Opdrachten op maat voor jullie groep</span><b>+ €{P['custom']} <small>(€{P['custom_incl']} incl.)</small></b></div>
 <div><span>Groepsgrootte</span><b>{P['min_people']} tot ±{P['max_people']} personen</b></div>
 </div>
