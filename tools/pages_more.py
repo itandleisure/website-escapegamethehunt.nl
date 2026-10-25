@@ -100,7 +100,7 @@ def post(p, pages_):
 <section class="section">
 <div class="wrap article">
 <article class="prose">
-{with_field_map(city, p['body'])}
+{with_field_map(city, p['body'])}{post_faq(p)}
 </article>
 <aside class="aside" aria-label="Boeken">{card}{nl_map(city['slug']) if city else ''}</aside>
 </div>
@@ -112,7 +112,13 @@ def post(p, pages_):
            'image': SITE['url'] + (img or SITE['og_image']), 'mainEntityOfPage': SITE['url'] + p['path'],
            'publisher': {'@id': SITE['url'] + '/#organization'}}
     return page(path=p['path'], title=p['title'], description=p['description'], body=body, og_image=img or None,
-                schema=[crumb_schema(crumbs), art], active='/escape-game-the-hunt-nieuws/')
+                schema=[crumb_schema(crumbs), art] + ([faq_schema(p['faq'])] if p.get('faq') else []), active='/escape-game-the-hunt-nieuws/')
+
+
+def post_faq(p):
+    if not p.get('faq'):
+        return ''
+    return f'\n<h2>Veelgestelde vragen</h2>\n{faq_block(p["faq"])}'
 
 
 def section(label, title, inner, cls='section'):
