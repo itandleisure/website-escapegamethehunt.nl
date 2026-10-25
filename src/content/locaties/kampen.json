@@ -1,6 +1,6 @@
 {
- "title": "Escaperoom Kampen: buiten door de Hanzestad | The Hunt",
- "description": "Escape room in Kampen, maar dan buiten: speel The Hunt in de Hanzestad vanaf het Oude Raadhuisplein, tussen IJssel en Burgwal. Voor groepen vanaf 8 personen.",
+ "title": "Outdoor escaperoom Kampen vanaf {min_personen} personen, {prijs} | The Hunt",
+ "description": "Outdoor escaperoom in Kampen: ontsnap aan de Hunters door de Hanzestad. Vanaf {min_personen} personen, {prijs} ex. btw t/m {prijs_tm} personen. Groepen tot {max_personen}+. Boek nu!",
  "og_image": "/assets/uploads/2025/06/speel-nu-escape-game-the-hunt-Kampen.png",
  "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
  "published": "",

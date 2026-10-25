@@ -24,8 +24,23 @@ ICON_MENU = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-w
 ICON_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
 
 
+# Mogen in de titel en meta description staan, zodat een prijswijziging in site.json overal doorwerkt.
+PLACEHOLDERS = {'{prijs}': '€%s' % P['base'], '{prijs_tm}': str(P['base_max_people']),
+                '{min_personen}': str(P['min_people']), '{max_personen}': str(P['max_people'])}
+
+
+def fill(text):
+    for key, value in PLACEHOLDERS.items():
+        text = text.replace(key, value)
+    return text
+
+
 def content(kind, slug):
-    return json.load(open(os.path.join(ROOT, 'src', 'content', kind, slug + '.json'), encoding='utf-8'))
+    c = json.load(open(os.path.join(ROOT, 'src', 'content', kind, slug + '.json'), encoding='utf-8'))
+    for key in ('title', 'description'):
+        if isinstance(c.get(key), str):
+            c[key] = fill(c[key])
+    return c
 
 
 def coords(loc):
