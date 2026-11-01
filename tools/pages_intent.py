@@ -114,7 +114,7 @@ def teamuitje():
 <h2 id="waarom-titel">Samenwerken ontstaat vanzelf</h2>
 <p>Bij The Hunt is er geen trainer die vertelt dat jullie beter moeten communiceren. Zodra de klok loopt, ontdekken jullie dat zelf. Elk team krijgt een gametas met zes escape-puzzels en de GameApp, en moet binnen 90 minuten het geheime extractiepunt bereiken. Ondertussen krijgen de Hunters elke 10 minuten jullie locatie door.</p>
 <p>Binnen elk team komen vanzelf rollen naar voren. De puzzelaar ziet verbanden die anderen missen. De navigator kiest de route. Iemand bewaakt de tijd, een ander houdt de Hunters in de gaten. Zo heeft iedereen een rol, ook collega’s die niet van rennen houden.</p>
-<p>Zoeken jullie vooral iets waarbij je in beweging bent? Lees meer over The Hunt als <a href="/actief-teamuitje/">actief teamuitje</a>.</p>
+<p>Zoeken jullie vooral iets waarbij je in beweging bent? Lees meer over The Hunt als <a href="/actief-teamuitje/">actief teamuitje</a>. Plannen jullie een uitje rond de feestdagen? Kijk dan bij ons <a href="/kerstuitje/">kerstuitje</a>.</p>
 <ul class="checks">
 <li>Actief en buiten, in het centrum van de stad</li>
 <li>Meerdere teams tegen elkaar, met een winnaar aan het eind</li>
@@ -268,3 +268,74 @@ def actief_teamuitje():
     return page(path=path, title='Actief teamuitje | Buiten de stad in met The Hunt',
                 description=f'Actief teamuitje: 90 minuten buiten, puzzels oplossen en ontsnappen aan live Hunters, met 10 minuten voorsprong. Voor 8 tot ±200 personen, in {len(LOCS)} steden. Vanaf €{P["base"]} ex. btw.',
                 body=body, schema=[crumb_schema(crumbs), faq_schema(ACTIEF_FAQ)], active=path)
+
+
+KERST_FAQ = [
+    ('Kan The Hunt ook in december?',
+     '<p>Ja. The Hunt speelt het hele jaar door, dus ook in november en december. Jullie zijn 90 minuten in beweging, dus met een warme jas is het prima te doen. Bij extreem weer overleggen we samen.</p>'),
+    ('Kunnen we The Hunt combineren met een kerstborrel of kerstdiner?',
+     '<p>Ja, dat is de meest gekozen opzet. Na het spel lopen jullie samen naar een café of restaurant in de buurt. Die reservering doen jullie zelf; wij stemmen de starttijd van The Hunt erop af.</p>'),
+    ('Met hoeveel personen kunnen we spelen?',
+     f'<p>Vanaf {P["min_people"]} personen. We verdelen de groep in teams van ongeveer zes die tegen elkaar spelen. Tot ongeveer {P["max_people"]} deelnemers is mogelijk, dus ook met het hele bedrijf.</p>'),
+    ('Wat kost een kerstuitje met The Hunt?',
+     f'<p>Voor de hele groep betaal je €{P["base"]} ex. btw (€{P["base_incl"]} incl. btw), tot en met {P["base_max_people"]} personen. Alle bedragen staan op de <a href="/escape-game-the-hunt-prijzen/">prijzenpagina</a>.</p>'),
+    ('Hoe lang van tevoren moeten we boeken?',
+     '<p>Hoe eerder, hoe meer keus. In december willen veel bedrijven op dezelfde vrijdagen en dagen vlak voor kerst. Vraag daarom op tijd aan, dan kijken we samen welke datum en tijd kan.</p>'),
+    ('Kan het ook in onze eigen stad?',
+     '<p>We spelen in vaste speelsteden door heel Nederland. Staat jullie stad er niet bij? Dan organiseren we The Hunt daar ook graag. Samen kijken we wat wel en niet kan, en daar zitten geen extra kosten aan.</p>'),
+]
+
+
+def kerstuitje():
+    path = '/kerstuitje/'
+    crumbs = [('Home', '/'), ('Kerstuitje', path)]
+    body = f'''{hero('Kerstuitje met je team: The Hunt', 'Een kerstuitje of eindejaarsuitje waar iedereen het nog weken over heeft: 90 minuten buiten in de stad, in teams puzzels oplossen en uit handen blijven van live Hunters. Daarna samen naar de kerstborrel of het kerstdiner. Voor 8 tot ±200 personen.', [('Home', '/'), ('Kerstuitje', None)], 'Kerstuitje · eindejaarsuitje · teamuitje', img='/assets/uploads/2026/09/the-hunt-hunter-en-groepen-1600.jpg')}
+
+<section class="section" aria-labelledby="kerst-titel">
+<div class="wrap split">
+<div class="stack">
+<span class="label">Het jaar goed afsluiten</span>
+<h2 id="kerst-titel">Een kerstuitje dat niet alleen uit borrelen bestaat</h2>
+<p>Bij veel kerstuitjes zit iedereen de hele avond aan dezelfde tafel, naast dezelfde collega’s. Met The Hunt begint jullie kerstuitje met actie. Jullie worden in teams verdeeld, krijgen een gametas met zes escape-puzzels en de GameApp, en moeten het geheime extractiepunt bereiken voordat de Hunters jullie te pakken krijgen.</p>
+<p>Jullie krijgen 10 minuten voorsprong. Daarna gaan de live Hunters op jacht: echte mensen, geen figuren in een app. Na 90 minuten weten jullie welk team gewonnen heeft, en hebben jullie genoeg verhalen voor de rest van de avond.</p>
+<ul class="checks">
+<li>90 minuten buiten in de stad, ook in de winter</li>
+<li>Live Hunters die jacht op jullie maken, na 10 minuten voorsprong</li>
+<li>Collega’s van verschillende afdelingen in één team</li>
+<li>Makkelijk te combineren met een kerstborrel of kerstdiner</li>
+</ul>
+</div>
+<div class="media-frame"><img src="/assets/uploads/2026/09/the-hunt-hunter-en-groepen-800.jpg" alt="Een Hunter houdt de teams in de gaten" loading="lazy" width="800" height="600"></div>
+</div>
+</section>
+
+<section class="section dark grid-bg" aria-labelledby="plan-titel">
+<div class="wrap split">
+<div class="media-frame"><img src="/assets/uploads/2026/09/the-hunt-team-puzzelt-800.jpg" alt="Een team puzzelt samen tijdens The Hunt" loading="lazy" width="800" height="602"></div>
+<div class="stack">
+<span class="label">Op tijd plannen</span>
+<h2 id="plan-titel">December is snel vol</h2>
+<p>In december willen veel bedrijven op dezelfde dagen hun kerstuitje of eindejaarsuitje houden. Weten jullie de datum al? Vraag dan op tijd aan. Dan kijken we samen naar de starttijd, zodat jullie direct na het spel aan de borrel of het diner kunnen.</p>
+<p>Is december al te vol? Een nieuwjaarsuitje in januari werkt net zo goed, en dan begint het nieuwe jaar meteen met energie.</p>
+</div>
+</div>
+</section>
+
+{section('Programma', 'Zo ziet jullie kerstuitje eruit', f'<div class="pricing">{programme("team")}{price_line()}</div>')}
+
+{cities_block(f'Kerstuitje in {len(LOCS)} steden', 'Kies jullie stad voor de startlocatie en het speelveld. Staat jullie stad er niet bij? Dan komen we naar jullie toe.', ('teamuitje', 'bedrijfsuitje', 'bedrijfsfeest'))}
+
+<section class="section tight paper" aria-labelledby="trailer-titel">
+<div class="wrap split">
+<div class="stack"><span class="label">Trailer</span><h2 id="trailer-titel">Zo ziet een Hunt eruit</h2>
+<p>Bekijk in de trailer hoe het spel werkt. Meer over teamuitjes en grote groepen lees je op de pagina <a href="/teamuitje-bedrijfsuitje/">teamuitje en bedrijfsuitje</a>, of kijk bij een <a href="/actief-teamuitje/">actief teamuitje</a>.</p></div>
+{VIDEO}
+</div>
+</section>
+
+{section('Veelgestelde vragen', 'Vragen over een kerstuitje', faq_block(KERST_FAQ), 'section paper')}
+
+{booking()}'''
+    return page(path=path, title='Kerstuitje met je team | Eindejaarsuitje met The Hunt',
+                description=f'Kerstuitje of eindejaarsuitje: 90 minuten buiten, puzzels oplossen en ontsnappen aan live Hunters, daarna door naar de kerstborrel. Voor 8 tot ±200 personen, in {len(LOCS)} steden. Vanaf €{P["base"]} ex. btw.',
+                body=body, schema=[crumb_schema(crumbs), faq_schema(KERST_FAQ)], active=path)

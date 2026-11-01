@@ -55,6 +55,7 @@ def main():
     write('/teamuitje-bedrijfsuitje/', pages_intent.teamuitje(), written)
     write('/vrijgezellenfeest/', pages_intent.vrijgezellenfeest(), written)
     write('/actief-teamuitje/', pages_intent.actief_teamuitje(), written)
+    write('/kerstuitje/', pages_intent.kerstuitje(), written)
 
     all_p = pm.all_pages()
     for p in all_p:
