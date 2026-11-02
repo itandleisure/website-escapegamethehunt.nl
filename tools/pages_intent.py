@@ -114,7 +114,7 @@ def teamuitje():
 <h2 id="waarom-titel">Samenwerken ontstaat vanzelf</h2>
 <p>Bij The Hunt is er geen trainer die vertelt dat jullie beter moeten communiceren. Zodra de klok loopt, ontdekken jullie dat zelf. Elk team krijgt een gametas met zes escape-puzzels en de GameApp, en moet binnen 90 minuten het geheime extractiepunt bereiken. Ondertussen krijgen de Hunters elke 10 minuten jullie locatie door.</p>
 <p>Binnen elk team komen vanzelf rollen naar voren. De puzzelaar ziet verbanden die anderen missen. De navigator kiest de route. Iemand bewaakt de tijd, een ander houdt de Hunters in de gaten. Zo heeft iedereen een rol, ook collega’s die niet van rennen houden.</p>
-<p>Zoeken jullie vooral iets waarbij je in beweging bent? Lees meer over The Hunt als <a href="/actief-teamuitje/">actief teamuitje</a>. Plannen jullie een uitje rond de feestdagen? Kijk dan bij ons <a href="/kerstuitje/">kerstuitje</a>.</p>
+<p>Zoeken jullie vooral iets waarbij je in beweging bent? Lees meer over The Hunt als <a href="/actief-teamuitje/">actief teamuitje</a>. Plannen jullie een uitje rond de feestdagen? Kijk dan bij ons <a href="/kerstuitje/">kerstuitje</a>. Gaat het om het hele bedrijf? Lees dan meer over een <a href="/personeelsuitje/">personeelsuitje</a>.</p>
 <ul class="checks">
 <li>Actief en buiten, in het centrum van de stad</li>
 <li>Meerdere teams tegen elkaar, met een winnaar aan het eind</li>
@@ -339,3 +339,173 @@ def kerstuitje():
     return page(path=path, title='Kerstuitje met je team | Eindejaarsuitje met The Hunt',
                 description=f'Kerstuitje of eindejaarsuitje: 90 minuten buiten, puzzels oplossen en ontsnappen aan live Hunters, daarna door naar de kerstborrel. Voor 8 tot ±200 personen, in {len(LOCS)} steden. Vanaf €{P["base"]} ex. btw.',
                 body=body, schema=[crumb_schema(crumbs), faq_schema(KERST_FAQ)], active=path)
+
+
+def _intent_page(path, name, h1, lede, label, blocks, programma_titel, steden_titel, words, faq, title, description):
+    """Landelijke doelgroeppagina: hero, twee tekstblokken, programma, steden, trailer, FAQ en boeking."""
+    crumbs = [('Home', '/'), (name, path)]
+    (l1, t1, b1, img1, alt1), (l2, t2, b2, img2, alt2) = blocks
+    body = f'''{hero(h1, lede, [('Home', '/'), (name, None)], label, img='/assets/uploads/2026/09/the-hunt-hunter-en-groepen-1600.jpg')}
+
+<section class="section" aria-labelledby="blok1-titel">
+<div class="wrap split">
+<div class="stack">
+<span class="label">{l1}</span>
+<h2 id="blok1-titel">{t1}</h2>
+{b1}
+</div>
+<div class="media-frame"><img src="{img1}" alt="{esc(alt1)}" loading="lazy" width="800" height="600"></div>
+</div>
+</section>
+
+<section class="section dark grid-bg" aria-labelledby="blok2-titel">
+<div class="wrap split">
+<div class="media-frame"><img src="{img2}" alt="{esc(alt2)}" loading="lazy" width="800" height="600"></div>
+<div class="stack">
+<span class="label">{l2}</span>
+<h2 id="blok2-titel">{t2}</h2>
+{b2}
+</div>
+</div>
+</section>
+
+{section('Programma', programma_titel, f'<div class="pricing">{programme("team")}{price_line()}</div>')}
+
+{cities_block(steden_titel, 'Kies jullie stad voor de startlocatie en het speelveld. Staat jullie stad er niet bij? Dan komen we naar jullie toe.', words)}
+
+<section class="section tight paper" aria-labelledby="trailer-titel">
+<div class="wrap split">
+<div class="stack"><span class="label">Trailer</span><h2 id="trailer-titel">Zo ziet een Hunt eruit</h2>
+<p>Bekijk in de trailer hoe het spel werkt. Meer over teamuitjes en grote groepen lees je op de pagina <a href="/teamuitje-bedrijfsuitje/">teamuitje en bedrijfsuitje</a>.</p></div>
+{VIDEO}
+</div>
+</section>
+
+{section('Veelgestelde vragen', f'Vragen over een {name.lower()}', faq_block(faq), 'section paper')}
+
+{booking()}'''
+    return page(path=path, title=title, description=description,
+                body=body, schema=[crumb_schema(crumbs), faq_schema(faq)], active=path)
+
+
+FAQ_REGEN = ('Gaat het door als het regent?',
+             '<p>Ja. Jullie blijven de hele tijd in beweging, dus met een regenjas is het prima te doen. Bij extreem weer overleggen we samen.</p>')
+FAQ_STAD = ('Kan het ook in onze eigen stad?',
+            '<p>We spelen in vaste speelsteden door heel Nederland. Staat jullie stad er niet bij? Dan organiseren we The Hunt daar ook graag. Samen kijken we wat wel en niet kan, en daar zitten geen extra kosten aan.</p>')
+IMG_HUNTER = ('/assets/uploads/2026/09/the-hunt-hunter-en-groepen-800.jpg', 'Een Hunter houdt de teams in de gaten')
+IMG_PUZZEL = ('/assets/uploads/2026/09/the-hunt-team-puzzelt-800.jpg', 'Een team puzzelt samen tijdens The Hunt')
+IMG_UITLEG = ('/assets/uploads/2026/09/the-hunt-spelleider-uitleg-800.jpg', 'Een spelleider geeft uitleg aan een groep voor de start')
+
+
+PERSONEEL_FAQ = [
+    ('Is The Hunt geschikt voor het hele personeel?',
+     '<p>Ja. Rennen mag, maar hoeft niet. In elk team van ongeveer zes is werk voor iedereen: puzzelen, de kaart lezen, de Hunters in de gaten houden of de route kiezen. Jong of oud, sportief of niet, iedereen doet mee.</p>'),
+    ('Met hoeveel collega’s kunnen we spelen?',
+     f'<p>Vanaf {P["min_people"]} personen tot ongeveer {P["max_people"]}. Bij grote groepen spelen meerdere teams tegelijk in hetzelfde speelveld, met meer spelleiders en Hunters.</p>'),
+    ('Wat kost een personeelsuitje met The Hunt?',
+     f'<p>Tot en met {P["base_max_people"]} personen betaal je €{P["base"]} ex. btw (€{P["base_incl"]} incl. btw) voor de hele groep. Daarboven komt er €{P["per_person"]} ex. btw per extra persoon bij. Alle bedragen staan op de <a href="/escape-game-the-hunt-prijzen/">prijzenpagina</a>.</p>'),
+    ('Kunnen we afdelingen door elkaar laten spelen?',
+     '<p>Ja, dat raden we zelfs aan. Jullie bepalen zelf de teams. Gemengde teams zorgen ervoor dat collega’s die elkaar weinig zien, samen moeten samenwerken. Afdelingen tegen elkaar kan natuurlijk ook.</p>'),
+    ('Hoe combineren we het met eten of een borrel?',
+     '<p>Na het spel lopen jullie samen naar een café of restaurant in de buurt. Die reservering doen jullie zelf; wij stemmen de starttijd van The Hunt erop af.</p>'),
+    FAQ_REGEN,
+    FAQ_STAD,
+]
+
+
+def personeelsuitje():
+    blocks = [
+        ('Voor het hele personeel', 'Een personeelsuitje waar iedereen aan meedoet',
+         '''<p>Een personeelsuitje moet voor iedereen leuk zijn: de nieuwe collega en de collega die er al twintig jaar werkt, de sporter en de puzzelaar. The Hunt is een outdoor escape game in de stad waarin elk team alle soorten mensen nodig heeft.</p>
+<p>Elk team krijgt een gametas met zes escape-puzzels en de GameApp, en moet het geheime extractiepunt bereiken voordat de Hunters het team te pakken krijgen. Jullie krijgen 10 minuten voorsprong. Daarna gaan de live Hunters op jacht: echte mensen, geen figuren in een app.</p>
+<ul class="checks">
+<li>Voor 8 tot ±200 collega’s, in teams van ongeveer zes</li>
+<li>90 minuten buiten in beweging, midden in de stad</li>
+<li>Geen sportieve prestatie nodig: slim kiezen wint</li>
+<li>Makkelijk te combineren met een borrel of diner</li>
+</ul>''', *IMG_HUNTER),
+        ('Makkelijk te organiseren', 'Jullie kiezen de stad en de datum, wij regelen de rest',
+         '''<p>Wie een personeelsuitje organiseert, wil vooral dat het goed loopt. Bij The Hunt is dat ons werk. Wij zorgen voor de spelleiders, de Hunters, de gametassen en het speelveld. Jullie hoeven alleen de collega’s naar de startlocatie te krijgen.</p>
+<p>Na de aanvraag krijg je een duidelijke offerte voor de hele groep. Twee weken van tevoren ontvangen jullie alle praktische informatie, zodat je die direct kunt doorsturen naar de collega’s.</p>''', *IMG_UITLEG),
+    ]
+    return _intent_page('/personeelsuitje/', 'Personeelsuitje', 'Personeelsuitje: The Hunt',
+                        'Een personeelsuitje dat iedereen meemaakt: 90 minuten buiten in de stad, in teams puzzels oplossen en uit handen blijven van live Hunters. Voor 8 tot ±200 collega’s, in heel Nederland.',
+                        'Personeelsuitje · bedrijfsuitje · teamuitje', blocks, 'Zo ziet jullie personeelsuitje eruit',
+                        f'Personeelsuitje in {len(LOCS)} steden', ('personeelsuitje', 'teamuitje', 'bedrijfsuitje'), PERSONEEL_FAQ,
+                        'Personeelsuitje | Outdoor escape game The Hunt voor het hele team',
+                        f'Personeelsuitje voor 8 tot ±200 collega’s: 90 minuten buiten puzzelen en ontsnappen aan live Hunters, met 10 minuten voorsprong. In {len(LOCS)} steden, vanaf €{P["base"]} ex. btw.')
+
+
+LENTE_FAQ = [
+    ('Wanneer is het beste moment voor een lenteuitje?',
+     '<p>Van maart tot en met juni. De dagen worden langer, dus jullie kunnen ook later op de middag nog starten en daarna buiten op een terras verder.</p>'),
+    ('Wat kost een lenteuitje met The Hunt?',
+     f'<p>Tot en met {P["base_max_people"]} personen betaal je €{P["base"]} ex. btw (€{P["base_incl"]} incl. btw) voor de hele groep. Daarboven komt er €{P["per_person"]} ex. btw per extra persoon bij. Alle bedragen staan op de <a href="/escape-game-the-hunt-prijzen/">prijzenpagina</a>.</p>'),
+    ('Is het ook iets voor een groep vrienden of familie?',
+     f'<p>Ja. The Hunt is vanaf {P["min_people"]} personen te boeken, voor bedrijven én particulieren. Kies bij de aanvraag gewoon “Particulier”.</p>'),
+    ('Met hoeveel personen kunnen we spelen?',
+     f'<p>Vanaf {P["min_people"]} personen tot ongeveer {P["max_people"]}. We verdelen de groep in teams van ongeveer zes die tegen elkaar spelen.</p>'),
+    FAQ_REGEN,
+    FAQ_STAD,
+]
+
+
+def lenteuitje():
+    blocks = [
+        ('Het voorjaar in', 'Een lenteuitje buiten, midden in de stad',
+         '''<p>Na een lange winter binnen wil iedereen weer naar buiten. Een lenteuitje of voorjaarsuitje met The Hunt is 90 minuten buiten in beweging: in teams door de stad, puzzels oplossen en uit het zicht blijven van de Hunters.</p>
+<p>Elk team krijgt een gametas met zes escape-puzzels en de GameApp. Jullie krijgen 10 minuten voorsprong. Daarna gaan de live Hunters op jacht, en die zien elke 10 minuten waar jullie zijn.</p>
+<ul class="checks">
+<li>90 minuten buiten in de lentezon (of een lentebui)</li>
+<li>Live Hunters die jacht op jullie maken, na 10 minuten voorsprong</li>
+<li>Voor collega’s, vrienden of familie, vanaf 8 personen</li>
+<li>Daarna door naar een terras in de buurt</li>
+</ul>''', *IMG_HUNTER),
+        ('Langere dagen', 'Starten wanneer het jullie uitkomt',
+         '''<p>In het voorjaar is het langer licht, dus jullie hebben meer keus in de starttijd. Een middag met daarna een borrel, of een start na werktijd met daarna samen eten: de starttijd bepalen we samen.</p>
+<p>Weten jullie de datum al? Vraag dan op tijd aan, dan hebben jullie de meeste keus in dagen en tijden.</p>''', *IMG_PUZZEL),
+    ]
+    return _intent_page('/lenteuitje/', 'Lenteuitje', 'Lenteuitje: The Hunt',
+                        'Een lenteuitje of voorjaarsuitje buiten in de stad: 90 minuten puzzels oplossen en uit handen blijven van live Hunters. Voor collega’s, vrienden of familie, vanaf 8 personen.',
+                        'Lenteuitje · voorjaarsuitje', blocks, 'Zo ziet jullie lenteuitje eruit',
+                        f'Lenteuitje in {len(LOCS)} steden', ('teamuitje', 'bedrijfsuitje', 'activiteit'), LENTE_FAQ,
+                        'Lenteuitje | Voorjaarsuitje buiten in de stad met The Hunt',
+                        f'Lenteuitje of voorjaarsuitje: 90 minuten buiten puzzelen en ontsnappen aan live Hunters, met 10 minuten voorsprong. Vanaf 8 personen, in {len(LOCS)} steden. Vanaf €{P["base"]} ex. btw.')
+
+
+ZOMER_FAQ = [
+    ('Is het niet te warm om te spelen in de zomer?',
+     '<p>Jullie bepalen zelf het tempo en kunnen onderweg in de schaduw puzzelen. Neem water mee. Op hete dagen raden we een start later op de middag of in de vroege avond aan; de starttijd bepalen we samen.</p>'),
+    ('Kunnen we The Hunt combineren met een zomerborrel of barbecue?',
+     '<p>Ja. Na het spel lopen jullie samen naar een terras of restaurant in de buurt. Die reservering doen jullie zelf; wij stemmen de starttijd erop af.</p>'),
+    ('Wat kost een zomeruitje met The Hunt?',
+     f'<p>Tot en met {P["base_max_people"]} personen betaal je €{P["base"]} ex. btw (€{P["base_incl"]} incl. btw) voor de hele groep. Daarboven komt er €{P["per_person"]} ex. btw per extra persoon bij. Alle bedragen staan op de <a href="/escape-game-the-hunt-prijzen/">prijzenpagina</a>.</p>'),
+    ('Met hoeveel personen kunnen we spelen?',
+     f'<p>Vanaf {P["min_people"]} personen tot ongeveer {P["max_people"]}. We verdelen de groep in teams van ongeveer zes die tegen elkaar spelen.</p>'),
+    ('Is het ook iets voor een groep vrienden?',
+     f'<p>Ja. The Hunt is vanaf {P["min_people"]} personen te boeken, voor bedrijven én particulieren. Kies bij de aanvraag gewoon “Particulier”.</p>'),
+    FAQ_STAD,
+]
+
+
+def zomeruitje():
+    blocks = [
+        ('Zomer in de stad', 'Een zomeruitje met actie en een terras na afloop',
+         '''<p>Een zomeruitje hoort buiten. Met The Hunt zijn jullie 90 minuten in de stad: in teams puzzels oplossen, een route kiezen en uit handen blijven van de Hunters. Daarna schuiven jullie aan op een terras in de buurt.</p>
+<p>Elk team krijgt een gametas met zes escape-puzzels en de GameApp. Jullie krijgen 10 minuten voorsprong. Daarna gaan de live Hunters op jacht: echte mensen, geen figuren in een app.</p>
+<ul class="checks">
+<li>90 minuten buiten, midden in de stad</li>
+<li>Live Hunters die jacht op jullie maken, na 10 minuten voorsprong</li>
+<li>Voor collega’s, vrienden of familie, vanaf 8 personen</li>
+<li>Goed te combineren met een zomerborrel of diner</li>
+</ul>''', *IMG_HUNTER),
+        ('Lange zomeravonden', 'Ook na werktijd',
+         '''<p>In de zomer is het tot laat licht. Daardoor kan The Hunt ook goed na werktijd: start aan het eind van de middag en eet daarna samen in de stad. Op warme dagen is dat ook het prettigste moment om te spelen.</p>
+<p>Willen jullie nog voor de zomervakantie met het team op pad? Vraag dan op tijd aan, dan hebben jullie de meeste keus in dagen en tijden.</p>''', *IMG_PUZZEL),
+    ]
+    return _intent_page('/zomeruitje/', 'Zomeruitje', 'Zomeruitje: The Hunt',
+                        'Een zomeruitje buiten in de stad: 90 minuten puzzels oplossen en uit handen blijven van live Hunters, daarna door naar het terras. Voor collega’s, vrienden of familie, vanaf 8 personen.',
+                        'Zomeruitje · zomerborrel · teamuitje', blocks, 'Zo ziet jullie zomeruitje eruit',
+                        f'Zomeruitje in {len(LOCS)} steden', ('teamuitje', 'bedrijfsuitje', 'activiteit'), ZOMER_FAQ,
+                        'Zomeruitje | Buiten de stad in met The Hunt',
+                        f'Zomeruitje met collega’s of vrienden: 90 minuten buiten puzzelen en ontsnappen aan live Hunters, daarna het terras op. Vanaf 8 personen, in {len(LOCS)} steden. Vanaf €{P["base"]} ex. btw.')
