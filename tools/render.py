@@ -81,7 +81,7 @@ t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
 y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);}})(window,document,"clarity","script","{CLARITY_ID}");
 clarity('consentv2',{{ad_Storage:'denied',analytics_Storage:g}});
 </script>'''
-ADS_CONVERSIE_HEAD = (f"<script>gtag('event','conversion',{{send_to:'{ADS_ID}/{ADS_CONVERSIE}',value:400,currency:'EUR'}});</script>\n"
+ADS_CONVERSIE_HEAD = (f"<script>gtag('event','conversion',{{send_to:'{ADS_ID}/{ADS_CONVERSIE}',value:495,currency:'EUR'}});</script>\n"
                       if ADS_CONVERSIE else '')
 COOKIE_BAR = '''<div class="cookiebar" id="cookiebar" role="dialog" aria-live="polite" aria-label="Cookies" hidden>
 <p>We gebruiken cookies van Google en Microsoft Clarity om te zien hoe bezoekers de site gebruiken en of onze Google-advertenties tot aanvragen leiden. Geen gepersonaliseerde advertenties, geen verkoop van gegevens. <a href="/privacyverklaring/">Privacyverklaring</a></p>

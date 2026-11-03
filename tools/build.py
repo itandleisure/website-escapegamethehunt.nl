@@ -4,7 +4,7 @@ Gebruik:  python tools/build.py
 
 Schrijft elke pagina als docs/<pad>/index.html, plus sitemap.xml, robots.txt en 404.html in docs/.
 GitHub Pages publiceert alleen de map docs/; src/ en tools/ blijven zo buiten de website.
-Alleen standaard-Python nodig. Doorverwijspagina's (meta refresh) worden niet aangeraakt.
+Alleen standaard-Python nodig; met Pillow worden nieuwe foto's ook naar WebP omgezet (tools/afbeeldingen.py). Doorverwijspagina's (meta refresh) worden niet aangeraakt.
 """
 import math
 import os
@@ -15,6 +15,7 @@ import pages  # noqa: E402
 import pages_more as pm  # noqa: E402
 import pages_intent  # noqa: E402
 import chat  # noqa: E402
+import afbeeldingen  # noqa: E402
 from render import LOCS, OUT, ROOT, SITE  # noqa: E402
 
 NEWS_PER_PAGE = 9
@@ -29,6 +30,7 @@ SPECIAL = {'/escape-game-the-hunt-prijzen/': pm.prices, '/contact/': pm.contact,
 def write(path, html, written):
     fp = os.path.join(OUT, path.strip('/'), 'index.html') if path != '/' else os.path.join(OUT, 'index.html')
     os.makedirs(os.path.dirname(fp), exist_ok=True)
+    html = afbeeldingen.webp_in_html(html)
     with open(fp, 'w', encoding='utf-8', newline='\n') as fh:
         fh.write(html)
     written.append((path, 'noindex' in html[:3000]))
@@ -44,6 +46,10 @@ def op_maat(p):
 
 def main():
     written = []
+    try:  # nieuwe foto's omzetten naar WebP; zonder Pillow worden alleen de bestaande WebP's gebruikt
+        afbeeldingen.omzetten()
+    except ImportError:
+        print('Let op: Pillow ontbreekt (pip install pillow), nieuwe foto\'s krijgen geen WebP-versie.')
     chat.build()  # eerst: de pagina's verwijzen met een hash naar assets/chat.json
     write('/', pages.home(), written)
     for loc in LOCS:
@@ -51,7 +57,7 @@ def main():
     write(OVERVIEW['path'], pm.locations_overview(OVERVIEW), written)
     write('/bedankt/', pm.thanks(), written)
     with open(os.path.join(OUT, '404.html'), 'w', encoding='utf-8', newline='\n') as fh:
-        fh.write(pm.not_found())  # GitHub Pages toont deze pagina bij elk onbekend adres
+        fh.write(afbeeldingen.webp_in_html(pm.not_found()))  # GitHub Pages toont deze pagina bij elk onbekend adres
     write('/teamuitje-bedrijfsuitje/', pages_intent.teamuitje(), written)
     write('/vrijgezellenfeest/', pages_intent.vrijgezellenfeest(), written)
     write('/actief-teamuitje/', pages_intent.actief_teamuitje(), written)
