@@ -56,6 +56,7 @@ def main():
         write(loc['url'], pages.location(loc), written)
     write(OVERVIEW['path'], pm.locations_overview(OVERVIEW), written)
     write('/bedankt/', pm.thanks(), written)
+    write('/werken-bij/bedankt/', pm.thanks_apply(), written)
     with open(os.path.join(OUT, '404.html'), 'w', encoding='utf-8', newline='\n') as fh:
         fh.write(afbeeldingen.webp_in_html(pm.not_found()))  # GitHub Pages toont deze pagina bij elk onbekend adres
     write('/teamuitje-bedrijfsuitje/', pages_intent.teamuitje(), written)
@@ -74,7 +75,7 @@ def main():
             html = op_maat(p)
         elif p['path'].startswith('/werken-bij/'):
             photo = '<img src="/assets/uploads/2026/09/the-hunt-spelleider-uitleg-1600.jpg" alt="Een spelleider geeft uitleg aan de groep" width="1600" height="1173">'
-            html = pm.simple(p, form=False, body_html=photo + p['body'], extra_after=pm.apply_block())
+            html = pm.simple(p, form=False, body_html=photo + p['body'], extra_after=pm.apply_block(p['path']))
         else:
             html = SPECIAL.get(p['path'], pm.simple)(p)
         write(p['path'], html, written)
