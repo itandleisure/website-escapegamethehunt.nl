@@ -51,15 +51,12 @@ Doorverwijspagina's (met een meta refresh) laat het bouwscript met rust.
 
 ## Formulier (zelfde opzet als coworkingcompeta.com en badassrentals.nl)
 
-Het boekingsformulier werkt in twee stappen:
-
-1. **Google Sheet + e-mail.** Staat `google_form_url` in `src/data/site.json` ingevuld, dan stuurt
-   `docs/assets/js/main.js` elke aanvraag naar het Google Apps Script `tools/google-formulier/Code.gs`. Dat zet de
-   aanvraag in het tabblad "Aanvragen", mailt info@escapegamethehunt.nl (antwoorden gaat direct naar de klant) en
-   ruimt aanvragen ouder dan 12 maanden automatisch op. Daarna gaat de bezoeker naar `/bedankt/`.
-2. **FormSubmit als reserve.** Is `google_form_url` leeg of lukt Google niet, dan gaat het formulier gewoon via
-   FormSubmit (`https://formsubmit.co/info@escapegamethehunt.nl`) naar hetzelfde adres. Bij de allereerste
-   inzending stuurt FormSubmit een activatiemail naar info@; die link moet één keer worden aangeklikt.
+Het boekingsformulier stuurt elke aanvraag naar het Google Apps Script `tools/google-formulier/Code.gs`
+(adres in `google_form_url` in `src/data/site.json`, verstuurd door `docs/assets/js/main.js`). Dat zet de
+aanvraag in het tabblad "Aanvragen", mailt info@escapegamethehunt.nl (antwoorden gaat direct naar de klant) en
+ruimt aanvragen ouder dan 12 maanden automatisch op. Daarna gaat de bezoeker naar `/bedankt/`. Er is geen
+externe formulierdienst als reserve: lukt versturen niet, dan blijft alles ingevuld staan en ziet de bezoeker
+een melding met het telefoonnummer en e-mailadres.
 
 De vacaturepagina's (`/werken-bij/...`) hebben een sollicitatieformulier dat op dezelfde manier verstuurt
 (`form=sollicitatie`, tabblad "Sollicitaties", 6 maanden bewaard) en daarna naar `/werken-bij/bedankt/` gaat.

@@ -333,11 +333,8 @@ def booking(city=None):
 </ol>
 <div class="contact-lines"><a href="tel:{SITE['phone']}">{SITE['phone_display']}</a><a href="mailto:{SITE['email']}">{SITE['email']}</a></div>
 </div>
-<form class="form" data-booking data-google="{esc(SITE['google_form_url'])}" action="{SITE['formsubmit']}" method="POST">
+<form class="form" data-booking data-google="{esc(SITE['google_form_url'])}" data-next="/bedankt/" method="POST">
 <input type="hidden" name="form" value="boeking">
-<input type="hidden" name="_subject" value="Aanvraag The Hunt via escapegamethehunt.nl">
-<input type="hidden" name="_template" value="table">
-<input type="hidden" name="_next" value="{SITE['url']}/bedankt/">
 <div class="field"><label for="f-naam">Naam</label><input id="f-naam" name="naam" autocomplete="name" required></div>
 <fieldset class="field"><legend>Type aanvraag</legend><div class="choices"><label><input type="radio" name="type" value="Zakelijk" checked> Zakelijk</label><label><input type="radio" name="type" value="Particulier"> Particulier</label></div></fieldset>
 <div class="field"><label for="f-mail">E-mailadres</label><input id="f-mail" type="email" name="email" autocomplete="email" required></div>
@@ -351,6 +348,7 @@ def booking(city=None):
 <div class="field"><label for="f-bron">Hoe heb je ons gevonden? <span class="opt">(optioneel)</span></label><select id="f-bron" name="gevonden"><option value="">Kies een antwoord</option><option>Google</option><option>Via via / aanbeveling</option><option>Eerder gespeeld</option><option>Social media</option><option>Uitjessite of platform</option><option>Via Badass Games</option><option>Anders</option></select></div>
 <div class="field full"><label for="f-info">Overige informatie <span class="opt">(optioneel)</span></label><textarea id="f-info" name="bericht"></textarea></div>
 <div class="hp" aria-hidden="true"><label for="f-web">Laat dit veld leeg</label><input id="f-web" name="_honey" tabindex="-1" autocomplete="off"></div>
+<p class="form-note error full" data-form-error hidden role="alert">Versturen is niet gelukt. Probeer het nog eens, of bel <a href="tel:{SITE['phone']}">{SITE['phone_display']}</a> of mail naar <a href="mailto:{SITE['email']}">{SITE['email']}</a>.</p>
 <div class="full"><button class="btn btn-signal" type="submit">Vraag een offerte aan {ICON_ARROW}</button><p class="form-note">We gebruiken je gegevens alleen voor je aanvraag. Lees de <a href="/privacyverklaring/">privacyverklaring</a>.</p></div>
 </form>
 </div>
