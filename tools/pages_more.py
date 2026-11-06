@@ -239,11 +239,8 @@ def apply_block(path=''):
 <p>Liever eerst even bellen of mailen? Dat kan ook.</p>
 <div class="contact-lines"><a href="tel:{SITE['phone']}">{SITE['phone_display']}</a><a href="mailto:{SITE['email']}?subject=Sollicitatie%20The%20Hunt">{SITE['email']}</a></div>
 </div>
-<form class="form" data-booking data-google="{esc(SITE['google_form_url'])}" action="{SITE['formsubmit']}" method="POST">
+<form class="form" data-booking data-google="{esc(SITE['google_form_url'])}" data-next="/werken-bij/bedankt/" method="POST">
 <input type="hidden" name="form" value="sollicitatie">
-<input type="hidden" name="_subject" value="Sollicitatie The Hunt via escapegamethehunt.nl">
-<input type="hidden" name="_template" value="table">
-<input type="hidden" name="_next" value="{SITE['url']}/werken-bij/bedankt/">
 <div class="field"><label for="s-naam">Naam</label><input id="s-naam" name="naam" autocomplete="name" required></div>
 <div class="field"><label for="s-leeftijd">Leeftijd</label><input id="s-leeftijd" type="number" name="leeftijd" min="15" max="99" inputmode="numeric" required></div>
 <div class="field"><label for="s-mail">E-mailadres</label><input id="s-mail" type="email" name="email" autocomplete="email" required></div>
@@ -253,6 +250,7 @@ def apply_block(path=''):
 <div class="field"><label for="s-stad">Voorkeursstad <span class="opt">(optioneel)</span></label><input id="s-stad" name="stad" placeholder="Waar wil je The Hunt spelen?"></div>
 <div class="field full"><label for="s-motivatie">Korte motivatie</label><textarea id="s-motivatie" name="bericht" placeholder="Wat lijkt je zo leuk om bij ons aan de slag te gaan?" required></textarea></div>
 <div class="hp" aria-hidden="true"><label for="s-web">Laat dit veld leeg</label><input id="s-web" name="_honey" tabindex="-1" autocomplete="off"></div>
+<p class="form-note error full" data-form-error hidden role="alert">Versturen is niet gelukt. Probeer het nog eens, of bel <a href="tel:{SITE['phone']}">{SITE['phone_display']}</a> of mail naar <a href="mailto:{SITE['email']}">{SITE['email']}</a>.</p>
 <div class="full"><button class="btn btn-signal" type="submit">Verstuur je sollicitatie {ICON_ARROW}</button><p class="form-note">We gebruiken je gegevens alleen voor je sollicitatie. Lees de <a href="/privacyverklaring/">privacyverklaring</a>.</p></div>
 </form>
 </div></section>'''

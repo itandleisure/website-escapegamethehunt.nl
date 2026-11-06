@@ -59,26 +59,24 @@
     vids.forEach(function (v) { io.observe(v); });
   }
 
-  /* Boekingsformulier (zelfde opzet als coworkingcompeta.com en badassrentals.nl).
-     - Staat er een Google Apps Script-URL in data-google (uit "google_form_url" in src/data/site.json), dan gaat
-       de aanvraag naar die Google Sheet + e-mail en daarna naar de bedankpagina.
-     - Is die leeg of lukt het niet, dan verstuurt het formulier gewoon via FormSubmit (de action in de HTML).
-       Zo gaat er nooit een aanvraag verloren. */
+  /* Formulieren (boeking en sollicitatie).
+     De inzending gaat naar het Google Apps Script in data-google (uit "google_form_url" in src/data/site.json):
+     dat zet hem in de Google Sheet en mailt hem door. Daarna gaat de bezoeker naar de pagina in data-next.
+     Lukt versturen niet, dan blijft alles ingevuld staan en verschijnt een melding met telefoon en e-mail. */
   var opened = Date.now();
   document.querySelectorAll('form[data-booking]').forEach(function (form) {
     var google = form.getAttribute('data-google');
+    var fout = form.querySelector('[data-form-error]');
+    var btn = form.querySelector('[type=submit]');
+    function mislukt() {
+      btn.disabled = false;
+      if (fout) { fout.hidden = false; fout.scrollIntoView({ block: 'nearest' }); }
+    }
     form.addEventListener('submit', function (e) {
-      if (!form.checkValidity()) { e.preventDefault(); form.reportValidity(); return; }
-      var soort = form.querySelector('[name="form"]');
-      if (window.gtag) {
-        var stad = form.querySelector('[name="stad"]');
-        // Een sollicitatie is geen boekingsaanvraag: eigen event, zodat het niet als lead/conversie telt.
-        gtag('event', soort && soort.value === 'sollicitatie' ? 'sollicitatie' : 'generate_lead',
-          { stad: stad ? stad.value : '', pagina: location.pathname });
-      }
-      if (!google || !window.fetch || !window.URLSearchParams) { return; }
       e.preventDefault();
-      var btn = form.querySelector('[type=submit]');
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      if (fout) { fout.hidden = true; }
+      if (!google || !window.fetch || !window.URLSearchParams) { mislukt(); return; }
       btn.disabled = true;
       var data = new URLSearchParams(new FormData(form));
       data.append('pagina', location.pathname);
@@ -87,9 +85,16 @@
         .then(function (r) { return r.json(); })
         .then(function (res) {
           if (!res.ok) { throw new Error(res.fout || 'mislukt'); }
-          location.href = new URL(form.querySelector('[name="_next"]').value).pathname;
+          var soort = form.querySelector('[name="form"]');
+          if (window.gtag) {
+            var stad = form.querySelector('[name="stad"]');
+            // Een sollicitatie is geen boekingsaanvraag: eigen event, zodat het niet als lead/conversie telt.
+            gtag('event', soort && soort.value === 'sollicitatie' ? 'sollicitatie' : 'generate_lead',
+              { stad: stad ? stad.value : '', pagina: location.pathname });
+          }
+          location.href = form.getAttribute('data-next') || '/bedankt/';
         })
-        .catch(function () { form.submit(); });
+        .catch(mislukt);
     });
   });
 
