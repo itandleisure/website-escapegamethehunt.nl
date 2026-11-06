@@ -1,6 +1,6 @@
 {
- "title": "Escape Room Den Haag | Outdoor Escape Game The Hunt",
- "description": "Escape room in Den Haag, maar dan buiten: speel The Hunt in het centrum vanaf de Nieuwe Kerk, van Grote Markt tot Bierkade. Voor teamuitjes, bedrijfsuitjes en vrijgezellenfeesten vanaf 8 personen.",
+ "title": "Outdoor escape room Den Haag vanaf {min_personen} personen, {prijs} | The Hunt",
+ "description": "Outdoor escape room in Den Haag: ontsnap aan de Hunters door Chinatown. Vanaf {min_personen} personen, {prijs} ex. btw t/m {prijs_tm} personen. Groepen tot {max_personen}+. Boek nu!",
  "og_image": "/assets/uploads/2026/10/the-hunt-den-haag-groep-chinatown-1600.jpg",
  "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
  "published": "",
