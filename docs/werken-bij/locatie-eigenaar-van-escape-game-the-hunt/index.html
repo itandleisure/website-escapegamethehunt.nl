@@ -87,10 +87,28 @@ clarity('consentv2',{ad_Storage:'denied',analytics_Storage:g});
 <h3>DIT GA JIJ STRAKS OOK DOEN</h3>
 <h2>Word ook onderdeel van ons team</h2>
 <p>Vul onderstaande gegevens in en we nemen zo snel mogelijk contact met je op!</p></div></div></section>
-<section class="section dark grid-bg"><div class="wrap booking">
-<div class="stack"><span class="label">Solliciteren</span><h2>Interesse? Neem contact op</h2>
-<p class="lede">Stuur een korte motivatie en je woonplaats. We nemen snel contact met je op.</p></div>
-<div class="stack contact-lines"><a href="mailto:info@escapegamethehunt.nl?subject=Sollicitatie%20The%20Hunt">info@escapegamethehunt.nl</a><a href="tel:+31850047719">085 004 7719</a></div>
+<section class="section dark grid-bg" id="solliciteren" aria-labelledby="solliciteren-titel"><div class="wrap booking">
+<div class="stack"><span class="label">Solliciteren</span><h2 id="solliciteren-titel">Word ook onderdeel van ons team</h2>
+<p class="lede">Vul het formulier in met een korte motivatie. We nemen zo snel mogelijk contact met je op.</p>
+<p>Liever eerst even bellen of mailen? Dat kan ook.</p>
+<div class="contact-lines"><a href="tel:+31850047719">085 004 7719</a><a href="mailto:info@escapegamethehunt.nl?subject=Sollicitatie%20The%20Hunt">info@escapegamethehunt.nl</a></div>
+</div>
+<form class="form" data-booking data-google="https://script.google.com/macros/s/AKfycbz2LCc1cotFLV4PupHHmPUJQz0pERgVHVa7Yavjsfcan2l5I1tIR_-q50kggAyGxNqP/exec" action="https://formsubmit.co/info@escapegamethehunt.nl" method="POST">
+<input type="hidden" name="form" value="sollicitatie">
+<input type="hidden" name="_subject" value="Sollicitatie The Hunt via escapegamethehunt.nl">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_next" value="https://escapegamethehunt.nl/werken-bij/bedankt/">
+<div class="field"><label for="s-naam">Naam</label><input id="s-naam" name="naam" autocomplete="name" required></div>
+<div class="field"><label for="s-leeftijd">Leeftijd</label><input id="s-leeftijd" type="number" name="leeftijd" min="15" max="99" inputmode="numeric" required></div>
+<div class="field"><label for="s-mail">E-mailadres</label><input id="s-mail" type="email" name="email" autocomplete="email" required></div>
+<div class="field"><label for="s-tel">Telefoonnummer</label><input id="s-tel" type="tel" name="telefoon" autocomplete="tel" required></div>
+<fieldset class="field full"><legend>Functie</legend><div class="choices"><label><input type="radio" name="functie" value="Spelleider (bijbaan / part-time)"> Spelleider (bijbaan / part-time)</label><label><input type="radio" name="functie" value="Spelleider (full-time)"> Spelleider (full-time)</label><label><input type="radio" name="functie" value="Locatie-eigenaar" checked> Locatie-eigenaar</label></div></fieldset>
+<div class="field"><label for="s-woonplaats">Woonplaats</label><input id="s-woonplaats" name="woonplaats" autocomplete="address-level2" required></div>
+<div class="field"><label for="s-stad">Voorkeursstad <span class="opt">(optioneel)</span></label><input id="s-stad" name="stad" placeholder="Waar wil je The Hunt spelen?"></div>
+<div class="field full"><label for="s-motivatie">Korte motivatie</label><textarea id="s-motivatie" name="bericht" placeholder="Wat lijkt je zo leuk om bij ons aan de slag te gaan?" required></textarea></div>
+<div class="hp" aria-hidden="true"><label for="s-web">Laat dit veld leeg</label><input id="s-web" name="_honey" tabindex="-1" autocomplete="off"></div>
+<div class="full"><button class="btn btn-signal" type="submit">Verstuur je sollicitatie <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><p class="form-note">We gebruiken je gegevens alleen voor je sollicitatie. Lees de <a href="/privacyverklaring/">privacyverklaring</a>.</p></div>
+</form>
 </div></section>
 
 </main>
@@ -113,7 +131,7 @@ clarity('consentv2',{ad_Storage:'denied',analytics_Storage:g});
 <p>We gebruiken cookies van Google en Microsoft Clarity om te zien hoe bezoekers de site gebruiken en of onze Google-advertenties tot aanvragen leiden. Geen gepersonaliseerde advertenties, geen verkoop van gegevens. <a href="/privacyverklaring/">Privacyverklaring</a></p>
 <div class="cookiebar-btns"><button type="button" class="btn btn-line" data-cookie="nee">Weigeren</button><button type="button" class="btn btn-signal" data-cookie="ja">Accepteren</button></div>
 </div>
-<script src="/assets/js/main.js?v=391c79ad" defer></script>
+<script src="/assets/js/main.js?v=8ddd7b1e" defer></script>
 <script src="/assets/js/chat.js?v=6144de8f" data-chat="/assets/chat.json?v=e3ffafca" defer></script>
 </body>
 </html>

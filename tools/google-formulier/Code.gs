@@ -38,6 +38,13 @@ var FORMULIEREN = {
       ['gevonden', 'Hoe gevonden']],
     verplicht: ['naam', 'email', 'telefoon', 'stad', 'datum', 'personen']
   },
+  // Sollicitaties via het formulier op de vacaturepagina's (werken bij)
+  sollicitatie: {
+    tabblad: 'Sollicitaties', bewaarMaanden: 6, onderwerp: 'Sollicitatie The Hunt',
+    velden: [['naam', 'Naam'], ['leeftijd', 'Leeftijd'], ['woonplaats', 'Woonplaats'], ['email', 'E-mail'],
+      ['telefoon', 'Telefoon'], ['functie', 'Functie'], ['stad', 'Voorkeursstad'], ['bericht', 'Motivatie']],
+    verplicht: ['naam', 'email', 'telefoon', 'woonplaats', 'functie']
+  },
   // Elke vraag die in de chat op de website wordt gesteld (anoniem): meteen een mail, en elke ochtend een overzicht.
   chatvraag: {
     tabblad: 'Chatvragen', bewaarMaanden: 12, onderwerp: 'Chatvraag',
@@ -95,6 +102,7 @@ function doPost(e) {
   try {
     var extra = type === 'boeking' ? ': ' + (g.stad || '') + ', ' + g.personen + ' pers. (' + (g.bedrijf || g.naam) + ')'
       : type === 'chatvraag' ? (g.antwoord === 'geen antwoord' ? ' zonder antwoord: ' : ': ') + g.vraag.slice(0, 80)
+      : type === 'sollicitatie' ? ': ' + g.naam + ' (' + g.functie + ', ' + g.woonplaats + ')'
       : ': ' + g.naam;
     stuurMail(cfg, g, cfg.onderwerp + extra);
   } catch (fout) {

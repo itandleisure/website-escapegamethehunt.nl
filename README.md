@@ -61,6 +61,10 @@ Het boekingsformulier werkt in twee stappen:
    FormSubmit (`https://formsubmit.co/info@escapegamethehunt.nl`) naar hetzelfde adres. Bij de allereerste
    inzending stuurt FormSubmit een activatiemail naar info@; die link moet één keer worden aangeklikt.
 
+De vacaturepagina's (`/werken-bij/...`) hebben een sollicitatieformulier dat op dezelfde manier verstuurt
+(`form=sollicitatie`, tabblad "Sollicitaties", 6 maanden bewaard) en daarna naar `/werken-bij/bedankt/` gaat.
+Dat telt niet als boekingsaanvraag of Ads-conversie: in Google Analytics heet het event `sollicitatie`.
+
 Google Sheet instellen (eenmalig):
 
 1. Maak een Google Sheet, bijv. "The Hunt aanvragen". Extensies > Apps Script: plak `tools/google-formulier/Code.gs`.

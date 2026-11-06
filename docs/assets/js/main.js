@@ -69,9 +69,12 @@
     var google = form.getAttribute('data-google');
     form.addEventListener('submit', function (e) {
       if (!form.checkValidity()) { e.preventDefault(); form.reportValidity(); return; }
+      var soort = form.querySelector('[name="form"]');
       if (window.gtag) {
         var stad = form.querySelector('[name="stad"]');
-        gtag('event', 'generate_lead', { stad: stad ? stad.value : '', pagina: location.pathname });
+        // Een sollicitatie is geen boekingsaanvraag: eigen event, zodat het niet als lead/conversie telt.
+        gtag('event', soort && soort.value === 'sollicitatie' ? 'sollicitatie' : 'generate_lead',
+          { stad: stad ? stad.value : '', pagina: location.pathname });
       }
       if (!google || !window.fetch || !window.URLSearchParams) { return; }
       e.preventDefault();

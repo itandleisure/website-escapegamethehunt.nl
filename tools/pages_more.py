@@ -226,12 +226,47 @@ def category(slug, name, posts):
                 body=body, robots='noindex, follow', active='/escape-game-the-hunt-nieuws/')
 
 
-def apply_block():
-    return f'''<section class="section dark grid-bg"><div class="wrap booking">
-<div class="stack"><span class="label">Solliciteren</span><h2>Interesse? Neem contact op</h2>
-<p class="lede">Stuur een korte motivatie en je woonplaats. We nemen snel contact met je op.</p></div>
-<div class="stack contact-lines"><a href="mailto:{SITE['email']}?subject=Sollicitatie%20The%20Hunt">{SITE['email']}</a><a href="tel:{SITE['phone']}">{SITE['phone_display']}</a></div>
+def apply_block(path=''):
+    """Sollicitatieformulier onder de vacaturepagina's. Zelfde verzending als het boekingsformulier
+    (Google Sheet + e-mail via data-google, FormSubmit als reserve), maar zonder Ads-conversie."""
+    keuzes = ['Spelleider (bijbaan / part-time)', 'Spelleider (full-time)', 'Locatie-eigenaar']
+    gekozen = keuzes[2] if 'locatie-eigenaar' in path else keuzes[0]
+    radios = ''.join(f'<label><input type="radio" name="functie" value="{esc(k)}"{" checked" if k == gekozen else ""}> {esc(k)}</label>'
+                     for k in keuzes)
+    return f'''<section class="section dark grid-bg" id="solliciteren" aria-labelledby="solliciteren-titel"><div class="wrap booking">
+<div class="stack"><span class="label">Solliciteren</span><h2 id="solliciteren-titel">Word ook onderdeel van ons team</h2>
+<p class="lede">Vul het formulier in met een korte motivatie. We nemen zo snel mogelijk contact met je op.</p>
+<p>Liever eerst even bellen of mailen? Dat kan ook.</p>
+<div class="contact-lines"><a href="tel:{SITE['phone']}">{SITE['phone_display']}</a><a href="mailto:{SITE['email']}?subject=Sollicitatie%20The%20Hunt">{SITE['email']}</a></div>
+</div>
+<form class="form" data-booking data-google="{esc(SITE['google_form_url'])}" action="{SITE['formsubmit']}" method="POST">
+<input type="hidden" name="form" value="sollicitatie">
+<input type="hidden" name="_subject" value="Sollicitatie The Hunt via escapegamethehunt.nl">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_next" value="{SITE['url']}/werken-bij/bedankt/">
+<div class="field"><label for="s-naam">Naam</label><input id="s-naam" name="naam" autocomplete="name" required></div>
+<div class="field"><label for="s-leeftijd">Leeftijd</label><input id="s-leeftijd" type="number" name="leeftijd" min="15" max="99" inputmode="numeric" required></div>
+<div class="field"><label for="s-mail">E-mailadres</label><input id="s-mail" type="email" name="email" autocomplete="email" required></div>
+<div class="field"><label for="s-tel">Telefoonnummer</label><input id="s-tel" type="tel" name="telefoon" autocomplete="tel" required></div>
+<fieldset class="field full"><legend>Functie</legend><div class="choices">{radios}</div></fieldset>
+<div class="field"><label for="s-woonplaats">Woonplaats</label><input id="s-woonplaats" name="woonplaats" autocomplete="address-level2" required></div>
+<div class="field"><label for="s-stad">Voorkeursstad <span class="opt">(optioneel)</span></label><input id="s-stad" name="stad" placeholder="Waar wil je The Hunt spelen?"></div>
+<div class="field full"><label for="s-motivatie">Korte motivatie</label><textarea id="s-motivatie" name="bericht" placeholder="Wat lijkt je zo leuk om bij ons aan de slag te gaan?" required></textarea></div>
+<div class="hp" aria-hidden="true"><label for="s-web">Laat dit veld leeg</label><input id="s-web" name="_honey" tabindex="-1" autocomplete="off"></div>
+<div class="full"><button class="btn btn-signal" type="submit">Verstuur je sollicitatie {ICON_ARROW}</button><p class="form-note">We gebruiken je gegevens alleen voor je sollicitatie. Lees de <a href="/privacyverklaring/">privacyverklaring</a>.</p></div>
+</form>
 </div></section>'''
+
+
+def thanks_apply():
+    crumbs = [('Home', '/'), ('Werken bij', '/werken-bij/'), ('Bedankt', None)]
+    body = f'''{hero('Bedankt voor je sollicitatie!', 'We hebben je sollicitatie ontvangen en nemen zo snel mogelijk contact met je op.', crumbs, cta=False)}
+<section class="section"><div class="wrap stack">
+<p>Wil je nog iets toevoegen? Bel ons op <a href="tel:{SITE['phone']}">{SITE['phone_display']}</a> of mail naar <a href="mailto:{SITE['email']}">{SITE['email']}</a>.</p>
+<p><a class="btn btn-line" href="/werken-bij/">Terug naar werken bij</a></p>
+</div></section>'''
+    return page(path='/werken-bij/bedankt/', title='Bedankt voor je sollicitatie - Escape Game The Hunt',
+                description='Bedankt voor je sollicitatie bij Escape Game The Hunt.', body=body, robots='noindex, follow')
 
 
 def thanks():
