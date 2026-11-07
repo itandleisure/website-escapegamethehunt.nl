@@ -99,6 +99,19 @@ VRIJ_FAQ = [
      '<p>Ja. Puzzelaars en lopers hebben allebei een rol, dus iedereen doet mee. Er is aan het eind een winnend team, dus het wordt vanzelf competitief.</p>'),
     ('Gaat het door als het regent?',
      '<p>Ja. The Hunt is een actief uitje waarbij je de hele tijd in beweging blijft. Trek wel kleding aan die tegen een buitje kan.</p>'),
+    ('Is The Hunt een escape room?',
+     '<p>Ja, maar dan buiten. Jullie lossen escape-puzzels op zoals in een escape room, alleen niet in een afgesloten kamer: het centrum van de stad is het speelveld. Het doel is binnen 90 minuten het geheime extractiepunt bereiken zonder door de Hunters gepakt te worden.</p>'),
+    ('Hoe lang duurt een vrijgezellenfeest met The Hunt?',
+     '<p>Het spel duurt 90 minuten. Met de uitleg vooraf en de afronding bij de finish ben je ongeveer twee uur bezig. Er blijft dus genoeg tijd over voor eten, borrelen of een tweede activiteit.</p>'),
+    ('Mag de vrijgezel verkleed meedoen?',
+     '<p>Zeker. Houd er wel rekening mee dat de Hunters jullie team dan sneller herkennen, dus pas je tactiek erop aan.</p>'),
+]
+
+VRIJ_STEPS = [
+    ('1. Verzamelen in het centrum', 'Jullie spelleider wacht op een centrale plek in de stad, vaak een plein vlak bij het station. Daar volgen de uitleg, de teamindeling en de rugtassen.'),
+    ('2. Tien minuten voorsprong', 'Elk team krijgt een rugtas met escape-puzzels en de GameApp. Jullie krijgen 10 minuten om afstand te nemen. Daarna gaan de Hunters op jacht.'),
+    ('3. Puzzelen en uit het zicht blijven', 'Elke opgeloste puzzel levert een stukje van een GPS-code op. De Hunters zien elke 10 minuten jullie locatie, dus kies slim waar je puzzelt. Het team blijft de hele tijd bij elkaar.'),
+    ('4. Het extractiepunt', 'Zijn alle puzzels opgelost, dan verschijnt het geheime extractiepunt. Wie het als eerste haalt zonder gepakt te worden, wint. Daarna: groepsfoto en feest.'),
 ]
 
 
@@ -155,7 +168,7 @@ def teamuitje():
 def vrijgezellenfeest():
     path = '/vrijgezellenfeest/'
     crumbs = [('Home', '/'), ('Vrijgezellenfeest', path)]
-    body = f'''{hero('Vrijgezellenfeest: The Hunt', 'Een actief en origineel vrijgezellenfeest: ontsnap in teams aan de Hunters, los puzzels op en bereik het extractiepunt. Vanaf 8 personen, in heel Nederland.', [('Home', '/'), ('Vrijgezellenfeest', None)], 'Vrijgezellenfeest · vrouwen · mannen · gemengd', img='/assets/uploads/2026/04/Escape-Game-The-Hunt-vrijgezellenfeest-groningen.jpeg')}
+    body = f'''{hero('Vrijgezellenfeest: outdoor escape room', 'Een actief en origineel vrijgezellenfeest: ontsnap in teams aan de Hunters, los puzzels op en bereik het extractiepunt. Vanaf 8 personen, in heel Nederland.', [('Home', '/'), ('Vrijgezellenfeest', None)], 'Vrijgezellenfeest · vrouwen · mannen · gemengd', img='/assets/uploads/2026/04/Escape-Game-The-Hunt-vrijgezellenfeest-groningen.jpeg')}
 
 <section class="section" aria-labelledby="waarom-titel">
 <div class="wrap split">
@@ -183,7 +196,41 @@ def vrijgezellenfeest():
 </div>
 </section>
 
+<section class="section" aria-labelledby="escape-titel">
+<div class="wrap split">
+<div class="media-frame"><img src="/assets/uploads/2026/09/the-hunt-puzzelen-met-kaart-800.jpg" alt="Een team puzzelt samen met de kaart van The Hunt" loading="lazy" width="600" height="800"></div>
+<div class="stack">
+<span class="label">Escape room vrijgezellenfeest</span>
+<h2 id="escape-titel">Een escape room als vrijgezellenfeest, maar dan buiten</h2>
+<p>Een escape room is een populair vrijgezellenuitje. Toch zit je een uur in één kamer, en vaak past maar een klein groepje tegelijk. The Hunt is een <strong>escape room voor jullie vrijgezellenfeest</strong> zonder die beperkingen: dezelfde puzzels onder tijdsdruk, maar dan midden in de stad, met de hele groep tegelijk en met tegenstanders die echt achter jullie aan komen.</p>
+<ul class="checks">
+<li>De hele groep speelt tegelijk, in teams van ongeveer zes die tegen elkaar strijden</li>
+<li>Geen kamer en geen vaste route: jullie kiezen zelf waar je puzzelt en welke straten je neemt</li>
+<li>Alle puzzels zitten in de rugtas en de GameApp, dus niemand hoeft in de stad naar aanwijzingen te zoeken</li>
+<li>Live Hunters die elke 10 minuten jullie locatie zien en steeds dichterbij komen</li>
+</ul>
+<p>Zoeken jullie vooral een uitje met collega’s? Kijk dan bij ons <a href="/teamuitje-bedrijfsuitje/">teamuitje en bedrijfsuitje</a>.</p>
+</div>
+</div>
+</section>
+
+{section('Zo werkt het', 'Van speluitleg tot extractiepunt', '<div class="cards">' + ''.join(f'<div class="card"><h3>{esc(t)}</h3><p>{esc(x)}</p></div>' for t, x in VRIJ_STEPS) + '</div>', 'section paper')}
+
+<section class="section dark grid-bg" aria-labelledby="bruid-titel">
+<div class="wrap split">
+<div class="stack">
+<span class="label">De vrijgezel in de hoofdrol</span>
+<h2 id="bruid-titel">Vragen over de bruid of bruidegom</h2>
+<p>Met <a href="/op-maat-gemaakt/" style="color:var(--signal)">The Hunt op maat</a> wordt het spel echt van jullie. Jullie sturen vooraf vragen en antwoorden over de vrijgezel aan, en wij verwerken ze in de opdrachten: hoe het stel elkaar heeft ontmoet, bekende uitspraken, oude foto’s of de grootste blunder. Wie de bruid of bruidegom het best kent, heeft een voordeel.</p>
+<p>Dat levert gegarandeerd discussie op, midden op straat terwijl de Hunters naderen. En laat de vrijgezel gerust verkleed meedoen: het maakt het spel alleen maar leuker, al herkennen de Hunters jullie team dan ook sneller.</p>
+</div>
+<div class="media-frame"><img src="/assets/uploads/2026/09/the-hunt-juichende-groep-800.jpg" alt="Een juichende groep na afloop van The Hunt" loading="lazy" width="800" height="600"></div>
+</div>
+</section>
+
 {photo_block('Zij gingen jullie voor', 'Groepen die The Hunt speelden', VRIJ_PHOTOS)}
+
+{section('Ervaringen', 'Wat groepen zeggen na hun Hunt', '<div class="quotes">' + ''.join(f'<figure class="quote"><span class="stars" aria-label="5 sterren">★★★★★</span><blockquote><p>{esc(t)}</p></blockquote><figcaption>{esc(h)}</figcaption></figure>' for h, t in SITE['reviews']) + '</div>', 'section navy')}
 
 {section('Programma', 'Zo ziet jullie vrijgezellenfeest eruit', f'<div class="pricing">{programme("vrijgezellen")}{price_line("particulier")}</div>')}
 
@@ -192,8 +239,8 @@ def vrijgezellenfeest():
 {section('Veelgestelde vragen', 'Vragen over een vrijgezellenfeest met The Hunt', faq_block(VRIJ_FAQ), 'section paper')}
 
 {booking()}'''
-    return page(path=path, title='Vrijgezellenfeest | Outdoor escape game The Hunt',
-                description='Origineel en actief vrijgezellenfeest: ontsnap in teams aan de Hunters, met vragen over de bruid of bruidegom. Vanaf 8 personen, in heel Nederland.',
+    return page(path=path, title='Vrijgezellenfeest escape room in de stad | The Hunt',
+                description='Vrijgezellenfeest als outdoor escape room: los puzzels op en ontsnap 90 minuten aan de Hunters, met vragen over de bruid of bruidegom. Vanaf 8 personen, in 30+ steden.',
                 body=body, schema=[crumb_schema(crumbs), faq_schema(VRIJ_FAQ)], active=path)
 
 
