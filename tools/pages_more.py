@@ -143,7 +143,7 @@ def simple(p, extra_before='', extra_after='', body_html=None, schema=(), lede=N
 def prices(p):
     rest = p['body'][p['body'].find('<h2>Maak'):] if '<h2>Maak' in p['body'] else ''
     return simple(p, extra_before=section('Prijzen', f'Eén vaste prijs t/m {P["base_max_people"]} personen', pricing()), body_html=rest,
-                  lede=f'Tot en met {P["base_max_people"]} personen betaal je €{P["base"]}. Daarboven €{P["per_person"]} per extra persoon. Exclusief btw (inclusief: €{P["base_incl"]} en €{P["per_person_incl"]} per extra persoon).')
+                  lede=f'Tot en met {P["base_max_people"]} personen betaal je €{P["base"]}. Daarboven €{P["per_person"]} per extra persoon. Exclusief btw (inclusief: €{P["base_incl"]} en €{P["per_person_incl"]} per extra persoon). Ook groepen van 100 personen of meer zijn welkom, tot ongeveer {P["max_people"]} deelnemers.')
 
 
 def contact(p):
