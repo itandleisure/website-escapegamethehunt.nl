@@ -49,7 +49,7 @@ TEKST = {
                 'helemaal te voet: goed voor de conditie en goed voor de lucht in de stad.'),
     'video_kop': 'Beleef het nog een keer',
     'video': 'Bekijk de video van The Hunt.',
-    'groepsfoto_kop': 'De groep',
+    'groepsfoto_kop': 'Groepsfoto',
     'fotos_kop': 'Jullie foto\'s',
     'review_kop': 'Laat een review achter',
     'review': ('Vonden jullie het een topdag? Laat dan een review achter, dat helpt ons enorm. '
@@ -75,6 +75,7 @@ KENGETALLEN = {  # indicatief
 FOTO_EXT = ('.jpg', '.jpeg', '.png', '.webp')
 RIJEN_P2 = 21       # teams in de tabel op pagina 2, de rest op een volgende pagina
 RIJEN_VERVOLG = 40
+RIJEN_GROTE_VIDEO = 9   # tot zoveel teams past de video groot op pagina 2
 
 
 # ---------------------------------------------------------------- hulpjes
@@ -162,14 +163,20 @@ th:first-child,td:first-child{{text-align:left;padding-left:0}}
 td:first-child{{font-weight:700;max-width:70mm;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
 tr.totaal td{{border-bottom:0;border-top:1.5px solid var(--navy);font-weight:700;color:var(--navy)}}
 .kleine{{font-size:7pt;color:var(--muted);margin-top:2mm}}
-.video{{position:absolute;left:16mm;right:16mm;bottom:20mm;display:grid;grid-template-columns:52mm 1fr;gap:5mm;align-items:center;
+.video{{position:absolute;left:16mm;right:16mm;bottom:20mm;display:grid;grid-template-columns:66mm 1fr;gap:6mm;align-items:center;
   text-decoration:none;color:inherit;background:var(--paper);border-radius:2.5mm;padding:3mm}}
-.video .poster{{position:relative;height:29mm;border-radius:2mm;background:var(--navy) center/cover no-repeat}}
+.video .poster{{position:relative;height:37mm;border-radius:2mm;background:var(--navy) center/cover no-repeat}}
 .video .poster i{{position:absolute;left:50%;top:50%;width:11mm;height:11mm;margin:-5.5mm 0 0 -5.5mm;border-radius:50%;background:var(--signal);
   display:grid;place-items:center;color:var(--night);font-style:normal;font-size:11pt;padding-left:.8mm}}
-.video h3{{font-size:13pt;margin-bottom:1mm}}
-.video p{{margin:0;color:var(--muted);font-size:9.5pt}}
-.video u{{color:#a85600;text-decoration:none;font-weight:700;font-size:9.5pt}}
+.video h3{{font-size:15pt;margin-bottom:1mm}}
+.video p{{margin:0;color:var(--muted);font-size:10.5pt}}
+.video u{{color:#a85600;text-decoration:none;font-weight:700;font-size:10.5pt}}
+.video.groot{{grid-template-columns:1fr;gap:4mm;padding:4mm}}
+.video.groot .poster{{height:78mm;border-radius:2.5mm}}
+.video.groot .poster i{{width:20mm;height:20mm;margin:-10mm 0 0 -10mm;font-size:20pt;padding-left:1.5mm}}
+.video.groot h3{{font-size:17pt}}
+.video.groot p,.video.groot u{{font-size:11pt}}
+.video.groot .tekst{{display:flex;align-items:baseline;gap:5mm;flex-wrap:wrap;padding:0 2mm 1mm}}
 
 /* foto's */
 .groepsfoto img{{width:100%;height:225mm;object-fit:cover;border-radius:2.5mm;display:block}}
@@ -214,7 +221,6 @@ def boekje(game, teams, per_team, fotos_groep, stad):
   <div class="tekst">
     <div class="label">{e(TEKST["label"])}</div>
     <h1>{e(TEKST["bedankt"])}{f' in <em>{e(stad)}</em>' if stad else ''}</h1>
-    <div class="sub">{len(teams)} team{"" if len(teams) == 1 else "s"} · {e(titel_game)}</div>
   </div>
   <div class="streep"></div>
 </section>''')
@@ -255,9 +261,9 @@ def boekje(game, teams, per_team, fotos_groep, stad):
     {tabel(eerste, not rest)}
     <p class="kleine">Indicatief: {nl(k["stappen_per_km"])} stappen en {k["kcal_per_km"]} kcal per km per persoon, {nl(k["co2_auto_per_km"], 2)} kg CO₂ per autokilometer, één auto per team.</p>
   </div>
-  <a class="video" href="{e(VIDEO)}">
+  <a class="video{' groot' if len(rijen) <= RIJEN_GROTE_VIDEO else ''}" href="{e(VIDEO)}">
     <div class="poster" style="background-image:url('{e(site_uri(VIDEO_POSTER))}')"><i>▶</i></div>
-    <div><h3>{e(TEKST["video_kop"])}</h3><p>{e(TEKST["video"])}</p><u>Bekijk de video →</u></div>
+    <div class="tekst"><h3>{e(TEKST["video_kop"])}</h3><p>{e(TEKST["video"])}</p><u>Bekijk de video →</u></div>
   </a>
   {voet(onder, nr)}
 </section>''')
