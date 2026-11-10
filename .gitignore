@@ -23,3 +23,6 @@ tools/seo/outreach/outreach.local.json
 tools/seo/outreach/test/
 tools/seo/outreach/outreach.xlsx
 tools/seo/clarity.token
+
+# Loquiz-resultaten: bevat foto's van deelnemers (niet publiek)
+tools/loquiz/uitvoer/
