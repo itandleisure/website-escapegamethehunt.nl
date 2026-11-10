@@ -8,7 +8,7 @@ Haalt voor één game de teams en de media op en schrijft een losse HTML-pagina 
     python tools/loquiz/resultaten.py --demo               # voorbeeldpagina zonder API, om de opmaak te bekijken
 
 De API-key staat in .env in de hoofdmap van het project (LOQUIZ_API_KEY=ApiKey-v1 ...). .env staat in .gitignore.
-De pagina komt in tools/loquiz/uitvoer/<game>/index.html. Die map staat ook in .gitignore: er staan foto's van
+De pagina komt in tools/loquiz/uitvoer/<game>/index.html. Een fotoboekje per team (PDF) maak je met boekje.py. Die map staat ook in .gitignore: er staan foto's van
 deelnemers in, dus nooit in docs/ (de publieke website) zetten.
 
 Alleen standaard-Python nodig. API-documentatie: https://api.loquiz.com/v3/docs
@@ -290,29 +290,20 @@ def demo():
     return game, teams, media
 
 
-# ---------------------------------------------------------------- hoofdprogramma
+# ---------------------------------------------------------------- ophalen en koppelen
 
-def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('--game', default=STANDAARD_GAME)
-    ap.add_argument('--scope', default=STANDAARD_SCOPE, help='een of meer scopes, komma-gescheiden; leeg = alle')
-    ap.add_argument('--uit', help='map voor de pagina (standaard tools/loquiz/uitvoer/<game>)')
-    ap.add_argument('--bewaar-json', action='store_true', help='ruwe API-antwoorden ook opslaan')
-    ap.add_argument('--demo', action='store_true', help='voorbeeldpagina zonder API')
-    a = ap.parse_args()
-
+def ophalen(game_id, scope, demo_modus=False):
+    """Game, teams (hoogste score eerst) en per team de media. Ook gebruikt door boekje.py."""
     ruw = {}
-    if a.demo:
+    if demo_modus:
         game, teams, media = demo()
-        a.scope = 'DEMO'
     else:
         key = lees_key()
-        game = haal(f'/games/{a.game}', key)
-        teams, ruw['teams'] = alles(f'/results/{a.game}/teams', key, scope=a.scope, sort='-totalScore')
-        media, ruw['media'] = alles(f'/results/{a.game}/media', key, scope=a.scope)
+        game = haal(f'/games/{game_id}', key)
+        teams, ruw['teams'] = alles(f'/results/{game_id}/teams', key, scope=scope, sort='-totalScore')
+        media, ruw['media'] = alles(f'/results/{game_id}/media', key, scope=scope)
         ruw['game'] = game
-    game.setdefault('id', a.game)
-
+    game.setdefault('id', game_id)
     teams.sort(key=lambda t: float(t.get('totalScore') or 0), reverse=True)
     team_ids = {str(t.get('id')) for t in teams}
     per_team, los = {}, 0
@@ -324,6 +315,23 @@ def main():
             per_team.setdefault(tid, []).append(f)
         else:
             los += 1
+    return game, teams, per_team, los, ruw
+
+
+# ---------------------------------------------------------------- hoofdprogramma
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('--game', default=STANDAARD_GAME)
+    ap.add_argument('--scope', default=STANDAARD_SCOPE, help='een of meer scopes, komma-gescheiden; leeg = alle')
+    ap.add_argument('--uit', help='map voor de pagina (standaard tools/loquiz/uitvoer/<game>)')
+    ap.add_argument('--bewaar-json', action='store_true', help='ruwe API-antwoorden ook opslaan')
+    ap.add_argument('--demo', action='store_true', help='voorbeeldpagina zonder API')
+    a = ap.parse_args()
+
+    game, teams, per_team, los, ruw = ophalen(a.game, a.scope, a.demo)
+    if a.demo:
+        a.scope = 'DEMO'
 
     uit = a.uit or os.path.join(HIER, 'uitvoer', 'demo' if a.demo else a.game)
     os.makedirs(uit, exist_ok=True)
@@ -337,7 +345,7 @@ def main():
     n = sum(len(v) for v in per_team.values())
     print(f'{len(teams)} teams, {n} media gekoppeld aan teams'
           + (f', {los} media zonder (bekend) team overgeslagen' if los else '') + f'\nPagina: {pad}')
-    if media and not n:
+    if los and not n:
         print('Let op: er is wel media opgehaald maar niets kon aan een team gekoppeld worden. '
               'Draai opnieuw met --bewaar-json en bekijk api.json.')
 
