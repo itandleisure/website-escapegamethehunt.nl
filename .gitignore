@@ -5,6 +5,11 @@ __pycache__/
 Thumbs.db
 .mcp.json
 
+# geheime sleutels (o.a. LOQUIZ_API_KEY)
+.env
+.env.*
+!.env.example
+
 # Aangeleverde originele foto's (worden verkleind naar assets/uploads)
 fotos-nieuw/
 
