@@ -1,5 +1,6 @@
 """Fotoboekje per groep als PDF: alle teams van één Loquiz-game (en scope) in één boekje.
 
+    python tools/loquiz/boekje.py --url https://results.loquiz.com/F3CJ8WVUSC:VANWIJNEN
     python tools/loquiz/boekje.py                         # game FK9SCMLMAJ, scope ADHOC
     python tools/loquiz/boekje.py --game ABC123 --scope ADHOC
     python tools/loquiz/boekje.py --stad "Den Haag"       # "... The Hunt in Den Haag" op de voorkant
@@ -12,10 +13,11 @@ Opbouw:
   4. alle foto's uit Loquiz, vier per pagina
   5. laat een review achter, met de andere spellen van Badass Games en de contactgegevens
 
-Groepsfoto's van de spelleider: zet ze in tools/loquiz/groepsfotos/<game>/ (jpg, png of webp). Zonder groepsfoto
-slaat het boekje die pagina over. Uitvoer: tools/loquiz/uitvoer/<game>/boekje-<game>.html en .pdf. De PDF maakt het
+Groepsfoto's van de spelleider: zet ze in tools/loquiz/groepsfotos/<game>-<scope>/ (jpg, png of webp). Zonder groepsfoto
+slaat het boekje die pagina over. Uitvoer: tools/loquiz/uitvoer/<game>-<scope>/boekje-<game>-<scope>.html en .pdf. De PDF maakt het
 script met Edge of Chrome (headless, zit standaard op Windows). Lukt dat niet, open dan de .html en kies Afdrukken >
 Opslaan als PDF. Teksten, kengetallen en de spellen staan hieronder.
+Zonder opdrachtregel: dubbelklik "Boekje maken.bat" (boekje_tool.py), dat opent een invulscherm in de browser.
 """
 import argparse
 import glob
@@ -26,6 +28,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import urllib.parse
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -327,7 +330,7 @@ def boekje(game, teams, per_team, fotos_groep, stad):
 # ---------------------------------------------------------------- PDF
 
 def browser(opgegeven=None):
-    kandidaten = [opgegeven] if opgegeven else []
+    kandidaten = [opgegeven or os.environ.get('BOEKJE_BROWSER')]
     for basis in (os.environ.get('PROGRAMFILES(X86)'), os.environ.get('PROGRAMFILES'), os.environ.get('LOCALAPPDATA')):
         if basis:
             kandidaten += [os.path.join(basis, 'Microsoft', 'Edge', 'Application', 'msedge.exe'),
@@ -367,43 +370,73 @@ def demo_media(per_team):
 
 # ---------------------------------------------------------------- hoofdprogramma
 
-def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('--game', default=STANDAARD_GAME)
-    ap.add_argument('--scope', default=STANDAARD_SCOPE)
-    ap.add_argument('--stad', default='', help='plaatsnaam achter "The Hunt" op de voorkant (standaard zonder)')
-    ap.add_argument('--groepsfotos', help='map met groepsfoto\'s (standaard tools/loquiz/groepsfotos/<game>)')
-    ap.add_argument('--uit', help='uitvoermap (standaard tools/loquiz/uitvoer/<game>)')
-    ap.add_argument('--browser', help='pad naar Edge of Chrome voor de PDF')
-    ap.add_argument('--geen-pdf', action='store_true', help='alleen HTML maken')
-    ap.add_argument('--demo', action='store_true')
-    a = ap.parse_args()
+def lees_url(url):
+    """Haalt game-ID en scope uit een spelleider-URL, bijv. https://results.loquiz.com/F3CJ8WVUSC:VANWIJNEN."""
+    url = urllib.parse.unquote(url.strip()).split('?')[0].split('#')[0]
+    deel = url.split('://')[-1].strip('/').split('/')[-1]
+    m = re.fullmatch(r'([A-Za-z0-9]{6,})(?::(.+))?', deel)
+    if not m:
+        raise ValueError(f'Geen game-ID gevonden in "{url}". Verwacht iets als https://results.loquiz.com/ABC123XYZ0:scope')
+    return m.group(1).upper(), (m.group(2) or '')
 
-    game, teams, per_team, _, _ = ophalen(a.game, a.scope, a.demo)
-    if a.demo:
+
+def mapnaam(game_id, scope):
+    return game_id + ('-' + re.sub(r'[^A-Za-z0-9]+', '-', scope).strip('-') if scope else '')
+
+
+def maak(game_id, scope, stad='', groepsfotomap=None, uit=None, exe=None, pdf=True, demo=False, log=print):
+    """Haalt alles op en schrijft het boekje. Geeft de paden en tellingen terug. Ook gebruikt door boekje_tool.py."""
+    game, teams, per_team, _, _ = ophalen(game_id, scope, demo)
+    if demo:
         demo_media(per_team)
-    sleutel = 'demo' if a.demo else a.game
-    fotomap = a.groepsfotos or os.path.join(HIER, 'groepsfotos', sleutel)
+    sleutel = 'demo' if demo else mapnaam(game_id, scope)
+    fotomap = groepsfotomap or os.path.join(HIER, 'groepsfotos', sleutel)
     os.makedirs(fotomap, exist_ok=True)
     groep = groepsfotos(fotomap)
-    uit = a.uit or os.path.join(HIER, 'uitvoer', sleutel)
+    uit = uit or os.path.join(HIER, 'uitvoer', sleutel)
     os.makedirs(uit, exist_ok=True)
 
     html_pad = os.path.join(uit, f'boekje-{sleutel}.html')
     with open(html_pad, 'w', encoding='utf-8') as fh:
-        fh.write(boekje(game, teams, per_team, groep, a.stad.strip()))
+        fh.write(boekje(game, teams, per_team, groep, (stad or '').strip()))
     n_fotos = sum(1 for v in per_team.values() for m in v if not m['video'] and not m['audio'])
-    print(f'{len(teams)} teams, {n_fotos} foto\'s uit Loquiz, {len(groep)} groepsfoto(\'s)')
+    uitkomst = {'titel': game.get('title') or game.get('name') or game_id, 'teams': len(teams), 'fotos': n_fotos,
+                'groepsfotos': len(groep), 'html': html_pad, 'pdf': None, 'fotomap': fotomap}
+    log(f'{len(teams)} teams, {n_fotos} foto\'s uit Loquiz, {len(groep)} groepsfoto(\'s)')
     if not groep:
-        print(f'Geen groepsfoto: zet die in {fotomap} en draai opnieuw.')
+        log(f'Geen groepsfoto: zet die in {fotomap} en draai opnieuw.')
+    if pdf:
+        exe = exe or browser()
+        if not exe:
+            log('Geen Edge of Chrome gevonden: open de HTML en kies Afdrukken > Opslaan als PDF.')
+        elif naar_pdf(exe, html_pad, html_pad[:-5] + '.pdf'):
+            uitkomst['pdf'] = html_pad[:-5] + '.pdf'
+            log(f'PDF: {uitkomst["pdf"]}')
+        else:
+            log('PDF maken mislukt: open de HTML en kies Afdrukken > Opslaan als PDF.')
+    log(f'HTML: {html_pad}')
+    return uitkomst
 
-    exe = None if a.geen_pdf else browser(a.browser)
-    if exe:
-        pdf = html_pad[:-5] + '.pdf'
-        print(f'PDF: {pdf}' if naar_pdf(exe, html_pad, pdf) else 'PDF maken mislukt: open de HTML en kies Afdrukken > Opslaan als PDF.')
-    elif not a.geen_pdf:
-        print('Geen Edge of Chrome gevonden: open de HTML en kies Afdrukken > Opslaan als PDF.')
-    print(f'HTML: {html_pad}')
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('--url', help='spelleider-URL, bijv. https://results.loquiz.com/F3CJ8WVUSC:VANWIJNEN')
+    ap.add_argument('--game', default=STANDAARD_GAME)
+    ap.add_argument('--scope', default=STANDAARD_SCOPE)
+    ap.add_argument('--stad', default='', help='plaatsnaam achter "The Hunt" op de voorkant (standaard zonder)')
+    ap.add_argument('--groepsfotos', help='map met groepsfoto\'s (standaard tools/loquiz/groepsfotos/<game>-<scope>)')
+    ap.add_argument('--uit', help='uitvoermap (standaard tools/loquiz/uitvoer/<game>-<scope>)')
+    ap.add_argument('--browser', help='pad naar Edge of Chrome voor de PDF')
+    ap.add_argument('--geen-pdf', action='store_true', help='alleen HTML maken')
+    ap.add_argument('--demo', action='store_true')
+    a = ap.parse_args()
+    if a.url:
+        try:
+            a.game, a.scope = lees_url(a.url)
+        except ValueError as fout:
+            sys.exit(str(fout))
+    maak(a.game, a.scope, a.stad, a.groepsfotos, a.uit, browser(a.browser) if a.browser else None,
+         pdf=not a.geen_pdf, demo=a.demo)
 
 
 if __name__ == '__main__':
