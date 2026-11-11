@@ -408,7 +408,7 @@ def naar_pdf(exe, html_pad, pdf_pad):
         cmd = [exe, '--headless=new', '--disable-gpu', '--no-sandbox', '--no-first-run', '--allow-file-access-from-files',
                '--no-pdf-header-footer', '--print-to-pdf-no-header', '--virtual-time-budget=30000',
                f'--print-to-pdf={pdf_pad}', uri(html_pad)]
-        if os.name == 'nt':  # los profiel, zodat een geopende Edge/Chrome niet in de weg zit
+        if os.name == 'nt' or sys.platform == 'darwin':  # los profiel, zodat een geopende Edge/Chrome niet in de weg zit
             cmd.insert(1, f'--user-data-dir={profiel}')
         try:
             subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=180)
@@ -477,7 +477,7 @@ def verzamel(game_id, scope, stad='', teamfoto=None, extra=(), min_fotos=MIN_FOT
     fotos = []
     demo_bron = eigen_fotos()
     n = 0
-    for t in teams:
+    for ti, t in enumerate(teams):
         for m in per_team.get(str(t.get('id')), []):
             if m['video'] or m['audio']:
                 continue
@@ -491,27 +491,59 @@ def verzamel(game_id, scope, stad='', teamfoto=None, extra=(), min_fotos=MIN_FOT
             except OSError as fout:
                 log(f'Foto overgeslagen ({fout}): {m["url"]}')
                 continue
-            fotos.append({'bestand': naam, 'bron': 'loquiz', 'bijschrift': t.get('name') or ''})
+            fotos.append({'bestand': naam, 'bron': 'loquiz', 'bijschrift': t.get('name') or '', 'team': ti})
     for naam in sorted(os.listdir(fmap)):
         if naam.startswith('extra-'):
             fotos.append({'bestand': naam, 'bron': 'extra', 'bijschrift': ''})
-    tekort = max(0, int(min_fotos or 0) - len(fotos))
-    for i, bron in enumerate(eigen_fotos()[:tekort], 1):
-        naam = f'eigen-{i:02d}{ext_van(bron)}'
-        shutil.copyfile(bron, os.path.join(fmap, naam))
-        fotos.append({'bestand': naam, 'bron': 'eigen', 'bijschrift': ''})
     team = next((f for f in sorted(os.listdir(fmap)) if f.startswith('team.')), None)
 
     gegevens = {'sleutel': sleutel, 'game': game_id, 'scope': scope, 'stad': (stad or '').strip(),
                 'titel': game.get('title') or game.get('name') or game_id,
                 'teams': [{'naam': t.get('name') or 'Team', 'km': km(t)} for t in teams],
                 'teamfoto': team, 'fotos': fotos}
+    with open(os.path.join(map_, 'boekje-alles.json'), 'w', encoding='utf-8') as fh:  # alles, vóór de keuze
+        json.dump(gegevens, fh, ensure_ascii=False, indent=1)
+    gegevens['fotos'] = fotos + aanvullen(fmap, len(fotos), min_fotos)
+    fotos = gegevens['fotos']
     with open(os.path.join(map_, 'boekje.json'), 'w', encoding='utf-8') as fh:
         json.dump(gegevens, fh, ensure_ascii=False, indent=1)
     soorten = {b: sum(1 for f in fotos if f['bron'] == b) for b in ('loquiz', 'extra', 'eigen')}
     log(f'{len(teams)} teams; foto\'s: {soorten["loquiz"]} uit Loquiz, {soorten["extra"]} extra, '
         f'{soorten["eigen"]} eigen; teamfoto: {"ja" if team else "nee"}')
     return gegevens
+
+
+def aanvullen(fmap, aantal, min_fotos):
+    """Vult aan met eigen sfeerfoto's (fotos/eigen-NN.*) tot min_fotos; geeft de nieuwe foto's terug."""
+    for oud in os.listdir(fmap):
+        if oud.startswith('eigen-'):
+            os.remove(os.path.join(fmap, oud))
+    erbij = []
+    for i, bron in enumerate(eigen_fotos()[:max(0, int(min_fotos or 0) - aantal)], 1):
+        naam = f'eigen-{i:02d}{ext_van(bron)}'
+        shutil.copyfile(bron, os.path.join(fmap, naam))
+        erbij.append({'bestand': naam, 'bron': 'eigen', 'bijschrift': ''})
+    return erbij
+
+
+def kies(sleutel, uit_teams=(), uit_fotos=(), min_fotos=MIN_FOTOS, log=print):
+    """Haalt teams en foto's weg die niet in het boekje mogen (bijv. de spelleiders) en vult daarna aan.
+
+    uit_teams: volgnummers van teams (zoals in boekje-alles.json); hun foto's gaan ook weg.
+    uit_fotos: bestandsnamen van losse foto's die eruit moeten."""
+    map_ = werkmap(sleutel)
+    g = json.load(open(os.path.join(map_, 'boekje-alles.json'), encoding='utf-8'))
+    uit_teams, uit_fotos = {int(i) for i in uit_teams}, set(uit_fotos)
+    g['teams'] = [t for i, t in enumerate(g['teams']) if i not in uit_teams]
+    fotos = [f for f in g['fotos'] if f['bestand'] not in uit_fotos and f.get('team') not in uit_teams]
+    if g.get('teamfoto') in uit_fotos:
+        g['teamfoto'] = None
+    g['fotos'] = fotos + aanvullen(os.path.join(map_, 'fotos'), len(fotos), min_fotos)
+    with open(os.path.join(map_, 'boekje.json'), 'w', encoding='utf-8') as fh:
+        json.dump(g, fh, ensure_ascii=False, indent=1)
+    log(f'Gekozen: {len(g["teams"])} teams, {len(fotos)} foto\'s, '
+        f'{len(g["fotos"]) - len(fotos)} eigen foto\'s erbij')
+    return g
 
 
 # ---------------------------------------------------------------- opmaken

@@ -3,12 +3,13 @@
 Start met "Boekje maken.bat" (of: python tools/loquiz/boekje_tool.py). Er opent een pagina in de browser op
 http://127.0.0.1:8765. Alles draait op deze computer; de API-key en de GitHub-token blijven in .env.
 
-Stappen achter de knop "Maak fotoboek":
-1. foto's ophalen uit Loquiz, teamfoto en extra foto's erbij, aanvullen met eigen foto's tot minimaal 8;
-2. de PDF maken;
-3. (als "online zetten" aan staat) in de browser: foto's verkleinen, alles versleutelen met een nieuw wachtwoord,
+Stappen:
+1. "Teams en foto's ophalen": foto's uit Loquiz, teamfoto en extra foto's erbij;
+2. controleren: teams (zoals de spelleiders) en foto's die niet in het boekje mogen uitvinken;
+3. "Maak fotoboek": aanvullen met eigen foto's tot minimaal 8 en de PDF maken;
+4. (als "online zetten" aan staat) in de browser: foto's verkleinen, alles versleutelen met een nieuw wachtwoord,
    en het versleutelde bestand online zetten op escapegamethehunt.nl/fotoboek/<code>/;
-4. een kant-en-klare mail tonen met de link, het wachtwoord en de PDF.
+5. een kant-en-klare mail tonen met de link, het wachtwoord en de PDF.
 Sluit het zwarte venster om te stoppen.
 """
 import email.parser
@@ -17,6 +18,7 @@ import json
 import os
 import re
 import socket
+import subprocess
 import sys
 import tempfile
 import threading
@@ -88,6 +90,21 @@ button[disabled]{opacity:.6;cursor:wait}
 .ww{font:700 20px ui-monospace,Consolas,monospace;letter-spacing:.06em}
 textarea{width:100%;min-height:300px;font:inherit;font-size:14px;padding:12px;border:1px solid var(--line);border-radius:8px;margin-top:8px}
 .rij{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-top:10px}
+.keuze{display:none}
+.keuze.open{display:block}
+.teams{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;margin:10px 0 18px}
+.teams label{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:10px 12px;cursor:pointer}
+.teams label.uit{opacity:.5;text-decoration:line-through}
+.teams input{width:18px;height:18px;flex:none}
+.teams small{display:block;color:var(--muted);text-decoration:none}
+.raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-top:10px}
+.raster label{position:relative;cursor:pointer;display:block}
+.raster img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;display:block;background:var(--line)}
+.raster input{position:absolute;top:8px;left:8px;width:22px;height:22px;margin:0}
+.raster small{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
+.raster label.uit img{opacity:.25;filter:grayscale(1)}
+.raster label.dicht{display:none}
+.telling{font-weight:700;margin-top:14px}
 .melding{background:#fff8ef;border:1px solid #f6d3a4;border-radius:8px;padding:10px 12px;margin-top:12px;font-size:14px}
 </style></head>
 <body>
@@ -129,9 +146,19 @@ textarea{width:100%;min-height:300px;font:inherit;font-size:14px;padding:12px;bo
   <label class="vink"><input type="checkbox" id="online" checked>
     <div>Ook online zetten met een wachtwoord<span>Op escapegamethehunt.nl/fotoboek/, niet vindbaar in Google, elke keer met een nieuw wachtwoord. Je krijgt meteen een mail om te versturen.</span></div></label>
  </div>
- <button type="submit" id="knop">Maak fotoboek</button>
+ <button type="submit" id="knop">Teams en foto's ophalen</button>
+ <div class="kaart keuze" id="keuze" style="margin-top:18px">
+  <span class="kop"><span class="stap">4</span>Controleer wat er in het boekje komt</span>
+  <p class="hulp">Vink teams uit die er niet in horen, zoals de spelleiders: die tellen dan niet mee in de kilometers en hun foto's vallen weg. Klik op een foto om hem uit of aan te zetten.</p>
+  <div class="teams" id="teams"></div>
+  <div class="kop">Foto's</div>
+  <div class="raster" id="raster"></div>
+  <p class="telling" id="telling"></p>
+  <button type="button" id="maak">Maak fotoboek</button>
+ </div>
  <ol class="voortgang" id="voortgang">
-   <li data-s="ophalen">Foto's ophalen en PDF maken (ongeveer een minuut)</li>
+   <li data-s="ophalen">Teams en foto's ophalen</li>
+   <li data-s="maken">Fotoboek en PDF maken (ongeveer een minuut)</li>
    <li data-s="verkleinen">Foto's klaarmaken voor de website</li>
    <li data-s="versleutelen">Versleutelen met een nieuw wachtwoord</li>
    <li data-s="online">Online zetten</li>
@@ -163,7 +190,7 @@ function dropzone(drop,lijst,doos,een){
 dropzone($('drop-team'),teamfoto,$('duim-team'),true);
 dropzone($('drop-extra'),extra,$('duim-extra'),false);
 
-const STAPPEN=['ophalen','verkleinen','versleutelen','online'];
+const STAPPEN=['ophalen','maken','verkleinen','versleutelen','online'];
 function stap(naam){const n=STAPPEN.indexOf(naam);document.querySelectorAll('#voortgang li').forEach(li=>{
   const i=STAPPEN.indexOf(li.dataset.s);li.className=i<n?'klaar':i===n?'bezig':''})}
 
@@ -245,20 +272,71 @@ function mailtekst(d,o){
   'Met vriendelijke groet,\n\nEscape Game The Hunt\nescapegamethehunt.nl · 085 004 7719';
 }
 
+let gehaald=null;
+function telling(){
+  const aan=[...document.querySelectorAll('#raster input')].filter(i=>i.checked&&!i.closest('label').classList.contains('dicht')).length;
+  const teams=[...document.querySelectorAll('#teams input')].filter(i=>i.checked).length;
+  const min=+$('min').value||0;
+  $('telling').textContent=teams+' teams en '+aan+' foto\'s in het boekje'+(aan<min?', aangevuld met '+(min-aan)+' eigen sfeerfoto\'s':'')+'.';
+}
+function toonKeuze(d){
+  gehaald=d;
+  $('teams').innerHTML='';$('raster').innerHTML='';
+  d.teams.forEach(t=>{
+    const l=document.createElement('label');
+    l.innerHTML='<input type="checkbox" checked><span><b></b><small></small></span>';
+    l.querySelector('b').textContent=t.naam;
+    l.querySelector('small').textContent=t.km.toLocaleString('nl-NL',{maximumFractionDigits:1})+' km · '+t.fotos+' foto\'s';
+    const cb=l.querySelector('input');cb.dataset.i=t.i;
+    cb.onchange=()=>{l.classList.toggle('uit',!cb.checked);
+      document.querySelectorAll('#raster label[data-team="'+t.i+'"]').forEach(f=>f.classList.toggle('dicht',!cb.checked));telling()};
+    $('teams').appendChild(l);
+  });
+  const fotos=(d.teamfoto?[Object.assign({bijschrift:'Teamfoto'},d.teamfoto)]:[]).concat(d.fotos);
+  fotos.forEach(f=>{
+    const l=document.createElement('label');if(f.team!=null)l.dataset.team=f.team;
+    l.innerHTML='<input type="checkbox" checked><img loading="lazy" alt=""><small></small>';
+    l.querySelector('img').src=f.url;l.querySelector('small').textContent=f.bijschrift||(f.bron==='extra'?'Extra foto':'');
+    const cb=l.querySelector('input');cb.dataset.naam=f.naam;
+    cb.onchange=()=>{l.classList.toggle('uit',!cb.checked);telling()};
+    $('raster').appendChild(l);
+  });
+  $('keuze').classList.add('open');telling();$('keuze').scrollIntoView({behavior:'smooth'});
+}
+$('min').oninput=()=>{if(gehaald)telling()};
+
 $('f').onsubmit=async ev=>{
   ev.preventDefault();
-  const knop=$('knop'),uit=$('uitslag'),online=$('online').checked,vg=$('voortgang');
-  $('klaar').className='uitslag';uit.className='uitslag';knop.disabled=true;vg.style.display='block';
-  vg.querySelectorAll('li').forEach(li=>li.style.display=(online||li.dataset.s==='ophalen')?'':'none');
+  const knop=$('knop'),uit=$('uitslag'),vg=$('voortgang');
+  $('klaar').className='uitslag';uit.className='uitslag';$('keuze').classList.remove('open');knop.disabled=true;
+  vg.style.display='block';vg.querySelectorAll('li').forEach(li=>li.style.display=li.dataset.s==='ophalen'?'':'none');
   stap('ophalen');
-  const fd=new FormData();fd.append('url',$('url').value);fd.append('stad',$('stad').value);fd.append('min',$('min').value);
+  const fd=new FormData();fd.append('url',$('url').value);fd.append('stad',$('stad').value);
   // uploads eerst verkleinen tot 2400 px: sneller, en nog steeds scherp in de PDF
   for(const b of teamfoto)fd.append('teamfoto',await verklein(b,2400),b.name);
   for(const b of extra)fd.append('extra',await verklein(b,2400),b.name);
   let d;
-  try{d=await (await fetch('/maak',{method:'POST',body:fd})).json()}
+  try{d=await (await fetch('/ophalen',{method:'POST',body:fd})).json()}
   catch(err){d={ok:false,melding:'Er ging iets mis: '+err}}
-  if(!d.ok){uit.className='uitslag fout';uit.textContent=d.melding;vg.style.display='none';knop.disabled=false;return}
+  vg.style.display='none';knop.disabled=false;knop.textContent='Opnieuw ophalen';
+  if(!d.ok){uit.className='uitslag fout';uit.textContent=d.melding;return}
+  toonKeuze(d);
+};
+
+$('maak').onclick=async()=>{
+  if(!gehaald)return;
+  const knop=$('maak'),uit=$('uitslag'),online=$('online').checked,vg=$('voortgang');
+  $('klaar').className='uitslag';uit.className='uitslag';knop.disabled=true;$('knop').disabled=true;
+  vg.style.display='block';vg.querySelectorAll('li').forEach(li=>li.style.display=li.dataset.s==='ophalen'?'none':(online||li.dataset.s==='maken')?'':'none');
+  stap('maken');
+  const keuze={sleutel:gehaald.sleutel,min:+$('min').value||0,
+    uit_teams:[...document.querySelectorAll('#teams input')].filter(i=>!i.checked).map(i=>+i.dataset.i),
+    uit_fotos:[...document.querySelectorAll('#raster input')].filter(i=>!i.checked).map(i=>i.dataset.naam)};
+  let d;
+  try{d=await (await fetch('/maak',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(keuze)})).json()}
+  catch(err){d={ok:false,melding:'Er ging iets mis: '+err}}
+  const klaarZetten=()=>{vg.style.display='none';knop.disabled=false;$('knop').disabled=false};
+  if(!d.ok){uit.className='uitslag fout';uit.textContent=d.melding;klaarZetten();return}
   let o=null;
   if(online){
     o={ww:nieuwWachtwoord(),id:nieuwId()};
@@ -270,7 +348,7 @@ $('f').onsubmit=async ev=>{
       o.url=r.url||'';o.melding=r.melding||'';
     }catch(err){o.melding='Online zetten mislukt: '+err}
   }
-  vg.style.display='none';toonKlaar(d,o);knop.disabled=false;
+  klaarZetten();toonKlaar(d,o);
 };
 </script>
 </body></html>
@@ -305,16 +383,13 @@ def bestand_url(p):
     return '/bestand/' + urllib.parse.quote(os.path.relpath(p, UITVOER).replace(os.sep, '/'))
 
 
-def maak(velden, bestanden):
+def ophalen(velden, bestanden):
+    """Stap 1: teams en foto's ophalen (nog zonder aanvulling), zodat je kunt kiezen wat erin komt."""
     demo = velden.get('url', '').strip().lower() == 'demo'  # "demo" als URL: voorbeeld zonder API
     try:
         game_id, scope = ('DEMO', '') if demo else boekje.lees_url(velden.get('url', ''))
     except ValueError as fout:
         return {'ok': False, 'melding': str(fout)}
-    try:
-        minimaal = max(0, min(40, int(velden.get('min') or boekje.MIN_FOTOS)))
-    except ValueError:
-        minimaal = boekje.MIN_FOTOS
     regels = []
     with tempfile.TemporaryDirectory() as tmp:
         def bewaar(lijst, voorvoegsel):
@@ -328,17 +403,45 @@ def maak(velden, bestanden):
         team = bewaar(bestanden.get('teamfoto', [])[:1], 'team')
         extra = bewaar(bestanden.get('extra', []), 'extra')
         try:  # vervang=True: alleen wat nu is geüpload telt, niets van een eerdere poging
-            g = boekje.verzamel(game_id, scope, velden.get('stad', ''), team[0] if team else None, extra, minimaal,
+            g = boekje.verzamel(game_id, scope, velden.get('stad', ''), team[0] if team else None, extra, 0,
                                 demo=demo, log=regels.append, vervang=True)
         except SystemExit as fout:  # de API-functies stoppen met een leesbare melding
             return {'ok': False, 'melding': str(fout)}
-    u = boekje.opmaken(g['sleutel'], log=regels.append)
+    fmap = os.path.join(boekje.werkmap(g['sleutel']), 'fotos')
+    per_team = {}
+    for f in g['fotos']:
+        if f.get('team') is not None:
+            per_team[f['team']] = per_team.get(f['team'], 0) + 1
+    return {'ok': True, 'sleutel': g['sleutel'],
+            'teams': [{'i': i, 'naam': t['naam'], 'km': t['km'], 'fotos': per_team.get(i, 0)} for i, t in enumerate(g['teams'])],
+            'teamfoto': {'naam': g['teamfoto'], 'url': bestand_url(os.path.join(fmap, g['teamfoto'])), 'bron': 'team'}
+            if g.get('teamfoto') else None,
+            'fotos': [{'naam': f['bestand'], 'url': bestand_url(os.path.join(fmap, f['bestand'])), 'bron': f['bron'],
+                       'bijschrift': f['bijschrift'], 'team': f.get('team')} for f in g['fotos']]}
+
+
+def maak(keuze):
+    """Stap 2: met de keuze (teams en foto's eruit) aanvullen, de PDF en de online pagina maken."""
+    sleutel = str(keuze.get('sleutel') or '')
+    if not re.match(r'^[A-Za-z0-9-]+$', sleutel) or not os.path.exists(os.path.join(boekje.werkmap(sleutel), 'boekje-alles.json')):
+        return {'ok': False, 'melding': 'Haal eerst de teams en foto\'s op.'}
+    try:
+        minimaal = max(0, min(40, int(keuze.get('min', boekje.MIN_FOTOS))))
+        uit_teams = [int(i) for i in keuze.get('uit_teams') or []]
+    except (TypeError, ValueError):
+        return {'ok': False, 'melding': 'Ongeldige keuze.'}
+    uit_fotos = [str(n) for n in keuze.get('uit_fotos') or []]
+    regels = []
+    g = boekje.kies(sleutel, uit_teams, uit_fotos, minimaal, log=regels.append)
+    if not g['teams']:
+        return {'ok': False, 'melding': 'Er staat geen enkel team meer aan. Vink minstens één team aan.'}
+    u = boekje.opmaken(sleutel, log=regels.append)
     fmap = os.path.join(u['map'], 'fotos')
     lijst = ([g['teamfoto']] if g.get('teamfoto') else []) + [f['bestand'] for f in g['fotos']]
     soorten = {b: sum(1 for f in g['fotos'] if f['bron'] == b) for b in ('loquiz', 'extra', 'eigen')}
     tot = date.today() + timedelta(days=fotoboek_web.config()['dagen'])
     melding = '' if u['pdf'] else 'De PDF kon niet automatisch gemaakt worden: open de webpagina en kies Afdrukken > Opslaan als PDF.'
-    return {'ok': True, 'sleutel': g['sleutel'], 'titel': e(u['titel']), 'stad': g.get('stad') or '',
+    return {'ok': True, 'sleutel': sleutel, 'titel': e(u['titel']), 'stad': g.get('stad') or '',
             'pdf': bestand_url(u['pdf']) if u['pdf'] else '', 'pdf_naam': os.path.basename(u['pdf']) if u['pdf'] else '',
             'html': bestand_url(u['html']), 'online': bestand_url(u['online']), 'melding': melding,
             'fotos': [{'naam': n, 'url': bestand_url(os.path.join(fmap, n))} for n in lijst],
@@ -359,11 +462,13 @@ def publiceer(sleutel, boek_id, data):
         fh.write(data)
     with open(os.path.join(lokaal, 'index.html'), 'w', encoding='utf-8') as fh:
         fh.write(fotoboek_web.slot())
-    if os.name == 'nt':
-        try:
-            os.startfile(boekje.werkmap(sleutel))  # map openen, zodat de PDF meteen als bijlage kan
-        except OSError:
-            pass
+    try:  # map openen, zodat de PDF meteen als bijlage kan
+        if os.name == 'nt':
+            os.startfile(boekje.werkmap(sleutel))
+        elif sys.platform == 'darwin':
+            subprocess.Popen(['open', boekje.werkmap(sleutel)])
+    except OSError:
+        pass
     try:
         url = fotoboek_web.publiceer(boek_id, data, log=print)
     except fotoboek_web.Fout as fout:
@@ -400,13 +505,15 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         url = urllib.parse.urlparse(self.path)
-        if url.path not in ('/maak', '/publiceer'):
+        if url.path not in ('/ophalen', '/maak', '/publiceer'):
             return self.stuur(404, b'Niet gevonden', 'text/plain')
         if not BEZIG.acquire(blocking=False):
             return self.json({'ok': False, 'melding': 'Er wordt al een fotoboek gemaakt. Wacht even en probeer het opnieuw.'})
         try:
-            if url.path == '/maak':
-                uit = maak(*lees_formulier(self))
+            if url.path == '/ophalen':
+                uit = ophalen(*lees_formulier(self))
+            elif url.path == '/maak':
+                uit = maak(json.loads(self.rfile.read(int(self.headers.get('Content-Length') or 0)) or b'{}'))
             else:
                 q = urllib.parse.parse_qs(url.query)
                 data = self.rfile.read(int(self.headers.get('Content-Length') or 0))
