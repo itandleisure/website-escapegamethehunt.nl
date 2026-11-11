@@ -49,8 +49,9 @@ var FORMULIEREN = {
   review: {
     tabblad: 'Reviews', bewaarMaanden: 36, onderwerp: 'Review The Hunt',
     velden: [['cijfer', 'Sterren (1-5)'], ['review', 'Review'], ['naam', 'Naam'], ['groep', 'Bedrijf of groep'],
-      ['stad', 'Gespeeld in'], ['email', 'E-mail'], ['publiceren', 'Mag op de website']],
-    verplicht: ['cijfer', 'review', 'naam']
+      ['stad', 'Gespeeld in'], ['email', 'E-mail'], ['publiceren', 'Mag op de website'],
+      ['datum', 'Datum gespeeld'], ['spelleider', 'Spelleider(s)'], ['tips', 'Tips (alleen intern)']],
+    verplicht: ['cijfer', 'review', 'naam', 'datum']
   },
   // Elke vraag die in de chat op de website wordt gesteld (anoniem): meteen een mail, en elke ochtend een overzicht.
   chatvraag: {

@@ -280,7 +280,10 @@ def review():
 <div class="field"><label for="r-naam">Naam</label><input id="r-naam" name="naam" autocomplete="name" required></div>
 <div class="field"><label for="r-groep">Bedrijf of groep <span class="opt">(optioneel)</span></label><input id="r-groep" name="groep" autocomplete="organization"></div>
 <div class="field"><label for="r-stad">Gespeeld in <span class="opt">(optioneel)</span></label><input id="r-stad" name="stad" placeholder="Bijvoorbeeld Amersfoort"></div>
+<div class="field"><label for="r-datum">Datum gespeeld</label><input id="r-datum" type="date" name="datum" required></div>
+<div class="field"><label for="r-spelleider">Spelleider(s) <span class="opt">(optioneel)</span></label><input id="r-spelleider" name="spelleider" placeholder="Wie was jullie spelleider?"></div>
 <div class="field"><label for="r-mail">E-mailadres <span class="opt">(optioneel)</span></label><input id="r-mail" type="email" name="email" autocomplete="email"></div>
+<div class="field full"><label for="r-tips">Tips of verbeterpunten <span class="opt">(optioneel, alleen voor ons)</span></label><textarea id="r-tips" name="tips" placeholder="Wat kunnen we nog beter doen?"></textarea></div>
 <div class="field full"><div class="choices"><label><input type="checkbox" name="publiceren" value="ja" checked> Jullie mogen mijn review (met voornaam) op de website zetten</label></div></div>
 <div class="hp" aria-hidden="true"><label for="r-web">Laat dit veld leeg</label><input id="r-web" name="_honey" tabindex="-1" autocomplete="off"></div>
 <p class="form-note error full" data-form-error hidden role="alert">Versturen is niet gelukt. Probeer het nog eens, of mail je review naar <a href="mailto:{SITE['email']}">{SITE['email']}</a>.</p>
@@ -293,8 +296,14 @@ def review():
 
 def thanks_review():
     crumbs = [('Home', '/'), ('Review', '/review/'), ('Bedankt', None)]
-    body = f'''{hero('Bedankt voor je review!', 'Fijn dat je de tijd nam. We lezen elke review.', crumbs, cta=False)}
+    google = SITE.get('google_review_url') or ''
+    vraag = (f'''<div class="stack"><h2>Wil je ons ook helpen op Google?</h2>
+<p>Je review staat nu bij ons. Wil je hem ook op Google zetten? Dan zien andere groepen hem ook, en dat helpt ons enorm. Je kunt je tekst gewoon kopiëren.</p>
+<p><a class="btn btn-signal" href="{esc(google)}" target="_blank" rel="noopener">Zet je review op Google {ICON_ARROW}</a></p></div>'''
+             if google else '')
+    body = f'''{hero('Bedankt voor je review!', 'Fijn dat je de tijd nam. We lezen elke review, ook de tips.', crumbs, cta=False)}
 <section class="section"><div class="wrap stack">
+{vraag}
 <p>Zin in een volgende missie? Bekijk <a href="/">alle locaties van The Hunt</a> of bel ons op <a href="tel:{SITE['phone']}">{SITE['phone_display']}</a>.</p>
 <p><a class="btn btn-line" href="/">Terug naar de homepage</a></p>
 </div></section>'''
