@@ -27,3 +27,4 @@ tools/seo/clarity.token
 # Loquiz-resultaten: bevat foto's van deelnemers (niet publiek)
 tools/loquiz/uitvoer/
 tools/loquiz/groepsfotos/
+tools/loquiz/teamfotos/
