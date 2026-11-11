@@ -297,14 +297,21 @@ def review():
 def thanks_review():
     crumbs = [('Home', '/'), ('Review', '/review/'), ('Bedankt', None)]
     google = SITE.get('google_review_url') or ''
-    vraag = (f'''<div class="stack"><h2>Wil je ons ook helpen op Google?</h2>
+    vraag = (f'''<section class="section"><div class="wrap stack"><h2>Wil je ons ook helpen op Google?</h2>
 <p>Je review staat nu bij ons. Wil je hem ook op Google zetten? Dan zien andere groepen hem ook, en dat helpt ons enorm. Je kunt je tekst gewoon kopiëren.</p>
-<p><a class="btn btn-signal" href="{esc(google)}" target="_blank" rel="noopener">Zet je review op Google {ICON_ARROW}</a></p></div>'''
+<p><a class="btn btn-signal" href="{esc(google)}" target="_blank" rel="noopener">Zet je review op Google {ICON_ARROW}</a></p></div></section>'''
              if google else '')
+    spellen = ''.join(
+        f'<a class="card has-img" href="{esc(sp["link"])}" target="_blank" rel="noopener">'
+        f'<img src="{esc(sp["foto"])}" alt="{esc(sp["naam"])}" loading="lazy" width="900" height="480">'
+        f'<h3>{esc(sp["naam"])}</h3><p>{esc(sp["tekst"])}</p><span class="more">Bekijk het spel →</span></a>'
+        for sp in SITE.get('badass_spellen', []))
     body = f'''{hero('Bedankt voor je review!', 'Fijn dat je de tijd nam. We lezen elke review, ook de tips.', crumbs, cta=False)}
-<section class="section"><div class="wrap stack">
 {vraag}
-<p>Zin in een volgende missie? Bekijk de andere spellen van Badass Games, zoals The Hundred, de Escapeboxen, de Detective Game en Boeven &amp; Speurneuzen.</p>
+<section class="section paper"><div class="wrap stack">
+<span class="label">Badass Games</span><h2>Zin in een volgende missie?</h2>
+<p class="lede">Badass Games maakt nog meer spellen voor teams, vrienden en families.</p>
+<div class="cards four">{spellen}</div>
 <p><a class="btn btn-signal" href="https://badassgames.nl/" target="_blank" rel="noopener">Bekijk alle spellen van Badass Games {ICON_ARROW}</a></p>
 </div></section>'''
     return page(path='/review/bedankt/', title='Bedankt voor je review - Escape Game The Hunt',

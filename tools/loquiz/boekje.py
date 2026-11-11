@@ -66,20 +66,7 @@ TEKST = {
 }
 
 # Andere spellen op de laatste pagina. Vul de omschrijving en link in; laat 'link' leeg om hem weg te laten.
-SPELLEN = [  # bron: de spelpagina's van Badass Games; links worden badassgames.nl
-    {'naam': 'The Hundred', 'link': 'https://badassgames.nl/the-hundred/',
-     'foto': '/assets/uploads/2026/11/badassgames-the-hundred-900.jpg',
-     'tekst': 'Verzamel als team precies 100 munten in 90 minuten. Te veel of te weinig is verliezen: strategie onder tijdsdruk.'},
-    {'naam': 'Escapeboxen', 'link': 'https://badassgames.nl/escapeboxen/',
-     'foto': '/assets/uploads/2026/11/badassgames-escapeboxen-900.jpg',
-     'tekst': 'Een complete escape-ervaring in een kist, met echte sloten, puzzels en onze GameApp. Speel hem overal: thuis, op kantoor of op locatie.'},
-    {'naam': 'Detective Game', 'link': 'https://badassgames.nl/detective-game/',
-     'foto': '/assets/uploads/2026/11/badassgames-detective-game-900.jpg',
-     'tekst': 'Los als rechercheursteam drie mysteries op. Verzamel aanwijzingen, ondervraag vier verdachten en ontdek wie de waarheid spreekt.'},
-    {'naam': 'Boeven & Speurneuzen', 'link': 'https://badassgames.nl/boeven-en-speurneuzen/',
-     'foto': '/assets/uploads/2026/11/badassgames-boeven-en-speurneuzen-900.jpg',
-     'tekst': 'Speurtocht voor kinderen: los als onderzoeksteam een inbraak in het gemeentehuis op en ontmasker de échte boef.'},
-]
+SPELLEN = SITE.get('badass_spellen', [])  # meer spellen van Badass Games, uit src/data/site.json
 
 KENGETALLEN = {  # indicatief
     'stappen_per_km': 1350,      # gemiddelde wandelaar
