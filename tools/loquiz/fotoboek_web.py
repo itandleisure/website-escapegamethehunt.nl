@@ -159,7 +159,8 @@ def inhoud(g, pdf_naam):
 .fb .lb .dicht{{position:absolute;top:10px;right:14px;background:none;border:0;color:#fff;font-size:2rem;cursor:pointer;line-height:1}}
 .fb .lb .pijl{{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:0;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.4rem;cursor:pointer}}
 .fb .lb .vorige{{left:10px}}.fb .lb .volgende{{right:10px}}
-@media (max-width:600px){{.fb section{{padding:40px 0}}.fb .logo{{height:48px}}.fb .raster{{grid-template-columns:repeat(2,1fr);gap:6px}}}}
+.fb .bg-logo{{float:right;width:120px;height:120px;margin:0 0 16px 24px}}
+@media (max-width:600px){{.fb .bg-logo{{width:84px;height:84px}}.fb section{{padding:40px 0}}.fb .logo{{height:48px}}.fb .raster{{grid-template-columns:repeat(2,1fr);gap:6px}}}}
 </style>
 <div class="fb">
   <header class="held">
@@ -215,6 +216,7 @@ def inhoud(g, pdf_naam):
   </div></section>
 
   <section class="donker" style="border-top:1px solid rgba(255,255,255,.1)"><div class="wrap">
+    <img class="bg-logo" src="{URL}{b.BADASS_LOGO}" alt="Badass Games" loading="lazy">
     <div class="label">Badass Games</div>
     <h2>{e(T["spellen_kop"])}</h2>
     <p style="max-width:65ch">{e(T["spellen"])}</p>
