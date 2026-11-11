@@ -65,6 +65,7 @@ def bestanden():
     lijst += ['src/data/site.json', 'src/data/locations.json']
     lijst += ['docs/assets/fonts/' + f for f in os.listdir(os.path.join(ROOT, 'docs', 'assets', 'fonts'))]
     lijst += ['docs' + p for p in (site['logo'], boekje.VOORKANT_FOTO, boekje.VIDEO_POSTER, boekje.REVIEW_FOTO, boekje.HUNTER_FOTO)]
+    lijst += ['docs' + s['foto'] for s in boekje.SPELLEN if s.get('foto', '').startswith('/')]
     lijst += ['docs' + p for p in boekje.EIGEN_FOTOS if p not in lijst and 'docs' + p not in lijst]
     eigen = os.path.join(HIER, 'eigen-fotos')
     if os.path.isdir(eigen):
