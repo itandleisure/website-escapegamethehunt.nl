@@ -304,8 +304,8 @@ def thanks_review():
     body = f'''{hero('Bedankt voor je review!', 'Fijn dat je de tijd nam. We lezen elke review, ook de tips.', crumbs, cta=False)}
 <section class="section"><div class="wrap stack">
 {vraag}
-<p>Zin in een volgende missie? Bekijk <a href="/">alle locaties van The Hunt</a> of bel ons op <a href="tel:{SITE['phone']}">{SITE['phone_display']}</a>.</p>
-<p><a class="btn btn-line" href="/">Terug naar de homepage</a></p>
+<p>Zin in een volgende missie? Bekijk de andere spellen van Badass Games, zoals The Hundred, de Escapeboxen, de Detective Game en Boeven &amp; Speurneuzen.</p>
+<p><a class="btn btn-signal" href="https://badassgames.nl/" target="_blank" rel="noopener">Bekijk alle spellen van Badass Games {ICON_ARROW}</a></p>
 </div></section>'''
     return page(path='/review/bedankt/', title='Bedankt voor je review - Escape Game The Hunt',
                 description='Bedankt voor je review van Escape Game The Hunt.', body=body, robots='noindex, follow')
