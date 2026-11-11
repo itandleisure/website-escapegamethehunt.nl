@@ -11,7 +11,7 @@ Opbouw:
   2. jullie Hunt in cijfers: gemiddeld en totaal gelopen, per team km, stappen, kcal en CO2-besparing, plus de video
   3. groepsfoto('s) van de spelleider
   4. alle foto's uit Loquiz, vier per pagina
-  5. laat een review achter, met de andere spellen van Badass Games en de contactgegevens
+  5. laat een review achter, met de andere spellen van Badass Games, spelleiders werven en de contactgegevens
 
 Groepsfoto's van de spelleider: zet ze in tools/loquiz/groepsfotos/<game>-<scope>/ (jpg, png of webp). Zonder groepsfoto
 slaat het boekje die pagina over. Uitvoer: tools/loquiz/uitvoer/<game>-<scope>/boekje-<game>-<scope>.html en .pdf. De PDF maakt het
@@ -56,6 +56,12 @@ TEKST = {
                'En zin in meer? Wij hebben nog veel meer spellen.'),
     'review_url': 'https://escapegamethehunt.nl/',
     'spellen_kop': 'Meer spellen van Badass Games',
+    'hunter_label': 'Gezocht: Hunters',
+    'hunter_kop': 'Wil jullie zoon of dochter ook Hunter worden?',
+    'hunter': ('Wij zoeken spelleiders in heel Nederland: groepen ontvangen, het spel uitleggen en daarna als Hunter '
+               'de jacht openen. Een bijbaan vol actie, in de eigen stad.'),
+    'hunter_url': 'https://escapegamethehunt.nl/werken-bij/werken-bij-escape-game-the-hunt-spelleider/',
+    'hunter_link': 'escapegamethehunt.nl/werken-bij',
 }
 
 # Andere spellen op de laatste pagina. Vul de omschrijving en link in; laat 'link' leeg om hem weg te laten.
@@ -190,7 +196,13 @@ tr.totaal td{{border-bottom:0;border-top:1.5px solid var(--navy);font-weight:700
 /* review + spellen */
 .review p{{color:var(--on-dark-muted);font-size:11.5pt;max-width:165mm}}
 .knop{{display:inline-block;margin-top:6mm;background:var(--signal);color:var(--night);font-weight:700;padding:3.5mm 8mm;border-radius:20mm;text-decoration:none;font-size:12pt}}
-.spellen{{margin-top:14mm}}
+.spellen{{margin-top:9mm}}
+.hunter{{margin-top:6mm;display:grid;grid-template-columns:1fr auto;gap:6mm;align-items:center;background:var(--signal);
+  color:var(--night);border-radius:2.5mm;padding:5mm 6mm;text-decoration:none}}
+.hunter .label{{color:var(--night);opacity:.75}}
+.hunter b{{display:block;font-size:13.5pt;line-height:1.2;margin:1mm 0 1.5mm}}
+.hunter span{{font-size:9.5pt;line-height:1.4;display:block}}
+.hunter u{{text-decoration:none;font-weight:700;font-size:10pt;white-space:nowrap;border:2px solid var(--night);border-radius:20mm;padding:2.5mm 4.5mm}}
 .spellen h3{{color:#fff;font-size:14pt;margin-bottom:4mm}}
 .kaarten{{display:grid;grid-template-columns:1fr 1fr;gap:4mm}}
 .kaart{{border:1px solid rgba(255,255,255,.15);border-radius:2.5mm;padding:5mm;border-top:3px solid var(--signal);text-decoration:none;color:inherit;display:block}}
@@ -313,6 +325,10 @@ def boekje(game, teams, per_team, fotos_groep, stad):
     <p>{e(TEKST["review"])}</p>
     <a class="knop" href="{e(TEKST["review_url"])}">Laat een review achter</a>
     <div class="spellen"><h3>{e(TEKST["spellen_kop"])}</h3><div class="kaarten">{kaarten}</div></div>
+    <a class="hunter" href="{e(TEKST["hunter_url"])}">
+      <div><div class="label">{e(TEKST["hunter_label"])}</div><b>{e(TEKST["hunter_kop"])}</b><span>{e(TEKST["hunter"])}</span></div>
+      <u>{e(TEKST["hunter_link"])} →</u>
+    </a>
   </div>
   <div class="contact">
     <img src="{e(logo)}" alt="The Hunt">
