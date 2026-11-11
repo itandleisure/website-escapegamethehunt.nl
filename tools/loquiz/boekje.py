@@ -408,7 +408,7 @@ def naar_pdf(exe, html_pad, pdf_pad):
         cmd = [exe, '--headless=new', '--disable-gpu', '--no-sandbox', '--no-first-run', '--allow-file-access-from-files',
                '--no-pdf-header-footer', '--print-to-pdf-no-header', '--virtual-time-budget=30000',
                f'--print-to-pdf={pdf_pad}', uri(html_pad)]
-        if os.name == 'nt':  # los profiel, zodat een geopende Edge/Chrome niet in de weg zit
+        if os.name == 'nt' or sys.platform == 'darwin':  # los profiel, zodat een geopende Edge/Chrome niet in de weg zit
             cmd.insert(1, f'--user-data-dir={profiel}')
         try:
             subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=180)

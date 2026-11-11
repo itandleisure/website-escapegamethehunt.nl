@@ -17,6 +17,7 @@ import json
 import os
 import re
 import socket
+import subprocess
 import sys
 import tempfile
 import threading
@@ -359,11 +360,13 @@ def publiceer(sleutel, boek_id, data):
         fh.write(data)
     with open(os.path.join(lokaal, 'index.html'), 'w', encoding='utf-8') as fh:
         fh.write(fotoboek_web.slot())
-    if os.name == 'nt':
-        try:
-            os.startfile(boekje.werkmap(sleutel))  # map openen, zodat de PDF meteen als bijlage kan
-        except OSError:
-            pass
+    try:  # map openen, zodat de PDF meteen als bijlage kan
+        if os.name == 'nt':
+            os.startfile(boekje.werkmap(sleutel))
+        elif sys.platform == 'darwin':
+            subprocess.Popen(['open', boekje.werkmap(sleutel)])
+    except OSError:
+        pass
     try:
         url = fotoboek_web.publiceer(boek_id, data, log=print)
     except fotoboek_web.Fout as fout:
