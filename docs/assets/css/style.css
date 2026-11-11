@@ -285,8 +285,10 @@ fieldset.field{border:0;padding:0;margin:0}
 .choices label{display:inline-flex;align-items:center;gap:8px;font-weight:400;border:1px solid var(--line);border-radius:999px;padding:.5em .9em;cursor:pointer;background:var(--paper)}
 .choices input{accent-color:var(--signal);width:auto}
 .hp{position:absolute;left:-9999px}
-.form-note{grid-column:1/-1;padding:12px 14px;border-radius:8px;background:#ebf7ef;color:#1f5130}
-.form-note.error{background:#fdecea;color:#8a1f11}
+.form-note{grid-column:1/-1;margin:10px 0 0;font-size:.85rem;line-height:1.5;color:var(--muted)}
+.form-note a{color:inherit;text-decoration:underline}
+.form-note.error{margin:0;padding:12px 14px;border-radius:8px;font-size:.95rem;background:#fdecea;color:#8a1f11}
+.form-note.error a{color:#8a1f11}
 .contact-lines{display:flex;flex-direction:column;gap:8px}
 .contact-lines a{color:var(--white);font-weight:700;text-decoration:none}
 .contact-lines a:hover{color:var(--signal)}
