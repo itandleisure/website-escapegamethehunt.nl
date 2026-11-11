@@ -46,9 +46,11 @@ LEESMIJ = '''Fotoboek maken - The Hunt
 3. Teamfoto: sleep de groepsfoto van de spelleider in het vak (één foto, komt groot bovenaan).
    Sla foto's uit WhatsApp eerst op de computer op.
 4. Extra foto's (van de spelleider of het social media team): sleep ze in het tweede vak.
-   Zijn er samen minder dan 8 foto's, dan vullen we aan met onze eigen sfeerfoto's.
-5. Laat "Ook online zetten met een wachtwoord" aan staan en klik op "Maak fotoboek".
-6. Na een paar minuten zie je de link, het wachtwoord en een kant-en-klare mail. Klik op "Kopieer mail",
+5. Laat "Ook online zetten met een wachtwoord" aan staan en klik op "Teams en foto's ophalen".
+6. Controleer wat erin komt: vink teams uit die er niet in horen (zoals de spelleiders) en klik op foto's
+   die niet in het boekje mogen. Zijn er minder dan 8 foto's, dan vullen we aan met onze eigen sfeerfoto's.
+   Klik op "Maak fotoboek".
+7. Na een paar minuten zie je de link, het wachtwoord en een kant-en-klare mail. Klik op "Kopieer mail",
    plak hem in een nieuwe mail aan de klant en voeg de PDF toe als bijlage (de map met de PDF gaat vanzelf open).
    Het wachtwoord is elke keer anders. De link werkt na een paar minuten.
 
@@ -90,9 +92,11 @@ Elke keer:
    Vul eventueel de plaatsnaam in.
 3. Teamfoto: sleep de groepsfoto van de spelleider in het vak (één foto, komt groot bovenaan).
 4. Extra foto's (van de spelleider of het social media team): sleep ze in het tweede vak.
-   Zijn er samen minder dan 8 foto's, dan vullen we aan met onze eigen sfeerfoto's.
-5. Laat "Ook online zetten met een wachtwoord" aan staan en klik op "Maak fotoboek".
-6. Na een paar minuten zie je de link, het wachtwoord en een kant-en-klare mail. Klik op "Kopieer mail",
+5. Laat "Ook online zetten met een wachtwoord" aan staan en klik op "Teams en foto's ophalen".
+6. Controleer wat erin komt: vink teams uit die er niet in horen (zoals de spelleiders) en klik op foto's
+   die niet in het boekje mogen. Zijn er minder dan 8 foto's, dan vullen we aan met onze eigen sfeerfoto's.
+   Klik op "Maak fotoboek".
+7. Na een paar minuten zie je de link, het wachtwoord en een kant-en-klare mail. Klik op "Kopieer mail",
    plak hem in een nieuwe mail aan de klant en voeg de PDF toe als bijlage (de map met de PDF gaat vanzelf open).
    Het wachtwoord is elke keer anders. De link werkt na een paar minuten.
 
