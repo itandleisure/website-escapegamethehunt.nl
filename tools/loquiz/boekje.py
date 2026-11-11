@@ -52,7 +52,7 @@ TEKST = {
     'review_kop': 'Laat een review achter',
     'review': ('Vonden jullie het een topdag? Laat dan een review achter, dat helpt ons enorm. '
                'En zin in meer? Wij hebben nog veel meer spellen.'),
-    'review_url': 'https://escapegamethehunt.nl/',
+    'review_url': 'https://escapegamethehunt.nl/review/',
     'spellen_kop': 'Meer spellen van Badass Games',
     'hunter_label': 'Gezocht: Hunters',
     'hunter_kop': 'Wil jullie zoon of dochter ook Hunter worden?',
