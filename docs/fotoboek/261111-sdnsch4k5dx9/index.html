@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
+<meta name="referrer" content="no-referrer">
+<title>Fotoboek · The Hunt</title>
+<style>
+@font-face{font-family:'Lato';font-weight:400;font-display:swap;src:url(/assets/fonts/S6uyw4BMUTPHjx4wXg.woff2) format('woff2')}
+@font-face{font-family:'Lato';font-weight:700;font-display:swap;src:url(/assets/fonts/S6u9w4BMUTPHh6UVSwiPGQ.woff2) format('woff2')}
+html,body{margin:0;background:#141e29}
+.slot{min-height:100vh;display:grid;place-items:center;padding:24px;font:400 17px/1.5 'Lato',system-ui,sans-serif;color:#e7edf3}
+.slot form{width:100%;max-width:380px;text-align:center}
+.slot img{height:72px;margin:0 auto 22px;display:block}
+.slot h1{font-size:1.6rem;margin:0 0 6px;color:#fff}
+.slot p{color:#a9b6c4;margin:0 0 20px}
+.slot input{width:100%;box-sizing:border-box;font:inherit;font-size:1.15rem;letter-spacing:.08em;text-align:center;padding:13px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff}
+.slot input:focus{outline:3px solid rgba(242,146,34,.5);border-color:#f29222}
+.slot button{margin-top:12px;width:100%;font:inherit;font-weight:700;background:#f29222;color:#141e29;border:0;border-radius:999px;padding:13px;cursor:pointer}
+.slot button[disabled]{opacity:.6;cursor:wait}
+.slot .fout{color:#ffb4a8;min-height:1.5em;margin-top:12px}
+</style></head>
+<body>
+<div class="slot" id="slot"><form id="f">
+  <img src="/assets/uploads/2025/06/escape-game-the-hunt-wit-logo.png" alt="The Hunt">
+  <h1>Jullie fotoboek</h1>
+  <p>Vul het wachtwoord in dat je van ons hebt gekregen.</p>
+  <input id="ww" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" required placeholder="Wachtwoord" aria-label="Wachtwoord">
+  <button id="knop">Open het fotoboek</button>
+  <div class="fout" id="fout" role="alert"></div>
+</form></div>
+<div id="app"></div>
+<script>
+(function(){
+const ITER=250000,MAGIC='THB1';
+const $=id=>document.getElementById(id);
+function norm(s){return s.toUpperCase().replace(/[^A-Z0-9]/g,'')}
+async function sleutel(ww,zout){
+  const basis=await crypto.subtle.importKey('raw',new TextEncoder().encode(norm(ww)),'PBKDF2',false,['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2',salt:zout,iterations:ITER,hash:'SHA-256'},basis,{name:'AES-GCM',length:256},false,['decrypt']);
+}
+let data=null;
+async function laad(){if(!data){const r=await fetch('data.bin',{cache:'no-store'});if(!r.ok)throw new Error('niet gevonden');data=new Uint8Array(await r.arrayBuffer())}return data}
+async function open(ww){
+  const d=await laad();
+  if(new TextDecoder().decode(d.slice(0,4))!==MAGIC)throw new Error('onbekend bestand');
+  const zout=d.slice(4,20),iv=d.slice(20,32);
+  const k=await sleutel(ww,zout);
+  let plat;
+  try{plat=new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv},k,d.slice(32)))}catch(e){return false}
+  const lengte=new DataView(plat.buffer).getUint32(0);
+  const kop=JSON.parse(new TextDecoder().decode(plat.subarray(4,4+lengte)));
+  const basis=4+lengte,blobs={},bytes={};
+  for(const b of kop.bestanden){const deel=plat.subarray(basis+b.start,basis+b.start+b.lengte);bytes[b.naam]=deel;blobs[b.naam]=URL.createObjectURL(new Blob([deel],{type:b.type}))}
+  toon(kop,blobs,bytes);
+  try{sessionStorage.setItem('fb:'+location.pathname,ww)}catch(e){}
+  return true;
+}
+function crc32(b){let c,t=crc32.t;if(!t){t=crc32.t=[];for(let n=0;n<256;n++){c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}}
+  c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=t[(c^b[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0}
+function zip(bestanden){ // zonder compressie (foto's zijn al gecomprimeerd)
+  const delen=[],centraal=[];let pos=0;
+  for(const [naam,data] of bestanden){
+    const n=new TextEncoder().encode(naam),crc=crc32(data),h=new DataView(new ArrayBuffer(30));
+    h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint16(8,0,true);h.setUint32(14,crc,true);
+    h.setUint32(18,data.length,true);h.setUint32(22,data.length,true);h.setUint16(26,n.length,true);
+    delen.push(new Uint8Array(h.buffer),n,data);
+    const c=new DataView(new ArrayBuffer(46));
+    c.setUint32(0,0x02014b50,true);c.setUint16(4,20,true);c.setUint16(6,20,true);c.setUint32(16,crc,true);
+    c.setUint32(20,data.length,true);c.setUint32(24,data.length,true);c.setUint16(28,n.length,true);c.setUint32(42,pos,true);
+    centraal.push(new Uint8Array(c.buffer),n);pos+=30+n.length+data.length;
+  }
+  const grootte=centraal.reduce((s,x)=>s+x.length,0),eind=new DataView(new ArrayBuffer(22));
+  eind.setUint32(0,0x06054b50,true);eind.setUint16(8,bestanden.length,true);eind.setUint16(10,bestanden.length,true);
+  eind.setUint32(12,grootte,true);eind.setUint32(16,pos,true);
+  return new Blob([...delen,...centraal,new Uint8Array(eind.buffer)],{type:'application/zip'});
+}
+function bewaar(blob,naam){const a=document.createElement('a');a.href=typeof blob==='string'?blob:URL.createObjectURL(blob);a.download=naam;document.body.appendChild(a);a.click();a.remove()}
+function toon(kop,blobs,bytes){
+  $('slot').remove();
+  document.title=kop.titel||document.title;
+  const app=$('app');app.innerHTML=kop.html;
+  app.querySelectorAll('[data-f]').forEach(el=>{const u=blobs[el.dataset.f];if(!u)return;if(el.tagName==='A')el.href=u;else el.src=u});
+  const fotos=kop.bestanden.filter(b=>b.naam.startsWith('fotos/'));
+  const bewaarnaam={};fotos.forEach((b,i)=>bewaarnaam[b.naam]=String(i+1).padStart(2,'0')+'-'+(b.bewaar||b.naam.slice(6)));
+  const zipnaam=(kop.zip||'fotos-the-hunt')+'.zip';
+  app.querySelectorAll('[data-zip]').forEach(k=>k.onclick=()=>bewaar(zip(fotos.map(b=>[bewaarnaam[b.naam],bytes[b.naam]])),zipnaam));
+  const lb=app.querySelector('#lb'),img=lb.querySelector('img'),dl=lb.querySelector('[data-lb=download]');let nu=0;
+  const tegels=[...app.querySelectorAll('.foto')];
+  function toonFoto(i){nu=(i+tegels.length)%tegels.length;const f=tegels[nu].querySelector('img');img.src=f.src;dl.href=f.src;
+    dl.download='the-hunt-'+(bewaarnaam[f.dataset.f]||'foto.jpg');lb.classList.add('open')}
+  tegels.forEach((t,i)=>t.onclick=()=>toonFoto(i));
+  lb.addEventListener('click',ev=>{const a=ev.target.dataset.lb;if(a==='dicht'||ev.target===lb)lb.classList.remove('open');else if(a==='1'||a==='-1')toonFoto(nu+Number(a))});
+  document.addEventListener('keydown',ev=>{if(!lb.classList.contains('open'))return;if(ev.key==='Escape')lb.classList.remove('open');
+    if(ev.key==='ArrowRight')toonFoto(nu+1);if(ev.key==='ArrowLeft')toonFoto(nu-1)});
+  window.scrollTo(0,0);
+}
+$('f').addEventListener('submit',async ev=>{
+  ev.preventDefault();const k=$('knop');k.disabled=true;$('fout').textContent='';k.textContent='Bezig met openen...';
+  try{if(!await open($('ww').value)){$('fout').textContent='Dat wachtwoord klopt niet. Let op: hoofdletters maken niet uit, streepjes ook niet.'}}
+  catch(e){$('fout').textContent='Het fotoboek kon niet geladen worden. Probeer het later opnieuw.'}
+  k.disabled=false;k.textContent='Open het fotoboek';
+});
+try{const w=sessionStorage.getItem('fb:'+location.pathname);if(w){$('ww').value=w;open(w).catch(()=>{})}}catch(e){}
+})();
+</script>
+</body></html>
