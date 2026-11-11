@@ -34,17 +34,25 @@ BAT = '\r\n'.join([
     '"python\\python.exe" "tools\\loquiz\\boekje_tool.py"',
     'if errorlevel 1 pause', ''])
 
-LEESMIJ = '''Fotoboekje maken - The Hunt
-===========================
+LEESMIJ = '''Fotoboek maken - The Hunt
+=======================
 
 1. Dubbelklik op "Boekje maken.bat". Er opent een pagina in je browser (en een zwart venster: laat dat open).
 2. Plak de spelleider-URL, bijvoorbeeld https://results.loquiz.com/F3CJ8WVUSC:VANWIJNEN
-3. Sleep de groepsfoto('s) uit WhatsApp in het vak (eerst opslaan op de computer).
-4. Vul eventueel de plaatsnaam in en klik op "Maak boekje".
-5. Na ongeveer een minuut opent de map met de PDF. Die kun je mailen naar de klant.
+   Vul eventueel de plaatsnaam in.
+3. Teamfoto: sleep de groepsfoto van de spelleider in het vak (één foto, komt groot bovenaan).
+   Sla foto's uit WhatsApp eerst op de computer op.
+4. Extra foto's (van de spelleider of het social media team): sleep ze in het tweede vak.
+   Zijn er samen minder dan 8 foto's, dan vullen we aan met onze eigen sfeerfoto's.
+5. Laat "Ook online zetten met een wachtwoord" aan staan en klik op "Maak fotoboek".
+6. Na een paar minuten zie je de link, het wachtwoord en een kant-en-klare mail. Klik op "Kopieer mail",
+   plak hem in een nieuwe mail aan de klant en voeg de PDF toe als bijlage (de map met de PDF gaat vanzelf open).
+   Het wachtwoord is elke keer anders. De link werkt na een paar minuten.
 
-De boekjes staan in tools\\loquiz\\uitvoer\\<spel>\\. Klaar? Sluit het zwarte venster.
-Werkt de PDF niet? Klik op "Open als webpagina" en kies Afdrukken > Opslaan als PDF.
+De fotoboeken staan ook op deze computer in tools\\loquiz\\uitvoer\\<spel>\\.
+Online fotoboeken worden na 90 dagen automatisch weggehaald.
+Werkt de PDF niet? Klik op "PDF-versie als webpagina" en kies Afdrukken > Opslaan als PDF.
+Zegt het scherm "geen GITHUB_TOKEN" of "GitHub weigert de toegang"? Vraag Frans om een nieuwe .env.
 Windows vraagt bij de eerste keer misschien of het programma mag draaien: kies "Meer info" > "Toch uitvoeren".
 '''.replace('\n', '\r\n')
 
@@ -53,10 +61,14 @@ def bestanden():
     site = json.load(open(os.path.join(ROOT, 'src', 'data', 'site.json'), encoding='utf-8'))
     sys.path.insert(0, HIER)
     import boekje
-    lijst = [f'tools/loquiz/{n}' for n in ('resultaten.py', 'boekje.py', 'boekje_tool.py')]
+    lijst = [f'tools/loquiz/{n}' for n in ('resultaten.py', 'boekje.py', 'boekje_tool.py', 'fotoboek_web.py')]
     lijst += ['src/data/site.json', 'src/data/locations.json']
     lijst += ['docs/assets/fonts/' + f for f in os.listdir(os.path.join(ROOT, 'docs', 'assets', 'fonts'))]
     lijst += ['docs' + p for p in (site['logo'], boekje.VOORKANT_FOTO, boekje.VIDEO_POSTER)]
+    lijst += ['docs' + p for p in boekje.EIGEN_FOTOS if p not in lijst and 'docs' + p not in lijst]
+    eigen = os.path.join(HIER, 'eigen-fotos')
+    if os.path.isdir(eigen):
+        lijst += [f'tools/loquiz/eigen-fotos/{f}' for f in sorted(os.listdir(eigen)) if f.lower().endswith(boekje.FOTO_EXT)]
     return lijst
 
 

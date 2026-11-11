@@ -1,23 +1,20 @@
-"""Fotoboekje per groep als PDF: alle teams van één Loquiz-game (en scope) in één boekje.
+"""Fotoboek per groep: PDF en (via boekje_tool.py) een online pagina met wachtwoord. Eén boekje per Loquiz-game en scope.
 
-    python tools/loquiz/boekje.py --url https://results.loquiz.com/F3CJ8WVUSC:VANWIJNEN
-    python tools/loquiz/boekje.py                         # game FK9SCMLMAJ, scope ADHOC
-    python tools/loquiz/boekje.py --game ABC123 --scope ADHOC
-    python tools/loquiz/boekje.py --stad "Den Haag"       # "... The Hunt in Den Haag" op de voorkant
+    python tools/loquiz/boekje.py --url https://results.loquiz.com/F3CJ8WVUSC:VANWIJNEN --teamfoto team.jpg
+    python tools/loquiz/boekje.py --url ... --extra foto1.jpg foto2.jpg --min-fotos 8 --stad "Den Haag"
     python tools/loquiz/boekje.py --demo                  # voorbeeldboekje zonder API
 
-Opbouw:
+Opbouw van de PDF:
   1. voorkant met onze eigen foto: "Missie volbracht · Bedankt voor het spelen van The Hunt"
   2. jullie Hunt in cijfers: gemiddeld en totaal gelopen, per team km, stappen, kcal en CO2-besparing, plus de video
-  3. groepsfoto('s) van de spelleider
-  4. alle foto's uit Loquiz, vier per pagina
+  3. de teamfoto van de spelleider (één foto, groot)
+  4. alle foto's: uit Loquiz, de extra foto's (spelleider, social media) en zo nodig eigen sfeerfoto's tot het minimum
   5. laat een review achter, met de andere spellen van Badass Games, spelleiders werven en de contactgegevens
 
-Groepsfoto's van de spelleider: zet ze in tools/loquiz/groepsfotos/<game>-<scope>/ (jpg, png of webp). Zonder groepsfoto
-slaat het boekje die pagina over. Uitvoer: tools/loquiz/uitvoer/<game>-<scope>/boekje-<game>-<scope>.html en .pdf. De PDF maakt het
-script met Edge of Chrome (headless, zit standaard op Windows). Lukt dat niet, open dan de .html en kies Afdrukken >
-Opslaan als PDF. Teksten, kengetallen en de spellen staan hieronder.
-Zonder opdrachtregel: dubbelklik "Boekje maken.bat" (boekje_tool.py), dat opent een invulscherm in de browser.
+Werkwijze: verzamel() haalt de gegevens en foto's op in tools/loquiz/uitvoer/<game>-<scope>/ (map fotos/ en boekje.json),
+opmaken() maakt daaruit de PDF en de inhoud van de online pagina. De PDF maakt het script met Edge of Chrome (headless,
+zit standaard op Windows). Eigen sfeerfoto's: zet ze in tools/loquiz/eigen-fotos/, anders kiest het script foto's van
+de site (EIGEN_FOTOS). Zonder opdrachtregel: dubbelklik "Boekje maken.bat" (boekje_tool.py) voor het invulscherm.
 """
 import argparse
 import glob
@@ -29,6 +26,7 @@ import subprocess
 import sys
 import tempfile
 import urllib.parse
+import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -79,6 +77,20 @@ KENGETALLEN = {  # indicatief
 }
 
 FOTO_EXT = ('.jpg', '.jpeg', '.png', '.webp')
+MIN_FOTOS = 8       # aanvullen met eigen sfeerfoto's tot minimaal zoveel foto's
+EIGEN_MAP = os.path.join(HIER, 'eigen-fotos')
+EIGEN_FOTOS = [     # sfeerfoto's van de site (pad binnen docs/), gebruikt als tools/loquiz/eigen-fotos/ leeg is
+    '/assets/uploads/2026/09/the-hunt-gameapp-1600.jpg',
+    '/assets/uploads/2026/09/the-hunt-puzzelen-met-kaart-1600.jpg',
+    '/assets/uploads/2026/09/the-hunt-hunter-rugtas-1600.jpg',
+    '/assets/uploads/2026/09/the-hunt-puzzelen-met-gameboekje-1600.jpg',
+    '/assets/uploads/2026/09/the-hunt-spelleider-uitleg-1600.jpg',
+    '/assets/uploads/2026/09/the-hunt-extractiepunt-gehaald-1600.jpg',
+    '/assets/uploads/2026/09/the-hunt-team-puzzelt-1600.jpg',
+    '/assets/uploads/2026/09/the-hunt-spelen-in-de-regen-1600.jpg',
+    '/assets/uploads/2026/09/the-hunt-spelleiders-1600.jpg',
+    '/assets/uploads/2026/09/the-hunt-hunter-en-groepen-1600.jpg',
+]
 RIJEN_P2 = 21       # teams in de tabel op pagina 2, de rest op een volgende pagina
 RIJEN_VERVOLG = 40
 RIJEN_GROTE_VIDEO = 9   # tot zoveel teams past de video groot op pagina 2
@@ -103,16 +115,30 @@ def stad_uit(titel):
     return re.sub(r'(?i)^\s*(escape\s*game\s*)?the\s*hunt\s*(nl\s*)?[-:|]*\s*', '', titel or '').strip()
 
 
-def groepsfotos(map_):
-    if not map_ or not os.path.isdir(map_):
-        return []
-    return [uri(p) for p in sorted(glob.glob(os.path.join(map_, '**', '*'), recursive=True))
-            if p.lower().endswith(FOTO_EXT)]
+def eigen_fotos():
+    """Sfeerfoto's om aan te vullen: eerst tools/loquiz/eigen-fotos/, anders de lijst EIGEN_FOTOS van de site."""
+    if os.path.isdir(EIGEN_MAP):
+        eigen = [p for p in sorted(glob.glob(os.path.join(EIGEN_MAP, '*'))) if p.lower().endswith(FOTO_EXT)]
+        if eigen:
+            return eigen
+    return [str(DOCS / p.lstrip('/')) for p in EIGEN_FOTOS if (DOCS / p.lstrip('/')).exists()]
+
+
+def cijfers(teams):
+    """Per team km, stappen, kcal en CO2, plus de totalen (gedeeld door PDF en online pagina)."""
+    k = KENGETALLEN
+    rijen = [(t.get('naam') or t.get('name') or 'Team', km(t)) for t in teams]
+    rijen = [(n, d, d * k['stappen_per_km'], d * k['kcal_per_km'], d * k['co2_auto_per_km']) for n, d in rijen]
+    rijen.sort(key=lambda r: r[1], reverse=True)  # wie het verst liep bovenaan
+    gelopen = [r for r in rijen if r[1] > 0]
+    tot_km = sum(r[1] for r in rijen)
+    return {'rijen': rijen, 'tot_km': tot_km, 'gem_km': tot_km / len(gelopen) if gelopen else 0,
+            'tot_co2': sum(r[4] for r in rijen)}
 
 
 def km(team):
     try:
-        return float(team.get('odometer') or 0)
+        return float(team.get('km', team.get('odometer')) or 0)
     except (TypeError, ValueError):
         return 0.0
 
@@ -186,7 +212,6 @@ tr.totaal td{{border-bottom:0;border-top:1.5px solid var(--navy);font-weight:700
 
 /* foto's */
 .groepsfoto img{{width:100%;height:225mm;object-fit:cover;border-radius:2.5mm;display:block}}
-.groepsfoto.twee img{{height:110mm;margin-bottom:5mm}}
 .raster{{display:grid;grid-template-columns:1fr 1fr;gap:5mm}}
 .raster figure{{margin:0}}
 .raster img{{width:100%;height:104mm;object-fit:cover;border-radius:2mm;display:block;background:var(--paper)}}
@@ -219,9 +244,9 @@ def voet(onder, nr, donker=False):
     return f'<div class="voet"><span>{e(onder)}</span><span>{nr:02d}</span></div>'
 
 
-def boekje(game, teams, per_team, fotos_groep, stad):
+def boekje(titel_game, teams, fotos, teamfoto, stad):
+    """fotos: lijst van (src, bijschrift); teamfoto: src of None."""
     logo = site_uri(SITE['logo'])
-    titel_game = game.get('title') or game.get('name') or ''
     onder = 'The Hunt' + (f' · {stad}' if stad else '')
     k = KENGETALLEN
     bladen, nr = [], 1
@@ -238,15 +263,8 @@ def boekje(game, teams, per_team, fotos_groep, stad):
 </section>''')
 
     # 2. cijfers per groep en per team, met de video
-    rijen = []
-    for t in teams:
-        d = km(t)
-        rijen.append((t.get('name') or 'Team', d, d * k['stappen_per_km'], d * k['kcal_per_km'], d * k['co2_auto_per_km']))
-    rijen.sort(key=lambda r: r[1], reverse=True)  # wie het verst liep bovenaan
-    gelopen = [r for r in rijen if r[1] > 0]
-    tot_km = sum(r[1] for r in rijen)
-    gem_km = tot_km / len(gelopen) if gelopen else 0
-    tot_co2 = sum(r[4] for r in rijen)
+    c = cijfers(teams)
+    rijen, tot_km, gem_km, tot_co2 = c['rijen'], c['tot_km'], c['gem_km'], c['tot_co2']
     groot = f'''<div class="grootrij">
       <div class="groot"><b>{nl(gem_km, 1)} km</b><span>gemiddeld gelopen per team</span></div>
       <div class="groot"><b>{nl(gem_km * k["stappen_per_km"])}</b><span>stappen per persoon, gemiddeld</span></div>
@@ -287,26 +305,20 @@ def boekje(game, teams, per_team, fotos_groep, stad):
     {tabel(deel, i + RIJEN_VERVOLG >= len(rest))}
   </div>{voet(onder, nr)}</section>''')
 
-    # 3. groepsfoto('s)
-    for i in range(0, len(fotos_groep), 2):
-        deel = fotos_groep[i:i + 2]
+    # 3. teamfoto van de spelleider, groot
+    if teamfoto:
         nr += 1
-        imgs = ''.join(f'<img src="{e(f)}" alt="Groepsfoto">' for f in deel)
-        bladen.append(f'''<section class="blad"><div class="binnen groepsfoto{" twee" if len(deel) == 2 else ""}">
+        bladen.append(f'''<section class="blad"><div class="binnen groepsfoto">
     <div class="label">{e(TEKST["label"])}</div><h2>{e(TEKST["groepsfoto_kop"])}</h2>
-    {imgs}
+    <img src="{e(teamfoto)}" alt="Groepsfoto">
   </div>{voet(onder, nr)}</section>''')
 
-    # 4. Loquiz-foto's, vier per pagina, met de teamnaam
-    alle = []
-    for t in teams:
-        for m in per_team.get(str(t.get('id')), []):
-            if not m['video'] and not m['audio']:
-                alle.append((t.get('name') or '', m))
+    # 4. alle foto's, vier per pagina, met de teamnaam
+    alle = fotos
     for i in range(0, len(alle), 4):
         nr += 1
-        figs = ''.join(f'<figure><img src="{e(m["url"])}" alt="Foto van {e(n)}"><figcaption>{e(n)}</figcaption></figure>'
-                       for n, m in alle[i:i + 4])
+        figs = ''.join(f'<figure><img src="{e(src)}" alt="{e(n or "Foto")}"><figcaption>{e(n)}&nbsp;</figcaption></figure>'
+                       for src, n in alle[i:i + 4])
         kop = (f'<div class="label">{e(TEKST["label"])}</div><h2>{e(TEKST["fotos_kop"])}</h2>' if i == 0
                else f'<div class="label">{e(TEKST["fotos_kop"])}</div><div style="height:5mm"></div>')
         bladen.append(f'''<section class="blad"><div class="binnen">{kop}
@@ -377,20 +389,7 @@ def naar_pdf(exe, html_pad, pdf_pad):
     return os.path.exists(pdf_pad) and os.path.getsize(pdf_pad) > 1000
 
 
-# ---------------------------------------------------------------- demo
-
-def demo_media(per_team):
-    """Vervangt de demo-plaatjes door foto's van de site, zodat het voorbeeld zonder internet werkt."""
-    fotos = sorted(glob.glob(str(DOCS / 'assets' / 'uploads' / '2026' / '09' / 'the-hunt-*-1600.jpg')))
-    i = 0
-    for lijst in per_team.values():
-        for m in lijst:
-            if fotos:
-                m['url'] = m['duim'] = uri(fotos[i % len(fotos)])
-                i += 1
-
-
-# ---------------------------------------------------------------- hoofdprogramma
+# ---------------------------------------------------------------- verzamelen
 
 def lees_url(url):
     """Haalt game-ID en scope uit een spelleider-URL, bijv. https://results.loquiz.com/F3CJ8WVUSC:VANWIJNEN."""
@@ -406,38 +405,124 @@ def mapnaam(game_id, scope):
     return game_id + ('-' + re.sub(r'[^A-Za-z0-9]+', '-', scope).strip('-') if scope else '')
 
 
-def maak(game_id, scope, stad='', groepsfotomap=None, uit=None, exe=None, pdf=True, demo=False, log=print):
-    """Haalt alles op en schrijft het boekje. Geeft de paden en tellingen terug. Ook gebruikt door boekje_tool.py."""
-    game, teams, per_team, _, _ = ophalen(game_id, scope, demo)
-    if demo:
-        demo_media(per_team)
-    sleutel = 'demo' if demo else mapnaam(game_id, scope)
-    fotomap = groepsfotomap or os.path.join(HIER, 'groepsfotos', sleutel)
-    os.makedirs(fotomap, exist_ok=True)
-    groep = groepsfotos(fotomap)
-    uit = uit or os.path.join(HIER, 'uitvoer', sleutel)
-    os.makedirs(uit, exist_ok=True)
+def werkmap(sleutel):
+    return os.path.join(HIER, 'uitvoer', sleutel)
 
-    html_pad = os.path.join(uit, f'boekje-{sleutel}.html')
+
+def ext_van(naam, standaard='.jpg'):
+    x = os.path.splitext(urllib.parse.urlparse(naam).path)[1].lower()
+    return '.jpg' if x == '.jpeg' else (x if x in FOTO_EXT else standaard)
+
+
+def download(url, doel):
+    req = urllib.request.Request(url, headers={'User-Agent': 'thehunt-fotoboek/1.0'})
+    with urllib.request.urlopen(req, timeout=60) as r, open(doel, 'wb') as fh:
+        shutil.copyfileobj(r, fh)
+
+
+def verzamel(game_id, scope, stad='', teamfoto=None, extra=(), min_fotos=MIN_FOTOS, demo=False, log=print, vervang=False):
+    """Haalt teams en foto's op en zet alles in de werkmap: fotos/ en boekje.json.
+
+    teamfoto en extra zijn paden naar foto's op schijf; ze worden naar fotos/team.* en fotos/extra-NN.* gekopieerd.
+    Bestaan die al in fotos/ en geef je niets mee, dan blijven ze staan; met vervang=True gaan oude altijd weg."""
+    game, teams, per_team, _, _ = ophalen(game_id, scope, demo)
+    sleutel = 'demo' if demo else mapnaam(game_id, scope)
+    map_ = werkmap(sleutel)
+    fmap = os.path.join(map_, 'fotos')
+    os.makedirs(fmap, exist_ok=True)
+    weg = ('loquiz-', 'eigen-') + (('team.', 'extra-') if vervang else ())
+    for oud in os.listdir(fmap):  # Loquiz- en eigen foto's altijd opnieuw
+        if oud.startswith(weg):
+            os.remove(os.path.join(fmap, oud))
+    if teamfoto:
+        for oud in os.listdir(fmap):
+            if oud.startswith('team.'):
+                os.remove(os.path.join(fmap, oud))
+        shutil.copyfile(teamfoto, os.path.join(fmap, 'team' + ext_van(teamfoto)))
+    if extra:
+        for oud in os.listdir(fmap):
+            if oud.startswith('extra-'):
+                os.remove(os.path.join(fmap, oud))
+        for i, pad in enumerate(extra, 1):
+            shutil.copyfile(pad, os.path.join(fmap, f'extra-{i:02d}{ext_van(pad)}'))
+
+    fotos = []
+    demo_bron = eigen_fotos()
+    n = 0
+    for t in teams:
+        for m in per_team.get(str(t.get('id')), []):
+            if m['video'] or m['audio']:
+                continue
+            n += 1
+            naam = f'loquiz-{n:02d}{ext_van(m["url"])}'
+            try:
+                if demo:
+                    shutil.copyfile(demo_bron[(n - 1) % len(demo_bron)], os.path.join(fmap, naam))
+                else:
+                    download(m['url'], os.path.join(fmap, naam))
+            except OSError as fout:
+                log(f'Foto overgeslagen ({fout}): {m["url"]}')
+                continue
+            fotos.append({'bestand': naam, 'bron': 'loquiz', 'bijschrift': t.get('name') or ''})
+    for naam in sorted(os.listdir(fmap)):
+        if naam.startswith('extra-'):
+            fotos.append({'bestand': naam, 'bron': 'extra', 'bijschrift': ''})
+    tekort = max(0, int(min_fotos or 0) - len(fotos))
+    for i, bron in enumerate(eigen_fotos()[:tekort], 1):
+        naam = f'eigen-{i:02d}{ext_van(bron)}'
+        shutil.copyfile(bron, os.path.join(fmap, naam))
+        fotos.append({'bestand': naam, 'bron': 'eigen', 'bijschrift': ''})
+    team = next((f for f in sorted(os.listdir(fmap)) if f.startswith('team.')), None)
+
+    gegevens = {'sleutel': sleutel, 'game': game_id, 'scope': scope, 'stad': (stad or '').strip(),
+                'titel': game.get('title') or game.get('name') or game_id,
+                'teams': [{'naam': t.get('name') or 'Team', 'km': km(t)} for t in teams],
+                'teamfoto': team, 'fotos': fotos}
+    with open(os.path.join(map_, 'boekje.json'), 'w', encoding='utf-8') as fh:
+        json.dump(gegevens, fh, ensure_ascii=False, indent=1)
+    soorten = {b: sum(1 for f in fotos if f['bron'] == b) for b in ('loquiz', 'extra', 'eigen')}
+    log(f'{len(teams)} teams; foto\'s: {soorten["loquiz"]} uit Loquiz, {soorten["extra"]} extra, '
+        f'{soorten["eigen"]} eigen; teamfoto: {"ja" if team else "nee"}')
+    return gegevens
+
+
+# ---------------------------------------------------------------- opmaken
+
+def opmaken(sleutel, exe=None, pdf=True, log=print):
+    """Maakt uit de werkmap de PDF (boekje-<sleutel>.pdf) en de inhoud voor de online pagina (online.html)."""
+    import fotoboek_web
+    map_ = werkmap(sleutel)
+    g = json.load(open(os.path.join(map_, 'boekje.json'), encoding='utf-8'))
+    fmap = os.path.join(map_, 'fotos')
+    fotos = [(uri(os.path.join(fmap, f['bestand'])), f['bijschrift']) for f in g['fotos']]
+    team = uri(os.path.join(fmap, g['teamfoto'])) if g.get('teamfoto') else None
+    html_pad = os.path.join(map_, f'boekje-{sleutel}.html')
     with open(html_pad, 'w', encoding='utf-8') as fh:
-        fh.write(boekje(game, teams, per_team, groep, (stad or '').strip()))
-    n_fotos = sum(1 for v in per_team.values() for m in v if not m['video'] and not m['audio'])
-    uitkomst = {'titel': game.get('title') or game.get('name') or game_id, 'teams': len(teams), 'fotos': n_fotos,
-                'groepsfotos': len(groep), 'html': html_pad, 'pdf': None, 'fotomap': fotomap}
-    log(f'{len(teams)} teams, {n_fotos} foto\'s uit Loquiz, {len(groep)} groepsfoto(\'s)')
-    if not groep:
-        log(f'Geen groepsfoto: zet die in {fotomap} en draai opnieuw.')
+        fh.write(boekje(g['titel'], g['teams'], fotos, team, g['stad']))
+    uitkomst = {'titel': g['titel'], 'teams': len(g['teams']), 'fotos': len(g['fotos']), 'teamfoto': bool(team),
+                'html': html_pad, 'pdf': None, 'online': None, 'map': map_}
     if pdf:
         exe = exe or browser()
+        pdf_pad = os.path.join(map_, f'fotoboek-the-hunt-{sleutel}.pdf')
         if not exe:
             log('Geen Edge of Chrome gevonden: open de HTML en kies Afdrukken > Opslaan als PDF.')
-        elif naar_pdf(exe, html_pad, html_pad[:-5] + '.pdf'):
-            uitkomst['pdf'] = html_pad[:-5] + '.pdf'
-            log(f'PDF: {uitkomst["pdf"]}')
+        elif naar_pdf(exe, html_pad, pdf_pad):
+            uitkomst['pdf'] = pdf_pad
+            log(f'PDF: {pdf_pad}')
         else:
             log('PDF maken mislukt: open de HTML en kies Afdrukken > Opslaan als PDF.')
+    online = os.path.join(map_, 'online.html')
+    with open(online, 'w', encoding='utf-8') as fh:
+        fh.write(fotoboek_web.inhoud(g, os.path.basename(uitkomst['pdf']) if uitkomst['pdf'] else None))
+    uitkomst['online'] = online
     log(f'HTML: {html_pad}')
     return uitkomst
+
+
+def maak(game_id, scope, stad='', teamfoto=None, extra=(), min_fotos=MIN_FOTOS, exe=None, pdf=True, demo=False,
+         log=print):
+    g = verzamel(game_id, scope, stad, teamfoto, extra, min_fotos, demo, log)
+    return opmaken(g['sleutel'], exe, pdf, log)
 
 
 def main():
@@ -446,8 +531,9 @@ def main():
     ap.add_argument('--game', default=STANDAARD_GAME)
     ap.add_argument('--scope', default=STANDAARD_SCOPE)
     ap.add_argument('--stad', default='', help='plaatsnaam achter "The Hunt" op de voorkant (standaard zonder)')
-    ap.add_argument('--groepsfotos', help='map met groepsfoto\'s (standaard tools/loquiz/groepsfotos/<game>-<scope>)')
-    ap.add_argument('--uit', help='uitvoermap (standaard tools/loquiz/uitvoer/<game>-<scope>)')
+    ap.add_argument('--teamfoto', help='de teamfoto van de spelleider (één foto)')
+    ap.add_argument('--extra', nargs='*', default=[], help='extra foto\'s (spelleider, social media)')
+    ap.add_argument('--min-fotos', type=int, default=MIN_FOTOS, help='aanvullen met eigen foto\'s tot dit aantal')
     ap.add_argument('--browser', help='pad naar Edge of Chrome voor de PDF')
     ap.add_argument('--geen-pdf', action='store_true', help='alleen HTML maken')
     ap.add_argument('--demo', action='store_true')
@@ -457,7 +543,7 @@ def main():
             a.game, a.scope = lees_url(a.url)
         except ValueError as fout:
             sys.exit(str(fout))
-    maak(a.game, a.scope, a.stad, a.groepsfotos, a.uit, browser(a.browser) if a.browser else None,
+    maak(a.game, a.scope, a.stad, a.teamfoto, a.extra, a.min_fotos, browser(a.browser) if a.browser else None,
          pdf=not a.geen_pdf, demo=a.demo)
 
 
