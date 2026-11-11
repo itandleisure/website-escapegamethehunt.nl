@@ -35,11 +35,12 @@ from resultaten import HIER, ROOT, STANDAARD_GAME, STANDAARD_SCOPE, e, ophalen  
 SITE = json.load(open(os.path.join(ROOT, 'src', 'data', 'site.json'), encoding='utf-8'))
 DOCS = Path(ROOT) / 'docs'
 
-VOORKANT_FOTO = '/assets/uploads/2026/09/the-hunt-juichende-groep-1600.jpg'  # onze eigen foto, pad binnen docs/
+VOORKANT_FOTO = '/assets/uploads/2026/11/the-hunt-fotoboek-voorkant-1600.jpg'  # onze eigen foto, pad binnen docs/
 VIDEO = SITE['url'] + '/assets/video/the-hunt-trailer-720p.mp4'
 VIDEO_POSTER = '/assets/uploads/2026/09/the-hunt-hunter-en-groepen-1600.jpg'
 REVIEW_FOTO = '/assets/uploads/2026/09/the-hunt-extractiepunt-gehaald-1600.jpg'  # foto op de reviewpagina
-HUNTER_FOTO = '/assets/uploads/2026/09/the-hunt-spelleiders-1600.jpg'           # foto bij Hunters gezocht
+HUNTER_FOTO = '/assets/uploads/2026/11/the-hunt-hunter-rugtas-gezocht.jpg'         # foto bij Hunters gezocht
+BADASS_LOGO = '/assets/uploads/2026/11/badassgames-logo-rond-600.png'   # logo op de spellenpagina
 
 TEKST = {
     'label': 'Missie volbracht',
@@ -78,16 +79,16 @@ FOTO_EXT = ('.jpg', '.jpeg', '.png', '.webp')
 MIN_FOTOS = 8       # aanvullen met eigen sfeerfoto's tot minimaal zoveel foto's
 EIGEN_MAP = os.path.join(HIER, 'eigen-fotos')
 EIGEN_FOTOS = [     # sfeerfoto's van de site (pad binnen docs/), gebruikt als tools/loquiz/eigen-fotos/ leeg is
+    '/assets/uploads/2026/11/the-hunt-high-five-1600.jpg',
+    '/assets/uploads/2026/11/the-hunt-spelleider-briefing-1600.jpg',
+    '/assets/uploads/2026/11/the-hunt-gameapp-scannen-1600.jpg',
+    '/assets/uploads/2026/11/the-hunt-spelleider-overzicht-1600.jpg',
+    '/assets/uploads/2026/11/the-hunt-samen-puzzelen-1600.jpg',
+    '/assets/uploads/2026/11/the-hunt-spelleider-legt-uit-1600.jpg',
     '/assets/uploads/2026/09/the-hunt-gameapp-1600.jpg',
     '/assets/uploads/2026/09/the-hunt-puzzelen-met-kaart-1600.jpg',
-    '/assets/uploads/2026/09/the-hunt-hunter-rugtas-1600.jpg',
-    '/assets/uploads/2026/09/the-hunt-puzzelen-met-gameboekje-1600.jpg',
-    '/assets/uploads/2026/09/the-hunt-spelleider-uitleg-1600.jpg',
     '/assets/uploads/2026/09/the-hunt-extractiepunt-gehaald-1600.jpg',
     '/assets/uploads/2026/09/the-hunt-team-puzzelt-1600.jpg',
-    '/assets/uploads/2026/09/the-hunt-spelen-in-de-regen-1600.jpg',
-    '/assets/uploads/2026/09/the-hunt-spelleiders-1600.jpg',
-    '/assets/uploads/2026/09/the-hunt-hunter-en-groepen-1600.jpg',
 ]
 RIJEN_P2 = 21       # teams in de tabel op pagina 2, de rest op een volgende pagina
 RIJEN_VERVOLG = 40
@@ -230,6 +231,8 @@ tr.totaal td{{border-bottom:0;border-top:1.5px solid var(--navy);font-weight:700
 .hunter span{{font-size:10pt;line-height:1.45;display:block}}
 .hunter u{{display:inline-block;margin-top:4mm;text-decoration:none;font-weight:700;font-size:10pt;border:2px solid var(--night);border-radius:20mm;padding:2.5mm 4.5mm}}
 /* meer spellen */
+
+.spellen-blad .bg-logo{{float:right;width:30mm;height:30mm;margin:0 0 4mm 6mm}}
 .spellen-blad p.intro{{color:var(--on-dark-muted)}}
 .kaarten{{display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-top:6mm}}
 .kaart{{border:1px solid rgba(255,255,255,.15);border-radius:2.5mm;overflow:hidden;border-top:3px solid var(--signal);text-decoration:none;color:inherit;display:block;background:rgb(31,43,56)}}
@@ -361,6 +364,7 @@ def boekje(titel_game, teams, fotos, teamfoto, stad):
         + '</div>' + ('</a>' if s.get('link') else '</div>')
         for s in SPELLEN)
     bladen.append(f'''<section class="blad donker spellen-blad"><div class="binnen">
+    <img class="bg-logo" src="{e(site_uri(BADASS_LOGO))}" alt="Badass Games">
     <div class="label">Badass Games</div>
     <h2>{e(TEKST["spellen_kop"])}</h2>
     <p class="intro">{e(TEKST["spellen"])}</p>
