@@ -5,6 +5,11 @@ __pycache__/
 Thumbs.db
 .mcp.json
 
+# geheime sleutels (o.a. LOQUIZ_API_KEY)
+.env
+.env.*
+!.env.example
+
 # Aangeleverde originele foto's (worden verkleind naar assets/uploads)
 fotos-nieuw/
 
@@ -18,3 +23,7 @@ tools/seo/outreach/outreach.local.json
 tools/seo/outreach/test/
 tools/seo/outreach/outreach.xlsx
 tools/seo/clarity.token
+
+# Loquiz-resultaten: bevat foto's van deelnemers (niet publiek)
+tools/loquiz/uitvoer/
+tools/loquiz/groepsfotos/

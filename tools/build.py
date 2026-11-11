@@ -57,6 +57,8 @@ def main():
     write(OVERVIEW['path'], pm.locations_overview(OVERVIEW), written)
     write('/bedankt/', pm.thanks(), written)
     write('/werken-bij/bedankt/', pm.thanks_apply(), written)
+    write('/review/', pm.review(), written)
+    write('/review/bedankt/', pm.thanks_review(), written)
     with open(os.path.join(OUT, '404.html'), 'w', encoding='utf-8', newline='\n') as fh:
         fh.write(afbeeldingen.webp_in_html(pm.not_found()))  # GitHub Pages toont deze pagina bij elk onbekend adres
     write('/teamuitje-bedrijfsuitje/', pages_intent.teamuitje(), written)
