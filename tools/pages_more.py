@@ -256,6 +256,52 @@ def apply_block(path=''):
 </div></section>'''
 
 
+def review():
+    """Reviewpagina voor klanten (link in het fotoboek). Google-review als eerste keus (google_review_url in
+    src/data/site.json), daarnaast een eigen formulier dat via het Apps Script in het tabblad Reviews belandt."""
+    crumbs = [('Home', '/'), ('Review', None)]
+    google = SITE.get('google_review_url') or ''
+    sterren = ''.join(f'<label><input type="radio" name="cijfer" value="{n}"{" checked" if n == 5 else ""} required> {"★" * n}</label>'
+                      for n in range(5, 0, -1))
+    google_blok = (f'''<div class="stack"><span class="label">Op Google</span><h2>Laat een Google-review achter</h2>
+<p>Een review op Google helpt andere groepen het meest bij het kiezen van hun uitje. Het kost je een minuutje.</p>
+<p><a class="btn btn-signal" href="{esc(google)}" target="_blank" rel="noopener">Schrijf een Google-review {ICON_ARROW}</a></p>
+<p class="form-note">Liever niet via Google? Vul dan hiernaast het formulier in.</p></div>''' if google else
+        '''<div class="stack"><span class="label">Jullie mening</span><h2>Hoe was jullie Hunt?</h2>
+<p>Vertel ons wat je ervan vond. Goede punten horen we graag, verbeterpunten nog liever.</p></div>''')
+    body = f'''{hero('Bedankt voor het spelen!', 'Hoe vonden jullie The Hunt? Laat een review achter, dat helpt ons enorm.', crumbs, cta=False)}
+<section class="section dark grid-bg" id="review" aria-labelledby="review-titel"><div class="wrap booking">
+{google_blok}
+<form class="form" data-booking data-google="{esc(SITE['google_form_url'])}" data-next="/review/bedankt/" method="POST">
+<input type="hidden" name="form" value="review">
+<h2 id="review-titel" class="full" style="margin:0;font-size:1.3rem">Review via onze website</h2>
+<fieldset class="field full"><legend>Je cijfer</legend><div class="choices">{sterren}</div></fieldset>
+<div class="field full"><label for="r-review">Je review</label><textarea id="r-review" name="review" placeholder="Wat vond je van The Hunt? Wat was het mooiste moment?" required></textarea></div>
+<div class="field"><label for="r-naam">Naam</label><input id="r-naam" name="naam" autocomplete="name" required></div>
+<div class="field"><label for="r-groep">Bedrijf of groep <span class="opt">(optioneel)</span></label><input id="r-groep" name="groep" autocomplete="organization"></div>
+<div class="field"><label for="r-stad">Gespeeld in <span class="opt">(optioneel)</span></label><input id="r-stad" name="stad" placeholder="Bijvoorbeeld Amersfoort"></div>
+<div class="field"><label for="r-mail">E-mailadres <span class="opt">(optioneel)</span></label><input id="r-mail" type="email" name="email" autocomplete="email"></div>
+<div class="field full"><div class="choices"><label><input type="checkbox" name="publiceren" value="ja" checked> Jullie mogen mijn review (met voornaam) op de website zetten</label></div></div>
+<div class="hp" aria-hidden="true"><label for="r-web">Laat dit veld leeg</label><input id="r-web" name="_honey" tabindex="-1" autocomplete="off"></div>
+<p class="form-note error full" data-form-error hidden role="alert">Versturen is niet gelukt. Probeer het nog eens, of mail je review naar <a href="mailto:{SITE['email']}">{SITE['email']}</a>.</p>
+<div class="full"><button class="btn btn-signal" type="submit">Verstuur je review {ICON_ARROW}</button><p class="form-note">We gebruiken je gegevens alleen voor je review. Lees de <a href="/privacyverklaring/">privacyverklaring</a>.</p></div>
+</form>
+</div></section>'''
+    return page(path='/review/', title='Laat een review achter - Escape Game The Hunt',
+                description='Vertel ons hoe je The Hunt vond: via Google of via onze website.', body=body, robots='noindex, follow')
+
+
+def thanks_review():
+    crumbs = [('Home', '/'), ('Review', '/review/'), ('Bedankt', None)]
+    body = f'''{hero('Bedankt voor je review!', 'Fijn dat je de tijd nam. We lezen elke review.', crumbs, cta=False)}
+<section class="section"><div class="wrap stack">
+<p>Zin in een volgende missie? Bekijk <a href="/">alle locaties van The Hunt</a> of bel ons op <a href="tel:{SITE['phone']}">{SITE['phone_display']}</a>.</p>
+<p><a class="btn btn-line" href="/">Terug naar de homepage</a></p>
+</div></section>'''
+    return page(path='/review/bedankt/', title='Bedankt voor je review - Escape Game The Hunt',
+                description='Bedankt voor je review van Escape Game The Hunt.', body=body, robots='noindex, follow')
+
+
 def thanks_apply():
     crumbs = [('Home', '/'), ('Werken bij', '/werken-bij/'), ('Bedankt', None)]
     body = f'''{hero('Bedankt voor je sollicitatie!', 'We hebben je sollicitatie ontvangen en nemen zo snel mogelijk contact met je op.', crumbs, cta=False)}

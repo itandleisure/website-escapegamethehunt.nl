@@ -45,6 +45,13 @@ var FORMULIEREN = {
       ['telefoon', 'Telefoon'], ['functie', 'Functie'], ['stad', 'Voorkeursstad'], ['bericht', 'Motivatie']],
     verplicht: ['naam', 'email', 'telefoon', 'woonplaats', 'functie']
   },
+  // Reviews via escapegamethehunt.nl/review/ (link in het fotoboek)
+  review: {
+    tabblad: 'Reviews', bewaarMaanden: 36, onderwerp: 'Review The Hunt',
+    velden: [['cijfer', 'Sterren (1-5)'], ['review', 'Review'], ['naam', 'Naam'], ['groep', 'Bedrijf of groep'],
+      ['stad', 'Gespeeld in'], ['email', 'E-mail'], ['publiceren', 'Mag op de website']],
+    verplicht: ['cijfer', 'review', 'naam']
+  },
   // Elke vraag die in de chat op de website wordt gesteld (anoniem): meteen een mail, en elke ochtend een overzicht.
   chatvraag: {
     tabblad: 'Chatvragen', bewaarMaanden: 12, onderwerp: 'Chatvraag',
@@ -102,6 +109,7 @@ function doPost(e) {
   try {
     var extra = type === 'boeking' ? ': ' + (g.stad || '') + ', ' + g.personen + ' pers. (' + (g.bedrijf || g.naam) + ')'
       : type === 'chatvraag' ? (g.antwoord === 'geen antwoord' ? ' zonder antwoord: ' : ': ') + g.vraag.slice(0, 80)
+      : type === 'review' ? ': ' + g.cijfer + ' sterren van ' + g.naam + (g.groep ? ' (' + g.groep + ')' : '')
       : type === 'sollicitatie' ? ': ' + g.naam + ' (' + g.functie + ', ' + g.woonplaats + ')'
       : ': ' + g.naam;
     stuurMail(cfg, g, cfg.onderwerp + extra);

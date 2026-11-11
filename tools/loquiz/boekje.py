@@ -38,6 +38,8 @@ DOCS = Path(ROOT) / 'docs'
 VOORKANT_FOTO = '/assets/uploads/2026/09/the-hunt-juichende-groep-1600.jpg'  # onze eigen foto, pad binnen docs/
 VIDEO = SITE['url'] + '/assets/video/the-hunt-trailer-720p.mp4'
 VIDEO_POSTER = '/assets/uploads/2026/09/the-hunt-hunter-en-groepen-1600.jpg'
+REVIEW_FOTO = '/assets/uploads/2026/09/the-hunt-extractiepunt-gehaald-1600.jpg'  # foto op de reviewpagina
+HUNTER_FOTO = '/assets/uploads/2026/09/the-hunt-spelleiders-1600.jpg'           # foto bij Hunters gezocht
 
 TEKST = {
     'label': 'Missie volbracht',
@@ -51,9 +53,10 @@ TEKST = {
     'fotos_kop': 'Jullie foto\'s',
     'review_kop': 'Laat een review achter',
     'review': ('Vonden jullie het een topdag? Laat dan een review achter, dat helpt ons enorm. '
-               'En zin in meer? Wij hebben nog veel meer spellen.'),
-    'review_url': 'https://escapegamethehunt.nl/',
+               'Op Google of via onze website: het kost je een minuutje.'),
+    'review_url': 'https://escapegamethehunt.nl/review/',
     'spellen_kop': 'Meer spellen van Badass Games',
+    'spellen': 'Zin in meer? Badass Games maakt nog meer spellen voor groepen, teams en families.',
     'hunter_label': 'Gezocht: Hunters',
     'hunter_kop': 'Wil jullie zoon of dochter ook Hunter worden?',
     'hunter': ('Wij zoeken spelleiders in heel Nederland: groepen ontvangen, het spel uitleggen en daarna als Hunter '
@@ -170,10 +173,10 @@ h2{{font-size:24pt;margin:2.5mm 0 4mm}}
 .donker .voet{{border-color:rgba(255,255,255,.15);color:var(--on-dark-muted)}}
 
 /* voorkant */
-.voor .beeld{{position:absolute;inset:0 0 auto 0;height:200mm;background:var(--navy) center/cover no-repeat}}
-.voor .beeld::after{{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,30,41,.45) 0,rgba(20,30,41,0) 30%,rgba(20,30,41,.15) 65%,var(--night) 100%)}}
-.voor .logo{{position:absolute;top:14mm;left:16mm;height:20mm;z-index:2}}
-.voor .tekst{{position:absolute;left:16mm;right:16mm;top:190mm;z-index:2}}
+.voor .beeld{{position:absolute;inset:0 0 auto 0;height:190mm;background:var(--navy) center/cover no-repeat}}
+.voor .logovlak{{position:absolute;top:0;left:0;background:var(--night);padding:8mm 10mm 8mm 16mm;border-bottom-right-radius:4mm;z-index:2}}
+.voor .logo{{display:block;height:18mm}}
+.voor .tekst{{position:absolute;left:16mm;right:16mm;top:204mm;z-index:2}}
 .voor h1{{font-size:36pt;color:#fff;margin:3mm 0 5mm}}
 .voor h1 em{{font-style:normal;color:var(--signal)}}
 .voor .sub{{font:9pt var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--on-dark-muted)}}
@@ -218,21 +221,28 @@ tr.totaal td{{border-bottom:0;border-top:1.5px solid var(--navy);font-weight:700
 .raster figcaption{{font:7.5pt var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:1.5mm;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
 
-/* review + spellen */
+/* review + hunters */
 .review p{{color:var(--on-dark-muted);font-size:11.5pt;max-width:165mm}}
-.knop{{display:inline-block;margin-top:6mm;background:var(--signal);color:var(--night);font-weight:700;padding:3.5mm 8mm;border-radius:20mm;text-decoration:none;font-size:12pt}}
-.spellen{{margin-top:9mm}}
-.hunter{{margin-top:6mm;display:grid;grid-template-columns:1fr auto;gap:6mm;align-items:center;background:var(--signal);
-  color:var(--night);border-radius:2.5mm;padding:5mm 6mm;text-decoration:none}}
+.rv-foto{{width:100%;height:62mm;object-fit:cover;border-radius:2.5mm;display:block;margin:2mm 0 5mm}}
+.knoppen{{display:flex;flex-wrap:wrap;gap:4mm;margin-top:5mm}}
+.knop{{display:inline-block;background:var(--signal);color:var(--night);font-weight:700;padding:3.5mm 8mm;border-radius:20mm;text-decoration:none;font-size:12pt}}
+.knop.lijn{{background:none;color:#fff;border:1.5px solid rgba(255,255,255,.5)}}
+.hunter{{margin-top:10mm;display:grid;grid-template-columns:62mm 1fr;background:var(--signal);color:var(--night);border-radius:2.5mm;overflow:hidden;text-decoration:none}}
+.hunter img{{width:100%;height:100%;min-height:62mm;object-fit:cover;display:block}}
+.hunter .in{{padding:6mm}}
 .hunter .label{{color:var(--night);opacity:.75}}
-.hunter b{{display:block;font-size:13.5pt;line-height:1.2;margin:1mm 0 1.5mm}}
-.hunter span{{font-size:9.5pt;line-height:1.4;display:block}}
-.hunter u{{text-decoration:none;font-weight:700;font-size:10pt;white-space:nowrap;border:2px solid var(--night);border-radius:20mm;padding:2.5mm 4.5mm}}
-.spellen h3{{color:#fff;font-size:14pt;margin-bottom:4mm}}
-.kaarten{{display:grid;grid-template-columns:1fr 1fr;gap:4mm}}
-.kaart{{border:1px solid rgba(255,255,255,.15);border-radius:2.5mm;padding:5mm;border-top:3px solid var(--signal);text-decoration:none;color:inherit;display:block}}
-.kaart b{{display:block;color:#fff;font-size:13pt;margin-bottom:1mm}}
-.kaart span{{font-size:9.5pt;color:var(--on-dark-muted)}}
+.hunter b{{display:block;font-size:15pt;line-height:1.2;margin:1.5mm 0 2mm}}
+.hunter span{{font-size:10pt;line-height:1.45;display:block}}
+.hunter u{{display:inline-block;margin-top:4mm;text-decoration:none;font-weight:700;font-size:10pt;border:2px solid var(--night);border-radius:20mm;padding:2.5mm 4.5mm}}
+/* meer spellen */
+.spellen-blad p.intro{{color:var(--on-dark-muted)}}
+.kaarten{{display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-top:6mm}}
+.kaart{{border:1px solid rgba(255,255,255,.15);border-radius:2.5mm;overflow:hidden;border-top:3px solid var(--signal);text-decoration:none;color:inherit;display:block;background:rgb(31,43,56)}}
+.kaart img{{width:100%;height:42mm;object-fit:cover;display:block}}
+.kaart .in{{padding:5mm}}
+.kaart b{{display:block;color:#fff;font-size:14pt;margin-bottom:1.5mm}}
+.kaart span{{font-size:10pt;line-height:1.45;color:var(--on-dark-muted);display:block}}
+.kaart u{{display:block;margin-top:3mm;text-decoration:none;font-weight:700;font-size:10pt;color:var(--signal)}}
 .contact{{position:absolute;left:16mm;right:16mm;bottom:20mm;display:flex;justify-content:space-between;align-items:flex-end}}
 .contact img{{height:15mm}}
 .contact div{{text-align:right;font-size:10pt;line-height:1.6}}
@@ -254,7 +264,7 @@ def boekje(titel_game, teams, fotos, teamfoto, stad):
     # 1. voorkant
     bladen.append(f'''<section class="blad donker voor">
   <div class="beeld" style="background-image:url('{e(site_uri(VOORKANT_FOTO))}')"></div>
-  <img class="logo" src="{e(logo)}" alt="The Hunt">
+  <div class="logovlak"><img class="logo" src="{e(logo)}" alt="The Hunt"></div>
   <div class="tekst">
     <div class="label">{e(TEKST["label"])}</div>
     <h1>{e(TEKST["bedankt"])}{f' in <em>{e(stad)}</em>' if stad else ''}</h1>
@@ -325,22 +335,41 @@ def boekje(titel_game, teams, fotos, teamfoto, stad):
     <div class="raster">{figs}</div>
   </div>{voet(onder, nr)}</section>''')
 
-    # 5. review + spellen + contact
+    # 5. review en Hunters gezocht
     nr += 1
-    kaarten = ''.join(
-        (f'<a class="kaart" href="{e(s["link"])}">' if s.get('link') else '<div class="kaart">')
-        + f'<b>{e(s["naam"])}</b><span>{e(s["tekst"])}</span>' + ('</a>' if s.get('link') else '</div>')
-        for s in SPELLEN)
+    google = SITE.get('google_review_url') or ''
+    knoppen = ((f'<a class="knop" href="{e(google)}">Google-review</a>'
+                f'<a class="knop lijn" href="{e(TEKST["review_url"])}">Review via onze website</a>') if google
+               else f'<a class="knop" href="{e(TEKST["review_url"])}">Laat een review achter</a>')
     bladen.append(f'''<section class="blad donker review"><div class="binnen">
     <div class="label">{e(TEKST["label"])}</div>
     <h2>{e(TEKST["review_kop"])}</h2>
+    <img class="rv-foto" src="{e(site_uri(REVIEW_FOTO))}" alt="">
     <p>{e(TEKST["review"])}</p>
-    <a class="knop" href="{e(TEKST["review_url"])}">Laat een review achter</a>
-    <div class="spellen"><h3>{e(TEKST["spellen_kop"])}</h3><div class="kaarten">{kaarten}</div></div>
+    <div class="knoppen">{knoppen}</div>
     <a class="hunter" href="{e(TEKST["hunter_url"])}">
-      <div><div class="label">{e(TEKST["hunter_label"])}</div><b>{e(TEKST["hunter_kop"])}</b><span>{e(TEKST["hunter"])}</span></div>
-      <u>{e(TEKST["hunter_link"])} →</u>
+      <img src="{e(site_uri(HUNTER_FOTO))}" alt="">
+      <div class="in"><div class="label">{e(TEKST["hunter_label"])}</div><b>{e(TEKST["hunter_kop"])}</b><span>{e(TEKST["hunter"])}</span>
+      <u>{e(TEKST["hunter_link"])} →</u></div>
     </a>
+  </div>
+  {voet(onder, nr, True)}
+</section>''')
+
+    # 6. meer spellen van Badass Games + contact
+    nr += 1
+    kaarten = ''.join(
+        (f'<a class="kaart" href="{e(s["link"])}">' if s.get('link') else '<div class="kaart">')
+        + (f'<img src="{e(site_uri(s["foto"]) if s["foto"].startswith("/") else s["foto"])}" alt="">' if s.get('foto') else '')
+        + f'<div class="in"><b>{e(s["naam"])}</b><span>{e(s["tekst"])}</span>'
+        + (f'<u>{e(s["link"].replace("https://", "").rstrip("/"))} →</u>' if s.get('link') else '')
+        + '</div>' + ('</a>' if s.get('link') else '</div>')
+        for s in SPELLEN)
+    bladen.append(f'''<section class="blad donker spellen-blad"><div class="binnen">
+    <div class="label">Badass Games</div>
+    <h2>{e(TEKST["spellen_kop"])}</h2>
+    <p class="intro">{e(TEKST["spellen"])}</p>
+    <div class="kaarten">{kaarten}</div>
   </div>
   <div class="contact">
     <img src="{e(logo)}" alt="The Hunt">
@@ -348,7 +377,7 @@ def boekje(titel_game, teams, fotos, teamfoto, stad):
       <a href="mailto:{e(SITE["email"])}">{e(SITE["email"])}</a><br>
       <a href="tel:{e(SITE["phone"])}">{e(SITE["phone_display"])}</a></div>
   </div>
-  {voet(onder, nr)}
+  {voet(onder, nr, True)}
 </section>''')
 
     return f'''<!doctype html>

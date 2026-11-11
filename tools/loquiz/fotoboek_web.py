@@ -70,9 +70,15 @@ def inhoud(g, pdf_naam):
         fotos += (f'<button class="foto" data-i="{i}" type="button"><img data-f="fotos/{e(f["bestand"])}" alt="{e(bij or "Foto")}"'
                   f' loading="lazy">' + (f'<span>{e(bij)}</span>' if bij else '') + '</button>')
     kaarten = ''.join(
-        (f'<a class="kaart" href="{e(s["link"])}">' if s.get('link') else '<div class="kaart">')
-        + f'<b>{e(s["naam"])}</b><span>{e(s["tekst"])}</span>' + ('</a>' if s.get('link') else '</div>')
+        (f'<a class="kaart" href="{e(s["link"])}" target="_blank" rel="noopener">' if s.get('link') else '<div class="kaart">')
+        + (f'<img src="{e(s["foto"] if s["foto"].startswith("http") else URL + s["foto"])}" alt="" loading="lazy">' if s.get('foto') else '')
+        + f'<div class="in"><b>{e(s["naam"])}</b><span>{e(s["tekst"])}</span></div>' + ('</a>' if s.get('link') else '</div>')
         for s in b.SPELLEN)
+    google = SITE.get('google_review_url') or ''
+    review_knoppen = ((f'<a class="knop" href="{e(google)}" target="_blank" rel="noopener">Google-review</a>'
+                       f'<a class="knop licht" href="{e(T["review_url"])}" target="_blank" rel="noopener">Review via onze website</a>')
+                      if google else
+                      f'<a class="knop" href="{e(T["review_url"])}" target="_blank" rel="noopener">Laat een review achter</a>')
     pdf_knop = (f'<a class="knop" data-f="{e(pdf_naam)}" download="{e(pdf_naam)}">Download het fotoboek (PDF)</a>'
                 if pdf_naam else '')
     n = len(g['fotos'])
@@ -125,11 +131,19 @@ def inhoud(g, pdf_naam):
 .fb .donker .label{{color:var(--signal)}}
 .fb .donker p{{color:var(--on-dark-muted)}}
 .fb .kaarten{{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:16px}}
-.fb .kaart{{border:1px solid rgba(255,255,255,.15);border-top:3px solid var(--signal);border-radius:10px;padding:16px;color:inherit;text-decoration:none;display:block}}
+.fb .kaart{{border:1px solid rgba(255,255,255,.15);border-top:3px solid var(--signal);border-radius:10px;overflow:hidden;color:inherit;text-decoration:none;display:block;background:#1f2b38}}
+.fb .kaart img{{width:100%;aspect-ratio:16/9;object-fit:cover}}
+.fb .kaart .in{{padding:16px}}
+.fb .rv{{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}}
+.fb .rv img{{border-radius:12px;width:100%;aspect-ratio:4/3;object-fit:cover}}
+@media (max-width:760px){{.fb .rv{{grid-template-columns:1fr}}}}
 .fb .kaart b{{display:block;color:#fff;font-size:1.1rem}}
 .fb .kaart span{{font-size:.92rem;color:var(--on-dark-muted)}}
-.fb .hunter{{margin-top:28px;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;background:var(--signal);
-  color:var(--night);border-radius:12px;padding:22px;text-decoration:none}}
+.fb .hunter{{margin-top:40px;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);background:var(--signal);
+  color:var(--night);border-radius:12px;overflow:hidden;text-decoration:none}}
+.fb .hunter img{{width:100%;height:100%;min-height:220px;object-fit:cover}}
+.fb .hunter .in{{padding:24px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}}
+@media (max-width:640px){{.fb .hunter{{grid-template-columns:1fr}}.fb .hunter img{{min-height:0;aspect-ratio:16/9}}}}
 .fb .hunter b{{display:block;font-size:1.3rem;margin:.2em 0 .3em}}
 .fb .hunter .label{{color:var(--night);opacity:.75}}
 .fb .hunter p{{margin:0;color:var(--night);max-width:60ch}}
@@ -186,16 +200,25 @@ def inhoud(g, pdf_naam):
   </div></section>
 
   <section class="donker"><div class="wrap">
-    <div class="label">{e(T["label"])}</div>
-    <h2>{e(T["review_kop"])}</h2>
-    <p style="max-width:65ch">{e(T["review"])}</p>
-    <p style="margin-top:18px"><a class="knop" href="{e(T["review_url"])}" target="_blank" rel="noopener">Laat een review achter</a></p>
-    <h3 style="margin-top:40px">{e(T["spellen_kop"])}</h3>
-    <div class="kaarten">{kaarten}</div>
+    <div class="rv">
+      <div><div class="label">{e(T["label"])}</div>
+        <h2>{e(T["review_kop"])}</h2>
+        <p style="max-width:60ch">{e(T["review"])}</p>
+        <div class="knoppen" style="margin-top:18px">{review_knoppen}</div></div>
+      <img src="{URL}{b.REVIEW_FOTO}" alt="" loading="lazy">
+    </div>
     <a class="hunter" href="{e(T["hunter_url"])}" target="_blank" rel="noopener">
-      <div><div class="label">{e(T["hunter_label"])}</div><b>{e(T["hunter_kop"])}</b><p>{e(T["hunter"])}</p></div>
-      <u>Bekijk de vacature →</u>
+      <img src="{URL}{b.HUNTER_FOTO}" alt="" loading="lazy">
+      <div class="in"><div class="label">{e(T["hunter_label"])}</div><b>{e(T["hunter_kop"])}</b><p>{e(T["hunter"])}</p>
+      <u>Bekijk de vacature →</u></div>
     </a>
+  </div></section>
+
+  <section class="donker" style="border-top:1px solid rgba(255,255,255,.1)"><div class="wrap">
+    <div class="label">Badass Games</div>
+    <h2>{e(T["spellen_kop"])}</h2>
+    <p style="max-width:65ch">{e(T["spellen"])}</p>
+    <div class="kaarten">{kaarten}</div>
   </div></section>
 
   <footer><div class="wrap">
