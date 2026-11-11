@@ -57,6 +57,7 @@ def inhoud(g, pdf_naam):
     """HTML van het fotoboek. Foto's en PDF staan als data-f="..." en worden na het ontsleutelen ingevuld."""
     import boekje as b
     T, k = b.TEKST, b.KENGETALLEN
+    deel = b.deel_links(T['hunter_deeltekst'], T['hunter_url'])
     c = b.cijfers(g['teams'])
     stad = g.get('stad') or ''
     team = g.get('teamfoto')
@@ -147,7 +148,9 @@ def inhoud(g, pdf_naam):
 .fb .hunter b{{display:block;font-size:1.3rem;margin:.2em 0 .3em}}
 .fb .hunter .label{{color:var(--night);opacity:.75}}
 .fb .hunter p{{margin:0;color:var(--night);max-width:60ch}}
-.fb .hunter u{{text-decoration:none;font-weight:700;border:2px solid var(--night);border-radius:999px;padding:.6em 1.1em;white-space:nowrap}}
+.fb .hunter .hk{{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}}
+.fb .hunter .hk a{{text-decoration:none;font-weight:700;border:2px solid var(--night);border-radius:999px;padding:.6em 1.1em;white-space:nowrap;color:var(--night)}}
+.fb .hunter .hk a.vol{{background:var(--night);color:#fff}}
 .fb footer{{background:var(--night);color:var(--on-dark-muted);border-top:1px solid rgba(255,255,255,.12);padding:28px 0;font-size:.9rem}}
 .fb footer .wrap{{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}}
 .fb footer a{{color:#fff;text-decoration:none}}
@@ -208,11 +211,14 @@ def inhoud(g, pdf_naam):
         <div class="knoppen" style="margin-top:18px">{review_knoppen}</div></div>
       <img src="{URL}{b.REVIEW_FOTO}" alt="" loading="lazy">
     </div>
-    <a class="hunter" href="{e(T["hunter_url"])}" target="_blank" rel="noopener">
+    <div class="hunter">
       <img src="{URL}{b.HUNTER_FOTO}" alt="" loading="lazy">
       <div class="in"><div class="label">{e(T["hunter_label"])}</div><b>{e(T["hunter_kop"])}</b><p>{e(T["hunter"])}</p>
-      <u>Bekijk de vacature →</u></div>
-    </a>
+      <p><strong>{e(T["hunter_doorsturen"])}</strong></p>
+      <div class="hk"><a class="vol" href="{e(deel["whatsapp"])}" target="_blank" rel="noopener">Stuur door via WhatsApp</a>
+      <a href="{e(deel["mail"])}">Stuur door per mail</a>
+      <a href="{e(T["hunter_url"])}" target="_blank" rel="noopener">Bekijk de vacature →</a></div></div>
+    </div>
   </div></section>
 
   <section class="donker" style="border-top:1px solid rgba(255,255,255,.1)"><div class="wrap">

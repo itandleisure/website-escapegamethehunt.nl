@@ -59,12 +59,22 @@ TEKST = {
     'spellen_kop': 'Meer spellen van Badass Games',
     'spellen': 'Zin in meer? Badass Games maakt nog meer spellen voor groepen, teams en families.',
     'hunter_label': 'Gezocht: Hunters',
-    'hunter_kop': 'Wil jullie zoon of dochter ook Hunter worden?',
-    'hunter': ('Wij zoeken spelleiders in heel Nederland: groepen ontvangen, het spel uitleggen en daarna als Hunter '
+    'hunter_kop': 'Wij zijn op jacht naar nieuwe Hunters!',
+    'hunter': ('We zoeken spelleiders in heel Nederland: groepen ontvangen, het spel uitleggen en daarna als Hunter '
                'de jacht openen. Een bijbaan vol actie, in de eigen stad.'),
+    'hunter_doorsturen': 'Ken jij iemand die dit op het lijf geschreven is? Stuur de vacature door!',
+    'hunter_deel': 'Stuur de vacature door',
+    'hunter_deeltekst': 'Iets voor jou? Escape Game The Hunt zoekt nieuwe Hunters (spelleiders):',
     'hunter_url': 'https://escapegamethehunt.nl/werken-bij/werken-bij-escape-game-the-hunt-spelleider/',
     'hunter_link': 'escapegamethehunt.nl/werken-bij',
 }
+
+
+def deel_links(tekst, url):
+    """Links om de vacature door te sturen: WhatsApp en mail (werken in de PDF en online)."""
+    q = urllib.parse.quote
+    return {'whatsapp': f'https://wa.me/?text={q(tekst + " " + url)}',
+            'mail': f'mailto:?subject={q("Vacature: Hunter bij Escape Game The Hunt")}&body={q(tekst + chr(10) + url)}'}
 
 # Andere spellen op de laatste pagina. Vul de omschrijving en link in; laat 'link' leeg om hem weg te laten.
 SPELLEN = SITE.get('badass_spellen', [])  # meer spellen van Badass Games, uit src/data/site.json
@@ -229,7 +239,10 @@ tr.totaal td{{border-bottom:0;border-top:1.5px solid var(--navy);font-weight:700
 .hunter .label{{color:var(--night);opacity:.75}}
 .hunter b{{display:block;font-size:15pt;line-height:1.2;margin:1.5mm 0 2mm}}
 .hunter span{{font-size:10pt;line-height:1.45;display:block}}
-.hunter u{{display:inline-block;margin-top:4mm;text-decoration:none;font-weight:700;font-size:10pt;border:2px solid var(--night);border-radius:20mm;padding:2.5mm 4.5mm}}
+.hunter .door{{font-weight:700;margin-top:2.5mm}}
+.hunter .hk{{display:flex;flex-wrap:wrap;gap:2mm;margin-top:4mm}}
+.hunter .hk a{{text-decoration:none;font-weight:700;font-size:10pt;border:2px solid var(--night);border-radius:20mm;padding:2.5mm 4.5mm;color:var(--night)}}
+.hunter .hk a.vol{{background:var(--night);color:#fff}}
 /* meer spellen */
 
 .spellen-blad .bg-logo{{float:right;width:30mm;height:30mm;margin:0 0 4mm 6mm}}
@@ -335,6 +348,7 @@ def boekje(titel_game, teams, fotos, teamfoto, stad):
 
     # 5. review en Hunters gezocht
     nr += 1
+    deel = deel_links(TEKST['hunter_deeltekst'], TEKST['hunter_url'])
     google = SITE.get('google_review_url') or ''
     knoppen = ((f'<a class="knop" href="{e(google)}">Google-review</a>'
                 f'<a class="knop lijn" href="{e(TEKST["review_url"])}">Review via onze website</a>') if google
@@ -345,11 +359,13 @@ def boekje(titel_game, teams, fotos, teamfoto, stad):
     <img class="rv-foto" src="{e(site_uri(REVIEW_FOTO))}" alt="">
     <p>{e(TEKST["review"])}</p>
     <div class="knoppen">{knoppen}</div>
-    <a class="hunter" href="{e(TEKST["hunter_url"])}">
+    <div class="hunter">
       <img src="{e(site_uri(HUNTER_FOTO))}" alt="">
       <div class="in"><div class="label">{e(TEKST["hunter_label"])}</div><b>{e(TEKST["hunter_kop"])}</b><span>{e(TEKST["hunter"])}</span>
-      <u>{e(TEKST["hunter_link"])} →</u></div>
-    </a>
+      <span class="door">{e(TEKST["hunter_doorsturen"])}</span>
+      <div class="hk"><a class="vol" href="{e(deel["whatsapp"])}">{e(TEKST["hunter_deel"])} →</a>
+      <a href="{e(TEKST["hunter_url"])}">{e(TEKST["hunter_link"])}</a></div></div>
+    </div>
   </div>
   {voet(onder, nr, True)}
 </section>''')
