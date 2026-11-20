@@ -7,7 +7,7 @@ name: Statistieken
 
 on:
   schedule:
-    - cron: '0 5 * * 2-7'   # dinsdag t/m zondag 05:00 UTC (6:00 of 7:00 Nederlandse tijd)
+    - cron: '0 5 * * 0,2-6' # dinsdag t/m zondag 05:00 UTC (6:00 of 7:00 Nederlandse tijd)
     - cron: '0 5 * * 1'     # maandag: ook posities en e-mail
   workflow_dispatch:
     inputs:
