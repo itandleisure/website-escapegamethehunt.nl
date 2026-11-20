@@ -5,7 +5,8 @@ Gebruik:
   python tools/seo/statistiek.py --posities --gsc --mail --push  (wekelijks: ook posities meten en mailen)
   python tools/seo/statistiek.py --build                         (alleen pagina opnieuw maken)
 
-Instellingen staan in tools/seo/statistiek.local.json (niet in git):
+Draait automatisch in GitHub Actions (.github/workflows/statistiek.yml), met de sleutels als GitHub-secrets.
+Lokaal staan de instellingen in tools/seo/statistiek.local.json (niet in git):
   {"wachtwoord": "...", "gsc_key": "" (leeg = omgevingsvariabele GSC_SLEUTEL),
    "mail_url": "https://script.google.com/macros/s/.../exec", "mail_token": "...",
    "ontvangers": "a@b.nl,c@d.nl", "onderwerp": "Statistieken Escape Game The Hunt website"}
@@ -30,22 +31,36 @@ E = html.escape
 
 
 def sleutel_uit_omgeving():
-    """In een cloudomgeving staat de serviceaccount-sleutel als base64 in GSC_SLEUTEL_B64 in plaats van als bestand.
+    """In een cloudomgeving (GitHub Actions) staat de serviceaccount-sleutel niet als bestand maar in een omgevingsvariabele:
+    GSC_SLEUTEL_JSON (de inhoud van het .json-bestand) of GSC_SLEUTEL_B64 (dezelfde inhoud als base64).
     Schrijf hem dan naar een tijdelijk bestand en zet GSC_SLEUTEL daarop, zodat de rest van het script niet verandert."""
-    b64 = os.environ.get('GSC_SLEUTEL_B64', '').strip()
-    if b64 and not os.environ.get('GSC_SLEUTEL'):
+    raw = os.environ.get('GSC_SLEUTEL_JSON', '').strip().encode()
+    if not raw and os.environ.get('GSC_SLEUTEL_B64', '').strip():
+        raw = base64.b64decode(os.environ['GSC_SLEUTEL_B64'].strip())
+    if raw and not os.environ.get('GSC_SLEUTEL'):
         import tempfile
         fd, pad = tempfile.mkstemp(suffix='.json')
         with os.fdopen(fd, 'wb') as fh:
-            fh.write(base64.b64decode(b64))
+            fh.write(raw)
         os.environ['GSC_SLEUTEL'] = pad
 
 
 sleutel_uit_omgeving()
 
 
+# In de cloud komen wachtwoord en mailgegevens uit GitHub-secrets in plaats van uit statistiek.local.json
+OMGEVING = {'wachtwoord': 'STATISTIEK_WACHTWOORD', 'mail_url': 'STATISTIEK_MAIL_URL', 'mail_token': 'STATISTIEK_MAIL_TOKEN',
+            'ontvangers': 'STATISTIEK_ONTVANGERS'}
+
+
 def cfg():
     c = json.load(open(CFG_F, encoding='utf-8')) if os.path.exists(CFG_F) else {}
+    for k, env in OMGEVING.items():
+        if os.environ.get(env, '').strip():
+            c[k] = os.environ[env].strip()
+    if os.environ.get('GITHUB_ACTIONS') and not c.get('wachtwoord'):
+        # anders krijgt de pagina een willekeurig nieuw wachtwoord dat niemand kent
+        sys.exit('Secret STATISTIEK_WACHTWOORD ontbreekt in GitHub; dashboard niet bijgewerkt.')
     changed = False
     if not c.get('wachtwoord'):
         c['wachtwoord'] = secrets.token_urlsafe(9); changed = True
@@ -887,6 +902,8 @@ if __name__ == '__main__':
         ap.add_argument('--' + a, action='store_true')
     a_ = ap.parse_args()
     c = cfg()
+    if a_.posities and not os.environ.get('DATAFORSEO_LOGIN'):
+        print('Posities: DATAFORSEO_LOGIN ontbreekt, meting overgeslagen'); a_.posities = False
     if a_.posities:
         sys.path.insert(0, HERE)
         import posities_meten

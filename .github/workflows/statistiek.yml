@@ -1,0 +1,82 @@
+# Statistieken (Search Console, Analytics, Google Ads via Analytics, Clarity) automatisch bijwerken in de cloud.
+# Elke ochtend: cijfers ophalen en het dashboard docs/statistiek/ vernieuwen.
+# Maandag: ook posities meten (DataForSEO) en de wekelijkse e-mail sturen.
+# Handmatig starten kan via Actions > Statistieken > Run workflow.
+# De sleutels staan als secrets in GitHub (Settings > Secrets and variables > Actions), nooit in de code.
+name: Statistieken
+
+on:
+  schedule:
+    - cron: '0 5 * * 2-7'   # dinsdag t/m zondag 05:00 UTC (6:00 of 7:00 Nederlandse tijd)
+    - cron: '0 5 * * 1'     # maandag: ook posities en e-mail
+  workflow_dispatch:
+    inputs:
+      wekelijks:
+        description: 'Ook posities meten en de wekelijkse e-mail sturen'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: statistiek
+  cancel-in-progress: false
+
+jobs:
+  bijwerken:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Pakketten installeren
+        run: pip install google-auth requests cryptography
+
+      # Historie (o.a. Clarity per dag) staat niet in git; bewaar die tussen de runs in de cache
+      - name: Eerdere gegevens terugzetten
+        uses: actions/cache/restore@v4
+        with:
+          path: tools/seo/data
+          key: seo-data-${{ github.run_id }}
+          restore-keys: seo-data-
+
+      - name: Statistieken ophalen en dashboard bijwerken
+        env:
+          GSC_SLEUTEL_JSON: ${{ secrets.GSC_SLEUTEL_JSON }}
+          STATISTIEK_WACHTWOORD: ${{ secrets.STATISTIEK_WACHTWOORD }}
+          STATISTIEK_MAIL_URL: ${{ secrets.STATISTIEK_MAIL_URL }}
+          STATISTIEK_MAIL_TOKEN: ${{ secrets.STATISTIEK_MAIL_TOKEN }}
+          CLARITY_TOKEN: ${{ secrets.CLARITY_TOKEN }}
+          DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
+          DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+          WEKELIJKS: ${{ github.event.schedule == '0 5 * * 1' || inputs.wekelijks == true }}
+        run: |
+          if [ -z "$GSC_SLEUTEL_JSON" ]; then echo "::error::Secret GSC_SLEUTEL_JSON ontbreekt"; exit 1; fi
+          git config user.name "Statistieken (GitHub Actions)"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ "$WEKELIJKS" = "true" ]; then
+            python tools/seo/statistiek.py --posities --gsc --mail --push
+          else
+            python tools/seo/statistiek.py --gsc --push
+          fi
+
+      - name: Gegevens bewaren voor de volgende run
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: tools/seo/data
+          key: seo-data-${{ github.run_id }}
+
+      # Een push met de ingebouwde GitHub-token start niet altijd een nieuwe publicatie; vraag die daarom expliciet aan
+      - name: Website opnieuw publiceren
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" >/dev/null || echo "Publiceren aanvragen lukte niet (de site wordt mogelijk toch al gebouwd)"
