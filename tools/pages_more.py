@@ -4,7 +4,7 @@ import json
 import os
 
 from pages import VIDEO  # noqa: F401  (hergebruikt op sommige pagina's)
-from render import (ADS_CONVERSIE_HEAD, ICON_ARROW, with_field_map, LOCS, OUT, P, ROOT, SITE, booking, esc, faq_block, faq_schema, nl_map, page, post_card,
+from render import (ADS_CONVERSIE_HEAD, fill, ICON_ARROW, with_field_map, LOCS, OUT, P, ROOT, SITE, booking, esc, faq_block, faq_schema, nl_map, page, post_card,
                     pricing, province_list)
 
 LOC_BY_SLUG = {l['slug']: l for l in LOCS}
@@ -14,6 +14,9 @@ def all_pages():
     out = []
     for fp in sorted(glob.glob(os.path.join(ROOT, 'src', 'content', 'pages', '*.json'))):
         d = json.load(open(fp, encoding='utf-8'))
+        for key in ('title', 'description'):  # {prijs} e.d., zodat een prijswijziging overal doorwerkt
+            if isinstance(d.get(key), str):
+                d[key] = fill(d[key])
         d['city'] = next((LOC_BY_SLUG[c] for c in d['categories'] if c in LOC_BY_SLUG), None)
         d['kind'] = 'post' if d['categories'] else 'page'
         out.append(d)

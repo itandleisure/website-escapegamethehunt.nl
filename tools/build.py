@@ -19,8 +19,9 @@ import afbeeldingen  # noqa: E402
 from render import LOCS, OUT, ROOT, SITE  # noqa: E402
 
 NEWS_PER_PAGE = 9
-OVERVIEW = {'path': '/escape-game-the-hunt-locaties/', 'title': 'Escape Game The Hunt Locaties - Escape Game The Hunt',
-            'description': 'Ontdek alle locaties waar je Escape Game The Hunt kunt spelen. Van stad tot stad: hier vind je jouw volgende escape avontuur op straatniveau!',
+OVERVIEW = {'path': '/escape-game-the-hunt-locaties/', 'title': f'Locaties: The Hunt in {len(LOCS)} steden | Escape Game The Hunt',
+            'description': f'Speel de outdoor escape room met echte Hunters in {len(LOCS)} steden, van Groningen tot Terneuzen. '
+                           'Kies jullie stad en bekijk startlocatie, speelveld en prijs. Komen we ook naar jullie toe?',
             'h1': 'Alle locaties van The Hunt', 'og_image': '', 'robots': '', 'body': ''}
 SPECIAL = {'/escape-game-the-hunt-prijzen/': pm.prices, '/contact/': pm.contact, '/veelgestelde-vragen/': pm.faq_page,
            '/escape-game-the-hunt-fotopagina/': pm.photos, '/over-ons/': pm.about,
