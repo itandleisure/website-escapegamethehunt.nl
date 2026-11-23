@@ -81,7 +81,7 @@ t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
 y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);}})(window,document,"clarity","script","{CLARITY_ID}");
 clarity('consentv2',{{ad_Storage:'denied',analytics_Storage:g}});
 </script>'''
-ADS_CONVERSIE_HEAD = (f"<script>gtag('event','conversion',{{send_to:'{ADS_ID}/{ADS_CONVERSIE}',value:495,currency:'EUR'}});</script>\n"
+ADS_CONVERSIE_HEAD = (f"<script>gtag('event','conversion',{{send_to:'{ADS_ID}/{ADS_CONVERSIE}',value:{P['base']},currency:'EUR'}});</script>\n"
                       if ADS_CONVERSIE else '')
 COOKIE_BAR = '''<div class="cookiebar" id="cookiebar" role="dialog" aria-live="polite" aria-label="Cookies" hidden>
 <p>We gebruiken cookies van Google en Microsoft Clarity om te zien hoe bezoekers de site gebruiken en of onze Google-advertenties tot aanvragen leiden. Geen gepersonaliseerde advertenties, geen verkoop van gegevens. <a href="/privacyverklaring/">Privacyverklaring</a></p>
@@ -199,7 +199,7 @@ def pricing(city=None):
 <div class="amount tnum">€{P['base']}<small>ex. btw · t/m {P['base_max_people']} personen</small></div>
 <p class="price-incl">€{P['base_incl']} inclusief btw</p>
 <div class="price-rows">
-<div><span>Per extra persoon boven de {P['base_max_people']}</span><b>€{P['per_person']} <small>(€{P['per_person_incl']} incl.)</small></b></div>
+<div><span>Vanaf {P['base_max_people'] + 1} personen, per persoon</span><b>€{P['per_person']} <small>(€{P['per_person_incl']} incl.)</small></b></div>
 <div><span>Opdrachten op maat voor jullie groep</span><b>+ €{P['custom']} <small>(€{P['custom_incl']} incl.)</small></b></div>
 <div><span>Groepsgrootte</span><b>{P['min_people']} tot ±{P['max_people']} personen</b></div>
 </div>
