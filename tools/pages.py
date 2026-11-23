@@ -141,8 +141,11 @@ def home():
 </section>
 
 {booking()}'''
-    return page(path='/', title='Escape Game The Hunt | Outdoor escape room in heel Nederland',
-                description='The Hunt is de outdoor escape room geïnspireerd op Hunted en Jachtseizoen. Ontsnap in 90 minuten aan de Hunters, te spelen in heel Nederland. Vanaf 8 personen.',
+    # Titel: merknaam voorop (zoekers op "escape game the hunt"), daarna wat het is en het verschil: echte Hunters.
+    # Omschrijving: Hunted/Jachtseizoen voor de zoekers op het tv-spel, plus steden, groepsgrootte en groepsprijs.
+    return page(path='/', title='Escape Game The Hunt | Outdoor escape room met echte Hunters',
+                description=f'Het spel geïnspireerd op Hunted: echte Hunters jagen op jullie team door de stad. '
+                            f'90 minuten, in {len(LOCS)} steden, vanaf {P["min_people"]} personen. €{P["base"]} ex. btw voor de hele groep.',
                 body=body, schema=[faq_schema(GENERAL_FAQ),
                                    {'@context': 'https://schema.org', '@type': 'WebSite', 'name': SITE['name'], 'url': SITE['url']}],
                 head_extra='<meta name="google-site-verification" content="GNl7i1eW7qRSl_ednpGUEVZconmYRnp_xq_5k6pT__M">\n')
