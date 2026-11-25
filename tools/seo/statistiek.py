@@ -558,6 +558,41 @@ def rankings():
     return out
 
 
+def landing_rankings():
+    """[(datum, [rijen])] van de landingspagina-metingen, oud naar nieuw."""
+    out = []
+    for f in sorted(glob.glob(os.path.join(MET, 'landingspaginas-*.csv'))):
+        out.append((os.path.basename(f)[16:26], list(csv.DictReader(open(f, encoding='utf-8-sig'), delimiter=';'))))
+    return out
+
+
+def landing_section(L):
+    if not L:
+        return ''
+    lab = lambda d: dt.date.fromisoformat(d).strftime('%d-%m')
+    last_d, last = L[-1]
+    hist = {}
+    for d, rows in L:
+        for r in rows:
+            hist.setdefault(r['zoekwoord'], []).append(int(r['positie']) if r['positie'] else None)
+    body, groep = [], None
+    for r in last:
+        p = int(r['positie']) if r['positie'] else None
+        h = hist.get(r['zoekwoord'], [])
+        prev = h[-2] if len(h) > 1 else None
+        a = arrow(p, prev, True) if p and prev else ('<span class="up">nieuw</span>' if p and len(h) > 1 else '')
+        tip = ' → '.join('–' if v is None else str(v) for v in h)
+        if r['groep'] != groep:
+            groep = r['groep']
+            body.append(f'<tr><th colspan="4" style="background:#f3f5f7">{E(groep)}</th></tr>')
+        body.append(f'<tr><td>{E(r["zoekwoord"])}</td><td class="{cls(p)}">{p or "–"} {a}<div class="hist">{tip}</div></td>'
+                    f'<td><a href="{SITE[:-1]}{E(r["doelpagina"])}" target="_blank">{E(r["doelpagina"])}</a></td><td class="muted">{E(r["top3"])}</td></tr>')
+    n = sum(1 for r in last if r['positie'])
+    return (f'<section><h2>Posities landingspagina\'s</h2><p class="muted">Laatste meting {lab(last_d)}-{last_d[:4]}: {n} van {len(last)} zoekwoorden in de top 30. '
+            'Met stad: gezocht vanaf het stadscentrum; zonder stad: Nederland. Mobiel, top 30.</p>'
+            f'<div class="scroll"><table><tr><th>Zoekwoord</th><th>Positie</th><th>Doelpagina</th><th>Top 3 nu</th></tr>{"".join(body)}</table></div></section>')
+
+
 # ---------------- helpers ----------------
 def agg(rows, key=0):
     return {r['keys'][key]: r for r in rows}
@@ -696,6 +731,7 @@ def dashboard(g, R, a=None, ad=None):
             body.append(f'<tr><th>{E(s)}</th>{"".join(cells)}</tr>')
         parts.append(f'<section><h2>Posities per stad</h2><p class="muted">Laatste meting {lab(last)}-{last[:4]}. Groen = top 3, geel = 4-10, oranje = 11-30, streepje = niet in de top 30. Onder elk getal staat de historie van oud naar nieuw.</p>'
                      f'<div class="scroll"><table class="rank"><tr><th>Stad</th>{head}</tr>{"".join(body)}</table></div></section>')
+    parts.append(landing_section(landing_rankings()))
     if g:
         qn, qv = agg(g['q_nu']), agg(g['q_voor'])
         kans = sorted([r for r in g['q_nu'] if 4 <= r['position'] <= 15 and r['impressions'] >= 20], key=lambda r: -r['impressions'])[:25]
@@ -888,12 +924,13 @@ def push():
     g = lambda *a: subprocess.run(['git', '-C', ROOT, *a], capture_output=True, text=True)
     g('add', 'docs/statistiek', 'tools/seo/metingen')
     if not g('diff', '--cached', '--quiet').returncode:
-        print('Geen wijzigingen om te pushen'); return
+        print('Geen wijzigingen om te pushen'); return True
     g('commit', '-m', f'Statistieken bijgewerkt {dt.date.today()}')
     # GitHub Pages publiceert sinds 10 oktober 2026 vanaf main
     g('pull', '--rebase', '--autostash', 'origin', 'main')
     r = g('push', 'origin', 'HEAD:main')
     print('Push:', 'ok' if r.returncode == 0 else r.stderr[-300:])
+    return r.returncode == 0
 
 
 if __name__ == '__main__':
@@ -902,12 +939,25 @@ if __name__ == '__main__':
         ap.add_argument('--' + a, action='store_true')
     a_ = ap.parse_args()
     c = cfg()
-    if a_.posities and not os.environ.get('DATAFORSEO_LOGIN'):
-        print('Posities: DATAFORSEO_LOGIN ontbreekt, meting overgeslagen'); a_.posities = False
+    fouten = []  # problemen die de workflow aan het eind laten mislukken (dan mailt GitHub)
+    if a_.posities and not (os.environ.get('DATAFORSEO_LOGIN') and os.environ.get('DATAFORSEO_PASSWORD')):
+        fouten.append('Posities niet gemeten: DATAFORSEO_LOGIN of DATAFORSEO_PASSWORD ontbreekt in de GitHub-secrets')
+        a_.posities = False
     if a_.posities:
         sys.path.insert(0, HERE)
         import posities_meten
-        posities_meten.main()
+        try:
+            posities_meten.main()
+        except posities_meten.MetingOngeldig as e:
+            fouten.append(str(e))
+        except Exception as e:
+            fouten.append(f'Positiemeting vastgelopen: {type(e).__name__}: {e}')
+    laatste = sorted(glob.glob(os.path.join(MET, 'posities-*.csv')))
+    if laatste and os.environ.get('GITHUB_ACTIONS'):
+        dagen = (dt.date.today() - dt.date.fromisoformat(os.path.basename(laatste[-1])[9:19])).days
+        if dagen > 9:
+            fouten.append(f'De laatste geldige positiemeting is van {dagen} dagen geleden ({os.path.basename(laatste[-1])[9:19]}); '
+                          'de wekelijkse meting van maandag is mislukt of niet gedraaid')
     g = gsc_fetch(c) if a_.gsc else None
     g = g or gsc_latest()
     a = (ga_fetch(c) if a_.gsc else None) or ga_latest()
@@ -921,5 +971,9 @@ if __name__ == '__main__':
     print('Dashboard:', OUT)
     if a_.mail:
         send(c, email_html(g, R, a))
-    if a_.push:
-        push()
+    if a_.push and not push():
+        fouten.append('De nieuwe cijfers konden niet naar GitHub worden gepusht, het dashboard is niet bijgewerkt')
+    if fouten:
+        for f in fouten:
+            print(f'::error::{f}')
+        sys.exit(1)

@@ -2,6 +2,9 @@
 # Elke ochtend: cijfers ophalen en het dashboard docs/statistiek/ vernieuwen.
 # Maandag: ook posities meten (DataForSEO) en de wekelijkse e-mail sturen.
 # Handmatig starten kan via Actions > Statistieken > Run workflow.
+# Controle: is de positiemeting leeg of ongeldig (fouten van DataForSEO, tegoed op, alleen google.com in de top 3,
+# of ineens nergens gevonden), of is de laatste geldige meting ouder dan 9 dagen, dan mislukt deze workflow en
+# stuurt GitHub je automatisch een e-mail. Het dashboard wordt dan wel bijgewerkt met de overige cijfers.
 # De sleutels staan als secrets in GitHub (Settings > Secrets and variables > Actions), nooit in de code.
 name: Statistieken
 
