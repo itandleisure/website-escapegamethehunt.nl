@@ -1,0 +1,212 @@
+[
+ {
+  "groep": "Landelijk",
+  "zoekwoord": "teamuitje",
+  "stad": "",
+  "doelpagina": "/teamuitje-bedrijfsuitje/"
+ },
+ {
+  "groep": "Landelijk",
+  "zoekwoord": "bedrijfsuitje",
+  "stad": "",
+  "doelpagina": "/teamuitje-bedrijfsuitje/"
+ },
+ {
+  "groep": "Landelijk",
+  "zoekwoord": "actief teamuitje",
+  "stad": "",
+  "doelpagina": "/actief-teamuitje/"
+ },
+ {
+  "groep": "Landelijk",
+  "zoekwoord": "personeelsuitje",
+  "stad": "",
+  "doelpagina": "/personeelsuitje/"
+ },
+ {
+  "groep": "Seizoen",
+  "zoekwoord": "kerstuitje",
+  "stad": "",
+  "doelpagina": "/kerstuitje/"
+ },
+ {
+  "groep": "Seizoen",
+  "zoekwoord": "eindejaarsuitje",
+  "stad": "",
+  "doelpagina": "/kerstuitje/"
+ },
+ {
+  "groep": "Seizoen",
+  "zoekwoord": "kerstborrel activiteit",
+  "stad": "",
+  "doelpagina": "/kerstuitje/"
+ },
+ {
+  "groep": "Seizoen",
+  "zoekwoord": "nieuwjaarsuitje",
+  "stad": "",
+  "doelpagina": "/kerstuitje/"
+ },
+ {
+  "groep": "Seizoen",
+  "zoekwoord": "lenteuitje",
+  "stad": "",
+  "doelpagina": "/lenteuitje/"
+ },
+ {
+  "groep": "Seizoen",
+  "zoekwoord": "voorjaarsuitje",
+  "stad": "",
+  "doelpagina": "/lenteuitje/"
+ },
+ {
+  "groep": "Seizoen",
+  "zoekwoord": "zomeruitje",
+  "stad": "",
+  "doelpagina": "/zomeruitje/"
+ },
+ {
+  "groep": "Seizoen",
+  "zoekwoord": "bedrijfsuitje zomer",
+  "stad": "",
+  "doelpagina": "/zomeruitje/"
+ },
+ {
+  "groep": "Personeelsuitje",
+  "zoekwoord": "personeelsuitje amsterdam",
+  "stad": "Amsterdam",
+  "doelpagina": "/personeelsuitje-amsterdam/"
+ },
+ {
+  "groep": "Personeelsuitje",
+  "zoekwoord": "personeelsuitje groningen",
+  "stad": "Groningen",
+  "doelpagina": "/personeelsuitje-groningen/"
+ },
+ {
+  "groep": "Personeelsuitje",
+  "zoekwoord": "personeelsuitje rotterdam",
+  "stad": "Rotterdam",
+  "doelpagina": "/personeelsuitje-rotterdam/"
+ },
+ {
+  "groep": "Personeelsuitje",
+  "zoekwoord": "personeelsuitje utrecht",
+  "stad": "Utrecht",
+  "doelpagina": "/personeelsuitje-utrecht/"
+ },
+ {
+  "groep": "Personeelsuitje",
+  "zoekwoord": "personeelsuitje zwolle",
+  "stad": "Zwolle",
+  "doelpagina": "/personeelsuitje-zwolle/"
+ },
+ {
+  "groep": "Bedrijfsfeest",
+  "zoekwoord": "bedrijfsfeest amsterdam",
+  "stad": "Amsterdam",
+  "doelpagina": "/bedrijfsfeest-amsterdam/"
+ },
+ {
+  "groep": "Bedrijfsfeest",
+  "zoekwoord": "bedrijfsfeest arnhem",
+  "stad": "Arnhem",
+  "doelpagina": "/bedrijfsfeest-arnhem-actie-teamwork-en-lol-met-the-hunt/"
+ },
+ {
+  "groep": "Bedrijfsfeest",
+  "zoekwoord": "bedrijfsfeest den haag",
+  "stad": "Den Haag",
+  "doelpagina": "/bedrijfsfeest-den-haag/"
+ },
+ {
+  "groep": "Bedrijfsfeest",
+  "zoekwoord": "bedrijfsfeest groningen",
+  "stad": "Groningen",
+  "doelpagina": "/bedrijfsfeest-groningen-het-spannendste-avontuur-voor-colleg/"
+ },
+ {
+  "groep": "Bedrijfsfeest",
+  "zoekwoord": "bedrijfsfeest utrecht",
+  "stad": "Utrecht",
+  "doelpagina": "/bedrijfsfeest-utrecht/"
+ },
+ {
+  "groep": "Bedrijfsfeest",
+  "zoekwoord": "bedrijfsfeest zwolle",
+  "stad": "Zwolle",
+  "doelpagina": "/bedrijfsfeest-zwolle/"
+ },
+ {
+  "groep": "Actief teamuitje",
+  "zoekwoord": "actief teamuitje amsterdam",
+  "stad": "Amsterdam",
+  "doelpagina": "/actief-teamuitje-amsterdam/"
+ },
+ {
+  "groep": "Actief teamuitje",
+  "zoekwoord": "actief teamuitje amersfoort",
+  "stad": "Amersfoort",
+  "doelpagina": "/actief-teamuitje-amersfoort-ontdek-de-stad-tijdens-escape-game-the-hunt/"
+ },
+ {
+  "groep": "Actief teamuitje",
+  "zoekwoord": "actief bedrijfsuitje alkmaar",
+  "stad": "Alkmaar",
+  "doelpagina": "/actief-bedrijfsuitje-alkmaar/"
+ },
+ {
+  "groep": "Overig stad",
+  "zoekwoord": "activiteit groningen",
+  "stad": "Groningen",
+  "doelpagina": "/activiteit-groningen-gezocht-dit-escape-spel-brengt-de-stad-tot-leven/"
+ },
+ {
+  "groep": "Overig stad",
+  "zoekwoord": "city escape steenwijk",
+  "stad": "Steenwijk",
+  "doelpagina": "/city-escape-steenwijk-avontuur-teamwork-en-spanning-in-een-game/"
+ },
+ {
+  "groep": "Overig stad",
+  "zoekwoord": "city game tilburg",
+  "stad": "Tilburg",
+  "doelpagina": "/city-game-tilburg-actief-spannend-en-vol-teamwork/"
+ },
+ {
+  "groep": "Overig stad",
+  "zoekwoord": "groepsuitje tilburg",
+  "stad": "Tilburg",
+  "doelpagina": "/groepsuitje-tilburg-organiseren-kies-voor-de-spannendste-city-escape/"
+ },
+ {
+  "groep": "Overig stad",
+  "zoekwoord": "groepsactiviteit tilburg",
+  "stad": "Tilburg",
+  "doelpagina": "/groepsactiviteit-tilburg-de-stad-wordt-jullie-speelveld-met-escape-game-the-hunt/"
+ },
+ {
+  "groep": "Concurrent-alternatief",
+  "zoekwoord": "prison island nijmegen",
+  "stad": "Nijmegen",
+  "doelpagina": "/prison-island-nijmegen-the-hunt-nijmegen/"
+ },
+ {
+  "groep": "Concurrent-alternatief",
+  "zoekwoord": "escape boot nijmegen",
+  "stad": "Nijmegen",
+  "doelpagina": "/escape-boot-nijmegen-al-gedaan-ontdek-dan-the-hunt-het-avontuur-op-straatniveau/"
+ },
+ {
+  "groep": "Concurrent-alternatief",
+  "zoekwoord": "escaperoom tilburg voltage",
+  "stad": "Tilburg",
+  "doelpagina": "/escaperoom-tilburg-voltage-al-geprobeerd-tijd-voor-iets-anders/"
+ },
+ {
+  "groep": "Concurrent-alternatief",
+  "zoekwoord": "escape room koepelgevangenis arnhem",
+  "stad": "Arnhem",
+  "doelpagina": "/clocked-up-escape-room-arnhem-en-meer-ontdek-de-beste-escape-belevingen-in-de-stad/"
+ }
+]
