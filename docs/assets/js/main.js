@@ -1,0 +1,128 @@
+/* Escape Game The Hunt: menu en boekingsformulier. Geen trackers, geen externe scripts. */
+(function () {
+  'use strict';
+
+  /* Menu op mobiel */
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.getElementById('nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      nav.classList.add('anim');  // animatie alleen bij openen/sluiten, niet bij het draaien of verkleinen van het scherm
+      var open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) { nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }
+    });
+  }
+
+  /* Trailer: eigen mp4, pas geladen na een klik. play() direct in de klik, zodat hij ook op iPhone meteen met geluid start. */
+  document.querySelectorAll('.trailer[data-video]').forEach(function (box) {
+    box.querySelector('.play').addEventListener('click', function () {
+      var img = box.querySelector('img');
+      var v = document.createElement('video');
+      v.src = box.getAttribute('data-video');
+      v.controls = true;
+      v.playsInline = true;
+      v.preload = 'auto';
+      if (img) v.poster = img.currentSrc || img.src;
+      v.setAttribute('title', 'Trailer Escape Game The Hunt');
+      box.innerHTML = '';
+      box.appendChild(v);
+      box.classList.add('playing');
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});  // lukt automatisch starten niet, dan staat de play-knop van de speler klaar
+      if (window.gtag) gtag('event', 'trailer_play', { pagina: location.pathname });
+    });
+  });
+
+  /* Videoband: korte loop (eigen mp4, gedempt) starten zodra hij in beeld komt en pauzeren daarbuiten.
+     Bij "minder beweging" in de systeeminstellingen blijft de poster (foto) staan. */
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function play(v) { var p = v.play(); if (p && p.catch) { p.catch(function () {}); } }
+  var vids = document.querySelectorAll('video[data-autoplay]');
+  if (vids.length && 'IntersectionObserver' in window && !still) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var v = en.target;
+        if (en.isIntersecting) {
+          if (!v.dataset.loaded) {
+            v.dataset.loaded = '1';
+            v.autoplay = true;            // de browser start zelf zodra er genoeg geladen is
+            v.preload = 'auto';
+            v.addEventListener('canplay', function () { play(v); }, { once: true });
+            v.load();
+          } else { play(v); }
+        } else { v.pause(); }
+      });
+    }, { rootMargin: '150px' });
+    vids.forEach(function (v) { io.observe(v); });
+  }
+
+  /* Formulieren (boeking en sollicitatie).
+     De inzending gaat naar het Google Apps Script in data-google (uit "google_form_url" in src/data/site.json):
+     dat zet hem in de Google Sheet en mailt hem door. Daarna gaat de bezoeker naar de pagina in data-next.
+     Lukt versturen niet, dan blijft alles ingevuld staan en verschijnt een melding met telefoon en e-mail. */
+  var opened = Date.now();
+  document.querySelectorAll('form[data-booking]').forEach(function (form) {
+    var google = form.getAttribute('data-google');
+    var fout = form.querySelector('[data-form-error]');
+    var btn = form.querySelector('[type=submit]');
+    function mislukt() {
+      btn.disabled = false;
+      if (fout) { fout.hidden = false; fout.scrollIntoView({ block: 'nearest' }); }
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      if (fout) { fout.hidden = true; }
+      if (!google || !window.fetch || !window.URLSearchParams) { mislukt(); return; }
+      btn.disabled = true;
+      var data = new URLSearchParams(new FormData(form));
+      data.append('pagina', location.pathname);
+      data.append('duur', String(Date.now() - opened));
+      fetch(google, { method: 'POST', body: data })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          if (!res.ok) { throw new Error(res.fout || 'mislukt'); }
+          var soort = form.querySelector('[name="form"]');
+          if (window.gtag) {
+            var stad = form.querySelector('[name="stad"]');
+            // Een sollicitatie is geen boekingsaanvraag: eigen event, zodat het niet als lead/conversie telt.
+            gtag('event', soort && soort.value === 'sollicitatie' ? 'sollicitatie' : 'generate_lead',
+              { stad: stad ? stad.value : '', pagina: location.pathname });
+          }
+          location.href = form.getAttribute('data-next') || '/bedankt/';
+        })
+        .catch(mislukt);
+    });
+  });
+
+  /* Klik op een telefoonnummer of e-mailadres meten als event in Google Analytics (klik_bellen / klik_mailen). */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href^="mailto:"]');
+    if (a && window.gtag) {
+      gtag('event', a.getAttribute('href').indexOf('tel:') === 0 ? 'klik_bellen' : 'klik_mailen', { pagina: location.pathname });
+    }
+  });
+
+  /* Cookiemelding voor Google Analytics en Google Ads-conversiemeting (Consent Mode, zie GA_HEAD in tools/render.py). */
+  var bar = document.getElementById('cookiebar');
+  if (bar) {
+    var keuze = null;
+    try { keuze = localStorage.getItem('cookiekeuze-v2'); } catch (e) {}
+    if (!keuze) { bar.hidden = false; }
+    bar.querySelectorAll('[data-cookie]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var ja = b.getAttribute('data-cookie') === 'ja';
+        try { localStorage.setItem('cookiekeuze-v2', ja ? 'ja' : 'nee'); } catch (e) {}
+        if (window.gtag) { var g = ja ? 'granted' : 'denied'; gtag('consent', 'update', { analytics_storage: g, ad_storage: g, ad_user_data: g }); }
+        if (window.clarity) { clarity('consentv2', { ad_Storage: 'denied', analytics_Storage: ja ? 'granted' : 'denied' }); }
+        bar.hidden = true;
+      });
+    });
+    document.querySelectorAll('[data-cookie-open]').forEach(function (b) {
+      b.addEventListener('click', function () { bar.hidden = false; });
+    });
+  }
+})();

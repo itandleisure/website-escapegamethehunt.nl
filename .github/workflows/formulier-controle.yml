@@ -1,0 +1,42 @@
+# Controleert elke dag of het Google Apps Script achter de formulieren (offerte, sollicitatie, review, chat) bereikbaar is.
+# Weigert Google het script (bijv. omdat je opnieuw toestemming moet geven), dan mislukt deze workflow
+# en stuurt GitHub je automatisch een e-mail. Er wordt niets in de Sheet gezet en er gaat geen mail naar info@:
+# de test stuurt een leeg formulier, dat het script afwijst met "velden ontbreken".
+# Handmatig starten kan via Actions > Formulier-controle > Run workflow.
+name: Formulier-controle
+
+on:
+  schedule:
+    - cron: '30 6 * * *'  # elke dag 06:30 UTC (7:30 of 8:30 Nederlandse tijd)
+    - cron: '30 13 * * *' # en 13:30 UTC (14:30 of 15:30)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  controleren:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Formulierscript testen
+        run: |
+          URL=$(python3 -c "import json;print(json.load(open('src/data/site.json'))['google_form_url'])")
+          fout=0
+          for soort in boeking sollicitatie; do
+            antwoord=$(curl -sS -L -m 60 --retry 2 --retry-delay 20 -d "form=$soort" -d "duur=10000" "$URL" || true)
+            if echo "$antwoord" | grep -q '"fout":"velden"'; then
+              echo "OK: $soort-formulier wordt door het script ontvangen."
+            else
+              echo "::error::Het $soort-formulier komt niet aan bij het Google Apps Script. Antwoord: $(echo "$antwoord" | head -c 300)"
+              fout=1
+            fi
+          done
+          if [ "$fout" = 1 ]; then
+            echo "::error::Open Apps Script, kies Implementeren > Implementaties beheren > potloodje > Nieuwe versie > Implementeren en geef toestemming als Google daarom vraagt."
+            exit 1
+          fi

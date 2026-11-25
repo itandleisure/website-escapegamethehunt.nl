@@ -1,0 +1,1906 @@
+{
+"the hunt groningen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted groningen": {
+"vol": 20,
+"cpc": 1.07,
+"low": 0.38,
+"high": 1.04,
+"comp": "MEDIUM"
+},
+"escape game the hunt groningen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room groningen": {
+"vol": 2900,
+"cpc": 0.48,
+"low": 0.07,
+"high": 0.86,
+"comp": "MEDIUM"
+},
+"teamuitje groningen": {
+"vol": 320,
+"cpc": 2.96,
+"low": 1.04,
+"high": 2.8,
+"comp": "HIGH"
+},
+"bedrijfsuitje groningen": {
+"vol": 320,
+"cpc": 2.64,
+"low": 0.98,
+"high": 3,
+"comp": "HIGH"
+},
+"vrijgezellenfeest groningen": {
+"vol": 260,
+"cpc": 0.79,
+"low": 0.31,
+"high": 1.02,
+"comp": "LOW"
+},
+"outdoor escape room groningen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt winschoten": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted winschoten": {
+"vol": 10,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt winschoten": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room winschoten": {
+"vol": 20,
+"cpc": 2,
+"low": 0.49,
+"high": 1.01,
+"comp": "LOW"
+},
+"teamuitje winschoten": {
+"vol": 10,
+"cpc": 1.41,
+"low": null,
+"high": null,
+"comp": "HIGH"
+},
+"bedrijfsuitje winschoten": {
+"vol": 10,
+"cpc": 1.22,
+"low": null,
+"high": null,
+"comp": "HIGH"
+},
+"vrijgezellenfeest winschoten": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"outdoor escape room winschoten": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt leeuwarden": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted leeuwarden": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt leeuwarden": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room leeuwarden": {
+"vol": 1600,
+"cpc": 1.3,
+"low": 0.45,
+"high": 1.36,
+"comp": "LOW"
+},
+"teamuitje leeuwarden": {
+"vol": 90,
+"cpc": 2.63,
+"low": 0.62,
+"high": 2.33,
+"comp": "MEDIUM"
+},
+"bedrijfsuitje leeuwarden": {
+"vol": 70,
+"cpc": 2.3,
+"low": 0.74,
+"high": 2.36,
+"comp": "MEDIUM"
+},
+"vrijgezellenfeest leeuwarden": {
+"vol": 70,
+"cpc": 1.54,
+"low": 0.52,
+"high": 1.45,
+"comp": "MEDIUM"
+},
+"outdoor escape room leeuwarden": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt drachten": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted drachten": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt drachten": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room drachten": {
+"vol": 1000,
+"cpc": 0.43,
+"low": 0.12,
+"high": 1.73,
+"comp": "LOW"
+},
+"teamuitje drachten": {
+"vol": 20,
+"cpc": 1.11,
+"low": 0.56,
+"high": 1.75,
+"comp": "MEDIUM"
+},
+"bedrijfsuitje drachten": {
+"vol": 20,
+"cpc": 2.28,
+"low": 1.12,
+"high": 2.07,
+"comp": "HIGH"
+},
+"vrijgezellenfeest drachten": {
+"vol": 10,
+"cpc": 4.36,
+"low": null,
+"high": null,
+"comp": "LOW"
+},
+"outdoor escape room drachten": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt heerenveen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted heerenveen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt heerenveen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room heerenveen": {
+"vol": 590,
+"cpc": 1.54,
+"low": 0.47,
+"high": 1.57,
+"comp": "LOW"
+},
+"teamuitje heerenveen": {
+"vol": 20,
+"cpc": 2.04,
+"low": 1.04,
+"high": 2.15,
+"comp": "HIGH"
+},
+"bedrijfsuitje heerenveen": {
+"vol": 40,
+"cpc": 2.04,
+"low": 1.26,
+"high": 1.93,
+"comp": "HIGH"
+},
+"vrijgezellenfeest heerenveen": {
+"vol": 10,
+"cpc": 1.07,
+"low": null,
+"high": null,
+"comp": "LOW"
+},
+"outdoor escape room heerenveen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt assen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted assen": {
+"vol": 10,
+"cpc": 1.55,
+"low": null,
+"high": null,
+"comp": "MEDIUM"
+},
+"escape game the hunt assen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room assen": {
+"vol": 1600,
+"cpc": 1.12,
+"low": 0.45,
+"high": 1.33,
+"comp": "MEDIUM"
+},
+"teamuitje assen": {
+"vol": 50,
+"cpc": 3.12,
+"low": 0.89,
+"high": 2.8,
+"comp": "HIGH"
+},
+"bedrijfsuitje assen": {
+"vol": 20,
+"cpc": 2.46,
+"low": 1.28,
+"high": 2.7,
+"comp": "HIGH"
+},
+"vrijgezellenfeest assen": {
+"vol": 10,
+"cpc": 2.11,
+"low": 0.63,
+"high": 1.8,
+"comp": "HIGH"
+},
+"outdoor escape room assen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt emmen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted emmen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt emmen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room emmen": {
+"vol": 1300,
+"cpc": 0.9,
+"low": 0.29,
+"high": 2.28,
+"comp": "LOW"
+},
+"teamuitje emmen": {
+"vol": 50,
+"cpc": 2.22,
+"low": 0.8,
+"high": 2.02,
+"comp": "HIGH"
+},
+"bedrijfsuitje emmen": {
+"vol": 20,
+"cpc": 2.03,
+"low": 0.79,
+"high": 2.19,
+"comp": "HIGH"
+},
+"vrijgezellenfeest emmen": {
+"vol": 30,
+"cpc": 1.3,
+"low": null,
+"high": null,
+"comp": "LOW"
+},
+"outdoor escape room emmen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt meppel": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted meppel": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt meppel": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room meppel": {
+"vol": 170,
+"cpc": 1.85,
+"low": 0.46,
+"high": 1.35,
+"comp": "LOW"
+},
+"teamuitje meppel": {
+"vol": 20,
+"cpc": 2.57,
+"low": 0.99,
+"high": 2.52,
+"comp": "HIGH"
+},
+"bedrijfsuitje meppel": {
+"vol": 10,
+"cpc": 2.68,
+"low": 1.03,
+"high": 2.37,
+"comp": "HIGH"
+},
+"vrijgezellenfeest meppel": {
+"vol": 10,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"outdoor escape room meppel": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt zwolle": {
+"vol": 10,
+"cpc": 2.14,
+"low": 0.8,
+"high": 2.33,
+"comp": "HIGH"
+},
+"hunted zwolle": {
+"vol": 20,
+"cpc": 3.26,
+"low": 0.75,
+"high": 2.79,
+"comp": "HIGH"
+},
+"escape game the hunt zwolle": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room zwolle": {
+"vol": 4400,
+"cpc": 0.81,
+"low": 0.24,
+"high": 1.01,
+"comp": "MEDIUM"
+},
+"teamuitje zwolle": {
+"vol": 260,
+"cpc": 3.25,
+"low": 1.12,
+"high": 3.13,
+"comp": "HIGH"
+},
+"bedrijfsuitje zwolle": {
+"vol": 260,
+"cpc": 3.87,
+"low": 1.42,
+"high": 3.81,
+"comp": "HIGH"
+},
+"vrijgezellenfeest zwolle": {
+"vol": 210,
+"cpc": 1.78,
+"low": 0.71,
+"high": 2.2,
+"comp": "MEDIUM"
+},
+"outdoor escape room zwolle": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt kampen": {
+"vol": 10,
+"cpc": null,
+"low": 0.44,
+"high": 0.79,
+"comp": "MEDIUM"
+},
+"hunted kampen": {
+"vol": 90,
+"cpc": 2.1,
+"low": null,
+"high": null,
+"comp": "LOW"
+},
+"escape game the hunt kampen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room kampen": {
+"vol": 320,
+"cpc": 1.12,
+"low": 0.25,
+"high": 1.12,
+"comp": "LOW"
+},
+"teamuitje kampen": {
+"vol": 10,
+"cpc": 0.74,
+"low": null,
+"high": null,
+"comp": "MEDIUM"
+},
+"bedrijfsuitje kampen": {
+"vol": 10,
+"cpc": 0.88,
+"low": 1.05,
+"high": 1.92,
+"comp": "HIGH"
+},
+"vrijgezellenfeest kampen": {
+"vol": 10,
+"cpc": 1.06,
+"low": null,
+"high": null,
+"comp": "MEDIUM"
+},
+"outdoor escape room kampen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt steenwijk": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted steenwijk": {
+"vol": 10,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": "LOW"
+},
+"escape game the hunt steenwijk": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room steenwijk": {
+"vol": 90,
+"cpc": 1.34,
+"low": 0.43,
+"high": 1.41,
+"comp": "LOW"
+},
+"teamuitje steenwijk": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"bedrijfsuitje steenwijk": {
+"vol": 10,
+"cpc": 1.98,
+"low": null,
+"high": null,
+"comp": "HIGH"
+},
+"vrijgezellenfeest steenwijk": {
+"vol": 10,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"outdoor escape room steenwijk": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt deventer": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted deventer": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt deventer": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room deventer": {
+"vol": 2400,
+"cpc": 0.91,
+"low": 0.3,
+"high": 0.99,
+"comp": "MEDIUM"
+},
+"teamuitje deventer": {
+"vol": 110,
+"cpc": 3.39,
+"low": 1.37,
+"high": 2.95,
+"comp": "HIGH"
+},
+"bedrijfsuitje deventer": {
+"vol": 140,
+"cpc": 3.49,
+"low": 1.39,
+"high": 3.51,
+"comp": "MEDIUM"
+},
+"vrijgezellenfeest deventer": {
+"vol": 70,
+"cpc": 1.62,
+"low": 0.85,
+"high": 2.09,
+"comp": "MEDIUM"
+},
+"outdoor escape room deventer": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt almelo": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted almelo": {
+"vol": 10,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": "LOW"
+},
+"escape game the hunt almelo": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room almelo": {
+"vol": 390,
+"cpc": 0.66,
+"low": 0.22,
+"high": 0.59,
+"comp": "LOW"
+},
+"teamuitje almelo": {
+"vol": 30,
+"cpc": 1.76,
+"low": 1.08,
+"high": 2.32,
+"comp": "HIGH"
+},
+"bedrijfsuitje almelo": {
+"vol": 20,
+"cpc": 0.52,
+"low": 1.55,
+"high": 2.61,
+"comp": "HIGH"
+},
+"vrijgezellenfeest almelo": {
+"vol": 10,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": "LOW"
+},
+"outdoor escape room almelo": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt enschede": {
+"vol": 10,
+"cpc": 1.23,
+"low": 0.55,
+"high": 1.66,
+"comp": "MEDIUM"
+},
+"hunted enschede": {
+"vol": 10,
+"cpc": 5.53,
+"low": null,
+"high": null,
+"comp": "HIGH"
+},
+"escape game the hunt enschede": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room enschede": {
+"vol": 1900,
+"cpc": 0.97,
+"low": 0.3,
+"high": 0.89,
+"comp": "MEDIUM"
+},
+"teamuitje enschede": {
+"vol": 140,
+"cpc": 2.11,
+"low": 0.95,
+"high": 2.07,
+"comp": "HIGH"
+},
+"bedrijfsuitje enschede": {
+"vol": 110,
+"cpc": 2.21,
+"low": 0.98,
+"high": 2.23,
+"comp": "HIGH"
+},
+"vrijgezellenfeest enschede": {
+"vol": 90,
+"cpc": 1.7,
+"low": 0.55,
+"high": 2.15,
+"comp": "MEDIUM"
+},
+"outdoor escape room enschede": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt oldenzaal": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted oldenzaal": {
+"vol": 10,
+"cpc": 0.37,
+"low": null,
+"high": null,
+"comp": "LOW"
+},
+"escape game the hunt oldenzaal": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room oldenzaal": {
+"vol": 90,
+"cpc": 0.88,
+"low": 0.3,
+"high": 0.81,
+"comp": "MEDIUM"
+},
+"teamuitje oldenzaal": {
+"vol": 40,
+"cpc": 2.02,
+"low": 0.75,
+"high": 1.92,
+"comp": "HIGH"
+},
+"bedrijfsuitje oldenzaal": {
+"vol": 40,
+"cpc": 2.24,
+"low": null,
+"high": null,
+"comp": "HIGH"
+},
+"vrijgezellenfeest oldenzaal": {
+"vol": 10,
+"cpc": 1.07,
+"low": 0.45,
+"high": 1.17,
+"comp": "HIGH"
+},
+"outdoor escape room oldenzaal": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt almere": {
+"vol": 10,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": "LOW"
+},
+"hunted almere": {
+"vol": 20,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": "LOW"
+},
+"escape game the hunt almere": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room almere": {
+"vol": 720,
+"cpc": 1.02,
+"low": 0.42,
+"high": 0.99,
+"comp": "MEDIUM"
+},
+"teamuitje almere": {
+"vol": 70,
+"cpc": 3.85,
+"low": 1.44,
+"high": 4.36,
+"comp": "HIGH"
+},
+"bedrijfsuitje almere": {
+"vol": 90,
+"cpc": 5.02,
+"low": 1.95,
+"high": 4.63,
+"comp": "HIGH"
+},
+"vrijgezellenfeest almere": {
+"vol": 30,
+"cpc": 2.29,
+"low": 0.89,
+"high": 1.98,
+"comp": "HIGH"
+},
+"outdoor escape room almere": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt arnhem": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted arnhem": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt arnhem": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room arnhem": {
+"vol": 1600,
+"cpc": 0.83,
+"low": 0.29,
+"high": 0.82,
+"comp": "MEDIUM"
+},
+"teamuitje arnhem": {
+"vol": 170,
+"cpc": 3.79,
+"low": 1.49,
+"high": 4.1,
+"comp": "HIGH"
+},
+"bedrijfsuitje arnhem": {
+"vol": 140,
+"cpc": 5.59,
+"low": 1.79,
+"high": 5.25,
+"comp": "HIGH"
+},
+"vrijgezellenfeest arnhem": {
+"vol": 90,
+"cpc": 1.25,
+"low": 0.64,
+"high": 1.99,
+"comp": "MEDIUM"
+},
+"outdoor escape room arnhem": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt nijmegen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted nijmegen": {
+"vol": 10,
+"cpc": 1.84,
+"low": 0.6,
+"high": 1.59,
+"comp": "HIGH"
+},
+"escape game the hunt nijmegen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room nijmegen": {
+"vol": 2900,
+"cpc": 1.04,
+"low": 0.47,
+"high": 0.93,
+"comp": "HIGH"
+},
+"teamuitje nijmegen": {
+"vol": 210,
+"cpc": 3.23,
+"low": 1.57,
+"high": 2.07,
+"comp": "HIGH"
+},
+"bedrijfsuitje nijmegen": {
+"vol": 210,
+"cpc": 4.08,
+"low": 1.62,
+"high": 3.17,
+"comp": "HIGH"
+},
+"vrijgezellenfeest nijmegen": {
+"vol": 170,
+"cpc": 1.76,
+"low": 0.5,
+"high": 1.85,
+"comp": "HIGH"
+},
+"outdoor escape room nijmegen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt utrecht": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted utrecht": {
+"vol": 30,
+"cpc": 1.94,
+"low": 0.78,
+"high": 1.92,
+"comp": "HIGH"
+},
+"escape game the hunt utrecht": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room utrecht": {
+"vol": 6600,
+"cpc": 1.36,
+"low": 0.49,
+"high": 1.32,
+"comp": "HIGH"
+},
+"teamuitje utrecht": {
+"vol": 880,
+"cpc": 4.42,
+"low": 2.19,
+"high": 4.45,
+"comp": "HIGH"
+},
+"bedrijfsuitje utrecht": {
+"vol": 720,
+"cpc": 5.09,
+"low": 2.18,
+"high": 4.74,
+"comp": "HIGH"
+},
+"vrijgezellenfeest utrecht": {
+"vol": 590,
+"cpc": 1.98,
+"low": 0.75,
+"high": 2.25,
+"comp": "HIGH"
+},
+"outdoor escape room utrecht": {
+"vol": 10,
+"cpc": 2,
+"low": 0.88,
+"high": 2.07,
+"comp": "HIGH"
+},
+"the hunt amersfoort": {
+"vol": 30,
+"cpc": 1.33,
+"low": 0.3,
+"high": 2.5,
+"comp": "MEDIUM"
+},
+"hunted amersfoort": {
+"vol": 10,
+"cpc": 2.78,
+"low": 0.37,
+"high": 1.85,
+"comp": "MEDIUM"
+},
+"escape game the hunt amersfoort": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room amersfoort": {
+"vol": 4400,
+"cpc": 0.97,
+"low": 0.22,
+"high": 1.25,
+"comp": "MEDIUM"
+},
+"teamuitje amersfoort": {
+"vol": 390,
+"cpc": 4.62,
+"low": 1.52,
+"high": 3.42,
+"comp": "HIGH"
+},
+"bedrijfsuitje amersfoort": {
+"vol": 260,
+"cpc": 5.1,
+"low": 1.87,
+"high": 5,
+"comp": "HIGH"
+},
+"vrijgezellenfeest amersfoort": {
+"vol": 210,
+"cpc": 1.51,
+"low": 0.66,
+"high": 1.97,
+"comp": "MEDIUM"
+},
+"outdoor escape room amersfoort": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt amsterdam": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted amsterdam": {
+"vol": 10,
+"cpc": 2.35,
+"low": 0.54,
+"high": 2.68,
+"comp": "HIGH"
+},
+"escape game the hunt amsterdam": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room amsterdam": {
+"vol": 8100,
+"cpc": 1.96,
+"low": 0.78,
+"high": 1.73,
+"comp": "HIGH"
+},
+"teamuitje amsterdam": {
+"vol": 590,
+"cpc": 4.89,
+"low": 1.97,
+"high": 4.85,
+"comp": "HIGH"
+},
+"bedrijfsuitje amsterdam": {
+"vol": 720,
+"cpc": 4.64,
+"low": 2.12,
+"high": 4.92,
+"comp": "HIGH"
+},
+"vrijgezellenfeest amsterdam": {
+"vol": 320,
+"cpc": 1.39,
+"low": 0.44,
+"high": 1.51,
+"comp": "MEDIUM"
+},
+"outdoor escape room amsterdam": {
+"vol": 10,
+"cpc": 5.17,
+"low": 0.7,
+"high": 3.78,
+"comp": "HIGH"
+},
+"the hunt haarlem": {
+"vol": 40,
+"cpc": 0.91,
+"low": 0.59,
+"high": 1.8,
+"comp": "MEDIUM"
+},
+"hunted haarlem": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt haarlem": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room haarlem": {
+"vol": 1900,
+"cpc": 1.02,
+"low": 0.29,
+"high": 0.83,
+"comp": "MEDIUM"
+},
+"teamuitje haarlem": {
+"vol": 90,
+"cpc": 3.68,
+"low": 1.56,
+"high": 3.15,
+"comp": "HIGH"
+},
+"bedrijfsuitje haarlem": {
+"vol": 210,
+"cpc": 4.09,
+"low": 1.79,
+"high": 3.88,
+"comp": "MEDIUM"
+},
+"vrijgezellenfeest haarlem": {
+"vol": 90,
+"cpc": 1.86,
+"low": 0.73,
+"high": 2.2,
+"comp": "HIGH"
+},
+"outdoor escape room haarlem": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt alkmaar": {
+"vol": 10,
+"cpc": 2.43,
+"low": 0.59,
+"high": 2.45,
+"comp": "MEDIUM"
+},
+"hunted alkmaar": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt alkmaar": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room alkmaar": {
+"vol": 1900,
+"cpc": 1.63,
+"low": 0.52,
+"high": 2.04,
+"comp": "MEDIUM"
+},
+"teamuitje alkmaar": {
+"vol": 110,
+"cpc": 3.35,
+"low": 1.07,
+"high": 3.14,
+"comp": "HIGH"
+},
+"bedrijfsuitje alkmaar": {
+"vol": 110,
+"cpc": 3.91,
+"low": 1.01,
+"high": 3.98,
+"comp": "HIGH"
+},
+"vrijgezellenfeest alkmaar": {
+"vol": 90,
+"cpc": 1.59,
+"low": 0.52,
+"high": 1.12,
+"comp": "MEDIUM"
+},
+"outdoor escape room alkmaar": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt rotterdam": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted rotterdam": {
+"vol": 20,
+"cpc": 1.73,
+"low": 0.74,
+"high": 1.3,
+"comp": "MEDIUM"
+},
+"escape game the hunt rotterdam": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room rotterdam": {
+"vol": 6600,
+"cpc": 0.91,
+"low": 0.34,
+"high": 0.97,
+"comp": "MEDIUM"
+},
+"teamuitje rotterdam": {
+"vol": 590,
+"cpc": 3.67,
+"low": 1.46,
+"high": 3.59,
+"comp": "HIGH"
+},
+"bedrijfsuitje rotterdam": {
+"vol": 720,
+"cpc": 3.72,
+"low": 1.37,
+"high": 3.66,
+"comp": "HIGH"
+},
+"vrijgezellenfeest rotterdam": {
+"vol": 480,
+"cpc": 1.58,
+"low": 0.45,
+"high": 1.53,
+"comp": "MEDIUM"
+},
+"outdoor escape room rotterdam": {
+"vol": 10,
+"cpc": 1.1,
+"low": null,
+"high": null,
+"comp": "HIGH"
+},
+"the hunt den haag": {
+"vol": 10,
+"cpc": 1.02,
+"low": 0.38,
+"high": 2.44,
+"comp": "MEDIUM"
+},
+"hunted den haag": {
+"vol": 10,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": "HIGH"
+},
+"escape game the hunt den haag": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room den haag": {
+"vol": 2400,
+"cpc": 1.01,
+"low": 0.32,
+"high": 1,
+"comp": "MEDIUM"
+},
+"teamuitje den haag": {
+"vol": 320,
+"cpc": 5.68,
+"low": 2.31,
+"high": 5.41,
+"comp": "HIGH"
+},
+"bedrijfsuitje den haag": {
+"vol": 390,
+"cpc": 6.56,
+"low": 2.56,
+"high": 6.83,
+"comp": "HIGH"
+},
+"vrijgezellenfeest den haag": {
+"vol": 170,
+"cpc": 4.1,
+"low": 2.21,
+"high": 3.17,
+"comp": "MEDIUM"
+},
+"outdoor escape room den haag": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt zoetermeer": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted zoetermeer": {
+"vol": 50,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": "LOW"
+},
+"escape game the hunt zoetermeer": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room zoetermeer": {
+"vol": 1300,
+"cpc": 0.77,
+"low": 0.26,
+"high": 0.85,
+"comp": "MEDIUM"
+},
+"teamuitje zoetermeer": {
+"vol": 70,
+"cpc": 3.49,
+"low": 1.26,
+"high": 3.66,
+"comp": "HIGH"
+},
+"bedrijfsuitje zoetermeer": {
+"vol": 90,
+"cpc": 3.56,
+"low": 1.23,
+"high": 3.48,
+"comp": "HIGH"
+},
+"vrijgezellenfeest zoetermeer": {
+"vol": 20,
+"cpc": 0.83,
+"low": null,
+"high": null,
+"comp": "MEDIUM"
+},
+"outdoor escape room zoetermeer": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt dordrecht": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted dordrecht": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt dordrecht": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room dordrecht": {
+"vol": 1600,
+"cpc": 0.84,
+"low": 0.4,
+"high": 1.06,
+"comp": "LOW"
+},
+"teamuitje dordrecht": {
+"vol": 70,
+"cpc": 2.72,
+"low": 1.16,
+"high": 2.98,
+"comp": "HIGH"
+},
+"bedrijfsuitje dordrecht": {
+"vol": 90,
+"cpc": 2.52,
+"low": 1.49,
+"high": 3.31,
+"comp": "HIGH"
+},
+"vrijgezellenfeest dordrecht": {
+"vol": 30,
+"cpc": 3.03,
+"low": 0.72,
+"high": 1.81,
+"comp": "HIGH"
+},
+"outdoor escape room dordrecht": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt middelburg": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted middelburg": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt middelburg": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room middelburg": {
+"vol": 590,
+"cpc": 0.87,
+"low": 0.37,
+"high": 1.37,
+"comp": "MEDIUM"
+},
+"teamuitje middelburg": {
+"vol": 50,
+"cpc": 4.22,
+"low": 1.11,
+"high": 3.09,
+"comp": "HIGH"
+},
+"bedrijfsuitje middelburg": {
+"vol": 30,
+"cpc": 3.18,
+"low": null,
+"high": null,
+"comp": "MEDIUM"
+},
+"vrijgezellenfeest middelburg": {
+"vol": 30,
+"cpc": 2.12,
+"low": null,
+"high": null,
+"comp": "MEDIUM"
+},
+"outdoor escape room middelburg": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt terneuzen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted terneuzen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt terneuzen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room terneuzen": {
+"vol": 50,
+"cpc": 1.06,
+"low": 0.47,
+"high": 1.38,
+"comp": "LOW"
+},
+"teamuitje terneuzen": {
+"vol": 20,
+"cpc": 2.13,
+"low": null,
+"high": null,
+"comp": "MEDIUM"
+},
+"bedrijfsuitje terneuzen": {
+"vol": 10,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"vrijgezellenfeest terneuzen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"outdoor escape room terneuzen": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt eindhoven": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted eindhoven": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt eindhoven": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room eindhoven": {
+"vol": 4400,
+"cpc": 1.07,
+"low": 0.6,
+"high": 0.95,
+"comp": "MEDIUM"
+},
+"teamuitje eindhoven": {
+"vol": 320,
+"cpc": 3.71,
+"low": 1.08,
+"high": 3.23,
+"comp": "HIGH"
+},
+"bedrijfsuitje eindhoven": {
+"vol": 320,
+"cpc": 4.01,
+"low": 1.1,
+"high": 3.4,
+"comp": "HIGH"
+},
+"vrijgezellenfeest eindhoven": {
+"vol": 210,
+"cpc": 1.67,
+"low": 0.81,
+"high": 1.39,
+"comp": "MEDIUM"
+},
+"outdoor escape room eindhoven": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt tilburg": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted tilburg": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt tilburg": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room tilburg": {
+"vol": 2400,
+"cpc": 1.5,
+"low": 0.71,
+"high": 2.52,
+"comp": "MEDIUM"
+},
+"teamuitje tilburg": {
+"vol": 170,
+"cpc": 3.18,
+"low": 1.38,
+"high": 3.21,
+"comp": "HIGH"
+},
+"bedrijfsuitje tilburg": {
+"vol": 170,
+"cpc": 3.07,
+"low": 1.52,
+"high": 3.47,
+"comp": "HIGH"
+},
+"vrijgezellenfeest tilburg": {
+"vol": 140,
+"cpc": 2.5,
+"low": 0.9,
+"high": 2.59,
+"comp": "MEDIUM"
+},
+"outdoor escape room tilburg": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt maastricht": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted maastricht": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape game the hunt maastricht": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room maastricht": {
+"vol": 2900,
+"cpc": 0.45,
+"low": 0.17,
+"high": 0.59,
+"comp": "LOW"
+},
+"teamuitje maastricht": {
+"vol": 90,
+"cpc": 3.49,
+"low": 1.23,
+"high": 2.6,
+"comp": "HIGH"
+},
+"bedrijfsuitje maastricht": {
+"vol": 90,
+"cpc": 3.71,
+"low": 1.82,
+"high": 3.44,
+"comp": "HIGH"
+},
+"vrijgezellenfeest maastricht": {
+"vol": 110,
+"cpc": 0.83,
+"low": 0.48,
+"high": 1.41,
+"comp": "MEDIUM"
+},
+"outdoor escape room maastricht": {
+"vol": 10,
+"cpc": 0.64,
+"low": 0.31,
+"high": 1.09,
+"comp": "MEDIUM"
+},
+"the hunt venlo": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"hunted venlo": {
+"vol": 10,
+"cpc": 0.48,
+"low": null,
+"high": null,
+"comp": "MEDIUM"
+},
+"escape game the hunt venlo": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"escape room venlo": {
+"vol": 480,
+"cpc": 1.31,
+"low": 0.38,
+"high": 1.04,
+"comp": "LOW"
+},
+"teamuitje venlo": {
+"vol": 50,
+"cpc": 1.95,
+"low": 0.79,
+"high": 2.31,
+"comp": "HIGH"
+},
+"bedrijfsuitje venlo": {
+"vol": 20,
+"cpc": 1.53,
+"low": null,
+"high": null,
+"comp": "HIGH"
+},
+"vrijgezellenfeest venlo": {
+"vol": 20,
+"cpc": 1.84,
+"low": 0.44,
+"high": 1.25,
+"comp": "MEDIUM"
+},
+"outdoor escape room venlo": {
+"vol": null,
+"cpc": null,
+"low": null,
+"high": null,
+"comp": null
+},
+"the hunt": {
+"vol": 5400,
+"cpc": 0.5,
+"low": null,
+"high": null,
+"comp": "LOW"
+},
+"hunted": {
+"vol": 14800,
+"cpc": 1.78,
+"low": 0.72,
+"high": 2.21,
+"comp": "LOW"
+},
+"escape game the hunt": {
+"vol": 10,
+"cpc": 1.67,
+"low": 0.32,
+"high": 1.08,
+"comp": "LOW"
+},
+"hunted spel": {
+"vol": 70,
+"cpc": 2.79,
+"low": 0.48,
+"high": 2.14,
+"comp": "MEDIUM"
+},
+"hunted spelen": {
+"vol": 70,
+"cpc": 2.79,
+"low": 0.48,
+"high": 2.14,
+"comp": "MEDIUM"
+},
+"hunted game": {
+"vol": 480,
+"cpc": 1.84,
+"low": 0.3,
+"high": 1.79,
+"comp": "LOW"
+},
+"zelf hunted spelen": {
+"vol": 20,
+"cpc": 1.15,
+"low": 0.32,
+"high": 0.76,
+"comp": "MEDIUM"
+},
+"outdoor escape room": {
+"vol": 260,
+"cpc": 0.99,
+"low": 0.38,
+"high": 1.31,
+"comp": "MEDIUM"
+}
+}

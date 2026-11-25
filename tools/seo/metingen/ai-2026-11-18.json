@@ -1,0 +1,1159 @@
+{
+ "datum": "2026-11-18",
+ "platforms": {
+  "ChatGPT": "gpt-5.4-mini",
+  "Perplexity": "sonar",
+  "Gemini": "gemini-3.5-flash"
+ },
+ "kosten": 0.8,
+ "vragen": [
+  {
+   "stad": "Amsterdam",
+   "soort": "teamuitje",
+   "vraag": "Wat is een leuk en actief teamuitje in Amsterdam voor een groep collega's?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [],
+     "tekst": "Zeker — voor een **leuk en actief teamuitje in Amsterdam** zou ik iets kiezen dat zowel energie als samenwerking vraagt. Een paar goede richtingen:\n\n1. **Indoor klimmen / boulderen**  \n   Goed voor teams die iets actiefs willen zonder afhankelijk te zijn van het weer. Je kunt het laagdrempelig houden en eventueel een kleine teamchallenge maken.\n\n2. **Escape room met fysieke of creatieve opdrachten**  \n   Iets minder sportief, maar wel actief in de zin van samenwerken, puzzelen en tempo maken. Fijn als niet iedereen hetzelfde fitheidsniveau heeft.\n\n3. **Suppen of kanoën door de grachten of op rustig water**  \n   Heel leuk als het mooi weer is. Je combineert actief bezig zijn met een relaxte Amsterdam-ervaring.\n\n4. **Fiets- of steptocht met opdrachten**  \n   Denk aan een speurtocht of stadsspel op de fiets. Dat is vaak ideaal voor groepen collega’s: actief, competitief en makkelijk te organiseren.\n\n5. **Bootcamp of teamchallenge in een park**  \n   Bijvoorbeeld een sportieve workshop met opdrachten, estafettes en teambuilding. Goed als je echt iets energiekers zoekt.\n\nAls je wilt, kan ik ook meteen **3 concrete opties voor Amsterdam** voor je uitwerken op basis van:\n- **budget**\n- **aantal collega’s**\n- **binnen of buiten**\n- **meer sportief of meer gezellig**",
+     "kosten": 0.027457
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "upevents.nl",
+      "tbevents.nl",
+      "wegmetdebaas.nl",
+      "onemotion.nl",
+      "wezoo.com",
+      "uitjeseneten.nl"
+     ],
+     "tekst": "Een **Expeditie Robinson-achtig teamuitje** is een leuke actieve keuze in Amsterdam. Collega’s strijden in teams tijdens fysieke én mentale opdrachten, waardoor samenwerking, communicatie en competitie centraal staan.[1][2]\n\nAndere goede opties:\n\n- **Lasergamen of archery tag** – actief, laagdrempelig en geschikt voor teams die van competitie houden.[1][2]\n- **Interactieve citygame** – ontdek Amsterdam terwijl teams puzzels oplossen en opdrachten uitvoeren.[3][8]\n- **Bubbelvoetbal** – vooral leuk voor een informele groep die veel wil lachen en bewegen.[1]\n- **Combinatie-arrangement** – bijvoorbeeld lasergamen, een escape game of boogschieten, afgesloten met lunch en een borrel.[5]\n\n**Aanrader:** kies bij wisselvallig weer voor een indoor combinatie van **lasergamen + escape game + borrel**. Voor grotere groepen of mooi weer past een **citygame of Expeditie Robinson** beter.",
+     "kosten": 0.005896
+    },
+    "Gemini": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [],
+     "tekst": "Er zijn ontzettend veel leuke en actieve teamuitjes in Amsterdam te bedenken, afhankelijk van de groepsgrootte, het budget en hoe intensief de activiteit mag zijn. Hier zijn een aantal van de leukste en meest populaire opties:\n\n---\n\n### 1. **GlowGolf of Glow-in-the-dark Midgetgolf & Lasergame**\n* **Wat is het?** Een actief uitje waarbij je in het donker tussen fluorescerende elementen en lichten gaat minigolfen of lasergamen.\n* **Waarom leuk?** Binnen (dus weerbestendig), competitief en geschikt voor vrijwel iedereen in het team.\n* **Locatie:** Bijvoorbeeld bij Powerzone (nabij Centraal Station).\n\n---\n\n### 2. **Archery Tag of Bumpervoetbal**\n* **Wat is het?** \n  * **Archery Tag:** Een mix van trefbal, paintball en boogschieten (met speciale zachte pijlpunten).\n  * **Bumpervoetbal:** Voetballen terwijl je in een grote opblaasbare bal zit.\n* **Waarom leuk?** Heel actief, veel lachen, fysiek uitdagend en het versterkt het groepsgevoel enorm.\n* **Locatie:** Wordt vaak georganiseerd in parken (zoals het Vondelpark of Oosterpark) of op sportvelden via evenementenbureaus.\n\n---\n\n### 3. **Actieve Stads-Escape Games (bijv. 'Crazy 88' of 'Escape the City')**\n* **Wat is het?** Met de hele groep in teams de binnenstad van Amsterdam verkennen met een app/tablet. Je moet opdrachten uitvoeren, raadsels oplossen of gekke foto's/video's maken binnen een bepaalde tijd.\n* **Waarom leuk?** Veel beweging (wandelen door de stad), teambuilding, humor en competitie.\n* **Aanbieders:** Bureaus zoals *Uitjesbureau*, *Flitz-Events* of *Crazy 88*.\n\n---\n\n### 4. **Suppen of Kajakken op de Grachten**\n* **Wat is het?** Met een Stand-Up Paddleboard (SUP) of kajak door de grachten of het IJ navigeren.\n* **Waarom leuk?** Actief op het water, sportief en je ziet de stad vanaf een heel ander perspectief. \n* **Tip:** Wil je er een maatschappelijk doel aan koppelen? Denk aan **Plastic Fishing** met *Plastic Whale*, waarbij je in sloepen of op boards plastic uit de grachten vist.\n\n---\n\n### 5. **Boulderen of Klimmen**\n* **Wat is het?** Samen wandklimmen of boulderen (klimmen zonder touwen tot beperkte hoogte boven dikke matten).\n* **Waarom leuk?** Heel fysiek, mekaar aanmoedigen en grenzen verleggen.\n* **Locaties:** *Monk Bouldergym* (Amsterdam-Noord) of *Het Lab* (Amsterdam-West).\n\n---\n\n### 6. **Indoor VR (Virtual Reality) Free-roam Experience**\n* **Wat is het?** Je krijgt een VR-bril en -rugzak om en loopt fysiek rond in een grote hal terwijl je samen met je collega's zombies bestrijdt, raadsels oplost of op missie bent.\n* **Waarom leuk?** Heel interactief, je beweegt continu en het voelt ontzettend echt.\n* **Locatie:** *AVR (Amsterdam VR Center)* of *Zero Latency VR*.\n\n---\n\n### 7. **Padeltoernooi voor het Bedrijf**\n* **Wat is het?** Padel is dé razend populaire racketsport van het moment. Je kunt een aantal banen huren en een onderling toernooitje organiseren met een hapje en drankje erbij.\n* **Waarom leuk?** Makkelijk te leren (ook voor beginners) en erg dynamisch.\n* **Locaties:** *Peakz Padel* (diverse locaties in Amsterdam) of *Plaza Padel*.\n\n---\n\n### 💡 **Combineer-tip voor een complete dag:**\n* **Middag:** Een van de actieve activiteiten hierboven (1,5 tot 2 uur).\n* **Late middag:** Een borrel op een sloep/boot (lekker ontspannen na het bewegen).\n* **Avond:** Diner of barbecue bij een gezellige plek aan het water (zoals bij NDSM-werf in Noord of Strand Zuid).",
+     "kosten": 0.004475
+    }
+   }
+  },
+  {
+   "stad": "Amsterdam",
+   "soort": "vrijgezellenfeest",
+   "vraag": "Ik zoek een leuke activiteit voor een vrijgezellenfeest in Amsterdam. Wat raad je aan?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "iamsterdam.com"
+     ],
+     "tekst": "Zeker — als ik één activiteit zou aanraden voor een vrijgezellenfeest in Amsterdam, dan is het **een privé- of kleine groepsrondvaart door de grachten**. Amsterdam noemt dit zelf een echte must-do, en er zijn aanbieders met privé/speciale groepsopties, wat het extra geschikt maakt voor een feestelijke gelegenheid. ([iamsterdam.com](https://www.iamsterdam.com/en/whats-on/calendar/attractions-and-sights/canal-cruises/2-hour-small-group-canal-cruise-with-dutch-snacks-and-bar?utm_source=openai))\n\n**Als je iets meer actie wilt**, dan zijn dit ook goede keuzes:\n- **Escape room**: leuk als jullie van puzzelen en competitie houden; Amsterdam heeft meerdere escape rooms en speur-/escape-achtige ervaringen. ([iamsterdam.com](https://www.iamsterdam.com/en/see-and-do/amsterdam-for-groups?utm_source=openai))\n- **Karaoke**: ideaal voor een groep die het niet erg vindt om wat los te gaan; Duke of Tokyo heeft privébooths voor groepen. ([iamsterdam.com](https://www.iamsterdam.com/en/see-and-do/amsterdam-for-groups?utm_source=openai))\n- **Actieve groepslocatie buiten het centrum**: UP Events in Amsterdam biedt meer dan 30 activiteiten, zoals archery tag, escape games, VR, lasergamen en bubbelvoetbal, en is expliciet gericht op vrijgezellenfeesten en groepsuitjes. ([iamsterdam.com](https://www.iamsterdam.com/uit/agenda/attracties-en-bezienswaardigheden/tours/up-events-amsterdam?utm_source=openai))\n\n**Mijn praktische advies:**  \n- **Chill & stijlvol:** rondvaart met drankjes/snacks. ([iamsterdam.com](https://www.iamsterdam.com/en/whats-on/calendar/attractions-and-sights/canal-cruises/2-hour-small-group-canal-cruise-with-dutch-snacks-and-bar?utm_source=openai))  \n- **Grappig & competitief:** escape room + borrel daarna. ([iamsterdam.com](https://www.iamsterdam.com/en/see-and-do/amsterdam-for-groups?utm_source=openai))  \n- **Vol energie:** UP Events. ([iamsterdam.com](https://www.iamsterdam.com/uit/agenda/attracties-en-bezienswaardigheden/tours/up-events-amsterdam?utm_source=openai))  \n\nAls je wilt, kan ik je ook **3 concrete vrijgezellenfeest-programma’s** maken voor:\n1. **budgetvriendelijk**,  \n2. **luxe**, of  \n3. **wild/feestelijk**.",
+     "kosten": 0.020454
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "amsterdam.mokumevents.nl",
+      "tbevents.nl",
+      "vrijgezellenfeest.nl",
+      "thedungeons.com",
+      "1001activiteiten.nl",
+      "upevents.nl",
+      "flagshipamsterdam.com"
+     ],
+     "tekst": "Mijn aanrader: **een interactieve citygame door het centrum van Amsterdam**, eventueel afgesloten met een borrel of diner. Jullie worden in teams verdeeld en voeren grappige opdrachten uit op bekende plekken; zo ontstaat vanzelf competitie én groepsfoto’s.[2][6]\n\nAndere leuke opties:\n\n- **Privé rondvaart door de grachten** met schipper en drankjes: ontspannen en typisch Amsterdams.[9]\n- **Cocktailworkshop**: gezellig, creatief en geschikt voor vrijwel elke groepsgrootte.[6][9]\n- **Escape room**: ideaal voor een kleinere groep die van puzzelen en spanning houdt.[2][9]\n- **Karaoke in een privéruimte**: laagdrempelig en gegarandeerd veel gelach.[9]\n- **Crazy 88**: geschikt voor een energieke groep die niet bang is voor gekke opdrachten in de stad.[1][9]\n\nVoor de beste combinatie zou je kunnen kiezen voor **citygame in de middag + rondvaart of cocktailworkshop + diner**. Dat geeft een goede mix van actie, ontspanning en feest.",
+     "kosten": 0.005915
+    },
+    "Gemini": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [],
+     "tekst": "Amsterdam biedt heel veel mogelijkheden voor een onvergetelijk vrijgezellenfeest! Om een goede keuze te maken, helpt het vaak om te kijken naar de sfeer van de groep: zoeken jullie ontspanning, actie, creativiteit of feest? \n\nHier zijn een aantal van de leukste activiteiten in Amsterdam, verdeeld per categorie:\n\n---\n\n### 1. Op en rond het water (Klassiek & Gezellig)\n* **Privé Borrelboot (Sloep huren):** Dit is met afstand een van de populairste activiteiten. Huur een privéboot inclusief schipper en onbeperkt drank (bier, wijn, fris). Je vaart heerlijk door de grachten, kunt eigen muziek opzetten en het is de perfecte manier om bij te kletsen.\n* **Stand-Up Paddleboarding (SUP) of Waterfietsen:** Wil je het water op maar ook een beetje actief zijn? Ga suppen door de grachten of kies voor de klassieke waterfiets.\n\n### 2. Actief & Competitief (Voor de sportieve/fanatieke groep)\n* **Bubble Voetbal of Archery Tag:** In het Noorderpark of bij een indoorlocatie kun je botsen in opblaasbare ballen (Bubble Voetbal) of op elkaar jagen met pijl en boog (Archery Tag). Gegarandeerd lachen!\n* **VR Arcade (Virtual Reality):** Bij bijvoorbeeld *A'DAM VR Game Park* ga je in teams virtuele werelden in om zombies te verslaan of tegen elkaar te strijden.\n* **Glow-in-the-dark Midgetgolf:** Leuk als luchtige start van de dag bij *Powerzone* (nabij Centraal Station).\n\n### 3. Creatief & Uniek (Lachen & Herinneringen maken)\n* **Naaktmodel Schilderen:** Een klassieker voor vrijgezellenfeesten. Een ervaren docent helpt de groep om een (mannelijk of vrouwelijk) naaktmodel op doek vast te leggen. Vaak inclusief een glaasje bubbels.\n* **Cocktail Workshops:** Leer de kneepjes van het vak bij een professionele bar (zoals bij *House of Bols* of *Tales & Spirits*). Je leert schudden, schenken én natuurlijk proeven.\n* **Smartlappen Workshop:** Samen met een accordeonist duik je een typisch Jordanees café in om bekende Nederlandse smartlappen te zingen en op te nemen.\n\n### 4. Avond & Uitgaan (Feest & Entertainment)\n* **A'DAM Toren & Lookout:** Begin de avond op het dak van de A'DAM Toren met een panoramisch uitzicht over de stad. Voor de durals is er de hoogste schommel van Europa (*Over The Edge*).\n* **Karaoke Bar:** Reserveer een privéruimte bij bijvoorbeeld *Duke of Tokyo* (met een fantastisch Japans thema) of ga naar *Candela*. Iedereen zingt mee en de sfeer zit er meteen in.\n* **Stadswandeling / Pubquiz op maat:** Doe een 'Ik hou van Holland'-quiz of een vrijgezellen-speurtocht door de Jordaan of de Wallen met een gids die verhalen en opdrachten combineert.\n\n---\n\n### Tips voor de organisatie:\n1. **Houd rekening met de vrijgezel:** Zorg dat het programma echt past bij wat de aanstaande bruid/bruidegom leuk vindt (en niet alleen wat de groep grappig vindt).\n2. **Plan rustmomenten in:** Mocht je meerdere activiteiten op één dag doen, zorg dan voor genoeg tussentijd. In Amsterdam duurt verplaatsen van A naar B met een grote groep vaak langer dan je denkt.\n3. **Reserveer tijdig voor eten:** Restaurants in Amsterdam zitten snel vol voor grote groepen. Denk aan locaties met 'shared dining' (zoals *Foodhallen* of een leuk tapasrestaurant) voor een ongedwongen sfeer.\n\n**Als je me iets meer vertelt over de groep (mannen/vrouwen/gemengd, budget, wat voor type de vrijgezel is), kan ik gerichter met je meedenken!**",
+     "kosten": 0.004126
+    }
+   }
+  },
+  {
+   "stad": "Amsterdam",
+   "soort": "outdoor escape",
+   "vraag": "Is er een outdoor escape room of escape game in de buitenlucht in Amsterdam?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "viator.com"
+     ],
+     "tekst": "Ja — er zijn in Amsterdam zeker **outdoor escape games / city escape games**. Ik vond onder meer een **“Amsterdam Outdoor Escape Game: Self-Guided City Adventure”** en een **“Amsterdam Self-Guided Detective Murder Mystery Game”**, beide als buitenactiviteiten in de stad. Ook staat er een **“Amsterdam Outdoor Escape Game Team Spy Mission”** en een **“Interactive Escape City Game with Live Game Supervisor in Amsterdam”** vermeld. ([viator.com](https://www.viator.com/Amsterdam-tours/Fun-and-Games/d525-g12-c40336/2?utm_source=openai))\n\nAls je wilt, kan ik je ook helpen kiezen op basis van:\n- **met z’n tweeën / met vrienden / familie**\n- **zelfstandig vs. met begeleider**\n- **budget**\n- **Nederlandstalig of Engelstalig**",
+     "kosten": 0.028566
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "coddygames.com",
+      "mycityhunt.com",
+      "mapquest.com",
+      "thelandventure.com",
+      "iamsterdam.com",
+      "morty.app",
+      "onemotion.nl",
+      "tripadvisor.com",
+      "citygame.com",
+      "feverup.com"
+     ],
+     "tekst": "Ja. In Amsterdam zijn meerdere **outdoor escape games** waarbij je door de stad loopt en puzzels oplost — dus zonder opgesloten te zitten in een kamer.\n\n- **Coddy**: zes routes van ongeveer 2–5 km, meestal 90–180 minuten, gespeeld met je smartphone.[1]\n- **myCityHunt**: een outdoor geheim-agentenspel in het centrum, met puzzels rond onder andere het Anne Frank Huis.[2]\n- **The Landventure**: een aanpasbare citygame met routes van ongeveer 1,5 km, volledig via de smartphone.[4]\n- **Ghosts of Amsterdam**: een griezelige route van Hotel Prins Hendrik naar de Westerkerk, met raadsels en stadslegendes.[5]\n- **City Game Amsterdam / Escape World**: een outdoor citygame van ongeveer 90 minuten voor groepen van 3–36 personen.[6]\n- **Onemotion**: een begeleide outdoor escape room door Amsterdam, eventueel te combineren met een diner.[7]\n\nVoor een zelfstandige activiteit zijn **Coddy**, **myCityHunt** en **The Landventure** het meest geschikt. Controleer vóór het boeken de actuele startlocatie, prijs, beschikbaarheid en voertaal.",
+     "kosten": 0.005933
+    },
+    "Gemini": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "coddygames.com",
+      "escapeworld.nl",
+      "mycityhunt.com",
+      "mystery.city",
+      "sherlocked.nl",
+      "outsideescape.nl",
+      "citygame.com",
+      "thelandventure.com",
+      "anydoors.de"
+     ],
+     "tekst": "**Ja, er zijn verschillende outdoor escape rooms en outdoor escape games beschikbaar in Amsterdam**. \n\nIn plaats van opgesloten te zitten in een kamer, gebruik je de stad als je speelveld. Je beweegt je door het centrum of specifieke buurten terwijl je raadsels oplost, verborgen aanwijzingen zoekt en opdrachten uitvoert.\n\nEen overzicht van de bekendste opties in Amsterdam:\n\n---\n\n### 1. Fysieke spelattributen / Met materialen (Meest authentieke escape room-gevoel)\n* **Mystery City Games (Amsterdam Treasure Hunts):**  \n  * **Hoe het werkt:** Je krijgt een historische schatkaart en een fysieke houten kist vol met sloten en puzzels. Je loopt door de stad, zoekt aanwijzingen op gebouwen en monumenten om de kist stap voor stap te ontgrendelen.  \n* **Sherlocked – *Secret Sender*:**  \n  * **Hoe het werkt:** Bekend van hun prijswinnende indoor escape rooms. *Secret Sender* is hun outdoor avontuur waarbij je met fysieke attributen en raadsels een mysterie in de binnenstad ontrafelt.\n* **Escape World – *City Game*:**  \n  * **Hoe het werkt:** Biedt buiten-citygames aan met een GPS-koffer (zoals *The Rembrandt Runaway*). Dit is ook te combineren met hun indoor escape rooms op locatie (zoals bij het Waterlooplein).\n\n---\n\n### 2. Smartphone-gebaseerde outdoor games (Flexibel en direct te spelen)\n* **Outside Escape Amsterdam:**  \n  * **Hoe het werkt:** Een interactieve wandeling via een web-app op je telefoon. Je volgt een verhaallijn langs de grachten en bekende/onbekende plekken in de stad en lost samen puzzels op. \n* **Coddy / Landventure / myCityHunt:**  \n  * **Hoe het werkt:** Apps die verschillende routes en thema's aanbieden in Amsterdam (bijv. een spionnenthema, moordmysterie of historische speurtocht). Je kunt spelen wanneer je wilt zonder vooraf een gids te boeken.\n\n---\n\n### Praktische tips:\n* **Groepsgrootte:** Fysieke kisten/games (zoals Mystery City) werken het leukst in teams van 2 tot 6 personen per kist. Ben je met een grotere groep of bedrijfsuitje, dan kun je vaak met meerdere kisten tegen elkaar racen.\n* **Tijdsduur:** De meeste outdoor games duren gemiddeld **1,5 tot 2,5 uur**.\n* **Reserveren:** Voor games met fysieke materialen moet je vooraf reserveren en het materiaal ophalen. Smartphone-games zijn vaak direct digitaal aan te schaffen en te starten wanneer het jou uitkomt.",
+     "kosten": 0.03165
+    }
+   }
+  },
+  {
+   "stad": "Rotterdam",
+   "soort": "teamuitje",
+   "vraag": "Wat is een leuk en actief teamuitje in Rotterdam voor een groep collega's?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "rotterdam.info"
+     ],
+     "tekst": "Zeker — als je **één leuk en actief teamuitje in Rotterdam** zoekt, dan is **RiF010** waarschijnlijk de beste keuze. Daar kun je met collega’s **surfen, bodyboarden, suppen of kanoën** midden in de stad, en het is expliciet geschikt voor **groepen**. Daarna kun je samen wat eten of drinken bij de bar/keuken op locatie. ([rotterdam.info](https://www.rotterdam.info/nl/visit/finder-locations/rif010?utm_source=openai))\n\nAls je iets anders wilt dan water, zijn dit ook sterke opties:\n\n- **BiteMe Food Tours**: een actieve combinatie van **fietsen, wandelen of boot**, met meerdere eetstops; ook geschikt als **teamuitje of side-programma**. ([rotterdam.info](https://www.rotterdam.info/nl/visit/finder-locations/biteme-food-tours?utm_source=openai))  \n- **Abel. Hospitality & Leisure**: handig als jullie een **actief buitenprogramma** willen met **jeu de boules, pitch & putt, footgolf of adventuregolf**. ([rotterdam.info](https://www.rotterdam.info/nl/congressen/finder-venues/abel-hospitality-leisure?utm_source=openai))  \n- **iKapitein**: als jullie liever samen het water op gaan met een **sloep of rondvaart**; voor groepen tot **20 personen** is een rondvaart met schipper mogelijk. ([rotterdam.info](https://www.rotterdam.info/nl/visit/finder-locations/ikapitein?utm_source=openai))\n\n**Mijn snelle advies:**  \n- Voor **meest actief en origineel**: **RiF010**. ([rotterdam.info](https://www.rotterdam.info/nl/visit/finder-locations/rif010?utm_source=openai))  \n- Voor **mix van actief + eten**: **BiteMe Food Tours**. ([rotterdam.info](https://www.rotterdam.info/nl/visit/finder-locations/biteme-food-tours?utm_source=openai))  \n- Voor **rustiger maar gezellig teamgevoel**: **iKapitein** of **Abel**. ([rotterdam.info](https://www.rotterdam.info/nl/visit/finder-locations/ikapitein?utm_source=openai))\n\nAls je wilt, kan ik ook meteen **3 concrete teamuitjes in Rotterdam** voor je selecteren op basis van:\n1. groepsgrootte,  \n2. budget per persoon, en  \n3. of jullie iets **sportiefs, ontspannends of culinairs** willen.",
+     "kosten": 0.01998
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "funvillage.nl",
+      "monsterevents.nl",
+      "detuinderij.nl",
+      "zwartezwaanevents.nl",
+      "wegmetdebaas.nl",
+      "uitjeseneten.nl",
+      "spido.nl",
+      "mycityhunt.nl",
+      "sparta-rotterdam.nl",
+      "onemotion.nl"
+     ],
+     "tekst": "Een **citygame door Rotterdam** is een leuke, actieve keuze: verdeel collega’s in teams en laat ze onderweg raadsels en creatieve opdrachten uitvoeren rond bijvoorbeeld de Markthal, Kubuswoningen en Erasmusbrug. Zo combineer je beweging, competitie en samenwerking.[1][2]\n\nAndere goede opties:\n\n- **Prison Island** – teams lossen fysieke en mentale uitdagingen op; geschikt als samenwerken centraal staat.[3]\n- **Suppen of kajakken in de Leuvehaven** – sportief, buiten en typisch Rotterdams, met uitzicht op historische havens.[1]\n- **Escape room of VR-experience** – ideaal voor een kleinere groep die van spanning en puzzelen houdt.[1]\n- **Sloepengame** – vaar in teams door de stad en verdien punten met vragen en ludieke opdrachten.[4]\n- **Expeditie Robinson-achtige middag** – met onder meer vlotbouwen, boogschieten en strategische teamopdrachten.[1]\n\n**Beste allround keuze:** een citygame met aansluitend een borrel of diner. Die activiteit is laagdrempelig, kan met grotere groepen en laat collega’s Rotterdam op een actieve manier ontdekken.",
+     "kosten": 0.005954
+    },
+    "Gemini": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [],
+     "tekst": "Rotterdam biedt ontzettend veel mogelijkheden voor een leuk en actief teamuitje. Welke activiteit het beste past, hangt een beetje af van hoe fysiek uitdagend je het wilt maken en wat het weer doet, maar hier zijn de leukste opties op een rij:\n\n### 1. Actief op het water\nRotterdam en de Maas zijn onlosmakelijk met elkaar verbonden. Actieve wateractiviteiten zijn daarom altijd een succes:\n* **RIB Powerboat Varen:** Zin in adrenaline? Met een RIB-boot scheur je met wel 90 km/u over de Maas onder de Erasmusbrug door. Een spectaculaire ervaring.\n* **Suppen (Stand-Up Paddling) in de Bergse Plas of de Delfshaven:** Een stuk ontspannender, maar toch sportief. Je leert balanceren op een board en verkent Rotterdam vanaf het water.\n* **Kajakken of Kanootje huren:** Maak een actieve tocht door de historische grachten van Delfshaven of de Rotterdamse meren.\n\n### 2. Fun, actie en competitie (Indoor)\nMocht het weer wat minder zijn, dan zijn er indoor fantastische actieve opties:\n* **Remastered (Experience) combineren met een City Game:** Bekijk eerst de digitale kunstwereld van Remastered en doe daarna een interactieve outdoor escape game door de stad via een app.\n* **VR Arcade (Virtual Reality):** Trek met je team speciale vesten en VR-brillen aan en strijd samen tegen zombies of tegen elkaar in een virtuele wereld. \n* **J jeu de boules bar:** Iets laagdrempeliger actief. Baan huren, drankje erbij en lekker competitief boulen op overdekte banen.\n* **Indoor Cliff Diving / Trampolinepark (Bounce Valley):** Bounce Valley Rotterdam is het grootste aaneengesloten luchtkussenpark van Nederland. Lekker gek doen en heel actief!\n\n### 3. De stad ontdekken op wielen (Outdoor)\n* **E-Trikke of E-Scooter Tour:** Tour op een milieuvriendelijke, elektrische step of trikke door de stad, over de bruggen en langs de skyline van Rotterdam. \n* **Fietsen met gids (UrbanGuides of Baja Bikes):** Rotterdam is een fantastische fietsstad. Huur fietsen en laat een gids je meenemen langs de architectonische hoogtepunten (Kubuswoningen, Markthal, Depot Boijmans Van Beuningen).\n\n### 4. Echte adrenaline & Hoogtevrees testen\n* **Abseilen van de Euromast:** Voor de echte waaghalzen! Vanaf 100 meter hoogte tokkel of abseil je naar beneden van de iconische Euromast. Dit is het hoogste abseilpunt van Europa.\n* **Klimmen in Fun Forest Rotterdam (Kralingse Bos):** Net buiten het centrum kun je in het bos een actief klimparcours afleggen tussen de bomen, inclusief ziplines.\n\n---\n\n### 💡 Extra Tip voor de dagindeling:\nCombineer de actieve ervaring met de Rotterdamse eetcultuur. Na de activiteit kun je bijvoorbeeld gezellig afsluiten met een borrel of diner in de **Markthal**, de **Fenix Food Factory** op Katendrecht, of bij een van de vele horecagelegenheden op de **Witte de Withstraat**.\n\n**Vraag om het verder toe te spitsen:** \nHoe groot is de groep ongeveer, wat is het budget per persoon, en zoeken jullie iets heel intensiefs of juist meer 'laagdrempelig actief'? Dan denk ik graag nog specifieker mee!",
+     "kosten": 0.003654
+    }
+   }
+  },
+  {
+   "stad": "Rotterdam",
+   "soort": "vrijgezellenfeest",
+   "vraag": "Ik zoek een leuke activiteit voor een vrijgezellenfeest in Rotterdam. Wat raad je aan?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "rotterdam.info"
+     ],
+     "tekst": "Zeker — voor een **vrijgezellenfeest in Rotterdam** zou ik dit aanraden:\n\n**Mijn beste allround keuze: RiF010 + borrel/diner erna.**  \nWaarom: je hebt meteen iets actiefs en grappigs voor de groep, en RiF010 noemt zelf dat het geschikt is voor groepen en vrijgezellenweekenden. Bovendien kun je er ook samen eten of borrelen met uitzicht op de golven. ([rotterdam.info](https://www.rotterdam.info/nl/visit/finder-locations/rif010?utm_source=openai))\n\nAndere leuke opties:\n\n1. **Splashtours**  \n   Een stadsrit die eindigt met een spectaculaire “duik” in de Maas — leuk als je iets origineels wilt dat ook voor een gemixte groep goed werkt. ([rotterdam.info](https://www.rotterdam.info/nl/visit/finder-locations/splashtours?utm_source=openai))\n\n2. **Pannenkoekenboot**  \n   Handig als jullie iets luchtigs en gezelligs willen: onbeperkt pannenkoeken tijdens een vaartocht van 75 minuten langs de skyline. Je kunt zelfs exclusief huren voor grotere groepen. ([rotterdam.info](https://www.rotterdam.info/nl/visit/finder-locations/pannenkoekenboot?utm_source=openai))\n\n3. **Euromast + borrel in de stad**  \n   Goed als jullie van uitzicht en een wat chiquere vibe houden; de Euromast staat in de officiële Rotterdam top-10 en biedt 360-graden uitzicht over de skyline en haven. ([rotterdam.info](https://www.rotterdam.info/nl/visit/guide/top-10-attracties?utm_source=openai))\n\n4. **Gratis stadswandeling + food/drinks in de avond**  \n   Als je budgetvriendelijk wilt blijven: Rotterdam Tourist Information heeft een gratis stadswandeling langs water, kunst en iconische gebouwen. ([rotterdam.info](https://www.rotterdam.info/nl/visit/goed-om-te-weten/rotterdam-tourist-information?utm_source=openai))\n\n**Als je één activiteit wilt kiezen:**  \n- **Actief en hilarisch:** RiF010  \n- **Origineel en relaxed:** Splashtours  \n- **Gezellig en makkelijk:** Pannenkoekenboot\n\nAls je wilt, kan ik ook meteen een **top 3 maken op basis van jullie budget, leeftijd en hoeveel actie jullie willen**.",
+     "kosten": 0.020124
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "zwartezwaanevents.nl",
+      "funvillage.nl",
+      "spido.nl",
+      "onemotion.nl",
+      "adventurecityrotterdam.nl",
+      "rotterdam.activitycompany.nl",
+      "vrijgezellenfeest.nl",
+      "1001activiteiten.nl",
+      "tbevents.nl",
+      "getyourguide.com"
+     ],
+     "tekst": "Mijn aanrader: **een rondvaart over de Maas combineren met een speciaalbierproeverij**. Zo krijg je typisch Rotterdamse skyline en haven, zonder dat het programma te intensief wordt; bovendien is het geschikt voor vrijwel elke groepsgrootte.[1][3]\n\nAndere leuke opties:\n\n- **Actief en competitief:** bijlwerpen, Prison Island of een escape room.[2]\n- **Voor adrenalinezoekers:** klimmen bij Adventure City, ziplinen of een vrije val.[5]\n- **Creatief en ontspannen:** graffiti spuiten, action painting of een cocktailworkshop.[4][8]\n- **Veel lachen in de stad:** een Crazy 88-achtig stadsspel met opdrachten langs de Markthal en Lijnbaan.[3][8]\n- **Lekker eten erbij:** walking dinner, dinerspel of een foodtour.[3][9]\n\n**Ideale dagindeling:** begin met een stadsspel of escape-activiteit, vaar daarna over de Maas en sluit af met diner en drankjes. Reserveer vooral boottochten en populaire groepsactiviteiten vooraf.",
+     "kosten": 0.005903
+    },
+    "Gemini": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "1001activiteiten.nl",
+      "adventurecityrotterdam.nl",
+      "funvillage.nl",
+      "crazy88-events.nl",
+      "eventophetwater.nl",
+      "weekendsinrotterdam.com",
+      "1001vrijgezellenfeesten.nl",
+      "tbevents.nl",
+      "onemotion.nl"
+     ],
+     "tekst": "Rotterdam is een fantastische stad voor een vrijgezellenfeest! Doordat de stad een rauw, modern en veelzijdig karakter heeft, kun je heel gemakkelijk een dag samenstellen die precies past bij de vrijgezel. \n\nHier zijn de leukste aanraders, verdeeld per \"type\" groep:\n\n---\n\n### 1. Actief & Adrenaline (Voor de waaghalzen)\n* **Adventure City Rotterdam:** Het grootste overdekte klimpark van Nederland met tokkelbanen, vrije vallen van 20 meter en boulderen. Perfect om de vrijgezel even te laten zweten.\n* **Bijlwerpen (Real Axe Throwing):** Laat de Viking in je los bij locaties zoals Fun Village. Hilarisch om te doen, heerlijk ontladend en prima te combineren met een drankje.\n* **Abseilen van de Euromast:** Wil je de aanstaande bruid of bruidegom écht uit de comfortzone halen? Laat hen (of de hele groep) vanaf 100 meter hoogte naar beneden abseilen met een prachtig uitzicht over de stad.\n\n---\n\n### 2. Hilarisch & Stadsspellen (Lachen en de stad verkennen)\n* **Crazy 88 in het centrum:** Hét klassieke vrijgezellenfeest-spel. Met een app en begeleiding trek je door Rotterdam en voer je 88 knotsgekke opdrachten uit op straat (van vreemden meevragen voor een dansje tot hilarische foto-challenges).\n* **Prison Island / Escape Room:** Bij Fun Village speel je *Prison Island*: een mix van een escape room en Fort Boyard waarin je in teams cellen moet kraken door fysieke, tactische en mentale opdrachten op te lossen.\n\n---\n\n### 3. Borrelen & Ontspannen op het water\n* **Privé Borrelboot op de Maas:** Rotterdam ontdekken vanaf het water is een absolute aanrader. Je kunt een privé sloep of feestboot huren met schipper en onbeperkt drank. Je vaart langs de iconische skyline, de Erasmusbrug en de havens.\n* **Watertaxi & Hotel New York:** Pak een razendsnelle Watertaxi over de Maas (voelt als een attractie op zich) en laat je afzetten op de Kop van Zuid voor oesters en gin-tonics bij Hotel New York.\n\n---\n\n### 4. Gezelligheid, Food & Competitie\n* **Mooie Boules:** Een hele toffe foodhall-achtige setting waar je jeu-de-boules kunt spelen, gecombineerd met karaoke, bordspellen, speciaalbier en streetfood. Erg laagdrempelig en ontspannen.\n* **Paint & Sip in the Dark:** Een creatieve workshop waarbij je neon-kunstwerken maakt in het donker, terwijl je geniet van drankjes en goede muziek. \n* **Cocktailworkshop op de Witte de Withstraat:** Volg een bruisende workshop cocktails shaken in of rondom de leukste uitgaansstraat van Rotterdam.\n\n---\n\n### Tips voor het avondprogramma:\n1. **Eten:** Ga voor een shared-dining concept bij bijvoorbeeld de *Markthal*, *Foodhallen Rotterdam* (op de Kop van Zuid), of streekbier en burgers bij *Brouwerij Noordt*.\n2. **Uitgaan:** Sluit de nacht af op de **Witte de Withstraat** (de levendigste barstraat van de stad) of boek een privé-karaokekamer bij *Duke of Tokyo*.\n\n---\n\n**Tip om te kiezen:** \nZoek je iets voor een **mannen- of vrouwengroep**, of is het een **gemengde groep**? En houdt de vrijgezel juist van actie, of meer van lekker eten en borrelen? Laat het gerust weten, dan stel ik een leuk dagprogramma voor je samen!",
+     "kosten": 0.032527
+    }
+   }
+  },
+  {
+   "stad": "Rotterdam",
+   "soort": "outdoor escape",
+   "vraag": "Is er een outdoor escape room of escape game in de buitenlucht in Rotterdam?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": true,
+     "geciteerd": true,
+     "fragment": "l/steden/rotterdam-nl-10353/escape-game-rotterdam-8512?utm_source=openai)) - **The Hunt Rotterdam** – speelt “buiten” in het centrum van Rotterdam. ([escapegamethehunt.nl](https://escapegamethehunt.nl/escape-game-the-hunt-locaties/escape-game-the-hunt-rotterdam-2/?utm_source=openai)) - **Outside Escape Rotterdam** –",
+     "bronnen": [
+      "quest-escapes.nl",
+      "outdoorvalley.nl",
+      "mycityhunt.nl",
+      "escapegamethehunt.nl",
+      "outsideescape.nl"
+     ],
+     "tekst": "Ja — er zijn meerdere **outdoor escape rooms / escape games in de buitenlucht in Rotterdam**. Bijvoorbeeld:\n\n- **Quest Escapes Rotterdam** – een outdoor escape room in het centrum van Rotterdam. ([quest-escapes.nl](https://quest-escapes.nl/escape-room/rotterdam?utm_source=openai))\n- **Outdoor Valley** – biedt een “escape game in de buitenlucht bij Rotterdam” aan. ([outdoorvalley.nl](https://www.outdoorvalley.nl/bedrijven/programma/escape-game/?utm_source=openai))\n- **myCityHunt Rotterdam** – noemt het expliciet een outdoor escape game / escape room in de buitenlucht. ([mycityhunt.nl](https://www.mycityhunt.nl/steden/rotterdam-nl-10353/escape-game-rotterdam-8512?utm_source=openai))\n- **The Hunt Rotterdam** – speelt “buiten” in het centrum van Rotterdam. ([escapegamethehunt.nl](https://escapegamethehunt.nl/escape-game-the-hunt-locaties/escape-game-the-hunt-rotterdam-2/?utm_source=openai))\n- **Outside Escape Rotterdam** – een city escape door Rotterdam. ([outsideescape.nl](https://outsideescape.nl/product/outside-escape-rotterdam/?utm_source=openai))\n\nAls je wilt, kan ik meteen **de beste optie voor jullie groep** uitzoeken, bijvoorbeeld op basis van:\n- **aantal personen**\n- **taal** (Nederlands/Engels)\n- **moeilijkheid**\n- **budget**\n- **wel/geen begeleiding**",
+     "kosten": 0.018786
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "coddygames.com",
+      "citygame.com",
+      "mycityhunt.com",
+      "tripadvisor.com",
+      "mycityhunt.ie",
+      "onemotion.nl",
+      "viator.com",
+      "eventbrite.sg"
+     ],
+     "tekst": "Ja. In Rotterdam zijn meerdere **outdoor escape games** waarbij je door de stad loopt en puzzels oplost, meestal met een smartphone:\n\n- **Coddy**: drie routes door het centrum, ongeveer 1,5–5,2 km, 90–120 minuten, voor teams van 2–6 personen. De routes lopen onder meer langs de Markthal.[1]\n- **CityGame – The Rotterdam Syndicate**: een escape game in de buitenlucht waarbij iedere speler een rol krijgt; voor 2–5 spelers en beschikbaar in het Nederlands en Engels.[2]\n- **myCityHunt**: een zelfgeleide outdoor escape game in het centrum, met puzzels en een geheim-agentverhaal, onder andere rond de Erasmusbrug.[3]\n- **Onemotion**: organiseert een outdoor escape room door Rotterdam, eventueel gecombineerd met een diner; je speelt in teams met een route, opdrachten en aanwijzingen.[6]\n- **City Escape Game Rotterdam**: een citygame met een koffer vol fysieke puzzels en aanwijzingen, zonder telefoon of app, met een speelduur van ongeveer 1,5–2 uur.[10]\n\nVoor een zelfstandig spel met smartphone zijn Coddy of CityGame het meest voor de hand liggend; voor fysieke puzzels zonder app past City Escape Game beter. Controleer bij het reserveren de actuele prijs, startlocatie en beschikbaarheid.",
+     "kosten": 0.005971
+    },
+    "Gemini": {
+     "genoemd": true,
+     "geciteerd": true,
+     "fragment": "an geheim agenten of schatzoekers om een mysterie op te lossen via interactieve opdrachten op je telefoon.  ### 5. **Groeps- & Bedrijfsuitjes (bijv. *The Hunt* of *Outdoor Valley*)** * **The Hunt (Centrum Rotterdam):** Een grootschalig outdoorgame waarin je in teams de strijd tegen elkaar aangaat. * **Outdo",
+     "bronnen": [
+      "outsideescape.nl",
+      "escapetours.com",
+      "thelandventure.com",
+      "coddygames.com",
+      "mycityhunt.com",
+      "escapegamethehunt.nl",
+      "outdoorvalley.nl"
+     ],
+     "tekst": "Ja, er zijn in Rotterdam meerdere opties voor een **outdoor escape room / escape game** in de buitenlucht. In plaats van opgesloten te zitten in een kamer, wandel je hierbij door de stad en los je raadsels op via een smartphone-app of met behulp van fysieke attributen.\n\nEnkele bekende en populaire aanbieders in Rotterdam:\n\n### 1. **Outside Escape Rotterdam**\n* **Wat is het:** Een interactieve wandeling waarbij je een verhaal volgt op je smartphone. Je lost puzzels en raadsels op door goed om je heen te kijken in de stad.\n* **Voor wie:** Geschikt voor kleine groepen, gezinnen of vrienden.\n* **Bijzonderheden:** Geen tijdslimiet of vaste afspraak nodig; je kunt starten wanneer je wilt.\n\n### 2. **Escape Tour Rotterdam**\n* **Wat is het:** Een 'city escape' game waarbij je binnen 2 uur de geheime uitgang van Rotterdam moet vinden. Via raadsels, opdrachten en cryptische aanwijzingen op je telefoon ontdek je bekende én onbekende plekken in de stad.\n* **Voor wie:** Teams van 2 tot 5 personen (of meerdere teams tegen elkaar).\n\n### 3. **Coddy Games**\n* **Wat is het:** Verschillende thematische outdoor escape games/speurtochten door het centrum. Je gebruikt een GPS-app om locaties te ontgrendelen en raadsels op te lossen.\n\n### 4. **Landventure / MyCityHunt**\n* **Wat is het:** Urban outdoor games waarin je in de rol kruipt van geheim agenten of schatzoekers om een mysterie op te lossen via interactieve opdrachten op je telefoon.\n\n### 5. **Groeps- & Bedrijfsuitjes (bijv. *The Hunt* of *Outdoor Valley*)**\n* **The Hunt (Centrum Rotterdam):** Een grootschalig outdoorgame waarin je in teams de strijd tegen elkaar aangaat.\n* **Outdoor Valley (Bergschenhoek - net buiten Rotterdam):** Biedt outdoor teambuilding escape games in de natuur aan met tablets en koffers, ideaal voor grotere groepen en bedrijfsuitjes.\n\n---\n\n### Praktische tips:\n* **Benodigdheden:** Bij de meeste interactieve tours heb je enkel een opgeladen smartphone met mobiele internetverbinding nodig.\n* **Reserveren:** De meeste smartphone-gebaseerde outdoor games kun je 24/7 direct online kopen en meteen starten.",
+     "kosten": 0.031166
+    }
+   }
+  },
+  {
+   "stad": "Den Haag",
+   "soort": "teamuitje",
+   "vraag": "Wat is een leuk en actief teamuitje in Den Haag voor een groep collega's?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "denhaag.com"
+     ],
+     "tekst": "Zeker — een **leuk en actief teamuitje in Den Haag** is **Haagse Klimbos** in de Scheveningse Bosjes. Het is een groepsactiviteit met een duidelijke actieve insteek, en het is geschikt voor teamuitjes en teambuilding. ([denhaag.com](https://denhaag.com/nl/haagse-klimbos?utm_source=openai))\n\n**Waarom dit een goede keuze is voor collega’s:**\n- je bent echt fysiek bezig;\n- het is goed voor samenwerking en een beetje onderlinge uitdaging;\n- je zit midden in Den Haag, maar wel buiten in de natuur. ([denhaag.com](https://denhaag.com/nl/haagse-klimbos?utm_source=openai))\n\n**Als je iets wilt met iets minder hoogtes, maar nog steeds actief:**\n- **Golflounge Den Haag** — indoor golf, ook geschikt voor collega’s en teamuitjes. ([denhaag.com](https://denhaag.com/nl/golflounge-den-haag?utm_source=openai))\n- **Beleving aan Zee** — organiseert actieve groepsactiviteiten in Scheveningen, waaronder spelvormen en watersport. ([denhaag.com](https://denhaag.com/nl/beleving-aan-zee?utm_source=openai))\n- **Hart Beach** — leuk als je een strand- en watersportuitje zoekt; geschikt voor groepen en teamuitjes. ([denhaag.com](https://denhaag.com/nl/hart-beach?utm_source=openai))\n\nAls je wilt, kan ik ook meteen **3 concrete teamuitjes in Den Haag vergelijken op budget, groepsgrootte en “sportief niveau”**.",
+     "kosten": 0.019375
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "monsterevents.nl",
+      "detuinderij.nl",
+      "denhaag.com",
+      "evenuit.com",
+      "tbevents.nl",
+      "puuruitjes.nl",
+      "onemotion.nl",
+      "stadsarrangement.nl"
+     ],
+     "tekst": "Een **strand-zeskamp in Scheveningen** is waarschijnlijk de leukste keuze: actief, laagdrempelig en geschikt voor collega’s met verschillende sportniveaus. Denk aan ludieke estafettes, mega-twister, touwtrekken en andere strandspellen waarbij samenwerking en competitie centraal staan.[1][4][5]\n\nAndere goede opties:\n\n- **Peking Express-citygame**: in teams door Den Haag, met opdrachten, snelheid en strategische keuzes.[5]\n- **Archery tag**: een combinatie van boogschieten, trefbal en paintball; sportief en competitief.[9]\n- **Outdoor escape game**: puzzels oplossen en samen een route door de stad vinden.[10]\n- **De Alleskunner**: korte, hilarische uitdagingen rond snelheid, behendigheid en improvisatie.[1]\n- **Suppen of varen in Scheveningen**: actief, maar wat ontspannender en goed te combineren met een borrel of diner.[7]\n\n**Aanrader voor een gemengde groep:** kies de strand-zeskamp en sluit af met een drankje of barbecue aan zee. Voor een kleiner team dat vooral wil samenwerken, past een outdoor escape game beter.",
+     "kosten": 0.005929
+    },
+    "Gemini": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [],
+     "tekst": "Den Haag biedt een fantastische mix van stad, strand en cultuur, waardoor er enorm veel keuze is voor een leuk en actief teamuitje. Afhankelijk van waar je team het meest van houdt, zijn dit enkele van de leukste actieve opties:\n\n### 1. Actief op het strand van Scheveningen (Ideaal in het voorjaar/zomer)\n* **Expeditie Robinson Teambuilding:** Laat je collega’s in teams strijden op het strand met proeven die draaien om samenwerking, behendigheid en vuur maken. Een klassieker die het altijd goed doet.\n* **Golfsurfen of Suppen:** Ga samen de zee op bij een van de surfscholen bij de Scheveningse boulevard of het Zwarte Pad. Sluit af met een gezellige barbecue bij een strandtent.\n* **Brandingraften of Powerkiten:** Voor teams die van wat meer adrenaline houden. Trotseer de golven in een grote raft of leer sturen met een grote matrasvlieger op het strand.\n\n### 2. Actief & Puzzelen in de Binnenstad\n* **Stadsgame / City Escape:** Met een app (zoals *The Target*, *Escape the City* of *Sherlock*) doorkruis je in teams het historische centrum van Den Haag. Je ontrafelt raadsels, volgt sporen langs het Binnenhof en het Vredespaleis en strijdt tegen de klok (en elkaar).\n* **Kanoën of Suppen door de Haagse Grachten:** Den Haag heeft prachtige historische grachten. Met een gids (of op eigen houtje) ontdek je de stad vanaf het water. Heel actief, maar ook heel ontspannen!\n* **Grote Haagse Fietstocht (of op E-Choppers):** Huur fietsen of stoere E-Choppers en maak een tocht die de binnenstad combineert met de duinen en het strand.\n\n### 3. Indoor Actief (Perfect bij minder mooi weer)\n* **VR Arcade (Virtual Reality):** Bij locaties zoals VR Arcade Den Haag of Zero Latency stap je samen in een virtuele wereld waarin je samen missies moet volbrengen. Erg actief en hilarisch om te zien wat je collega's doen.\n* **Boulderen of Klimmen:** Bezoek een boulderhal (zoals *Boulderhal De Campus*) of een klimhal. Het is fysiek uitdagend, maar heel toegankelijk voor beginners en je helpt elkaar met het vinden van de juiste routes.\n* **Glow-in-the-Dark Minigolf of De Uithof:** Bij De Uithof kun je terecht voor indoor karten, schaatsen of zelfs skiën/snowboarden op echt ijs en sneeuw. \n\n---\n\n### 💡 Extra Tip voor het programma:\nCombineer de actieve activiteit met een goede afsluiter. Bijvoorbeeld:\n1. **Middag:** Expeditie Robinson op het strand of een Stadsgame in het centrum.\n2. **Borrel:** Bij een strandtent (bijv. *Barbarossa*, *Albatros* of *Het Puntje*) of in het centrum op de *Grote Markt*.\n3. **Diner:** Een gezellige barbecue aan zee of een Indische rijsttafel (dé culinaire specialiteit van Den Haag).\n\n**Om je een specifieker advies te geven:**\n* Met hoeveel personen zijn jullie ongeveer?\n* Zitten er grote verschillen in de fysieke conditie van het team?\n* Heeft het uitje plaats in de zomer of in het najaar/winter?",
+     "kosten": 0.00358725
+    }
+   }
+  },
+  {
+   "stad": "Den Haag",
+   "soort": "vrijgezellenfeest",
+   "vraag": "Ik zoek een leuke activiteit voor een vrijgezellenfeest in Den Haag. Wat raad je aan?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "outdoorsportdeuithof.nl",
+      "hofstadevents.nl",
+      "twins.nl"
+     ],
+     "tekst": "Zeker — voor een vrijgezellenfeest in Den Haag zou ik vooral deze 3 opties aanraden:\n\n1. **Actief en competitief:** een uitje bij **De Uithof** met bijvoorbeeld **Expeditie Games**. Dat is geschikt voor vrijgezellenfeesten, kan ook indoor doorgaan bij slecht weer en is leuk als jullie iets willen met actie, teamwork en een beetje competitie. ([outdoorsportdeuithof.nl](https://outdoorsportdeuithof.nl/activiteiten/expeditie-games/?utm_source=openai))\n\n2. **Origineel en hilarisch:** een **workshop / groepsactiviteit** zoals een moorddiner, pubquiz of een ludieke workshop via aanbieders in Den Haag. Dat is handig als jullie iets willen dat vooral draait om lachen, borrelen en samen iets doen zonder al te veel sportiviteit. ([hofstadevents.nl](https://hofstadevents.nl/vrijgezellenfeesten/?utm_source=openai))\n\n3. **Strand + chill + wat actie:** richting **Scheveningen** met een combinatie van strandactiviteiten zoals suppen, beachvolleybal of een borrel daarna. Dat past goed als jullie een relaxte dag willen met een feestelijke sfeer. ([twins.nl](https://twins.nl/vrijgezellenfeest-in-den-haag/?utm_source=openai))\n\n**Mijn persoonlijke aanrader:**  \n- **Voor een gemengde groep:** De Uithof.  \n- **Voor een gek, origineel feest:** een workshop of moorddiner.  \n- **Voor mooi weer:** Scheveningen met strandactiviteit + borrel. ([outdoorsportdeuithof.nl](https://outdoorsportdeuithof.nl/activiteiten/expeditie-games/?utm_source=openai))\n\nAls je wilt, kan ik ook meteen **3 concrete programma’s** voor je maken, bijvoorbeeld:\n- **budgetvriendelijk**\n- **actief/sportief**\n- **chic met borrel en diner**",
+     "kosten": 0.019626
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "evenuit.com",
+      "vrijgezellenfeest.nl",
+      "denhaag.com",
+      "onemotion.nl",
+      "tripadvisor.nl",
+      "1001activiteiten.nl",
+      "ohohdenhaagkroegentocht.nl",
+      "denhaag.activitycompany.nl"
+     ],
+     "tekst": "Ik raad een **strandchallenge in Scheveningen** aan, bijvoorbeeld Archery Tag, Highland Games of beachvolleybal. Dat is actief, hilarisch en geschikt voor verschillende groepsgroottes; daarna kunnen jullie afsluiten met een cocktailworkshop, diner of kroegentocht. [3][4]\n\nAndere leuke opties:\n\n- **Escape room of VR Escape Room** – ideaal als jullie van puzzelen en competitie houden. [3][6]\n- **Cocktailworkshop** – gezellig en minder sportief, eventueel met een ondeugende vrijgezellentwist. [4][9]\n- **Citygame of Pub Trail** – ontdek Den Haag in teams en combineer een speurtocht met cafés. [2][3]\n- **Boottocht door de Haagse grachten** – ontspannen, sociaal en goed te combineren met lunch of borrel. [3]\n- **Creatieve workshop**, zoals action painting of percussie – geschikt als niet iedereen van sportieve activiteiten houdt. [4]\n\n**Mijn favoriete programma:** middag Archery Tag op het strand, daarna een cocktailworkshop en ’s avonds eten en stappen in Scheveningen. Dat geeft de dag een goede mix van actie, gezelligheid en ontspanning.",
+     "kosten": 0.005953
+    },
+    "Gemini": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [],
+     "tekst": "Den Haag is een geweldige stad voor een vrijgezellenfeest! Omdat het én een historische binnenstad én het strand van Scheveningen heeft, kun je heel verschillende kanten op. \n\nHier zijn een aantal fantastische ideeën, verdeeld per type groep:\n\n---\n\n### 1. Actief & Buiten (Perfect voor Scheveningen)\n* **Powerkiten of Golfsurfen:** Ga naar het strand van Scheveningen en trotseer de elementen. Powerkiten (vliegeren met grote matten) is snel te leren en hilarisch om te zien als iemand door het zand getrokken wordt.\n* **RIB Boat Experience:** Met extreem hoge snelheid in een rubberboot over de golven van de Noordzee knallen. Hoge adrenalinegarantie!\n* **Expeditie Robinson:** Strijd op het strand tegen elkaar in proeven met vuur maken, puzzels, kracht en behendigheid.\n\n---\n\n### 2. Origineel & Gezellig in de Binnenstad\n* **Borrelboot door de Ooievaart:** Huur een privébootje met schipper en vaar door de Haagse grachten met onbeperkt drank en hapjes. Een hele ontspannen manier om de stad te zien.\n* **Crazy 88:** Een spelshow op straat. Met een tablet of app gaan jullie in teams de binnenstad in om 88 knotsgekke, grappige (en soms een beetje genante) opdrachten uit te voeren. Perfect voor een vrijgezellenfeest!\n* **Stadswandeling met 'Haagse Harry' (Gids):** Een ludieke stadswandeling door het centrum met een gids die jullie op z'n plat Haags de leukste geheimen van de stad laat zien.\n\n---\n\n### 3. Eten, Drinken & Unieke Ervaringen\n* **Cocktailworkshop op het Strand:** Leer de lekkerste cocktails shapen bij een van de vele Beachclubs op het strand van Scheveningen (zoals *Beachclub Indigo* of *Buiten*).\n* **VR Arcade (Virtual Reality Arena):** In een speciale hal doe je een VR-bril op en neem je het in teams tegen elkaar op in een futuristische shooter of escape-game.\n* **Jeu de Boules Bar (BoulesBitesBar):** Hiphalle waar je overdekt Jeu de Boules kunt spelen onder het genot van speciaalbier, cocktails en lekkere hapjes. Heel laagdrempelig en sfeervol.\n\n---\n\n### 4. Avond & Uitgaan\n* **Crazy Pianos (Scheveningen):** Hét fenomeen op de boulevard van Scheveningen. Twee pianisten spelen live verzoeknummers en maken er één groot feest van. Zorg wel dat je op tijd reserveert!\n* **Grote Markt & Zwarte Ruiter:** In de binnenstad is de Grote Markt dé plek om ’s avonds te borrelen en te dansen. Er hangt een hele fijne, ongedwongen sfeer met veel live muziek.\n\n---\n\n### 💡 Voorbeeld Dagprogramma\n* **13:00 uur:** Ontvangst met lunch bij een beachclub in Scheveningen.\n* **14:30 uur:** Actieve workshop op het strand (bijv. Powerkiten of Expeditie Robinson).\n* **17:00 uur:** Tram/Uber naar het centrum & inchecken/opfrissen.\n* **18:30 uur:** Borrelboottocht door de Haagse grachten.\n* **20:30 uur:** Diner & Cocktails in het centrum (bijv. bij *Jeu de Boules Bar* of *Mamma Mia*).\n* **23:00 uur:** Afsluiten op de Grote Markt of feest bij *Crazy Pianos*.\n\n---\n\n**Tip:** Denk vooraf even na over de samenstelling van de groep. Is de bruid/bruidegom liever sportief of juist erg van het borrelen en relaxen? Als je een voorkeur hebt voor een specifiek type activiteit (of budget), denk ik graag nog gerichter met je mee!",
+     "kosten": 0.004078
+    }
+   }
+  },
+  {
+   "stad": "Den Haag",
+   "soort": "outdoor escape",
+   "vraag": "Is er een outdoor escape room of escape game in de buitenlucht in Den Haag?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": true,
+     "geciteerd": true,
+     "fragment": " rooms / escape games in de buitenlucht** in Den Haag. Bijvoorbeeld:  - **The Hunt Den Haag**: een outdoor escape game in het centrum van Den Haag. ([escapegamethehunt.nl](https://escapegamethehunt.nl/escape-game-the-hunt-locaties/escape-game-the-hunt-den-haag/?utm_source=openai)) - **City Game Den Haag**: biedt een",
+     "bronnen": [
+      "escapegamethehunt.nl",
+      "citygame.com",
+      "outsideescape.nl",
+      "quest-escapes.nl",
+      "cityadventures.nl",
+      "coddygames.com"
+     ],
+     "tekst": "Ja — er zijn meerdere **outdoor escape rooms / escape games in de buitenlucht** in Den Haag. Bijvoorbeeld:\n\n- **The Hunt Den Haag**: een outdoor escape game in het centrum van Den Haag. ([escapegamethehunt.nl](https://escapegamethehunt.nl/escape-game-the-hunt-locaties/escape-game-the-hunt-den-haag/?utm_source=openai))\n- **City Game Den Haag**: biedt een escape game in de buitenlucht aan, gespeeld op je smartphone terwijl je door de stad loopt. ([citygame.com](https://citygame.com/nl/nederland/den-haag?utm_source=openai))\n- **Outside Escape Den Haag**: een city escape / buiten-escapegame langs plekken in Den Haag. ([outsideescape.nl](https://outsideescape.nl/product/outside-escape-denhaagse-harry/?utm_source=openai))\n- **Quest Escapes – Outdoor Escape Room in Den Haag**: een outdoor escapegame in de stad. ([quest-escapes.nl](https://quest-escapes.nl/escape-room/den-haag?utm_source=openai))\n- **Escape the City Den Haag**: expliciet beschreven als een outdoor escape game. ([cityadventures.nl](https://cityadventures.nl/escape-the-city-den-haag/?utm_source=openai))\n- **Coddy Den Haag**: noemt meerdere outdoor escape routes in Den Haag. ([coddygames.com](https://www.coddygames.com/nl/family-friends/city/den-haag?utm_source=openai))\n\nAls je wilt, kan ik ook meteen **de beste optie voor jullie groep** uitzoeken, bijvoorbeeld op basis van:\n- met z’n tweeën of met een groep,\n- Nederlands/Engels,\n- centrum of Scheveningen,\n- budget.",
+     "kosten": 0.019156
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "mycityhunt.com",
+      "coddygames.com",
+      "tripadvisor.com",
+      "eventbrite.sg",
+      "viator.com",
+      "tripadvisor.co.uk"
+     ],
+     "tekst": "Ja. In Den Haag zijn meerdere **outdoor escape games** waarbij je door de stad loopt en puzzels oplost met je smartphone:\n\n- **myCityHunt Escape Game** – een interactieve speurtocht door het centrum, onder meer rond het Binnenhof. Je gebruikt je telefoon voor raadsels en navigatie.[1]\n- **Coddy Outdoor Escape Game** – drie routes van ongeveer 2–3 km door het centrum, met een speelduur van circa 90–180 minuten en teams van 2–6 personen.[2]\n- **Outside Escape Den Haag** – een zelfgeleide stadswandeling met puzzels, bijvoorbeeld langs hofjes. Een route duurt ongeveer 1–2 uur.[7]\n- **Quest Escapes** – outdoor escape games die op een zelfgekozen buitenlocatie in Den Haag en omgeving kunnen worden gespeeld; geschikt voor groepen van 4 tot meer dan 100 personen.[3]\n\nDit zijn dus geen escape rooms met een afgesloten kamer, maar mobiele escape games in de buitenlucht. De beschikbaarheid, prijzen en startlocaties kunnen per aanbieder verschillen.",
+     "kosten": 0.005905
+    },
+    "Gemini": {
+     "genoemd": true,
+     "geciteerd": true,
+     "fragment": "mes & Grote groepen (met spelleider/acteurs) Zoek je een uitje voor een grotere groep (zoals een bedrijfsuitje, vrijgezellenfeest of familiedag)? * **The Hunt (Escape Game Den Haag):** Een actievol outdoor escape-concept geïnspireerd op het bekende tv-programma, gespeeld rond Chinatown, de Grote Markt en de",
+     "bronnen": [
+      "mycityhunt.com",
+      "escapegamethehunt.nl",
+      "haagseuitjes.nl",
+      "thehaguepartypubcrawl.com",
+      "outsideescape.nl",
+      "kidsproof.nl",
+      "coddygames.com",
+      "mycityhunt.de",
+      "citygame.com"
+     ],
+     "tekst": "**Ja, er zijn meerdere outdoor escape games en buiten-escape rooms beschikbaar in Den Haag.** In plaats van dat je in een kamer bent opgesloten, dient het historische centrum of het strand als speelveld en los je raadsels op via je smartphone (en soms met fysieke opdrachten).\n\nHier zijn een paar van de meest populaire opties:\n\n### 1. Self-guided stadsspellen (Direct te starten op je eigen telefoon)\nDeze spellen speel je met je eigen groepje op je eigen telefoon wanneer het jou uitkomt:\n* **Outside Escape Den Haag & Scheveningen:**\n  * *Binnenstad:* Je wandelt langs highlights zoals de Hofvijver, het Lange Voorhout en Paleis Noordeinde terwijl je een mysterie oplost (bijv. rondom de grondwet of de Haagse hofjes).\n  * *Scheveningen:* Er is ook een Outside Escape-route over het strand en de boulevard.\n* **Coddy Outdoor Escape Game:** Biedt verschillende interactieve verhaallijnen aan door het centrum van Den Haag (o.a. een detective/mysterie-thema en een familiaire speurtocht).\n* **myCityHunt Escape Game:** Een interactief geheim-agenten-thema waarbij je door de stad navigeert op zoek naar codes en raadsels om een dreiging te stoppen.\n* **City Games / Qula:** Bieden interactieve moordmysteries en outdoor escape rooms door de Haagse binnenstad.\n\n### 2. Begeleide outdoor games & Grote groepen (met spelleider/acteurs)\nZoek je een uitje voor een grotere groep (zoals een bedrijfsuitje, vrijgezellenfeest of familiedag)?\n* **The Hunt (Escape Game Den Haag):** Een actievol outdoor escape-concept geïnspireerd op het bekende tv-programma, gespeeld rond Chinatown, de Grote Markt en de Bierkade.\n* **Escape City (via organisaties zoals Uitjesbureau Den Haag):** Je strijdt in teams tegen elkaar, gewapend met een tablet of app en opdrachten door het centrum van de stad.\n* **Outdoor Escape Scheveningen / Den Haag:** Een GPS-gebaseerd spel waarbij je het in groepsverband opneemt tegen de klok om bijvoorbeeld een 'aanslag' te verijdelen.\n\n### Praktische tips:\n* **Flexibiliteit:** De meeste smartphone-gebaseerde outdoor games vereisen geen reservering vooraf voor een specifiek tijdstip; je kunt starten zodra je de code aanschaft.\n* **Tijdsduur:** Gemiddeld duren deze wandelingen/spellen 1,5 tot 2,5 uur.\n* **Wat heb je nodig?** Een opgeladen smartphone met mobiele data is bij vrijwel alle varianten voldoende.",
+     "kosten": 0.031579
+    }
+   }
+  },
+  {
+   "stad": "Utrecht",
+   "soort": "teamuitje",
+   "vraag": "Wat is een leuk en actief teamuitje in Utrecht voor een groep collega's?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "kanoverhuurutrecht.nl"
+     ],
+     "tekst": "Een **leuk en actief teamuitje in Utrecht** is een **kano- of fluisterboottocht met spel/route-opdracht** via Kanoverhuur Utrecht. Dat is echt samen iets doen, je bent buiten, je moet samenwerken en je ziet de stad vanaf het water. ([kanoverhuurutrecht.nl](https://kanoverhuurutrecht.nl/pointofsale/avontuurlijke-minstroomgidstocht?utm_source=openai))\n\n**Mijn beste tip voor een groep collega’s:**\n- **GPS-puzzeltocht / teambuilding op het water**: geschikt vanaf **6 personen** en bedoeld om de **teamspirit** te versterken. ([kanoverhuurutrecht.nl](https://kanoverhuurutrecht.nl/2015_Folder_Kanoverhuur_arrangementen.pdf?utm_source=openai))\n- **Avontuurlijke Minstroomgidstocht**: een actieve kanotocht met gids, duurt **2–2,5 uur**, is te boeken vanaf **10 personen**, en kost **€29,50 p.p.** inclusief kano, gids en waterdichte tas. ([kanoverhuurutrecht.nl](https://kanoverhuurutrecht.nl/pointofsale/avontuurlijke-minstroomgidstocht?utm_source=openai))\n- **Wie is de Rat**-arrangement: als je meer competitie en humor wilt, is er een combinatie van varen en een spelprogramma van **5,5 uur** voor **vanaf 10 personen**. ([kanoverhuurutrecht.nl](https://kanoverhuurutrecht.nl/2015_Folder_Kanoverhuur_arrangementen.pdf?utm_source=openai))\n\n**Waarom dit goed werkt voor collega’s:**\n- actief, maar niet extreem zwaar;  \n- je bent met elkaar bezig in kleine teams;  \n- het is geschikt voor een mix van sportieve en minder sportieve collega’s;  \n- Utrecht als grachtenstad maakt het extra leuk en origineel. ([kanoverhuurutrecht.nl](https://kanoverhuurutrecht.nl/pointofsale/avontuurlijke-minstroomgidstocht?utm_source=openai))\n\nAls je wilt, kan ik ook meteen **3 concrete teamuitjes in Utrecht vergelijken op sfeer, prijs en groepsgrootte**.",
+     "kosten": 0.030237
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "recron.nl",
+      "detuinderij.nl",
+      "tbevents.nl",
+      "1001activiteiten.nl",
+      "duic.nl",
+      "mycityhunt.nl",
+      "onemotion.nl"
+     ],
+     "tekst": "Een **actieve citygame door de Utrechtse binnenstad** is een leuke keuze voor collega’s: jullie werken in teams aan raadsels, creatieve opdrachten en codes, terwijl je langs grachten en bekende plekken komt. Zo combineer je beweging, competitie en teambuilding.[1][3]\n\nAndere goede opties:\n\n- **Bootcamp in het Griftpark** – sportief en energiek, met opdrachten waarbij samenwerking centraal staat.[3]\n- **Klimpark bij Utrecht** – geschikt voor een avontuurlijk team; combineer klimmen met tokkelen of abseilen.[1]\n- **Sloepenrally op de Utrechtse grachten** – vaar in teams en voer strategische en ludieke opdrachten uit.[8]\n- **Escape room** – ideaal bij slecht weer en sterk gericht op communicatie en samenwerken.[3]\n- **Kano- of GPS-tocht** – een actieve buitenactiviteit met ruimte voor competitie en gezellig napraten.[1]\n\n**Beste allround keuze:** een citygame van ongeveer 2 à 3 uur, afgesloten met een borrel of diner aan de Oudegracht. Die optie is geschikt voor verschillende leeftijden en conditieniveaus en kan vaak worden aangepast aan de groepsgrootte.[3][6]",
+     "kosten": 0.005958
+    },
+    "Gemini": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [],
+     "tekst": "Utrecht is een fantastische stad voor een teamuitje, met name omdat je het gezellige (historische) stadscentrum heel goed kunt combineren met actieve activiteiten op en rond het water. \n\nHier zijn een aantal ontzettend leuke en actieve ideeën voor een groep collega's, verdeeld per categorie:\n\n---\n\n### 1. Op het water (Typisch Utrecht & Actief)\n* **Kanoën of Suppen over de Oudegracht:**\n  Huur met de groep kano’s of SUP-boards (Stand Up Paddling) bij bijvoorbeeld de *Rijnstroom* of in de binnenstad. Je kunt door de historische stadsgrachten peddelen of de groenere route richting Amelisweerd nemen. Het is sportief, ontspannen én je ziet de stad vanaf een uniek punt.\n* **Canoe Polo of Sloep-Challenge:**\n  Wil je echt meer teambuilding en strijd op het water? Er worden in Utrecht ook workshops kanopolie georganiseerd. Of huur elektrische sloepen (zoals bij *Greenjoy* of *DiepSloep*) en koppel hier een ludieke foto-puzzeltocht op het water aan vast.\n\n---\n\n### 2. Stadsspellen & Fun (Competitief & Veel lopen)\n* **Crazy 88 of City Escape Game:**\n  Gewapend met een app of opdrachtenboekje trek je in teams de binnenstad in. Bij **Crazy 88** doe je in korte tijd 88 knotsgekke opdrachten in de stad (ideaal voor teambuilding en veel gelach). Bij een **City Escape Game** los je raadsels op terwijl je langs bekende plekken (zoals de Domtoren en het Janskerkhof) wandelt.\n* **VR Racing / Sim Racing:**\n  Zitten er veel autoliefhebbers of competitieve types in de groep? Bij **The Official F1 Racing Centre** in Utrecht (nabij Leidsche Rijn) kun je in professionele simulatoren tegen elkaar racen op bekende F1-circuits. adrenaline gegarandeerd!\n\n---\n\n### 3. Indoor Actie & Fun (Goed voor slecht weer)\n* **Jumpsquare of Bounce Valley:**\n  Wil je écht even alle energie kwijt en weer kind zijn? Bounce Valley Utrecht is een reusachtig overdekt luchtkussenpark (met obstakels, wipe-out elementen en wipe-out attributen). Heel actief en erg grappig om je collega's te zien struikelen.\n* **Boulderen (Klimmen):**\n  Utrecht heeft fantastische boulderhallen (zoals *Energiehaven* of *Sterk*). Boulderen is klimmen zonder touwen tot maximaal 4 meter hoogte boven dikke valmatten. Het is heel toegankelijk voor beginners, heel fysiek, en je helpt elkaar continu met het oplossen van de klimroutes (\"puzzels\").\n* **GlowGolf of Bijlwerpen:**\n  * **GlowGolf Utrecht:** Midgetgolfen in het donker met fluorescerende obstakels en decor.\n  * **Real Axe Throwing:** Bijlwerpen is ontladend, stoer en weer eens wat anders dan bowlen.\n\n---\n\n### 4. Buiten in de natuur (Net buiten het centrum)\n* **Mountainbiken op de Utrechtse Heuvelrug:**\n  Ligt de focus echt op sportief? Op korte afstand van Utrecht (bijv. bij Zeist of Lage Vuursche) liggen enkele van de mooiste MTB-routes van Nederland. Je kunt hier MTB's of e-MTB's huren met een gids.\n* **Expeditie Robinson op locatie:**\n  Bij parken zoals het *Máximapark* of bij *Amelisweerd* kun je via evenementenbureaus een 'Expeditie Robinson' zeskamp boeken. Denksport, kracht, evenwicht en vuur maken komen hierin samen.\n\n---\n\n### 💡 Tip voor de afsluiting:\nSluit de dag actief én gezellig af op de **Neude**, aan de **Oudegracht** (in een van de typische werfkelders), of bij de industriële hotspot **VECHTCLUB** of **DB's** voor een borrel of diner. \n\n**Om je een specifieker advies te geven:**\n* Hoe groot is de groep ongeveer?\n* Is het voor een hele dag of een dagdeel?\n* Wat is de fysieke gesteldheid/leeftijd van de groep (moet iedereen mee kunnen doen, of mag het echt intensief zijn)?",
+     "kosten": 0.004475
+    }
+   }
+  },
+  {
+   "stad": "Utrecht",
+   "soort": "vrijgezellenfeest",
+   "vraag": "Ik zoek een leuke activiteit voor een vrijgezellenfeest in Utrecht. Wat raad je aan?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "visitutrechtregion.com"
+     ],
+     "tekst": "Zeker — voor een vrijgezellenfeest in Utrecht zou ik vooral iets kiezen dat **gezellig, groepsproof en makkelijk te combineren met borrel/diner** is. Mijn beste tips op basis van wat er nu in en rond Utrecht te doen is:\n\n1. **Utrecht Craft Beer Tours**  \n   Leuk als jullie van bier houden: een tour op de fiets door Utrecht met proeverij-vibe. Volgens de agenda is dit op **donderdag en vrijdag om 14.00 uur**. ([visitutrechtregion.com](https://www.visitutrechtregion.com/nl/evenementen/3960612073/utrecht-craft-beer-tours?utm_source=openai))\n\n2. **StoryTrail Theaterwandeling door Utrecht**  \n   Dit is een speelse, originele stadswandeling waarbij je de geschiedenis van Utrecht in verhaalvorm beleeft. Handig als je iets wilt dat ook leuk is voor een gemengde groep. ([visitutrechtregion.com](https://www.visitutrechtregion.com/nl/evenementen/2839092682/storytrail-theaterwandeling-door-utrecht?utm_source=openai))\n\n3. **Fort aan de Klop**  \n   Een fijne plek voor een vrijgezellenborrel of dagdeel: het is een historische, festivalachtige locatie waar je kunt eten, drinken en vaak iets leuks op de agenda hebt, zoals activiteiten of optredens. ([visitutrechtregion.com](https://www.visitutrechtregion.com/nl/locaties/2014787944/fort-aan-de-klop-1?utm_source=openai))\n\n4. **Fort de Gagel**  \n   Ook leuk voor een relaxte groepsborrel of etentje: een fort aan de rand van Utrecht, midden in de natuur, met terras en meerdere borrelplekken. ([visitutrechtregion.com](https://www.visitutrechtregion.com/nl/locaties/1095392317/fort-de-gagel?utm_source=openai))\n\n5. **Style Passport (groepskleuranalyse)**  \n   Als jullie iets origineels willen dat vooral voor een vriendinnengroep leuk is: een groepskleuranalyse wordt expliciet genoemd als geschikt voor een **vrijgezellenfeest**. ([visitutrechtregion.com](https://www.visitutrechtregion.com/nl/locaties/345513077/style-passport?utm_source=openai))\n\n**Mijn aanrader:**  \n- **Actief + lachen:** StoryTrail of Craft Beer Tour. ([visitutrechtregion.com](https://www.visitutrechtregion.com/nl/evenementen/3960612073/utrecht-craft-beer-tours?utm_source=openai))  \n- **Chillen + borrelen:** Fort aan de Klop of Fort de Gagel. ([visitutrechtregion.com](https://www.visitutrechtregion.com/nl/locaties/2014787944/fort-aan-de-klop-1?utm_source=openai))  \n- **Origineel voor vriendinnen:** Style Passport. ([visitutrechtregion.com](https://www.visitutrechtregion.com/nl/locaties/345513077/style-passport?utm_source=openai))\n\nAls je wilt, kan ik ook meteen een **top 5 maken op basis van jullie budget, groepsgrootte en of het meer “luid en los” of juist “chic en relaxed” moet zijn**.",
+     "kosten": 0.030539
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "tbevents.nl",
+      "recron.nl",
+      "vrijgezellenfeest.nl",
+      "onemotion.nl",
+      "tripadvisor.nl"
+     ],
+     "tekst": "Ik raad een **citygame door de Utrechtse binnenstad** aan. Jullie lossen in teams grappige opdrachten en raadsels op, ontdekken plekken rond de Oudegracht en kunnen de dag afsluiten met een borrel of pubquiz. Dat is laagdrempelig, competitief en geschikt voor zowel fanatieke als minder sportieve deelnemers.[1][4]\n\nAndere goede opties:\n\n- **Cocktailworkshop** – gezellig en ideaal als jullie liever binnen blijven.[4][8]\n- **Kookworkshop** – samen iets maken en daarna meteen eten.[2][8]\n- **Pub Trail** – combinatie van speurtocht en kroegentocht.[3]\n- **Crazy 88** – hilarische opdrachten in de stad voor een energieke groep.[3]\n- **Escape room of driftkarten** – geschikt als de groep van actie en competitie houdt.[6][9]\n\n**Mijn ideale programma:** citygame in de middag, daarna diner aan de gracht en afsluiten met een pubquiz of borrel.",
+     "kosten": 0.005894
+    },
+    "Gemini": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [],
+     "tekst": "Utrecht is een fantastische stad voor een vrijgezellenfeest! Omdat het erg afhangt van de groep en de vrijgezel (actief, relaxed, creatief of echt gericht op borrelen), heb ik de leukste activiteiten opgedeeld in een paar categorieën:\n\n---\n\n### 1. **Op en rond het water (Echt Utrechts)**\nUtrecht staat bekend om de grachten en de unieke werven. Het water op gaan is bijna altijd een succes:\n* **Borrelboot of BBQ-boot:** Huur een sloep met schipper inclusief onbeperkt dranken en eventueel een barbecue of hapjes. Zo kun je relaxen en feesten terwijl je door de grachten vaart.\n* **Kanoën of Suppen:** Wil je wat actiever zijn? Ga suppen (*Stand Up Paddling*) of kanoën door de stadsgrachten of richting Amelisweerd.\n* **Elektrische Waterfiets:** Een sportieve en gezellige manier om op eigen tempo de grachten te verkennen.\n\n---\n\n### 2. **Actief & Competitief**\nVoor groepen die van een spelletje of een beetje actie houden:\n* **Crazy 88 of City Game:** Gewapend met een app of opdrachtenboekje trek je de binnenstad in. Je doet ludieke, soms een tikkeltje gênante opdrachten in het centrum (perfect voor een vrijgezel!).\n* **J jeu de boules bij *Jeu*:** *Jeu de Boules Bar Utrecht* aan de Croeselaan is ontzettend populair. Je kunt er jeu de boules spelen onder het genot van speciaalbiertjes, cocktails en goeie snacks.\n* **Glow-in-the-dark Midgetgolf of Axe Throwing:** Bij *Golf in the Dark* of een van de bijlwerp-locaties kun je een stoere of unieke activiteit doen.\n* **VR Arcade:** Ga samen de virtuele strijd aan bij een Virtual Reality centrum (zoals *VR Arcade* bij Leidsche Rijn of in het centrum).\n\n---\n\n### 3. **Culinair & Creatief**\nAls de groep liever wat langer tafelt of iets creatiefs wil maken:\n* **Cocktailworkshop:** Leer de beste cocktails shaken (en opdrinken natuurlijk) bij een van de vele horecazaken in de binnenstad.\n* **Bierproeverij bij de Kromme Haring of Oudaen:** Utrecht heeft geweldige (stads)brouwerijen. Bij *Stadskasteel Oudaen* (in de kelder aan de Oudegracht) of *De Kromme Haring* kun je heerlijke lokale biertjes proeven.\n* **Workshop Tapas of Pizza maken:** Gezellig samen koken en daarna uitgebreid eten.\n* **Schilder- of Pijpworkshop:** Creatieve workshops (zoals 'Boetseer je eigen naaktmodel' of een schildersessie met een drankje erbij) doen het ook altijd goed op vrijgezellenfeesten.\n\n---\n\n### 4. **Avondprogramma & Uitgaan**\n* **Boules & Bites / Karaoke:** Utrecht heeft een aantal hele leuke karaoke-bars waar je een privébooth kunt huren (zoals bij *Duke of Tokyo*).\n* **Uitgaan in de Binnenstad:** Sluit de avond af rond het *Janskerkhof* of de *Nobelstraat*, waar veel gezellige cafés, feestcafés en clubs te vinden zijn.\n\n---\n\n### **Voorbeeld van een dagplanning:**\n1. **13:00 uur:** Ontvangst in het centrum met een lunch of koffie.\n2. **14:30 uur:** Stadsgame (bijv. Crazy 88) of een sloepentocht met drankjes.\n3. **17:00 uur:** Cocktailworkshop of een potje Jeu de Boules bij *Jeu*.\n4. **19:00 uur:** Diner/BBQ aan de Oudegracht.\n5. **21:30 uur:** Privé-karaokeroom of afsluiten in het nachtleven.\n\n---\n\n**Tip voor het boeken:**\nAls je met een grotere groep bent (10+ personen), is het slim om tijdig te reserveren, vooral voor activiteiten op zaterdag.\n\nNaar wat voor type activiteit zoek je het meest (actief, culinair, feestelijk, budgetvriendelijk), of wat voor type is de vrijgezel? Dan denk ik graag nog gerichter met je mee!",
+     "kosten": 0.004441
+    }
+   }
+  },
+  {
+   "stad": "Utrecht",
+   "soort": "outdoor escape",
+   "vraag": "Is er een outdoor escape room of escape game in de buitenlucht in Utrecht?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "escape-xperience.nl",
+      "citygame.com",
+      "cityadventures.nl",
+      "escaperoomtime.nl",
+      "mycityhunt.nl"
+     ],
+     "tekst": "Ja — in Utrecht zijn er meerdere **outdoor escape rooms / city escape games** in de buitenlucht. Bijvoorbeeld:\n\n- **Escape Xperience Utrecht** – een outdoor escape room door de stad. ([escape-xperience.nl](https://escape-xperience.nl/utrecht/?utm_source=openai))\n- **The Utrecht Syndicate (City Game)** – een zelfgeleide outdoor escape game via je telefoon, met Utrecht als speelbord. ([citygame.com](https://citygame.com/the-netherlands/utrecht/syndicate-utrecht?utm_source=openai))\n- **Escape the City Utrecht** – een outdoor escape game van ongeveer 90 minuten. ([cityadventures.nl](https://cityadventures.nl/escape-the-city-utrecht/?utm_source=openai))\n- **Operation Mindfall (Escaperoom TIME Utrecht)** – “een escape room, maar dan in de buitenlucht”, in de binnenstad van Utrecht. ([escaperoomtime.nl](https://escaperoomtime.nl/activiteiten/ar-citygame-operation-mindfall/?utm_source=openai))\n- **myCityHunt Utrecht** – een escape game in de buitenlucht in Utrecht. ([mycityhunt.nl](https://www.mycityhunt.nl/steden/utrecht-nl-10355/escape-game-utrecht-8514?utm_source=openai))\n\nAls je wilt, kan ik ook meteen de **beste optie voor jullie groep** kiezen op basis van:\n- aantal personen\n- leeftijd\n- taal (NL/EN)\n- budget\n- of je iets **makkelijks**, **spannends** of **familievriendelijks** zoekt.",
+     "kosten": 0.029081
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "mycityhunt.com",
+      "coddygames.com",
+      "tripadvisor.com",
+      "eventbrite.sg",
+      "citygame.com",
+      "feverup.com",
+      "questoapp.com"
+     ],
+     "tekst": "Ja, in Utrecht zijn meerdere **outdoor escape games** waarbij je door de stad loopt en puzzels oplost via je smartphone:\n\n- **The Utrecht Syndicate** – ongeveer 2 uur en 3–4 km door de binnenstad; start bij Stadhuisplein. Geschikt voor 1–4 spelers per team en beschikbaar in het Nederlands en Engels. Kosten: circa €19,95 per team.[6]\n- **Coddy Outdoor Escape Game** – vier routes van 2–4,5 km door het centrum, meestal 90–120 minuten. Je speelt met 2–6 personen via je smartphone.[2]\n- **Mystery Monsters of Utrecht** – een zelfgeleide route van ongeveer 60–90 minuten langs onder andere de Domtoren; beschikbaar in meerdere talen, waaronder Nederlands.[8]\n- **Outside Escape Utrecht** – een escape-achtige stadswandeling van 1–2 uur, onder meer door het Zocherpark.[3]\n- **MyCityHunt Escape Game** – een digitale speurtocht met een geheim-agentverhaal op verschillende plekken in de binnenstad.[1]\n\nDit zijn geen afgesloten escape rooms, maar mobiele stads spellen waarbij Utrecht zelf het speelveld vormt. Voor een Nederlandstalige optie met een relatief korte route lijken **Coddy** en **Mystery Monsters of Utrecht** het meest geschikt.",
+     "kosten": 0.005972
+    },
+    "Gemini": {
+     "genoemd": true,
+     "geciteerd": true,
+     "fragment": "escapegames aan in Utrecht (bijv. detective- en mysteriespellen).  * **Praktisch:** Volledig bestuurbaar via een app op je telefoon.   ### 4. Outdoor Escape Game \"The Hunt\" * **Hoe werkt het?** Een grootschaliger outdoor escape game dat vaak wordt ingezet voor grotere groepen, bedrijfsuitjes of vrijgezellenfeesten (mees",
+     "bronnen": [
+      "coddygames.com",
+      "citygame.com",
+      "escapegamethehunt.nl",
+      "escapetours.com",
+      "escape-xperience.nl",
+      "outsideescape.nl",
+      "escaperoomsnederland.nl"
+     ],
+     "tekst": "**Ja, er zijn zeker outdoor escape rooms en escape games in de buitenlucht in Utrecht!**\n\nOmdat je in de buitenlucht niet opgesloten zit in een kamer, worden deze spellen gespeeld in het historische centrum van Utrecht. Met behulp van een smartphone-app of een tas met attributen/aanwijzingen wandel je door de stad, los je raadsels op, ontrafel je verhaallijnen en zoek je naar verborgen details op gebouwen of monumenten.\n\nPopulaire opties in Utrecht zijn onder andere:\n\n### 1. Outside Escape Utrecht\n* **Hoe werkt het?** Je volgt een spannend verhaal via je telefoon. Je zoekt onder meer naar aanwijzingen over agent Bas Beenhakker die is weggevlucht met een geheim dossier.\n* **Route:** Ca. 2,5 km door onder meer het noordelijke deel van de binnenstad, hofjes en langs de Oudegracht.\n* **Praktisch:** Geen vooraf vastgelegde starttijd nodig; je start wanneer je wilt. \n\n### 2. Escape Tour Utrecht\n* **Hoe werkt it?** Een interactieve 'city game' waarbij je via opdrachten en cryptische raadsels helpt bij het vinden van de geheime uitgang van de stad binnen 2 uur.\n* **Route:** Wandeling langs bekende en onbekende plekjes rondom de Domtoren en het centrum.\n* **Praktisch:** Geschikt voor 2 tot 4 personen per team. Je kunt met meerdere teams tegen elkaar strijden.\n\n### 3. Coddy Outdoor Escape Games\n* **Hoe werkt het?** Coddy biedt verschillende thematische buiten-escapegames aan in Utrecht (bijv. detective- en mysteriespellen). \n* **Praktisch:** Volledig bestuurbaar via een app op je telefoon. \n\n### 4. Outdoor Escape Game \"The Hunt\"\n* **Hoe werkt het?** Een grootschaliger outdoor escape game dat vaak wordt ingezet voor grotere groepen, bedrijfsuitjes of vrijgezellenfeesten (meestal vanaf 8 personen). \n* **Route:** Door de binnenstad (o.a. Vredenburg, Oudegracht, Domplein).\n\n### 5. Escape Xperience (o.a. *The Hidden Painting*)\n* **Hoe werkt het?** Een outdoor mysterie over schilder Jan van Scorel en paus Adrianus. Je combineert aanwijzingen op je scherm met fysieke details die in de stad verstopt zijn.\n\n---\n\n### Tips voor het spelen van een Outdoor Escape Game:\n* **Flexibiliteit:** Bij de meeste spellen (zoals Outside Escape en Escape Tours) koop je een toegangscode en kun je op elk gewenst moment (en dag) starten.\n* **Benodigdheden:** Een opgeladen smartphone met mobiele data. \n* **Groepsgrootte:** Als je met meer dan 4 of 5 personen bent, is het aan te raden de groep op te splitsen in meerdere teams en tegen elkaar te strijden om het voor iedereen leuk te houden.",
+     "kosten": 0.031987
+    }
+   }
+  },
+  {
+   "stad": "Eindhoven",
+   "soort": "teamuitje",
+   "vraag": "Wat is een leuk en actief teamuitje in Eindhoven voor een groep collega's?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "visitbrabant.com",
+      "eindhovenvandaag.nl"
+     ],
+     "tekst": "Ja — voor een **leuk en actief teamuitje in Eindhoven** zou ik als eerste kijken naar **Outside Escape Eindhoven**. Dat is een soort escaperoom, maar dan buiten: je loopt als team door het centrum, lost raadsels op en bent ongeveer **2 uur** bezig. Het werkt met **2 tot 4 personen per team** en je hebt alleen een opgeladen telefoon nodig. ([visitbrabant.com](https://www.visitbrabant.com/nl/locaties/3126514943/outside-escape-eindhoven?utm_source=openai))\n\n**Nog 2 goede opties:**\n- **Stadswandeling door Eindhoven met een gids** — een actieve, laagdrempelige keuze van ongeveer **1,5 uur**, waarbij je samen de stad en plekken als de Lichttoren en Kazerne ontdekt. Geschikt voor groepen en zakelijk gebruik. ([visitbrabant.com](https://www.visitbrabant.com/nl/evenementen/588642806/stadswandeling-door-eindhoven-met-een-gids?utm_source=openai))\n- **Mooie Boules Eindhoven** — als je iets speels wilt met wat meer borrelsfeer: jeu de boules, eten en drinken in het centrum, geschikt voor een origineel bedrijfsuitje. ([eindhovenvandaag.nl](https://www.eindhovenvandaag.nl/bedrijven/mooie-boules-eindhoven?utm_source=openai))\n\n**Als je echt iets sportievers zoekt**, dan is **Quadrit.nl** interessant: daar kun je onder andere handboogschieten, kruisboogschieten, blaaspijpschieten en Arrow Battle doen; veel activiteiten zijn binnen mogelijk en ze richten zich expliciet op bedrijfsuitjes. ([visitbrabant.com](https://www.visitbrabant.com/nl/locaties/358141727/quadrit-nl-1?utm_source=openai))\n\n**Mijn snelle advies:**  \n- **Actief + samenwerking + stad:** Outside Escape ([visitbrabant.com](https://www.visitbrabant.com/nl/locaties/3126514943/outside-escape-eindhoven?utm_source=openai))  \n- **Meer competitie/sportief:** Quadrit.nl ([visitbrabant.com](https://www.visitbrabant.com/nl/locaties/358141727/quadrit-nl-1?utm_source=openai))  \n- **Meer relaxte borrel-sfeer:** Mooie Boules ([eindhovenvandaag.nl](https://www.eindhovenvandaag.nl/bedrijven/mooie-boules-eindhoven?utm_source=openai))\n\nAls je wilt, kan ik ook meteen **3 concrete teamuitjes in Eindhoven voorstellen op basis van jullie groepsgrootte, budget en gewenste intensiteit**.",
+     "kosten": 0.019965
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "doe-eindhoven.nl",
+      "beleef-eindhoven.nl",
+      "ssceindhoven.tue.nl",
+      "tbevents.nl",
+      "onemotion.nl",
+      "tripadvisor.nl",
+      "mycityhunt.nl",
+      "mooieboules.nl",
+      "stadsarrangement.nl"
+     ],
+     "tekst": "Een **interactieve citygame door Eindhoven** is een leuke keuze: collega’s werken in kleine teams samen, lossen puzzels op en voeren actieve opdrachten uit terwijl ze de stad ontdekken. Je kunt afsluiten met een borrel of diner.[1][2]\n\nAndere goede opties:\n\n- **Clash Rooms**: competitieve indoor spellen in teams; geschikt voor groepen die van actie, humor en samenwerken houden.[7]\n- **Escape room**: ideaal voor een kleiner team dat gezamenlijk raadsels wil oplossen onder tijdsdruk.[4][5]\n- **Jeu de boules bij Mooie Boules**: laagdrempelig en actief, met eten en drinken erbij; geschikt voor groepen van ongeveer 10 tot 100 personen.[9]\n- **Kanoën op de Dommel**: sportiever en geschikt voor collega’s die graag buiten bezig zijn.[6]\n- **Sportworkshop of boulderen bij SSC Eindhoven**: vooral interessant voor medewerkers van TU/e of Fontys, met eventueel lunch of borrel na afloop.[3]\n\n**Beste allround keuze:** een citygame met aansluitend diner. Dat combineert beweging, competitie, samenwerking en gezellig napraten, zonder dat iedereen een hoog sportniveau nodig heeft.",
+     "kosten": 0.00595
+    },
+    "Gemini": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [],
+     "tekst": "Eindhoven biedt ontzettend veel toffe, actieve opties voor een teamuitje! Wat het beste bij jullie past, hangt een beetje af van hoe 'sportief' het mag zijn. \n\nHier zijn een aantal fantastische actieve teamuitjes in Eindhoven, verdeeld per categorie:\n\n---\n\n### 1. **Hi-tech & Interactieve Actie (Echt 'Eindhoven')**\n* **Pixel Arcade / Grid (Interactieve Vloeren):** Bij locaties zoals *Go!Gaming* of specifieke arcadehallen kun je spellen spelen op lichtgevende tegelvloeren. Je moet rennen, springen en samenwerken om rood te ontwijken en groen te raken. Erg dynamisch, competitief en gegarandeerd veel gelach!\n* **VR Arcade (Strijp-S):** Trek een VR-bril én backpack aan en stap samen in een virtuele wereld. Je loopt fysiek rond in een grote ruimte terwijl je samen zombies bestrijdt of een hi-tech missie volbrengt. Heel actief én goed voor de teambuilding.\n\n---\n\n### 2. **Indoor Competitie & Plezier**\n* **De Ontdekfabriek (Strijp-S) – Teambuilding Challenge:** Heel leuk als je creativiteit én actie wilt combineren. Bouw in teams kettingreacties, voertuigen of katapulten en neem het tegen elkaar op op het inspirerende Strijp-S terrein.\n* **Jumpsquare of Boulderen:** \n  * *Boulderen (bijv. bij Monk):* Klimmen zonder touwen op lage wanden boven een dikke valmat. Zeer actief en verrassend gezellig omdat je elkaar helpt met het uitdenken van 'puzzels' op de muur.\n  * *Jumpsquare:* Samen dodgeballen op trampolines. Heel intensief, maar ontzettend grappig!\n* **GlowGolf of Lasergame bij Planet 040 / VIJF-55:** Een klassieker, maar altijd een succes voor een actieve onderlinge strijd.\n\n---\n\n### 3. **Buiten & Stadsspelen (Actief & Cultuur)**\n* **Stadsgame / Escape Game in het Centrum:** Denk aan games zoals *City Escape*, *The Target* of *Crazy 88*. Gewapend met een iPad of smartphone ren/loop je in teams door het centrum van Eindhoven en Strijp-S om opdrachten uit te voeren en de concurrentie slim af te zijn.\n* **Kajakken op de Dommel:** Start iets buiten het centrum (bijvoorbeeld bij Valkenswaard of de Genneper Parken) en peddel samen over de Dommel richting Eindhoven. Erg ontspannend, maar toch lekker actief in de natuur.\n\n---\n\n### 4. **Echt Sportief (Zweetgarantie)**\n* **Padel Toernooi:** Padel is ontzettend populair en makkelijk op te pakken voor beginners. Huur een paar banen bij bijvoorbeeld *Peakz Padel* of *Padel Club Eindhoven* en organiseer een onderling 'King of the Court' toernooi.\n* **Eindhoven Archery Tag:** Een combinatie van trefbal en handboogschieten. Je schiet met speciale, veilige pijlen (met schuimrubberen punten) op het andere team. Heel spannend en heel actief!\n\n---\n\n### 💡 **Tip voor de afsluiting:**\nEindhoven staat bekend om z'n gezellige horeca. Sluit een actieve middag op Strijp-S bijvoorbeeld af met een speciaalbier proeverij bij **Het Ketelhuis** of **Brouwerij het Uiltje/Biergarten**, of ga lekker borrelen op de **Kleine Berg** of de **Markt**!\n\n**Vraag om rekening mee te houden:** Hoe groot is de groep ongeveer, en hoe intensief mag het zijn (moet iedereen mee kunnen doen, of zijn bezwete shirts geen probleem)? Dan denk ik graag nog gerichter met je mee!",
+     "kosten": 0.004014
+    }
+   }
+  },
+  {
+   "stad": "Eindhoven",
+   "soort": "vrijgezellenfeest",
+   "vraag": "Ik zoek een leuke activiteit voor een vrijgezellenfeest in Eindhoven. Wat raad je aan?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "thisiseindhoven.com",
+      "leuksdoen.nl",
+      "kerasjiek.nl",
+      "beleef-eindhoven.nl"
+     ],
+     "tekst": "Zeker — voor een vrijgezellenfeest in Eindhoven zou ik **een combinatie van activiteit + borrel/diner op één locatie** aanraden. Dat is praktisch, gezellig en je voorkomt gedoe met vervoer tussen onderdelen. In Eindhoven zijn daar meerdere plekken voor die expliciet vrijgezellenfeesten organiseren. ([thisiseindhoven.com](https://www.thisiseindhoven.com/nl/locaties/beleef-eindhoven?utm_source=openai))\n\n**Mijn topaanradingen:**\n\n1. **Escape room of city game + eten/drinken**\n   - Goed als jullie van competitie, puzzels en veel lachen houden.\n   - In Eindhoven vind je meerdere escape- en game-opties, en arrangementen waarbij je er meteen een borrel of diner aan koppelt. ([leuksdoen.nl](https://leuksdoen.nl/uitjes-in/eindhoven/vrijgezellenfeest?utm_source=openai))\n\n2. **Workshop voor een originele, relaxte sfeer**\n   - Bijvoorbeeld **keramiek**, **graffiti**, **bonbons maken** of iets creatiefs.\n   - Dat werkt vooral leuk als de groep niet alleen “actie” wil, maar ook iets wil maken waar de vrijgezel later iets aan heeft. ([kerasjiek.nl](https://kerasjiek.nl/vrijgezellenfeest-eindhoven/?utm_source=openai))\n\n3. **Bowlen / lasergamen / karten**\n   - Ideaal als jullie een energiek feest willen met een speels competitief randje.\n   - Dit soort activiteiten wordt in Eindhoven vaak aangeboden als groepsuitje of vrijgezellenfeest. ([leuksdoen.nl](https://leuksdoen.nl/uitjes-in/eindhoven/vrijgezellenfeest?utm_source=openai))\n\n4. **Alles-in-één arrangement in het centrum**\n   - Als je het makkelijk wilt houden: kies een locatie waar activiteit, eten en drinken onder één dak zitten.\n   - Dat past goed bij grotere groepen en scheelt regelwerk. ([beleef-eindhoven.nl](https://www.beleef-eindhoven.nl/wat-kun-je-doen-voor-een-vrijgezellenfeest-in-hartje-eindhoven-inclusief-eten-en-drinken/?utm_source=openai))\n\n**Als ik één concrete keuze moet maken:**  \n- **Voor een actief vrijgezellenfeest:** karten of lasergamen.  \n- **Voor een originele, gezellige dag:** een creatieve workshop + borrel.  \n- **Voor de meest zorgeloze optie:** een all-in arrangement in hartje Eindhoven. ([beleef-eindhoven.nl](https://www.beleef-eindhoven.nl/wat-kun-je-doen-voor-een-vrijgezellenfeest-in-hartje-eindhoven-inclusief-eten-en-drinken/?utm_source=openai))\n\nAls je wilt, kan ik ook meteen **3 concrete programma’s voor Eindhoven** maken, bijvoorbeeld:\n- **budgetvriendelijk**\n- **luxe / all-in**\n- **wild & actief**\n\nIk kan ze dan meteen afstemmen op jullie groep en budget.",
+     "kosten": 0.020442
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "doe-eindhoven.nl",
+      "beleef-eindhoven.nl",
+      "zoominfo.com",
+      "vrijgezellenfeest.nl",
+      "onemotion.nl",
+      "thisiseindhoven.com",
+      "wrkshop.nl",
+      "1001activiteiten.nl"
+     ],
+     "tekst": "Mijn aanrader: **een citygame door Eindhoven**, bijvoorbeeld *Escape City* of *Hunted*. Jullie ontdekken de stad, voeren grappige opdrachten uit en werken in teams tegen elkaar—geschikt voor zowel kleine als grotere groepen.[1]\n\nAndere leuke opties:\n\n- **Step-kroegentocht**: actief én gezellig, met opdrachten in verschillende cafés.[9]\n- **Escape room of escape-roombattle**: ideaal voor een kleinere groep die van spanning en puzzelen houdt.[1]\n- **Pubquiz of muziek-bingo**: laagdrempelig en geschikt als niet iedereen sportief is.[3]\n- **Cocktail-, kook- of creatieve workshop**: gezellig als jullie vooral willen bijpraten en lachen.[6]\n- **Highland Games, paintball of bubbelvoetbal**: voor een energieke groep die actie zoekt.[4][5]\n\nEen geslaagd programma is bijvoorbeeld: **’s middags een citygame, daarna borrelen of eten en ’s avonds naar Stratumseind**. Kies bij een grote groep liever een citygame of pubquiz; voor een kleinere groep werken een escape room of workshop beter.[1][6]",
+     "kosten": 0.005932
+    },
+    "Gemini": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [],
+     "tekst": "Eindhoven is een fantastische stad voor een vrijgezellenfeest! Vanwege de industriële vibe (Strijp-S) en het bruisende nachtleven (zoals Stratumseind) is er voor elk type groep wel wat te doen. \n\nHier zijn een aantal van de leukste ideeën in Eindhoven, ingedeeld per type groep:\n\n---\n\n### 1. Actief & Competitief\n* **Doloris' Anoma Maze:** Een gigantisch, artistiek surrealistisch doolhof met meer dan 70 ruimtes waar je individueel (of samen) doorheen moet dwalen. Een hele unieke ervaring! Na afloop kun je naborrelen op de prachtige rooftop bar.\n* **VR Arcade (bijvoorbeeld bij Enigma VR of VR Experience Center):** Ga samen in virtual reality de strijd aan tegen zombies, of speel een tactische shooter tegen elkaar.\n* **GlowGolf Eindhoven:** Minigolf in het donker met neonlichten en 3D-effecten. Een leuke en laagdrempelige ijsbreker voor de dag.\n* **Japans Karaoke House (bijv. Duke of Tokyo):** Huur een privébooth voor je groep, bestel cocktails en zang/schreeuw de longen uit je lijf zonder dat vreemden meekijken.\n\n---\n\n### 2. Stoer, Buiten & Stadsspellen\n* **E-Chopper of E-Step tour over Strijp-S:** Huur elektrische scooters/choppers en verken het industriële Strijp-S en het centrum van Eindhoven op een relaxte en stoere manier.\n* **Stadsspellen (zoals *Crazy 88* of *Wie is de Mol*):** Er zijn verschillende organisaties die interactieve stadsspellen aanbieden via een app op je telefoon. Hilarisch om de aanstaande bruid of bruidegom vreemde opdrachten te laten uitvoeren in het centrum.\n* **Bootcamp of Axe Throwing:** Wil je de vrijgezel even goed laten zweten? Ga bij *Crazy Axes* bijlwerpen of boek een sportieve workshop.\n\n---\n\n### 3. Culinair & Relaxed (Genieten)\n* **High Beer of High Wine bij Strijp-S:** Bij zaken zoals *Het Veem* (Foodhallen) of *Brouwerij het Uiltje / Van Moll* kun je genieten van heerlijke speciaalbieren en hapjes.\n* **Cocktail- of Gin & Tonic workshop:** Leer de fijne kneepjes van het vak bij een van de vele cocktailbars in de stad (zoals *Thomas* of *Bobby's Bar*) en drink je eigen creaties op.\n* **Kookworkshop of BBQ Workshop:** Maak samen je eigen diner onder leiding van een chef.\n\n---\n\n### 4. Avond & Nachtleven\n* **Stratumseind (De langste uitgaansstraat van Nederland):** Dit mag eigenlijk niet ontbreken. Met meer dan 50 kroegen naast elkaar is er voor ieder wat wils (van feestcafés en dansclubs tot bruine kroegen).\n* **Thomas Eindhoven:** Een prachtige zaak op Stratumseind met een indrukwekkend interieur (vol muurschilderingen) waar je kunt dineren, cocktails drinken en later op de avond kunt dansen.\n* **Kleine Berg (De Bergen):** Liever iets sjieker of gemoedelijker borrelen? Wandel dan naar de Kleine Berg voor fijne bistro's, wijnbars en speciaalbiercafés.\n\n---\n\n### Voorbeeld van een dagindeling:\n1. **13:00:** Ontvangst met lunch bij *Down Town Gourmet Market* (foodhall met voor ieder wat wils).\n2. **14:30:** E-Chopper tour over Strijp-S óf Doloris' Anoma Maze.\n3. **17:00:** Cocktailworkshop bij *Bobby's Bar*.\n4. **19:00:** Uitgebreid diner/BBQ.\n5. **21:30:** Privé-karaoke en daarna afsluiten op Stratumseind.\n\n**Tip:** Is de vrijgezel een man of een vrouw, en zoeken jullie vooral iets actiefs, geks of juist ontspannends? Dan kan ik het advies nog specifieker maken!",
+     "kosten": 0.004257
+    }
+   }
+  },
+  {
+   "stad": "Eindhoven",
+   "soort": "outdoor escape",
+   "vraag": "Is er een outdoor escape room of escape game in de buitenlucht in Eindhoven?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "visitbrabant.com",
+      "quest-escapes.nl",
+      "cityadventures.nl",
+      "citygame.com",
+      "coddygames.com",
+      "irp.cdn-website.com"
+     ],
+     "tekst": "Ja — in Eindhoven zijn er meerdere **outdoor escape rooms / outdoor escape games**. Enkele concrete opties:\n\n- **Outside Escape Eindhoven**: een stadswandeling/escape-ervaring in de buitenlucht langs bekende en minder bekende plekken in Eindhoven. ([visitbrabant.com](https://www.visitbrabant.com/nl/locaties/3126514943/outside-escape-eindhoven?utm_source=openai))\n- **Quest Escapes – Outdoor Escape Room Eindhoven**: richt zich expliciet op een outdoor escape room in Eindhoven, ook geschikt voor grotere groepen. ([quest-escapes.nl](https://quest-escapes.nl/escape-room/eindhoven?utm_source=openai))\n- **Escape the City Eindhoven**: een outdoor escape game in de binnenstad, ongeveer 90 minuten. ([cityadventures.nl](https://cityadventures.nl/escape-the-city-eindhoven/?utm_source=openai))\n- **City Game Eindhoven**: meerdere stadsspellen, waaronder een outdoor escape game die je op je smartphone speelt terwijl je door de stad loopt. ([citygame.com](https://citygame.com/nl/nederland/eindhoven?utm_source=openai))\n- **Coddy Eindhoven**: ook een outdoor escape game met routes in Eindhoven. ([coddygames.com](https://www.coddygames.com/en/family-friends/city/eindhoven?utm_source=openai))\n- **preHistorisch Dorp – Het mysterie van Loki**: een escapespel in de buitenlucht, in een openluchtmuseum in Eindhoven. ([irp.cdn-website.com](https://irp.cdn-website.com/404f177f/files/uploaded/Studentenkrant_nr3_2026_Zuid_web.pdf?utm_source=openai))\n\nAls je wilt, kan ik ook meteen:\n1. de **beste keuze voor een groep/vrienden/date** aanraden, of  \n2. een **top 3 met prijzen en duur** voor je op een rij zetten.",
+     "kosten": 0.019285
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "mycityhunt.com",
+      "coddygames.com",
+      "tripadvisor.com",
+      "thisiseindhoven.com",
+      "citygame.com",
+      "viator.com"
+     ],
+     "tekst": "Ja. In Eindhoven zijn meerdere **outdoor escape games** waarbij je door de stad loopt en puzzels oplost met je smartphone:\n\n- **myCityHunt Outdoor Escape Game** – een smartphone-speurtocht in het centrum met een geheimagentenverhaal en opdrachten op verschillende locaties; vanaf ongeveer €12,99 per persoon.[1]\n- **Coddy Games** – routes door onder meer Strijp-S en het centrum, circa 2–3 km lang en 90–150 minuten durend; geschikt voor teams van 2–6 personen.[2]\n- **Quest Escapes Games** – mobiele outdoor escape games die op vrijwel elke buitenlocatie in Eindhoven en omgeving kunnen worden gespeeld, voor groepen van 4 tot meer dan 100 personen.[3]\n- **The Eindhoven Syndicate** – een zelfgeleide city escape van ongeveer één uur, gespeeld via een app; beschikbaar in het Nederlands en Engels.[5]\n\nVoor een kleinere groep die zelfstandig door de binnenstad wil lopen zijn **myCityHunt** of **The Eindhoven Syndicate** waarschijnlijk het meest geschikt. Zoek je juist een activiteit voor een grotere groep, dan is **Quest Escapes** praktischer.",
+     "kosten": 0.005933
+    },
+    "Gemini": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "im-puzzled.com",
+      "escapetours.com",
+      "visitbrabant.com",
+      "citygame.com",
+      "outsideescape.nl",
+      "exitmania.com"
+     ],
+     "tekst": "**Ja**, er zijn verschillende outdoor escape rooms en city games in de buitenlucht te spelen in Eindhoven. \n\nBij dit type outdoor games gebruik je meestal een smartphone-app of een fysieke tas/koffer met opdrachten. Je wandelt door de binnenstad van Eindhoven, zoekt naar aanwijzingen en lost raadsels op om een missie te voltooien of \"uit de stad te ontsnappen\".\n\nPopulaire opties in Eindhoven:\n\n1. **Outside Escape Eindhoven**\n   * **Wat:** Een interactieve wandeling/escape game door het centrum van Eindhoven waarin je raadsels oplost via je smartphone. Het verhaal draait om het terugvinden van een weggelopen robothond.\n   * **Duur & Afstand:** Ca. 2 uur / ~2,5 km.\n   * **Hoe:** Direct te boeken en op elk gewenst moment te starten.\n\n2. **Escape Tour Eindhoven**\n   * **Wat:** Een stadsgame gebaseerd op het escape room-principe. Je dwaalt door het centrum, beantwoordt vragen en zoekt de geheime uitgang van de stad om binnen 2 uur te \"ontsnappen\".\n   * **Hoe:** Geen gids nodig; je speelt het met je eigen team via een web-app op je telefoon.\n\n3. **I'm Puzzled / CityGames.com (bijv. *The Eindhoven Syndicate*)**\n   * **Wat:** Outdoor escape games met verschillende thematische verhalen en opdrachten. Via een GPS-gebaseerde app wandel je langs highlights en verborgen plekken in de stad.\n\n4. **Exitmania / Qula City Trails**\n   * **Wat:** Zelfstandig te starten outdoor games via de mobiele telefoon met uitdagende raadsels en puzzels verspreid over het centrum.\n\n**Praktische voordelen van outdoor escape games:**\n* **Flexibiliteit:** Je hoeft vooraf meestal geen vast tijdslot te reserveren; je kunt starten wanneer je wilt.\n* **Groepsgrootte:** Geschikt voor kleine groepjes (2-5 personen), maar bij grote groepen/bedrijfsuitjes kun je in meerdere teams tegen elkaar strijden.\n* **Kosten:** Vaak een stuk voordeliger (ca. € 20 - € 30 per team) dan een traditionele indoor escape room.",
+     "kosten": 0.0312
+    }
+   }
+  },
+  {
+   "stad": "Groningen",
+   "soort": "teamuitje",
+   "vraag": "Wat is een leuk en actief teamuitje in Groningen voor een groep collega's?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "visitgroningen.nl"
+     ],
+     "tekst": "Ja — **een heel leuk en actief teamuitje in Groningen is Pitch & Putt Groningen**. Volgens Visit Groningen is dit geschikt voor groepen, en je kunt het combineren met een terras en arrangementen voor lunch, borrel of diner. Dat maakt het sportief én handig voor een bedrijfsuitje. ([visitgroningen.nl](https://www.visitgroningen.nl/nl/blogs/actief-in-de-stad?utm_source=openai))\n\n**Waarom dit een goede keuze is:**\n- actief, maar voor bijna ieder niveau toegankelijk;\n- je kunt lekker competitief bezig zijn met collega’s;\n- daarna meteen door naar borrel of eten. ([visitgroningen.nl](https://www.visitgroningen.nl/nl/blogs/actief-in-de-stad?utm_source=openai))\n\n**Andere leuke actieve opties in Groningen:**\n- **Martinitoren beklimmen** als je iets korts maar pittigs wilt; Visit Groningen noemt het een echte work-out met uitzicht als beloning. ([visitgroningen.nl](https://www.visitgroningen.nl/nl/blogs/groepsuitjes-in-groningen?utm_source=openai))\n- **Op het water**: een sloep huren of suppen is volgens Visit Groningen een verrassende groepsactiviteit. ([visitgroningen.nl](https://www.visitgroningen.nl/nl/blogs/groepsuitjes-in-groningen?utm_source=openai))\n- **Wakepark Groningen** voor een sportieve uitdaging op het water, zoals waterskiën. ([visitgroningen.nl](https://www.visitgroningen.nl/nl/blogs/actief-in-de-stad?utm_source=openai))\n- **Escape room** als je meer teamwork en puzzelen wilt, bijvoorbeeld bij Goldberg Escape. ([visitgroningen.nl](https://www.visitgroningen.nl/nl/locaties/4250522604/goldberg-escape?utm_source=openai))\n\nAls je wilt, kan ik ook **3 concrete teamuitjes in Groningen voorstellen op basis van jullie groep**: rustig, sportief of echt competitief.",
+     "kosten": 0.019803
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "recron.nl",
+      "escapehunt.com",
+      "tbevents.nl",
+      "onemotion.nl",
+      "mycityhunt.nl",
+      "stadsarrangement.nl",
+      "valkbusiness.com"
+     ],
+     "tekst": "Een **citygame door Groningen** is een leuk en actief teamuitje: collega’s vormen teams, lopen door de binnenstad en lossen onderweg opdrachten en raadsels op. Het combineert beweging, competitie en samenwerking en kan worden afgesloten met een borrel of diner.[3][5]\n\nAndere goede opties:\n\n- **Escape room** – geschikt voor teams die houden van puzzelen, communicatie en tijdsdruk.[2]\n- **Expeditie Grunopark** – een outdoor teamspel met verschillende uitdagingen, ideaal voor een sportievere groep.[10]\n- **Jump XL Groningen** – trampoline- en challenge-activiteiten voor een energiek, laagdrempelig uitje.[10]\n- **Klimmen of waterskiën** – goede keuzes voor een avontuurlijk team dat echt actief bezig wil zijn.[1]\n- **Fiets- of wandeltocht door De Onlanden** – actief maar ontspannen, eventueel gecombineerd met borrel of diner.[9]\n\n**Beste allround keuze:** een citygame in de binnenstad, omdat vrijwel iedereen kan meedoen en je het programma eenvoudig kunt aanpassen aan groepsgrootte, budget en gewenste intensiteit.",
+     "kosten": 0.00594
+    },
+    "Gemini": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [],
+     "tekst": "Groningen biedt ontzettend veel mogelijkheden voor een actief en gezellig teamuitje! Afhankelijk van hoe sportief de groep is en wat het budget/de groepsgrootte is, zijn dit een aantal hele leuke ideeën:\n\n### 1. Actief op het water\n* **Kajakken, SUP'pen of Kanovaren door de Singels:** Ontdek de historische binnenstad van Groningen vanaf het water. Je kunt boarden/boten huren bij bijvoorbeeld *Jachthaven Oosterhaven* of *Teuntje de Slak* bij het Hoornsemeer.\n* **Sloepengame / Sloepvaren:** Huur een stel sloepen (zelf vaardig of met schipper) en koppel er een interactieve stadsquiz of speurtocht aan vast.\n\n### 2. Binnen (Handig bij slecht weer)\n* **Boulderen (Apex Boulders of Apex Rood):** Heel toegankelijk voor beginners, vereist geen ervaring, maar is wél heel actief en gezellig om samen puzzels op de klimmuur op te lossen.\n* **Karting & Lasergame bij Karting Groningen:** Ga de strijd aan op de kartbaan of doe een indoor lasergame.\n* **Vr-Experience (bijv. VR Cafe of Enversed):** Samen in virtual reality een escaperoom oplossen of actieve games tegen elkaar spelen.\n* **Escaperooms:** Groningen heeft een paar fantastische escaperooms (zoals *The Great Escape* of *Real Life Gaming*). Perfect voor teambuilding en samenwerking.\n\n### 3. De stad in (Stadsspellen)\n* **Crazy 88 of The Target:** Met een app of tablet de stad in om hilarische, actieve opdrachten uit te voeren of op elkaar te jagen. Bekende aanbieders hiervan zijn *Uitjesbureau Groningen* of *TB Events*.\n* **Bicycle Tour / Tandemtocht:** Huur tandems of fietsen en doe een actieve speurtocht of stadstour met gids langs de mooiste en verborgen plekken van Groningen.\n\n### 4. Buiten & Natuur (Vlak bij de stad)\n* **Klimpark & Outdoor bij Pagedal of Kardinge:** \n  * **Sportcentrum Kardinge:** Hier kun je onder andere wandklimmen (Klimcentrum Bjoeks heeft zelfs de hoogste vrijstaande klimtoren ter wereld, 'Excalibur'!), schaatsen (in de winter) of een padel-toernooi organiseren.\n* **Watersport bij het Hoornsemeer / Paterswoldsemeer:** Denk aan een clinic windsurfen, zeilen of gezamenlijk flyboarden/banaanvaren tijdens de zomermaanden.\n\n---\n\n### **Voorbeeld van een compleet dagprogramma:**\n1. **Middag (Actief):** Kardinge / Bjoeks (klimmen of padel) OF een actieve stadsgame (Crazy 88) in het centrum.\n2. **Borrel:** Een speciaalbierproeverij bij *Baxbier* (aan het water!) of een gezellige borrel in de Pijp.\n3. **Avond:** Afsluiten met een diner of BBQ bij een van de vele horecazaken rondom de Grote Markt of de Vismarkt (bijv. *Drie Gezusters*, *MOUSTACHE*, of *Mr. Mofongo*).\n\n**Tip:** Denk vooraf even na over het niveau van de groep (wil iedereen echt zweten of is ontspannen bewegen beter?) en of er rekening gehouden moet worden met eventuele blessures.",
+     "kosten": 0.003662
+    }
+   }
+  },
+  {
+   "stad": "Groningen",
+   "soort": "vrijgezellenfeest",
+   "vraag": "Ik zoek een leuke activiteit voor een vrijgezellenfeest in Groningen. Wat raad je aan?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "urbanheart.nl",
+      "club-caddie.nl",
+      "wakeparkgroningen.nl",
+      "visitgroningen.nl"
+     ],
+     "tekst": "Zeker — voor een vrijgezellenfeest in Groningen zou ik **een actieve groepsactiviteit combineren met een borrel in de stad**. Groningen leent zich daar goed voor, en uit het aanbod springen vooral deze opties eruit: een **workshop** (creatief of culinair), **midgetgolf midden in de stad**, of een **wateractiviteit zoals wakeboarden**. ([urbanheart.nl](https://www.urbanheart.nl/workshop-groningen/vrijgezellenfeest-in-groningen?utm_source=openai))\n\n**Mijn beste aanrader:**  \n- **Als jullie iets origineels willen:** kies een workshop bijv. creatief, muzikaal of samen iets maken. Dat is laagdrempelig en werkt goed met gemixte groepen. ([urbanheart.nl](https://www.urbanheart.nl/workshop-groningen/vrijgezellenfeest-in-groningen?utm_source=openai))  \n- **Als jullie vooral willen lachen en borrelen:** midgetgolf bij Club Caddie is leuk omdat het in Groningen zelf zit en je het makkelijk kunt combineren met eten/drinken. ([club-caddie.nl](https://www.club-caddie.nl/binnen/groepsuitjes?utm_source=openai))  \n- **Als de groep actief is en wel van adrenaline houdt:** wakeboarden/bodyboarden/kneeboarden bij Wakepark Groningen is een stoerdere keuze. ([wakeparkgroningen.nl](https://wakeparkgroningen.nl/vrijgezellenfeest?utm_source=openai))\n\n**Praktisch leuke opzet:**  \n1. Start met een activiteit van 1,5–3 uur.  \n2. Ga daarna eten of drinken in de stad. Groningen heeft een levendig uitgaansaanbod dat vaak wordt aangeraden voor vrijgezellenfeesten. ([visitgroningen.nl](https://www.visitgroningen.nl/nl/blogs/10-x-uitgaan-in-groningen?utm_source=openai))\n\nAls je wilt, kan ik ook meteen **3 concrete vrijgezellenfeest-plannen in Groningen** maken, bijvoorbeeld voor:\n- een **mannelijke** of **vrouwelijke** vrijgezel,\n- een **budget** van onder/ongeveer €25, €50 of €100 p.p.,\n- een **groep van 6, 10 of 20+ personen**.",
+     "kosten": 0.030264
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "tbevents.nl",
+      "posta7.nl",
+      "uitjeseneten.nl",
+      "escapehunt.com",
+      "cafesalud.nl",
+      "onemotion.nl",
+      "oldambtnu.nl"
+     ],
+     "tekst": "Mijn aanrader: **een Crazy 88 of citygame door het centrum van Groningen**, gevolgd door een borrel en diner. In teams voeren jullie hilarische opdrachten uit en ontdekken jullie tegelijk de stad; Crazy 88 duurt ongeveer 2,5 uur en is geschikt vanaf 12 personen.[10]\n\nAndere leuke opties:\n\n- **Escape room** – ideaal voor een kleinere groep die van puzzelen en samenwerken houdt; een sessie duurt doorgaans 60 minuten.[4]\n- **Bierproeverij** – gezellig en laagdrempelig, vanaf 6 personen en goed te combineren met een stadswandeling en diner.[6]\n- **Cocktailworkshop of salsa** – leuk als jullie iets interactiefs en feestelijks willen zonder sportieve activiteit.[8]\n- **Actief uitje bij Posta7 in Tolbert** – bijvoorbeeld glow-in-the-dark-midgetgolf, lasergamen of karaoke, met eten op dezelfde locatie.[2]\n\n**Leuk dagprogramma:** citygame in de middag → bier- of cocktailproeverij → diner → kroegentocht rond de Grote Markt en Poelestraat. Dat geeft een goede mix van actie, gezelligheid en feest.[6]",
+     "kosten": 0.005945
+    },
+    "Gemini": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [],
+     "tekst": "Groningen is een fantastische stad voor een vrijgezellenfeest! Dankzij de compacte binnenstad, de grachten en de bruisende horeca kun je er alle kanten op. \n\nHier zijn een aantal ontzettend leuke activiteiten in Groningen, verdeeld per categorie:\n\n### 1. Actief & Competitief\n* **Bende van Boven (Escape Room in de Martinitoren):** Ontsnap uit de iconische Martinitoren van Groningen. Een unieke locatie voor een escape room met een prachtig uitzicht als beloning!\n* **Axe Throwing (Bijvoorbeeld bij Real Axe Throwing Groningen):** Zin om wat energie kwijt te raken? Bijlwerpen is een stoere activiteit om de dag mee te beginnen.\n* **Crazy 88 of City Game:** Doe een interactief stadsspel via een app op je telefoon. Jullie krijgen 88 gekke, grappige of uitdagende opdrachten die je in het centrum van Groningen moet uitvoeren. Perfect om de vrijgezel een beetje in de spotlight te zetten.\n* **Jeep Safari of Ducktrail (omgeving Groningen):** Wil je iets buiten het centrum? Huur een stel oude lelijke eendjes (2CV) of ga offroaden met jeeps door het Groningse landschap.\n\n### 2. Op het water\n* **Sloep / Borrelboot huren:** Groningen heeft prachtige grachten (de Diepenring). Huur een sloep (met of zonder schipper) inclusief een koelbox vol drankjes of een barbecue aan boord.\n* **Kanoën of SUPpen:** Voor een wat actievere groep kun je SUP's of kano's huren en zo de stad vanaf het water verkennen.\n\n### 3. Culinair & Bourgondisch\n* **Speciaalbier- of Wijnproeverij:** \n  * Bezoek **Baxbier**, een lokale Groningse brouwerij aan het water, voor een rondleiding en proeverij.\n  * Of doe een bierproeverij bij café **De Toeter**, dat bekendstaat om het enorme assortiment speciaalbieren en whisky's.\n* **Cocktail Workshop:** Leer de beste cocktails shaken bij een van de hippe bars in de binnenstad (zoals Mr. Mofongo of The Stockroom).\n* **VR Arcade & Foodhall:** Combineer Virtual Reality games met lekker eten en drinken (bijvoorbeeld bij The Ultimate VR Arcade of in De Pijp).\n\n### 4. Avondprogramma & Uitgaan\n* **Mr. Mofongo:** Een must-visit! Dit bekende café/restaurant heeft een robotarm die de dranken inschenkt en een eigen distilleerderij. \n* **Karaoke bij Duke of Tokyo:** Huur een privé karaokeroom voor jouw groep, trek een aantal foute nummers uit de kast en zing de longen uit je lijf.\n* **De Poelekom & Peperstraat:** Groningen heeft **geen sluitingstijden**! Je kunt letterlijk doorfeesten tot de zon opkomt in bekende feestcafés en clubs rondom de Grote Markt en de Poelestraat.\n\n---\n\n### Voorbeeld van een dagindeling:\n1. **13:00 uur:** Ontvangst met lunch of koffie op de Grote Markt.\n2. **14:30 uur:** Actieve middagactiviteit (bijv. Sloep varen of Crazy 88).\n3. **17:00 uur:** Borrel & cocktailworkshop of speciaalbierproeverij bij Baxbier.\n4. **19:30 uur:** Uitgebreid diner/shared dining in de binnenstad.\n5. **21:30 uur:** Karaoke bij Duke of Tokyo.\n6. **23:30 uur tot laat:** De Poelestraat in!\n\n**Tip:** Is het een vrijgezellenfeest voor voornamelijk mannen of vrouwen, of een gemengde groep? En zoekt de groep vooral spanning, ontspanning of puur feest? Dan kan ik het advies nog specifieker op jullie afstemmen!",
+     "kosten": 0.004058
+    }
+   }
+  },
+  {
+   "stad": "Groningen",
+   "soort": "outdoor escape",
+   "vraag": "Is er een outdoor escape room of escape game in de buitenlucht in Groningen?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": true,
+     "geciteerd": true,
+     "fragment": "scapes.nl/escape-room/groningen?utm_source=openai)) - **The Hunt Groningen**: een outdoor escape room waarin je door de stad vlucht voor “hunters”. ([escapegamethehunt.nl](https://escapegamethehunt.nl/escape-game-the-hunt-locaties/escape-game-the-hunt-groningen/?utm_source=openai)) - **myCityHunt Groningen** en **Co",
+     "bronnen": [
+      "cityadventures.nl",
+      "citygame.com",
+      "outsideescape.nl",
+      "quest-escapes.nl",
+      "escapegamethehunt.nl",
+      "mycityhunt.nl"
+     ],
+     "tekst": "Ja — er zijn in Groningen meerdere **outdoor escape rooms / escape games in de buitenlucht**. Een paar voorbeelden:\n\n- **Escape the City Groningen**: een outdoor escape game in de binnenstad, te spelen via een app. ([cityadventures.nl](https://cityadventures.nl/escape-the-city-groningen/?utm_source=openai))\n- **City Game Groningen**: biedt een “escape game in de buitenlucht” waarbij je door Groningen loopt met je smartphone. ([citygame.com](https://citygame.com/nl/nederland/groningen?utm_source=openai))\n- **Outside Escape Groningen**: een buiten-escaperoom/city escape langs bekende en minder bekende plekken in de stad. ([outsideescape.nl](https://outsideescape.nl/product/outside-escape-groningen/?utm_source=openai))\n- **Quest Escapes Groningen**: noemt expliciet een outdoor escape room in Groningen, voor groepen van 4 tot 100+ personen. ([quest-escapes.nl](https://quest-escapes.nl/escape-room/groningen?utm_source=openai))\n- **The Hunt Groningen**: een outdoor escape room waarin je door de stad vlucht voor “hunters”. ([escapegamethehunt.nl](https://escapegamethehunt.nl/escape-game-the-hunt-locaties/escape-game-the-hunt-groningen/?utm_source=openai))\n- **myCityHunt Groningen** en **Coddy Groningen** hebben ook outdoor escape games in de stad. ([mycityhunt.nl](https://www.mycityhunt.nl/steden/groningen-nl-10359/escape-game-groningen-8518?utm_source=openai))\n\nAls je wilt, kan ik ook meteen de **beste keuze voor een groep vrienden / date / bedrijfsuitje** voor je uitzoeken.",
+     "kosten": 0.0190585
+    },
+    "Perplexity": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "coddygames.com",
+      "mycityhunt.com",
+      "tripadvisor.com",
+      "visitgroningen.nl",
+      "escapehunt.com",
+      "viator.com"
+     ],
+     "tekst": "Ja. In Groningen zijn meerdere **outdoor escape games** waarbij je door de binnenstad loopt en puzzels oplost:\n\n- **Coddy – Crazytopia:** een smartphone-game van ongeveer 2,7 km, van de Grote Markt naar de Vismarkt, voor 2–6 personen en circa 90 minuten.[1]\n- **myCityHunt – Escape Game Groningen:** een outdoor speurtocht in het centrum met een spionnenthema, waarbij je via je telefoon locaties en raadsels volgt.[2]\n- **Quest Escapes / Outside Escape Groningen:** mobiele escape games van ongeveer twee uur, geschikt voor groepen van 4 tot 100+ personen; keuze uit meerdere verhaallijnen en speelbaar op een buitenlocatie naar keuze in Groningen en omgeving.[3]\n\nVoor een klein gezelschap is Coddy of myCityHunt waarschijnlijk het eenvoudigst; voor een bedrijfsuitje of grotere groep lijkt Quest Escapes geschikter. Controleer bij het boeken wel de actuele prijs, beschikbaarheid en voertaal.",
+     "kosten": 0.005898
+    },
+    "Gemini": {
+     "genoemd": true,
+     "geciteerd": true,
+     "fragment": "ektocht. Je wordt door de stad geleid (o.a. langs de Martinitoren, het Hoge der A en het Forum) om raadsels en cryptische codes op te lossen.  ### 4. The Hunt Groningen (Voor grotere groepen / bedrijfsuitjes) * **Hoe het werkt:** Een fysieke outdoor escape game waarbij je in de binnenstad (vaak startend bij",
+     "bronnen": [
+      "outsideescape.nl",
+      "escapegamethehunt.nl",
+      "citygame.com",
+      "exploreden.com",
+      "escapetours.com",
+      "mycityhunt.com"
+     ],
+     "tekst": "**Ja**, er zijn verschillende outdoor escape games en city escape experiences in de binnenstad van Groningen. \n\nBij een outdoor escape room vormt niet een afgesloten kamer, maar de historische binnenstad van Groningen het speelveld. Je gebruikt (meestal) een smartphone of een speeltas met raadsels en kaarten om de opdrachten op te lossen.\n\nPopulaire opties in Groningen:\n\n### 1. Outside Escape Groningen\n* **Hoe het werkt:** Je volgt een storyline (bijvoorbeeld over een verdwenen schilderij of een stadsmysterie) die je langs bekende en verborgen plekken in Groningen leidt.\n* **Kenmerken:** Te spelen via je eigen telefoon, heel toegankelijk voor 2 tot 6 personen per team (of grotere groepen), en je kunt direct starten wanneer je wilt.\n\n### 2. Escape Tour Groningen\n* **Hoe het werkt:** Een interactief stadsspel gebaseerd op een historische of fictieve plot (zoals 'ontsnappen uit de stad' binnen 2 uur).\n* **Kenmerken:** Volledig digitaal via een app. Je ontrafelt raadsels door rond te lopen, hints te verzamelen en vragen te beantwoorden.\n\n### 3. City Game: The Groningen Syndicate / Secrets of Groningen\n* **Hoe het werkt:** Een outdoor escape & detective spoorzoektocht. Je wordt door de stad geleid (o.a. langs de Martinitoren, het Hoge der A en het Forum) om raadsels en cryptische codes op te lossen.\n\n### 4. The Hunt Groningen (Voor grotere groepen / bedrijfsuitjes)\n* **Hoe het werkt:** Een fysieke outdoor escape game waarbij je in de binnenstad (vaak startend bij Forum Groningen) puzzels moet oplossen met een gametas en app. Ondertussen word je 'opgejaagd' door live Hunters.\n* **Kenmerken:** Erg geschikt voor vrijgezellenfeesten, vriendengroepen of bedrijfsuitjes.\n\n---\n\n### Praktische tips:\n* **Flexibiliteit:** De meeste self-guided outdoor escape games (zoals Outside Escape en Escape Tours) hoef je niet op een vast tijdstip te boeken; je koopt een toegangscode en start wanneer het jou uitkomt.\n* **Benodigdheden:** Een opgeladen smartphone met mobiele data.",
+     "kosten": 0.031061
+    }
+   }
+  },
+  {
+   "stad": "Tilburg",
+   "soort": "teamuitje",
+   "vraag": "Wat is een leuk en actief teamuitje in Tilburg voor een groep collega's?",
+   "antwoorden": {
+    "ChatGPT": {
+     "genoemd": false,
+     "geciteerd": false,
+     "fragment": "",
+     "bronnen": [
+      "visitbrabant.com",
+      "tilburg.com"
+     ],
+     "tekst": "Zeker — voor een **leuk en actief teamuitje in Tilburg** zou ik vooral **NondeJeu** of **De Voltage** aanraden.  \n\n- **NondeJeu** is heel geschikt als je een mix zoekt van **competitie, actie en gezellig borrelen/eten** op één plek. Je kunt er o.a. **Prison Island** doen, **jeu de boules** spelen en samen eten; het wordt expliciet gepositioneerd als een actieve groepslocatie in hartje Tilburg. ([visitbrabant.com](https://www.visitbrabant.com/nl/locaties/2395171538/nondejeu?utm_source=openai))  \n- **De Voltage** is ideaal als jullie echt een **avontuurlijk en gevarieerd uitje** willen: het centrum heeft bijna **50 activiteiten**, waaronder **escape rooms**, **karten** en andere groepsactiviteiten, en wordt ook vaak genoemd als goede plek voor personeelsuitjes. ([visitbrabant.com](https://www.visitbrabant.com/nl/locaties/3959490710/de-voltage-indoor-entertainment?utm_source=openai))  \n\nAls je iets wilt dat meer **op maat** en minder “standaard” is, kun je ook kijken naar **Verrassend Tilburg & meer**, met bijvoorbeeld een **citygame**, **fietstocht/e-chopper**, of creatieve workshops. ([tilburg.com](https://tilburg.com/bedrijf/verrassend-tilburg-en-meer/?utm_source=openai))  \n\n**Mijn snelle advies:**\n- **Voor competitie + borrel:** NondeJeu. ([visitbrabant.com](https://www.visitbrabant.com/nl/locaties/2395171538/nondejeu?utm_source=openai))  \n- **Voor veel actie onder één dak:** De Voltage. ([visitbrabant.com](https://www.visitbrabant.com/nl/locaties/3959490710/de-voltage-indoor-entertainment?utm_source=openai))  \n- **Voor een origineel, op maat programma:** Verrassend Tilburg & meer. ([tilburg.com](https://tilburg.com/bedrijf/verrassend-tilburg-en-meer/?utm_source=openai))  \n\nAls je wilt, kan ik hierna ook **3 concrete teamuitje-combinaties** maken voor een groep van bijvoorbeeld **8, 15 of 30 collega’s**.",
+     "kosten": 0.019992
+    },
+    "Perplexity": {
+     "fout": "Payment Required.",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "Payment Required.",
+     "kosten": 0
+    }
+   }
+  },
+  {
+   "stad": "Tilburg",
+   "soort": "vrijgezellenfeest",
+   "vraag": "Ik zoek een leuke activiteit voor een vrijgezellenfeest in Tilburg. Wat raad je aan?",
+   "antwoorden": {
+    "ChatGPT": {
+     "fout": "Payment Required.",
+     "kosten": 0
+    },
+    "Perplexity": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "Payment Required.",
+     "kosten": 0
+    }
+   }
+  },
+  {
+   "stad": "Tilburg",
+   "soort": "outdoor escape",
+   "vraag": "Is er een outdoor escape room of escape game in de buitenlucht in Tilburg?",
+   "antwoorden": {
+    "ChatGPT": {
+     "fout": "Payment Required.",
+     "kosten": 0
+    },
+    "Perplexity": {
+     "fout": "Payment Required.",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    }
+   }
+  },
+  {
+   "stad": "Nijmegen",
+   "soort": "teamuitje",
+   "vraag": "Wat is een leuk en actief teamuitje in Nijmegen voor een groep collega's?",
+   "antwoorden": {
+    "ChatGPT": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Perplexity": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "Payment Required.",
+     "kosten": 0
+    }
+   }
+  },
+  {
+   "stad": "Nijmegen",
+   "soort": "vrijgezellenfeest",
+   "vraag": "Ik zoek een leuke activiteit voor een vrijgezellenfeest in Nijmegen. Wat raad je aan?",
+   "antwoorden": {
+    "ChatGPT": {
+     "fout": "Payment Required.",
+     "kosten": 0
+    },
+    "Perplexity": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    }
+   }
+  },
+  {
+   "stad": "Nijmegen",
+   "soort": "outdoor escape",
+   "vraag": "Is er een outdoor escape room of escape game in de buitenlucht in Nijmegen?",
+   "antwoorden": {
+    "ChatGPT": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Perplexity": {
+     "fout": "Payment Required.",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "Payment Required.",
+     "kosten": 0
+    }
+   }
+  },
+  {
+   "stad": "Zwolle",
+   "soort": "teamuitje",
+   "vraag": "Wat is een leuk en actief teamuitje in Zwolle voor een groep collega's?",
+   "antwoorden": {
+    "ChatGPT": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Perplexity": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    }
+   }
+  },
+  {
+   "stad": "Zwolle",
+   "soort": "vrijgezellenfeest",
+   "vraag": "Ik zoek een leuke activiteit voor een vrijgezellenfeest in Zwolle. Wat raad je aan?",
+   "antwoorden": {
+    "ChatGPT": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Perplexity": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    }
+   }
+  },
+  {
+   "stad": "Zwolle",
+   "soort": "outdoor escape",
+   "vraag": "Is er een outdoor escape room of escape game in de buitenlucht in Zwolle?",
+   "antwoorden": {
+    "ChatGPT": {
+     "fout": "Payment Required.",
+     "kosten": 0
+    },
+    "Perplexity": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    }
+   }
+  },
+  {
+   "stad": "Arnhem",
+   "soort": "teamuitje",
+   "vraag": "Wat is een leuk en actief teamuitje in Arnhem voor een groep collega's?",
+   "antwoorden": {
+    "ChatGPT": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Perplexity": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    }
+   }
+  },
+  {
+   "stad": "Arnhem",
+   "soort": "vrijgezellenfeest",
+   "vraag": "Ik zoek een leuke activiteit voor een vrijgezellenfeest in Arnhem. Wat raad je aan?",
+   "antwoorden": {
+    "ChatGPT": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Perplexity": {
+     "fout": "Payment Required.",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    }
+   }
+  },
+  {
+   "stad": "Arnhem",
+   "soort": "outdoor escape",
+   "vraag": "Is er een outdoor escape room of escape game in de buitenlucht in Arnhem?",
+   "antwoorden": {
+    "ChatGPT": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Perplexity": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    }
+   }
+  },
+  {
+   "stad": "",
+   "soort": "hunted",
+   "vraag": "Waar kan ik zelf Hunted spelen in Nederland, net als in het tv-programma?",
+   "antwoorden": {
+    "ChatGPT": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Perplexity": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    }
+   }
+  },
+  {
+   "stad": "",
+   "soort": "bedrijven",
+   "vraag": "Welke bedrijven organiseren een outdoor escape game door de stad in Nederland voor bedrijfsuitjes?",
+   "antwoorden": {
+    "ChatGPT": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Perplexity": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    }
+   }
+  },
+  {
+   "stad": "",
+   "soort": "jachtseizoen",
+   "vraag": "Wat is een spannend groepsuitje zoals Jachtseizoen of Hunted in Nederland?",
+   "antwoorden": {
+    "ChatGPT": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Perplexity": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    }
+   }
+  },
+  {
+   "stad": "",
+   "soort": "grote groepen",
+   "vraag": "Wat is de beste outdoor escape room in Nederland voor grote groepen?",
+   "antwoorden": {
+    "ChatGPT": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Perplexity": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    },
+    "Gemini": {
+     "fout": "'NoneType' object is not subscriptable",
+     "kosten": 0
+    }
+   }
+  }
+ ]
+}
