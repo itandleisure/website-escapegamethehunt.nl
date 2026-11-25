@@ -305,6 +305,18 @@
   "datum": "2026-11-25",
   "wat": "Daling komt door \"escape room leeuwarden\" (van positie 5 naar buiten de top 30 sinds 22 okt). Geen doorverwijzing, canonical of indexeringsprobleem. Titel weer laten beginnen met \"Escape Room Leeuwarden\" in het standaardformaat."
  },
+ {
+  "pagina": "/escape-game-the-hunt-locaties/escape-game-the-hunt-utrecht/",
+  "soort": "Bijna top 3",
+  "datum": "2026-11-25",
+  "wat": "\"escaperoom Utrecht\" in titel, H1, eerste H2 en eerste alinea, en als linktekst vanuit 4 stadsartikel(en)"
+ },
+ {
+  "pagina": "/bedrijfsuitje-rotterdam-teambuilding/",
+  "soort": "Te laag voor de vraag",
+  "datum": "2026-11-25",
+  "wat": "Speelveld in cijfers, de 90 minuten van dichtbij, extra FAQ, drie extra foto's en een extra review (eerder al PR #32 en #42). Backlinks: popi-mandje van 6 november nog bestellen"
+ },
 {
  "pagina": "/vrijgezellenfeest-arnhem-kies-voor-the-hunt-de-escape-game-vol-spanning-en-lol/",
  "soort": "Concurrentie met eigen pagina",
