@@ -103,7 +103,7 @@ def post(p, pages_):
 <section class="section">
 <div class="wrap article">
 <article class="prose">
-{with_field_map(city, p['body'])}{post_faq(p)}
+{with_field_map(city, p['body'])}{p.get('hoofdlink', '')}{post_faq(p)}
 </article>
 <aside class="aside" aria-label="Boeken">{card}{nl_map(city['slug']) if city else ''}</aside>
 </div>
