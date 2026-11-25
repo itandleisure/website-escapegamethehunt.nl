@@ -29,15 +29,24 @@ def exp_ctr(pos):
     return CTR.get(max(1, round(pos)), .015 if pos <= 20 else .005)
 
 
+def vul(text):
+    """Zet {prijs} e.d. om in de echte waarden, zoals het bouwscript dat ook doet."""
+    P = json.load(open(os.path.join(ROOT, 'src', 'data', 'site.json'), encoding='utf-8'))['prices']
+    for k, v in {'{prijs}': '€%s' % P['base'], '{prijs_tm}': str(P['base_max_people']),
+                 '{min_personen}': str(P['min_people']), '{max_personen}': str(P['max_people'])}.items():
+        text = text.replace(k, v)
+    return text
+
+
 def titles():
     out = {}
     for f in os.listdir(os.path.join(ROOT, 'src', 'content', 'pages')):
         d = json.load(open(os.path.join(ROOT, 'src', 'content', 'pages', f), encoding='utf-8'))
-        out[d['path']] = d.get('title', '')
+        out[d['path']] = vul(d.get('title', ''))
     for l in json.load(open(os.path.join(ROOT, 'src', 'data', 'locations.json'), encoding='utf-8')):
         f = os.path.join(ROOT, 'src', 'content', 'locaties', l['slug'] + '.json')
         if os.path.exists(f):
-            out[l['url']] = json.load(open(f, encoding='utf-8')).get('title', '')
+            out[l['url']] = vul(json.load(open(f, encoding='utf-8')).get('title', ''))
     return out
 
 
