@@ -242,7 +242,7 @@ def apply_block(path=''):
 <p>Liever eerst even bellen of mailen? Dat kan ook.</p>
 <div class="contact-lines"><a href="tel:{SITE['phone']}">{SITE['phone_display']}</a><a href="mailto:{SITE['email']}?subject=Sollicitatie%20The%20Hunt">{SITE['email']}</a></div>
 </div>
-<form class="form" data-booking data-google="{esc(SITE['google_form_url'])}" data-next="/werken-bij/bedankt/" method="POST">
+<form class="form" data-booking data-google="{esc(SITE['google_form_url'])}" data-reserve="{esc(SITE.get('reserve_form_key', ''))}" data-next="/werken-bij/bedankt/" method="POST">
 <input type="hidden" name="form" value="sollicitatie">
 <div class="field"><label for="s-naam">Naam</label><input id="s-naam" name="naam" autocomplete="name" required></div>
 <div class="field"><label for="s-leeftijd">Leeftijd</label><input id="s-leeftijd" type="number" name="leeftijd" min="15" max="99" inputmode="numeric" required></div>
@@ -275,7 +275,7 @@ def review():
     body = f'''{hero('Bedankt voor het spelen!', 'Hoe vonden jullie The Hunt? Laat een review achter, dat helpt ons enorm.', crumbs, cta=False)}
 <section class="section dark grid-bg" id="review" aria-labelledby="review-titel"><div class="wrap booking">
 {google_blok}
-<form class="form" data-booking data-google="{esc(SITE['google_form_url'])}" data-next="/review/bedankt/" method="POST">
+<form class="form" data-booking data-google="{esc(SITE['google_form_url'])}" data-reserve="{esc(SITE.get('reserve_form_key', ''))}" data-next="/review/bedankt/" method="POST">
 <input type="hidden" name="form" value="review">
 <h2 id="review-titel" class="full" style="margin:0;font-size:1.3rem">Review via onze website</h2>
 <fieldset class="field full"><legend>Je cijfer</legend><div class="choices">{sterren}</div></fieldset>

@@ -333,7 +333,7 @@ def booking(city=None):
 </ol>
 <div class="contact-lines"><a href="tel:{SITE['phone']}">{SITE['phone_display']}</a><a href="mailto:{SITE['email']}">{SITE['email']}</a></div>
 </div>
-<form class="form" data-booking data-google="{esc(SITE['google_form_url'])}" data-next="/bedankt/" method="POST">
+<form class="form" data-booking data-google="{esc(SITE['google_form_url'])}" data-reserve="{esc(SITE.get('reserve_form_key', ''))}" data-next="/bedankt/" method="POST">
 <input type="hidden" name="form" value="boeking">
 <div class="field"><label for="f-naam">Naam</label><input id="f-naam" name="naam" autocomplete="name" required></div>
 <fieldset class="field"><legend>Type aanvraag</legend><div class="choices"><label><input type="radio" name="type" value="Zakelijk" checked> Zakelijk</label><label><input type="radio" name="type" value="Particulier"> Particulier</label></div></fieldset>

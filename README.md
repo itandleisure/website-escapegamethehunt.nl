@@ -69,6 +69,12 @@ Google Sheet instellen (eenmalig):
 3. Implementeren > Nieuwe implementatie > Web-app, "Uitvoeren als: ik", "Toegang: iedereen".
 4. Zet de /exec-URL in `google_form_url` in `src/data/site.json`, draai `python tools/build.py`, commit en push.
 
+Reserveroute: weigert Google het script (bijv. omdat het opnieuw toestemming nodig heeft), dan stuurt de website
+de inzending via [Web3Forms](https://web3forms.com) per e-mail naar info@. De onderwerpregel begint dan met
+"RESERVE", en die inzending staat niet in de Sheet. De Access Key van Web3Forms staat in `reserve_form_key` in
+`src/data/site.json` (leeg = geen reserve). Elke dag controleert `.github/workflows/formulier-controle.yml`
+of het script nog werkt; zo niet, dan mailt GitHub een waarschuwing.
+
 ## Privacy
 
 Geen analytics, geen trackers, geen Google Fonts. De trailer laadt Vimeo pas na een klik op afspelen.

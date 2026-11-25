@@ -62,10 +62,13 @@
   /* Formulieren (boeking en sollicitatie).
      De inzending gaat naar het Google Apps Script in data-google (uit "google_form_url" in src/data/site.json):
      dat zet hem in de Google Sheet en mailt hem door. Daarna gaat de bezoeker naar de pagina in data-next.
-     Lukt versturen niet, dan blijft alles ingevuld staan en verschijnt een melding met telefoon en e-mail. */
+     Lukt dat niet (bijv. omdat Google het script weigert), dan gaat de inzending als reserve via Web3Forms
+     per e-mail naar info@ (sleutel in data-reserve, uit "reserve_form_key" in src/data/site.json).
+     Lukt ook dat niet, dan blijft alles ingevuld staan en verschijnt een melding met telefoon en e-mail. */
   var opened = Date.now();
   document.querySelectorAll('form[data-booking]').forEach(function (form) {
     var google = form.getAttribute('data-google');
+    var reserve = form.getAttribute('data-reserve');
     var fout = form.querySelector('[data-form-error]');
     var btn = form.querySelector('[type=submit]');
     function mislukt() {
@@ -76,15 +79,36 @@
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
       if (fout) { fout.hidden = true; }
-      if (!google || !window.fetch || !window.URLSearchParams) { mislukt(); return; }
+      if (!window.fetch || !window.URLSearchParams) { mislukt(); return; }
       btn.disabled = true;
       var data = new URLSearchParams(new FormData(form));
       data.append('pagina', location.pathname);
       data.append('duur', String(Date.now() - opened));
-      fetch(google, { method: 'POST', body: data })
-        .then(function (r) { return r.json(); })
-        .then(function (res) {
-          if (!res.ok) { throw new Error(res.fout || 'mislukt'); }
+      function viaGoogle() {
+        if (!google) { return Promise.reject(new Error('geen script')); }
+        return fetch(google, { method: 'POST', body: data })
+          .then(function (r) { return r.json(); })
+          .then(function (res) { if (!res.ok) { throw new Error(res.fout || 'mislukt'); } });
+      }
+      // Reserveroute: dezelfde velden per e-mail via Web3Forms. Spambots (honeypot) gaan hier niet heen.
+      function viaReserve() {
+        if (!reserve || data.get('_honey') || data.get('website')) { return Promise.reject(new Error('geen reserve')); }
+        var soortVeld = data.get('form') || 'formulier';
+        var velden = { access_key: reserve, from_name: 'Website Escape Game The Hunt',
+          subject: 'RESERVE ' + soortVeld + ': ' + (data.get('naam') || '') + ' (Google-script werkte niet, staat niet in de Sheet)' };
+        data.forEach(function (waarde, sleutel) {
+          if (sleutel === '_honey' || sleutel === 'website' || sleutel === 'duur') { return; }
+          velden[sleutel] = velden[sleutel] ? velden[sleutel] + ', ' + waarde : waarde;
+        });
+        if (data.get('email')) { velden.replyto = data.get('email'); }
+        return fetch('https://api.web3forms.com/submit', { method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(velden) })
+          .then(function (r) { return r.json(); })
+          .then(function (res) { if (!res.success) { throw new Error(res.message || 'mislukt'); } });
+      }
+      viaGoogle()
+        .catch(viaReserve)
+        .then(function () {
           var soort = form.querySelector('[name="form"]');
           if (window.gtag) {
             var stad = form.querySelector('[name="stad"]');
